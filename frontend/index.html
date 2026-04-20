@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub Contábil</title>
+    <style>
+      @media print {
+        @page {
+          size: A4;
+          margin: 15mm;
+        }
+        
+        body {
+          background: white !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        
+        .no-print {
+          display: none !important;
+        }
+        
+        .print-container {
+          box-shadow: none !important;
+          border: 1px solid #ccc !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          max-width: none !important;
+        }
+        
+        .print-section {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

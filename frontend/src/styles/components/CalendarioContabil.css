@@ -1,0 +1,180 @@
+/* ==================== CALENDÁRIO CONTÁBIL ==================== */
+
+.calendario-obrigacoes-container {
+  padding: 0;
+}
+
+.calendario-obrigacao-evento {
+  padding: 2px 6px;
+  border-radius: 4px;
+  border-left: 3px solid;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+
+.calendario-obrigacao-evento:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calendario-obrigacao-titulo {
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.4;
+}
+
+/* FullCalendar customizações para calendário contábil */
+.calendario-obrigacoes-container .fc-daygrid-event {
+  margin: 1px 0;
+}
+
+.calendario-obrigacoes-container .fc-daygrid-event-harness {
+  margin: 1px 0;
+}
+
+.calendario-obrigacoes-container .fc-toolbar-title {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+}
+
+.calendario-obrigacoes-container .fc-button-primary {
+  background-color: #ffffff !important;
+  border-color: #d1d5db !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+.calendario-obrigacoes-container .fc-button-primary:hover {
+  background-color: #f9fafb !important;
+  border-color: #9ca3af !important;
+}
+
+.calendario-obrigacoes-container .fc-button-primary:not(:disabled).fc-button-active,
+.calendario-obrigacoes-container .fc-button-primary:not(:disabled):active {
+  background-color: #eff6ff !important;
+  border-color: #3b82f6 !important;
+  color: #2563eb !important;
+}
+
+.calendario-obrigacoes-container .fc-daygrid-day-number {
+  font-weight: 600 !important;
+  color: #374151 !important;
+}
+
+/* Dias clicáveis - hover */
+.calendario-obrigacoes-container .fc-daygrid-day {
+  cursor: pointer !important;
+  transition: background-color 0.15s ease;
+}
+
+.calendario-obrigacoes-container .fc-daygrid-day:hover {
+  background-color: #f0f9ff !important;
+}
+
+.calendario-obrigacoes-container .fc-daygrid-day-frame {
+  cursor: pointer !important;
+}
+
+/* Indicador visual de dias com eventos */
+.calendario-obrigacoes-container .fc-daygrid-day.fc-day-has-event {
+  position: relative;
+}
+
+.calendario-obrigacoes-container .fc-daygrid-day.fc-day-has-event::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.calendario-obrigacoes-container .fc-day-today {
+  background-color: #eff6ff !important;
+}
+
+.calendario-obrigacoes-container .fc-day-today .fc-daygrid-day-number {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Loading e Error states */
+.calendario-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.calendario-loading__spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e7eb;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.calendario-loading__text {
+  margin-top: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.calendario-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #dc2626;
+}
+
+.calendario-error button {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.calendario-error button:hover {
+  background-color: #2563eb !important;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .calendario-obrigacao-titulo {
+    font-size: 10px;
+  }
+
+  .calendario-obrigacoes-container .fc-toolbar {
+    flex-direction: column !important;
+    gap: 0.5rem;
+  }
+
+  .calendario-obrigacoes-container .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+}

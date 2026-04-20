@@ -1,0 +1,204 @@
+/* ==================== PESQUISA EMPRESAS STYLES ==================== */
+
+.pesquisa-empresas-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #f8fafc;
+}
+
+.pesquisa-form {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+}
+
+.pesquisa-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.pesquisa-form__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.pesquisa-form__input {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.pesquisa-form__input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.pesquisa-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pesquisa-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* ==================== PESQUISA MEI TABLE RESPONSIVE ==================== */
+
+.mei-table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 16px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.mei-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* Force scroll on small screens */
+}
+
+.mei-table th {
+  background-color: #f8fafc;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.mei-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mei-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Card view for mobile */
+.mei-cards {
+  display: none;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.mei-card {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.mei-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.mei-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.mei-card__code {
+  font-size: 12px;
+  color: #64748b;
+  background-color: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.mei-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mei-card__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.mei-card__label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.mei-card__value {
+  color: #334155;
+  font-weight: 400;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .mei-table {
+    min-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pesquisa-empresas-container {
+    padding: 12px;
+  }
+
+  .pesquisa-form {
+    padding: 20px;
+  }
+
+  /* Show cards, hide table on mobile */
+  .mei-table-container {
+    display: none;
+  }
+
+  .mei-cards {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .pesquisa-form__group {
+    gap: 12px;
+  }
+
+  .pesquisa-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

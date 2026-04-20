@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   HubContabil Custom Styles
+   ============================================ */
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ============================================
+   A4 PAGE STYLES - Template Editor
+   ============================================ */
+
+.a4-page {
+  width: 210mm;
+  min-height: 297mm;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  padding: 20mm;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.editor-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  overflow: auto;
+  background: #f3f4f6;
+  min-height: 100vh;
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  outline: none;
+  min-height: 297mm;
+  line-height: 1.6;
+  padding: 0;
+}
+
+.ProseMirror h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+  color: #1e40af;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  color: #1e3a8a;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-top: 0.75em;
+  margin-bottom: 0.5em;
+  color: #1e293b;
+}
+
+.ProseMirror p {
+  margin-bottom: 1em;
+  line-height: 1.6;
+  font-size: 11pt;
+  font-family: 'Calibri', 'Segoe UI', sans-serif;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.ProseMirror li {
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.ProseMirror th,
+.ProseMirror td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.ProseMirror th {
+  background: #f3f4f6;
+  font-weight: bold;
+}
+
+.ProseMirror strong {
+  font-weight: bold;
+}
+
+.ProseMirror em {
+  font-style: italic;
+}
+
+.ProseMirror u {
+  text-decoration: underline;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  font-style: italic;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .a4-page, .a4-page * {
+    visibility: visible;
+  }
+
+  .a4-page {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 15mm;
+    box-shadow: none;
+    width: 210mm;
+    min-height: 297mm;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .no-break {
+    page-break-inside: avoid;
+  }
+}
+/* ============================================
+   Menu Lateral "Lite" Animation
+   ============================================ */
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.2s ease-out forwards;
+}
+
+.animate-slide-out-left {
+  animation: slide-out-left 0.2s ease-in forwards;
+}
+
+/* Transição suave para o conteúdo principal */
+.main-content-transition {
+  transition: margin-left 0.2s ease-out;
+}

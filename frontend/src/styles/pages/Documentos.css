@@ -1,0 +1,167 @@
+/* ==================== DOCUMENTOS STYLES ==================== */
+
+/* Container Principal */
+.documentos-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #f8fafc;
+}
+
+/* Upload Card */
+.documentos-upload-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+}
+
+.documentos-upload-card__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.documentos-upload-card__icon {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.documentos-upload-card__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.documentos-upload-card__subtitle {
+  font-size: 13px;
+  color: #666;
+  margin: 4px 0 0 0;
+}
+
+/* Upload Area */
+.documentos-upload-area {
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.documentos-upload-area:hover {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.documentos-upload-area__icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.documentos-upload-area__text {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 8px 0;
+}
+
+.documentos-upload-area__hint {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Action Buttons */
+.documentos-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.documentos-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.documentos-button--primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.documentos-button--primary:hover {
+  background-color: #1d4ed8;
+}
+
+.documentos-button--secondary {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.documentos-button--secondary:hover {
+  background-color: #e2e8f0;
+}
+
+.documentos-button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Result Card */
+.documentos-result {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.documentos-result__success {
+  color: #166534;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.documentos-result__info {
+  color: #15803d;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .documentos-container {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .documentos-upload-card {
+    padding: 16px;
+  }
+
+  .documentos-actions {
+    flex-direction: column;
+  }
+
+  .documentos-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

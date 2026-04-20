@@ -1,0 +1,377 @@
+{
+  "2026": {
+    "Janeiro": {
+      "01": [
+        { "eventName": "Confraternização Universal", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" },
+        { "eventName": "Nova regra IRRF", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Novo salário mínimo", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "09": [
+        { "eventName": "Complemento 13º Salário", "eventPeriod": "- Variável 2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "12": [
+        { "eventName": "Novas tabelas INSS", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "eSocial (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "EFD-Reinf (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento DARF Unificado (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "23": [
+        { "eventName": "PIS-PASEP Folha (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PIS-PASEP/COFINS (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "DCTFWeb (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "IRPJ/CSLL Mensal/Trimestral (Dez/25)", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "Adiantamento 13º Férias", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Opção Simples Nacional", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Fevereiro": {
+      "06": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "07": [
+        { "eventName": "Pagamento dos Salários dos Domésticos", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "13": [
+        { "eventName": "EFD-Contribuições", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "CIDE", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "16": [
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Carnaval (Ponto Facultativo)", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "17": [
+        { "eventName": "Carnaval (Ponto Facultativo)", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "18": [
+        { "eventName": "Carnaval (Ponto Facultativo até às 14h)", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Feriados" },
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "INSS Segurado Facultativo, Contribuinte Individual e Complementar", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE (Segurado Especial, Doméstico e MEI)", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento GFD (Mensal + eConsignado)", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento DARF Unificado", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "DIRBI", "eventPeriod": "- Período de Apuração: 12/2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "PGDAS - Simples Nacional/MEI", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "21": [
+        { "eventName": "Crédito do Trabalhador: Liberação do arquivo consignado", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP sobre Folha de Salários (DARF 8301)", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PIS-PASEP/COFINS - Demais Pessoas Jurídicas", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "27": [
+        { "eventName": "DCTFWeb", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "IRPJ e CSLL - Estimativa Mensal", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "IRPJ e CSLL Trimestral (quota)", "eventPeriod": "- Período de Apuração: 10 a 12/2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DME", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DOI", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "MIT", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "e-Financeira", "eventPeriod": "- Período de Apuração: 07 a 12/2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DIMOB 2026", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DMED 2026", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DBF 2026", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DERC 2026", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "Comprovante de Rendimentos Pagos e IRRF", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Declaração de Igualdade Salarial", "eventPeriod": "- 1º Semestre de 2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Março": {
+      "06": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "07": [
+        { "eventName": "Pagamento dos Salários dos Domésticos", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "08": [
+        { "eventName": "Dia Internacional da Mulher", "eventPeriod": "Data para ações internas", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "13": [
+        { "eventName": "EFD-Contribuições", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "CIDE", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "16": [
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "INSS Segurado Facultativo, Contribuinte Individual e Complementar", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Início DIRPF 2026", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "19": [
+        { "eventName": "Dia de São José - Padroeiro do Ceará", "eventPeriod": "Local Facultativo - CE, AP, São José dos Campos/SP, São José/SC, São José dos Pinhais/PR", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE (Segurado Especial, Doméstico e MEI)", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento GFD (Mensal + eConsignado)", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento DARF Unificado", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "DIRBI", "eventPeriod": "- Período de Apuração: 01/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "PGDAS - Simples Nacional/MEI", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "21": [
+        { "eventName": "Crédito do Trabalhador: Liberação do arquivo consignado", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP sobre Folha de Salários (DARF 8301)", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PIS-PASEP/COFINS - Demais Pessoas Jurídicas", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "Data Magna do Estado", "eventPeriod": "Local - Estado do Ceará", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "31": [
+        { "eventName": "DCTFWeb", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "IRPJ e CSLL - Estimativa Mensal", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "IRPJ e CSLL Trimestral (quota)", "eventPeriod": "- Período de Apuração: 10 a 12/2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DME", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DOI", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "MIT", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DEFIS", "eventPeriod": "- Ano-calendário 2025", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DTTA", "eventPeriod": "- Período de Apuração: 07 a 12/2025", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Abril": {
+      "05": [
+        { "eventName": "Páscoa", "eventPeriod": "Ações internas de Páscoa", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "06": [
+        { "eventName": "Dia Mundial da Atividade Física", "eventPeriod": "Bem-estar dos colaboradores", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Pagamento dos Salários dos Domésticos", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "EFD-Contribuições", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "CIDE", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "INSS Segurado Facultativo, Contribuinte Individual e Complementar", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE (Segurado Especial, Doméstico e MEI)", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento GFD (Mensal + eConsignado)", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento DARF Unificado", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "DIRBI", "eventPeriod": "- Período de Apuração: 02/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "PGDAS - Simples Nacional/MEI", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "21": [
+        { "eventName": "Tiradentes (Feriado Nacional)", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Feriados" },
+        { "eventName": "Crédito do Trabalhador: Liberação do arquivo consignado", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "24": [
+        { "eventName": "PIS-PASEP sobre Folha de Salários (DARF 8301)", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PIS-PASEP/COFINS - Demais Pessoas Jurídicas", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "28": [
+        { "eventName": "Dia Mundial da Segurança e Saúde no Trabalho", "eventPeriod": "Reforço à SST nas empresas", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "30": [
+        { "eventName": "DCTFWeb", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "IRPJ e CSLL - Estimativa Mensal", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "IRPJ e CSLL Trimestral (quota)", "eventPeriod": "- Período de Apuração: 01 a 03/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DME", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "DOI", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "MIT", "eventPeriod": "- Período de Apuração: 03/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Maio": {
+      "01": [
+        { "eventName": "Dia do Trabalhador", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "10": [
+        { "eventName": "Dia das Mães", "eventPeriod": "Homenagens internas", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "17": [
+        { "eventName": "Dia Internacional contra a Homofobia, Transfobia e Bifobia", "eventPeriod": "Ações de diversidade e inclusão", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "29": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 04/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Junho": {
+      "04": [
+        { "eventName": "Corpus Christi", "eventPeriod": "Ponto Facultativo Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "05": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "09": [
+        { "eventName": "Dia Nacional da Imunização", "eventPeriod": "Reforço à vacinação dos colaboradores", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "19": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "28": [
+        { "eventName": "Dia Internacional do Orgulho LGBTQIA+", "eventPeriod": "Ações de inclusão e diversidade", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "30": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 05/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Julho": {
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "09": [
+        { "eventName": "13º Salário - 1ª Parcela", "eventPeriod": "- 2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "31": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 06/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Agosto": {
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "10": [
+        { "eventName": "Dia dos Pais", "eventPeriod": "Homenagens internas", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "11": [
+        { "eventName": "Dia do Estudante", "eventPeriod": "Ações de capacitação", "eventBase": "", "calendar": "RH - Recursos Humanos" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "31": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 07/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Setembro": {
+      "04": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "07": [
+        { "eventName": "Independência do Brasil", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "30": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 08/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Outubro": {
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "12": [
+        { "eventName": "Nossa Sra. Aparecida", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "30": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 09/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Novembro": {
+      "06": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Proclamação da República", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "16": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Consciência Negra", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "25": [
+        { "eventName": "PIS-PASEP Folha", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "30": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 10/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Dezembro": {
+      "07": [
+        { "eventName": "Pagamento dos Salários", "eventPeriod": "- Período de Apuração: 11/2026", "eventBase": "CLT, art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "EFD-Reinf", "eventPeriod": "- Período de Apuração: 11/2026", "eventBase": "", "calendar": "Tributário Federal" },
+        { "eventName": "eSocial (eventos periódicos e demais eventos)", "eventPeriod": "- Período de Apuração: 11/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE", "eventPeriod": "- Período de Apuração: 11/2026", "eventBase": "", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "PGDAS - Simples Nacional", "eventPeriod": "- Período de Apuração: 11/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Natal", "eventPeriod": "Feriado Nacional", "eventBase": "", "calendar": "Feriados" }
+      ],
+      "30": [
+        { "eventName": "IRPJ/CSLL Mensal", "eventPeriod": "- Período de Apuração: 11/2026", "eventBase": "", "calendar": "Tributário Federal" }
+      ]
+    }
+  }
+}

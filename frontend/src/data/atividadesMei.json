@@ -1,0 +1,6949 @@
+[
+  {
+    "cnae": "0121101",
+    "ocupacao": "viveirista independente",
+    "descricao": "horticultura, exceto morango",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "0121101",
+      "viveirista independente",
+      "horticultura, exceto morango",
+      "viveirista",
+      "independente",
+      "horticultura,",
+      "exceto",
+      "morango"
+    ]
+  },
+  {
+    "cnae": "0159801",
+    "ocupacao": "apicultor(a) independente",
+    "descricao": "apicultura",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "0159801",
+      "apicultor(a) independente",
+      "apicultura",
+      "apicultor(a)",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "0159802",
+    "ocupacao": "criador(a) de animais domésticos independente",
+    "descricao": "criação de animais de estimação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "0159802",
+      "criador(a) de animais domésticos independente",
+      "criação de animais de estimação",
+      "criador(a)",
+      "animais",
+      "domésticos",
+      "independente",
+      "criação",
+      "estimação"
+    ]
+  },
+  {
+    "cnae": "0161002",
+    "ocupacao": "prestador(a) de serviços de poda, sob contrato de empreitada, independente",
+    "descricao": "serviço de poda de arvores para lavouras",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "0161002",
+      "prestador(a) de serviços de poda, sob contrato de empreitada, independente",
+      "serviço de poda de arvores para lavouras",
+      "prestador(a)",
+      "serviços",
+      "poda,",
+      "sob",
+      "contrato",
+      "empreitada,",
+      "independente",
+      "serviço",
+      "poda",
+      "arvores",
+      "para",
+      "lavouras"
+    ]
+  },
+  {
+    "cnae": "0161003",
+    "ocupacao": "prestador(a) de serviços de colheita, sob contrato de empreitada, independente",
+    "descricao": "serviço de preparação de terreno, cultivo e colheita",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "0161003",
+      "prestador(a) de serviços de colheita, sob contrato de empreitada, independente",
+      "serviço de preparação de terreno, cultivo e colheita",
+      "prestador(a)",
+      "serviços",
+      "colheita,",
+      "sob",
+      "contrato",
+      "empreitada,",
+      "independente",
+      "serviço",
+      "preparação",
+      "terreno,",
+      "cultivo",
+      "colheita"
+    ]
+  },
+  {
+    "cnae": "0162802",
+    "ocupacao": "tosquiador(a) independente",
+    "descricao": "serviço de tosquiamento de ovinos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "0162802",
+      "tosquiador(a) independente",
+      "serviço de tosquiamento de ovinos",
+      "tosquiador(a)",
+      "independente",
+      "serviço",
+      "tosquiamento",
+      "ovinos"
+    ]
+  },
+  {
+    "cnae": "0321304",
+    "ocupacao": "criador(a) de peixes ornamentais em água salgada independente",
+    "descricao": "criação de peixes ornamentais em água salgada e salobra",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "0321304",
+      "criador(a) de peixes ornamentais em água salgada independente",
+      "criação de peixes ornamentais em água salgada e salobra",
+      "criador(a)",
+      "peixes",
+      "ornamentais",
+      "água",
+      "salgada",
+      "independente",
+      "criação",
+      "salobra"
+    ]
+  },
+  {
+    "cnae": "0322104",
+    "ocupacao": "criador(a) de peixes ornamentais em água doce independente",
+    "descricao": "criação de peixes ornamentais em água doce",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "0322104",
+      "criador(a) de peixes ornamentais em água doce independente",
+      "criação de peixes ornamentais em água doce",
+      "criador(a)",
+      "peixes",
+      "ornamentais",
+      "água",
+      "doce",
+      "independente",
+      "criação"
+    ]
+  },
+  {
+    "cnae": "0892401",
+    "ocupacao": "salineiro/extrator de sal marinho independente",
+    "descricao": "extração de sal marinho",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "0892401",
+      "salineiro/extrator de sal marinho independente",
+      "extração de sal marinho",
+      "salineiro/extrator",
+      "sal",
+      "marinho",
+      "independente",
+      "extração"
+    ]
+  },
+  {
+    "cnae": "1013901",
+    "ocupacao": "fabricante de produtos derivados de carne independente",
+    "descricao": "fabricação de produtos de carne",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1013901",
+      "fabricante de produtos derivados de carne independente",
+      "fabricação de produtos de carne",
+      "fabricante",
+      "produtos",
+      "derivados",
+      "carne",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1031700",
+    "ocupacao": "beneficiador(a) de castanha independente",
+    "descricao": "fabricação de conservas de frutas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1031700",
+      "beneficiador(a) de castanha independente",
+      "fabricação de conservas de frutas",
+      "beneficiador(a)",
+      "castanha",
+      "independente",
+      "fabricação",
+      "conservas",
+      "frutas"
+    ]
+  },
+  {
+    "cnae": "1032599",
+    "ocupacao": "fabricante de conservas de legumes e outros vegetais independente",
+    "descricao": "fabricação de conservas de legumes e outros vegetais, exceto palmito",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1032599",
+      "fabricante de conservas de legumes e outros vegetais independente",
+      "fabricação de conservas de legumes e outros vegetais, exceto palmito",
+      "fabricante",
+      "conservas",
+      "legumes",
+      "outros",
+      "vegetais",
+      "independente",
+      "fabricação",
+      "vegetais,",
+      "exceto",
+      "palmito"
+    ]
+  },
+  {
+    "cnae": "1033301",
+    "ocupacao": "fabricante de sucos concentrados de frutas, hortaliças e legumes independente",
+    "descricao": "fabricação de sucos concentrados de frutas, hortaliças e legumes",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1033301",
+      "fabricante de sucos concentrados de frutas, hortaliças e legumes independente",
+      "fabricação de sucos concentrados de frutas, hortaliças e legumes",
+      "fabricante",
+      "sucos",
+      "concentrados",
+      "frutas,",
+      "hortaliças",
+      "legumes",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1033302",
+    "ocupacao": "fabricante de sucos de frutas, hortaliças e legumes independente",
+    "descricao": "fabricação de sucos de frutas, hortaliças e legumes, exceto concentrados",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1033302",
+      "fabricante de sucos de frutas, hortaliças e legumes independente",
+      "fabricação de sucos de frutas, hortaliças e legumes, exceto concentrados",
+      "fabricante",
+      "sucos",
+      "frutas,",
+      "hortaliças",
+      "legumes",
+      "independente",
+      "fabricação",
+      "legumes,",
+      "exceto",
+      "concentrados"
+    ]
+  },
+  {
+    "cnae": "1052000",
+    "ocupacao": "fabricante de laticínios independente",
+    "descricao": "fabricação de laticínios",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1052000",
+      "fabricante de laticínios independente",
+      "fabricação de laticínios",
+      "fabricante",
+      "laticínios",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1061902",
+    "ocupacao": "fabricante de produtos derivados do arroz independente",
+    "descricao": "fabricação de produtos do arroz",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1061902",
+      "fabricante de produtos derivados do arroz independente",
+      "fabricação de produtos do arroz",
+      "fabricante",
+      "produtos",
+      "derivados",
+      "arroz",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1063500",
+    "ocupacao": "farinheiro de mandioca independente",
+    "descricao": "fabricação de farinha de mandioca e derivados",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1063500",
+      "farinheiro de mandioca independente",
+      "fabricação de farinha de mandioca e derivados",
+      "farinheiro",
+      "mandioca",
+      "independente",
+      "fabricação",
+      "farinha",
+      "derivados"
+    ]
+  },
+  {
+    "cnae": "1064300",
+    "ocupacao": "farinheiro de milho independente",
+    "descricao": "fabricação de farinha de milho e derivados, exceto óleos de milho",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1064300",
+      "farinheiro de milho independente",
+      "fabricação de farinha de milho e derivados, exceto óleos de milho",
+      "farinheiro",
+      "milho",
+      "independente",
+      "fabricação",
+      "farinha",
+      "derivados,",
+      "exceto",
+      "óleos"
+    ]
+  },
+  {
+    "cnae": "1065101",
+    "ocupacao": "fabricante de amido e féculas de vegetais independente",
+    "descricao": "fabricação de amidos e féculas de vegetais",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1065101",
+      "fabricante de amido e féculas de vegetais independente",
+      "fabricação de amidos e féculas de vegetais",
+      "fabricante",
+      "amido",
+      "féculas",
+      "vegetais",
+      "independente",
+      "fabricação",
+      "amidos"
+    ]
+  },
+  {
+    "cnae": "1069400",
+    "ocupacao": "moendeiro(a) independente",
+    "descricao": "moagem e fabricação de produtos de origem vegetal não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1069400",
+      "moendeiro(a) independente",
+      "moagem e fabricação de produtos de origem vegetal não especificados anteriormente",
+      "moendeiro(a)",
+      "independente",
+      "moagem",
+      "fabricação",
+      "produtos",
+      "origem",
+      "vegetal",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1071600",
+    "ocupacao": "fabricante de açúcar mascavo independente",
+    "descricao": "fabricação de açúcar em bruto",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1071600",
+      "fabricante de açúcar mascavo independente",
+      "fabricação de açúcar em bruto",
+      "fabricante",
+      "açúcar",
+      "mascavo",
+      "independente",
+      "fabricação",
+      "bruto"
+    ]
+  },
+  {
+    "cnae": "1091101",
+    "ocupacao": "fabricante de pão de queijo congelado independente",
+    "descricao": "fabricação de produtos de panificação industrial",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1091101",
+      "fabricante de pão de queijo congelado independente",
+      "fabricação de produtos de panificação industrial",
+      "fabricante",
+      "pão",
+      "queijo",
+      "congelado",
+      "independente",
+      "fabricação",
+      "produtos",
+      "panificação",
+      "industrial"
+    ]
+  },
+  {
+    "cnae": "1091102",
+    "ocupacao": "confeiteiro(a) independente",
+    "descricao": "fabricação de produtos de padaria e confeitaria com predominância de produção própria.",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1091102",
+      "confeiteiro(a) independente",
+      "fabricação de produtos de padaria e confeitaria com predominância de produção própria.",
+      "confeiteiro(a)",
+      "independente",
+      "fabricação",
+      "produtos",
+      "padaria",
+      "confeitaria",
+      "com",
+      "predominância",
+      "produção",
+      "própria."
+    ]
+  },
+  {
+    "cnae": "1092900",
+    "ocupacao": "bolacheiro(a)/biscoiteiro(a) independente",
+    "descricao": "fabricação de biscoitos e bolachas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1092900",
+      "bolacheiro(a)/biscoiteiro(a) independente",
+      "fabricação de biscoitos e bolachas",
+      "bolacheiro(a)/biscoiteiro(a)",
+      "independente",
+      "fabricação",
+      "biscoitos",
+      "bolachas"
+    ]
+  },
+  {
+    "cnae": "1093701",
+    "ocupacao": "chocolateiro(a) independente",
+    "descricao": "fabricação de produtos derivados do cacau e de chocolates",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1093701",
+      "chocolateiro(a) independente",
+      "fabricação de produtos derivados do cacau e de chocolates",
+      "chocolateiro(a)",
+      "independente",
+      "fabricação",
+      "produtos",
+      "derivados",
+      "cacau",
+      "chocolates"
+    ]
+  },
+  {
+    "cnae": "1093702",
+    "ocupacao": "fabricante de balas, confeitos e frutas cristalizadas independente",
+    "descricao": "fabricação de frutas cristalizadas, balas e semelhantes",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1093702",
+      "fabricante de balas, confeitos e frutas cristalizadas independente",
+      "fabricação de frutas cristalizadas, balas e semelhantes",
+      "fabricante",
+      "balas,",
+      "confeitos",
+      "frutas",
+      "cristalizadas",
+      "independente",
+      "fabricação",
+      "cristalizadas,",
+      "balas",
+      "semelhantes"
+    ]
+  },
+  {
+    "cnae": "1094500",
+    "ocupacao": "fabricante de massas alimentícias independente",
+    "descricao": "fabricação de massas alimentícias",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1094500",
+      "fabricante de massas alimentícias independente",
+      "fabricação de massas alimentícias",
+      "fabricante",
+      "massas",
+      "alimentícias",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1095300",
+    "ocupacao": "fabricante de especiarias independente",
+    "descricao": "fabricação de especiarias, molhos, temperos e condimentos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1095300",
+      "fabricante de especiarias independente",
+      "fabricação de especiarias, molhos, temperos e condimentos",
+      "fabricante",
+      "especiarias",
+      "independente",
+      "fabricação",
+      "especiarias,",
+      "molhos,",
+      "temperos",
+      "condimentos"
+    ]
+  },
+  {
+    "cnae": "1096100",
+    "ocupacao": "fabricante de alimentos prontos congelados independente",
+    "descricao": "fabricação de alimentos e pratos prontos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1096100",
+      "fabricante de alimentos prontos congelados independente",
+      "fabricação de alimentos e pratos prontos",
+      "fabricante",
+      "alimentos",
+      "prontos",
+      "congelados",
+      "independente",
+      "fabricação",
+      "pratos"
+    ]
+  },
+  {
+    "cnae": "1099601",
+    "ocupacao": "vinagreiro independente",
+    "descricao": "fabricação de vinagres",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1099601",
+      "vinagreiro independente",
+      "fabricação de vinagres",
+      "vinagreiro",
+      "independente",
+      "fabricação",
+      "vinagres"
+    ]
+  },
+  {
+    "cnae": "1099604",
+    "ocupacao": "fabricante de gelo comum independente",
+    "descricao": "fabricação de gelo comum",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1099604",
+      "fabricante de gelo comum independente",
+      "fabricação de gelo comum",
+      "fabricante",
+      "gelo",
+      "comum",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1099605",
+    "ocupacao": "fabricante de chá independente",
+    "descricao": "fabricação de produtos para infusão (chá, mate, etc.)",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1099605",
+      "fabricante de chá independente",
+      "fabricação de produtos para infusão (chá, mate, etc.)",
+      "fabricante",
+      "chá",
+      "independente",
+      "fabricação",
+      "produtos",
+      "para",
+      "infusão",
+      "(chá,",
+      "mate,",
+      "etc.)"
+    ]
+  },
+  {
+    "cnae": "1099699",
+    "ocupacao": "fabricante de geléia de mocotó independente",
+    "descricao": "fabricação de outros produtos alimentícios não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1099699",
+      "fabricante de geléia de mocotó independente",
+      "fabricação de outros produtos alimentícios não especificados anteriormente",
+      "fabricante",
+      "geléia",
+      "mocotó",
+      "independente",
+      "fabricação",
+      "outros",
+      "produtos",
+      "alimentícios",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1122403",
+    "ocupacao": "fabricante de refrescos, xaropes e pós para refrescos independente",
+    "descricao": "fabricação de refrescos, xaropes e pós para refrescos, exceto refrescos de frutas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1122403",
+      "fabricante de refrescos, xaropes e pós para refrescos independente",
+      "fabricação de refrescos, xaropes e pós para refrescos, exceto refrescos de frutas",
+      "fabricante",
+      "refrescos,",
+      "xaropes",
+      "pós",
+      "para",
+      "refrescos",
+      "independente",
+      "fabricação",
+      "exceto",
+      "frutas"
+    ]
+  },
+  {
+    "cnae": "1220499",
+    "ocupacao": "fabricante de fumo e derivados do fumo independente",
+    "descricao": "fabricação de outros produtos do fumo, exceto cigarros, cigarrilhas e charutos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1220499",
+      "fabricante de fumo e derivados do fumo independente",
+      "fabricação de outros produtos do fumo, exceto cigarros, cigarrilhas e charutos",
+      "fabricante",
+      "fumo",
+      "derivados",
+      "independente",
+      "fabricação",
+      "outros",
+      "produtos",
+      "fumo,",
+      "exceto",
+      "cigarros,",
+      "cigarrilhas",
+      "charutos"
+    ]
+  },
+  {
+    "cnae": "1311100",
+    "ocupacao": "fabricante de fios de algodão independente",
+    "descricao": "preparação e fiação de fibras de algodão",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1311100",
+      "fabricante de fios de algodão independente",
+      "preparação e fiação de fibras de algodão",
+      "fabricante",
+      "fios",
+      "algodão",
+      "independente",
+      "preparação",
+      "fiação",
+      "fibras"
+    ]
+  },
+  {
+    "cnae": "1312000",
+    "ocupacao": "fabricante de fios de linho, rami, juta, seda e lã independente",
+    "descricao": "preparação e fiação de fibras têxteis naturais, exceto algodão",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1312000",
+      "fabricante de fios de linho, rami, juta, seda e lã independente",
+      "preparação e fiação de fibras têxteis naturais, exceto algodão",
+      "fabricante",
+      "fios",
+      "linho,",
+      "rami,",
+      "juta,",
+      "seda",
+      "independente",
+      "preparação",
+      "fiação",
+      "fibras",
+      "têxteis",
+      "naturais,",
+      "exceto",
+      "algodão"
+    ]
+  },
+  {
+    "cnae": "1321900",
+    "ocupacao": "tecelão(ã) de algodão independente",
+    "descricao": "tecelagem de fios de algodão",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1321900",
+      "tecelão(ã) de algodão independente",
+      "tecelagem de fios de algodão",
+      "tecelão(ã)",
+      "algodão",
+      "independente",
+      "tecelagem",
+      "fios"
+    ]
+  },
+  {
+    "cnae": "1322700",
+    "ocupacao": "tecelão(ã) independente",
+    "descricao": "tecelagem de fios de fibras têxteis naturais, exceto algodão",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1322700",
+      "tecelão(ã) independente",
+      "tecelagem de fios de fibras têxteis naturais, exceto algodão",
+      "tecelão(ã)",
+      "independente",
+      "tecelagem",
+      "fios",
+      "fibras",
+      "têxteis",
+      "naturais,",
+      "exceto",
+      "algodão"
+    ]
+  },
+  {
+    "cnae": "1340501",
+    "ocupacao": "estampador(a) de peças do vestuário independente",
+    "descricao": "estamparia e texturização em fios, tecidos, artefatos têxteis e peças do vestuário",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "1340501",
+      "estampador(a) de peças do vestuário independente",
+      "estamparia e texturização em fios, tecidos, artefatos têxteis e peças do vestuário",
+      "estampador(a)",
+      "peças",
+      "vestuário",
+      "independente",
+      "estamparia",
+      "texturização",
+      "fios,",
+      "tecidos,",
+      "artefatos",
+      "têxteis"
+    ]
+  },
+  {
+    "cnae": "1340599",
+    "ocupacao": "bordadeiro(a) independente",
+    "descricao": "outros serviços de acabamento em fios, tecidos, artefatos têxteis e peças do vestuário",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "1340599",
+      "bordadeiro(a) independente",
+      "outros serviços de acabamento em fios, tecidos, artefatos têxteis e peças do vestuário",
+      "bordadeiro(a)",
+      "independente",
+      "outros",
+      "serviços",
+      "acabamento",
+      "fios,",
+      "tecidos,",
+      "artefatos",
+      "têxteis",
+      "peças",
+      "vestuário"
+    ]
+  },
+  {
+    "cnae": "1351100",
+    "ocupacao": "fabricante de artefatos têxteis para uso doméstico independente",
+    "descricao": "fabricação de artefatos têxteis para uso doméstico",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1351100",
+      "fabricante de artefatos têxteis para uso doméstico independente",
+      "fabricação de artefatos têxteis para uso doméstico",
+      "fabricante",
+      "artefatos",
+      "têxteis",
+      "para",
+      "uso",
+      "doméstico",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1352900",
+    "ocupacao": "tapeceiro(a) independente",
+    "descricao": "fabricação de artefatos de tapeçaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1352900",
+      "tapeceiro(a) independente",
+      "fabricação de artefatos de tapeçaria",
+      "tapeceiro(a)",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "tapeçaria"
+    ]
+  },
+  {
+    "cnae": "1353700",
+    "ocupacao": "redeiro(a) independente",
+    "descricao": "fabricação de artefatos de cordoaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1353700",
+      "redeiro(a) independente",
+      "fabricação de artefatos de cordoaria",
+      "redeiro(a)",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "cordoaria"
+    ]
+  },
+  {
+    "cnae": "1359600",
+    "ocupacao": "artesão têxtil",
+    "descricao": "fabricação de outros produtos têxteis não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1359600",
+      "artesão têxtil",
+      "fabricação de outros produtos têxteis não especificados anteriormente",
+      "artesão",
+      "têxtil",
+      "fabricação",
+      "outros",
+      "produtos",
+      "têxteis",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1411801",
+    "ocupacao": "fabricante de roupas íntimas independente",
+    "descricao": "confecção de roupas íntimas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1411801",
+      "fabricante de roupas íntimas independente",
+      "confecção de roupas íntimas",
+      "fabricante",
+      "roupas",
+      "íntimas",
+      "independente",
+      "confecção"
+    ]
+  },
+  {
+    "cnae": "1411802",
+    "ocupacao": "fabricante de partes de roupas íntimas – facção independente",
+    "descricao": "facção de roupas íntimas",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1411802",
+      "fabricante de partes de roupas íntimas – facção independente",
+      "facção de roupas íntimas",
+      "fabricante",
+      "partes",
+      "roupas",
+      "íntimas",
+      "facção",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "1412601",
+    "ocupacao": "costureiro(a) de roupas, exceto sob medida independente",
+    "descricao": "confecção de peças de vestuário, exceto roupas íntimas e as confeccionadas sob medida",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1412601",
+      "costureiro(a) de roupas, exceto sob medida independente",
+      "confecção de peças de vestuário, exceto roupas íntimas e as confeccionadas sob medida",
+      "costureiro(a)",
+      "roupas,",
+      "exceto",
+      "sob",
+      "medida",
+      "independente",
+      "confecção",
+      "peças",
+      "vestuário,",
+      "roupas",
+      "íntimas",
+      "confeccionadas"
+    ]
+  },
+  {
+    "cnae": "1412602",
+    "ocupacao": "alfaiate independente",
+    "descricao": "confecção, sob medida, de peças do vestuário, exceto roupas íntimas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "1412602",
+      "alfaiate independente",
+      "confecção, sob medida, de peças do vestuário, exceto roupas íntimas",
+      "alfaiate",
+      "independente",
+      "confecção,",
+      "sob",
+      "medida,",
+      "peças",
+      "vestuário,",
+      "exceto",
+      "roupas",
+      "íntimas"
+    ]
+  },
+  {
+    "cnae": "1412603",
+    "ocupacao": "fabricante de partes de peças do vestuário – facção independente",
+    "descricao": "facção de peças do vestuário, exceto roupas íntimas",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1412603",
+      "fabricante de partes de peças do vestuário – facção independente",
+      "facção de peças do vestuário, exceto roupas íntimas",
+      "fabricante",
+      "partes",
+      "peças",
+      "vestuário",
+      "facção",
+      "independente",
+      "vestuário,",
+      "exceto",
+      "roupas",
+      "íntimas"
+    ]
+  },
+  {
+    "cnae": "1413403",
+    "ocupacao": "fabricante de partes de roupas profissionais – facção independente",
+    "descricao": "facção de roupas profissionais",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1413403",
+      "fabricante de partes de roupas profissionais – facção independente",
+      "facção de roupas profissionais",
+      "fabricante",
+      "partes",
+      "roupas",
+      "profissionais",
+      "facção",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "1414200",
+    "ocupacao": "boneleiro(a) (fabricante de bonés) independente",
+    "descricao": "fabricação de acessórios do vestuário, exceto para segurança e proteção",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1414200",
+      "boneleiro(a) (fabricante de bonés) independente",
+      "fabricação de acessórios do vestuário, exceto para segurança e proteção",
+      "boneleiro(a)",
+      "(fabricante",
+      "bonés)",
+      "independente",
+      "fabricação",
+      "acessórios",
+      "vestuário,",
+      "exceto",
+      "para",
+      "segurança",
+      "proteção"
+    ]
+  },
+  {
+    "cnae": "1421500",
+    "ocupacao": "fabricante de meias independente",
+    "descricao": "fabricação de meias",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1421500",
+      "fabricante de meias independente",
+      "fabricação de meias",
+      "fabricante",
+      "meias",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1422300",
+    "ocupacao": "crocheteiro(a) independente",
+    "descricao": "fabricação de artigos do vestuário, produzidos em malharias e tricotagens, exceto meias",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1422300",
+      "crocheteiro(a) independente",
+      "fabricação de artigos do vestuário, produzidos em malharias e tricotagens, exceto meias",
+      "crocheteiro(a)",
+      "independente",
+      "fabricação",
+      "artigos",
+      "vestuário,",
+      "produzidos",
+      "malharias",
+      "tricotagens,",
+      "exceto",
+      "meias"
+    ]
+  },
+  {
+    "cnae": "1510600",
+    "ocupacao": "curtidor de couro independente",
+    "descricao": "curtimento e outras preparações de couro",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1510600",
+      "curtidor de couro independente",
+      "curtimento e outras preparações de couro",
+      "curtidor",
+      "couro",
+      "independente",
+      "curtimento",
+      "outras",
+      "preparações"
+    ]
+  },
+  {
+    "cnae": "1521100",
+    "ocupacao": "fabricante de bolsas/bolseiro independente",
+    "descricao": "fabricação de artigos para viagem, bolsas e semelhantes de qualquer material",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1521100",
+      "fabricante de bolsas/bolseiro independente",
+      "fabricação de artigos para viagem, bolsas e semelhantes de qualquer material",
+      "fabricante",
+      "bolsas/bolseiro",
+      "independente",
+      "fabricação",
+      "artigos",
+      "para",
+      "viagem,",
+      "bolsas",
+      "semelhantes",
+      "qualquer",
+      "material"
+    ]
+  },
+  {
+    "cnae": "1529700",
+    "ocupacao": "artesão(ã) em couro independente",
+    "descricao": "fabricação de artefatos de couro não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1529700",
+      "artesão(ã) em couro independente",
+      "fabricação de artefatos de couro não especificados anteriormente",
+      "artesão(ã)",
+      "couro",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1531901",
+    "ocupacao": "fabricante de calçados de couro independente",
+    "descricao": "fabricação de calçados de couro",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1531901",
+      "fabricante de calçados de couro independente",
+      "fabricação de calçados de couro",
+      "fabricante",
+      "calçados",
+      "couro",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1531902",
+    "ocupacao": "acabador(a) de calçados independente",
+    "descricao": "acabamento de calçados de couro sob contrato",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1531902",
+      "acabador(a) de calçados independente",
+      "acabamento de calçados de couro sob contrato",
+      "acabador(a)",
+      "calçados",
+      "independente",
+      "acabamento",
+      "couro",
+      "sob",
+      "contrato"
+    ]
+  },
+  {
+    "cnae": "1539400",
+    "ocupacao": "fabricante de calçados de borracha, madeira e tecidos e fibras independente",
+    "descricao": "fabricação de calçados de materiais não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1539400",
+      "fabricante de calçados de borracha, madeira e tecidos e fibras independente",
+      "fabricação de calçados de materiais não especificados anteriormente",
+      "fabricante",
+      "calçados",
+      "borracha,",
+      "madeira",
+      "tecidos",
+      "fibras",
+      "independente",
+      "fabricação",
+      "materiais",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1540800",
+    "ocupacao": "fabricante de partes para calçados independente",
+    "descricao": "fabricação de partes para calçados, de qualquer material",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1540800",
+      "fabricante de partes para calçados independente",
+      "fabricação de partes para calçados, de qualquer material",
+      "fabricante",
+      "partes",
+      "para",
+      "calçados",
+      "independente",
+      "fabricação",
+      "calçados,",
+      "qualquer",
+      "material"
+    ]
+  },
+  {
+    "cnae": "1622699",
+    "ocupacao": "carpinteiro(a) independente",
+    "descricao": "fabricação de outros artigos de carpintaria para construção",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1622699",
+      "carpinteiro(a) independente",
+      "fabricação de outros artigos de carpintaria para construção",
+      "carpinteiro(a)",
+      "independente",
+      "fabricação",
+      "outros",
+      "artigos",
+      "carpintaria",
+      "para",
+      "construção"
+    ]
+  },
+  {
+    "cnae": "1623400",
+    "ocupacao": "fabricante de embalagens de madeira independente",
+    "descricao": "fabricação de artefatos de tanoaria e de embalagens de madeira",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1623400",
+      "fabricante de embalagens de madeira independente",
+      "fabricação de artefatos de tanoaria e de embalagens de madeira",
+      "fabricante",
+      "embalagens",
+      "madeira",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "tanoaria"
+    ]
+  },
+  {
+    "cnae": "1629301",
+    "ocupacao": "artesão(ã) em madeira independente",
+    "descricao": "fabricação de artefatos diversos de madeira, exceto móveis",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1629301",
+      "artesão(ã) em madeira independente",
+      "fabricação de artefatos diversos de madeira, exceto móveis",
+      "artesão(ã)",
+      "madeira",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "diversos",
+      "madeira,",
+      "exceto",
+      "móveis"
+    ]
+  },
+  {
+    "cnae": "1629302",
+    "ocupacao": "artesão(ã) em cortiça, bambu e afins independente",
+    "descricao": "fabricação de artefatos diversos de cortiça, bambu, palha, vime e outros materiais trançados, exceto móveis",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1629302",
+      "artesão(ã) em cortiça, bambu e afins independente",
+      "fabricação de artefatos diversos de cortiça, bambu, palha, vime e outros materiais trançados, exceto móveis",
+      "artesão(ã)",
+      "cortiça,",
+      "bambu",
+      "afins",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "diversos",
+      "bambu,",
+      "palha,",
+      "vime",
+      "outros",
+      "materiais",
+      "trançados,",
+      "exceto",
+      "móveis"
+    ]
+  },
+  {
+    "cnae": "1721400",
+    "ocupacao": "fabricante de papel independente",
+    "descricao": "fabricação de papel",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1721400",
+      "fabricante de papel independente",
+      "fabricação de papel",
+      "fabricante",
+      "papel",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1731100",
+    "ocupacao": "fabricante de embalagens de papel independente",
+    "descricao": "fabricação de embalagens de papel",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1731100",
+      "fabricante de embalagens de papel independente",
+      "fabricação de embalagens de papel",
+      "fabricante",
+      "embalagens",
+      "papel",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1732000",
+    "ocupacao": "fabricante de embalagens de cartolina e papel-cartão independente",
+    "descricao": "fabricação de embalagens de cartolina e papel-cartão",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1732000",
+      "fabricante de embalagens de cartolina e papel-cartão independente",
+      "fabricação de embalagens de cartolina e papel-cartão",
+      "fabricante",
+      "embalagens",
+      "cartolina",
+      "papel-cartão",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "1742799",
+    "ocupacao": "fabricante de guardanapos e copos de papel independente",
+    "descricao": "fabricação de produtos de papel para uso doméstico e higiênico-sanitário não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1742799",
+      "fabricante de guardanapos e copos de papel independente",
+      "fabricação de produtos de papel para uso doméstico e higiênico-sanitário não especificados anteriormente",
+      "fabricante",
+      "guardanapos",
+      "copos",
+      "papel",
+      "independente",
+      "fabricação",
+      "produtos",
+      "para",
+      "uso",
+      "doméstico",
+      "higiênico-sanitário",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1749400",
+    "ocupacao": "artesão(ã) em papel independente",
+    "descricao": "fabricação de produtos de pastas celulósicas, papel, cartolina, papel-cartão e papelão ondulado não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "1749400",
+      "artesão(ã) em papel independente",
+      "fabricação de produtos de pastas celulósicas, papel, cartolina, papel-cartão e papelão ondulado não especificados anteriormente",
+      "artesão(ã)",
+      "papel",
+      "independente",
+      "fabricação",
+      "produtos",
+      "pastas",
+      "celulósicas,",
+      "papel,",
+      "cartolina,",
+      "papel-cartão",
+      "papelão",
+      "ondulado",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "1813001",
+    "ocupacao": "serigrafista publicitário independente",
+    "descricao": "impressão de material para uso publicitário",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1813001",
+      "serigrafista publicitário independente",
+      "impressão de material para uso publicitário",
+      "serigrafista",
+      "publicitário",
+      "independente",
+      "impressão",
+      "material",
+      "para",
+      "uso"
+    ]
+  },
+  {
+    "cnae": "1813099",
+    "ocupacao": "serigrafista independente",
+    "descricao": "impressão de material para outros usos",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "1813099",
+      "serigrafista independente",
+      "impressão de material para outros usos",
+      "serigrafista",
+      "independente",
+      "impressão",
+      "material",
+      "para",
+      "outros",
+      "usos"
+    ]
+  },
+  {
+    "cnae": "1821100",
+    "ocupacao": "clicherista independente",
+    "descricao": "serviços de pré-impressão",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "1821100",
+      "clicherista independente",
+      "serviços de pré-impressão",
+      "clicherista",
+      "independente",
+      "serviços",
+      "pré-impressão"
+    ]
+  },
+  {
+    "cnae": "1822901",
+    "ocupacao": "encadernador(a)/plastificador(a) independente",
+    "descricao": "serviços de encadernação e plastificação",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "1822901",
+      "encadernador(a)/plastificador(a) independente",
+      "serviços de encadernação e plastificação",
+      "encadernador(a)/plastificador(a)",
+      "independente",
+      "serviços",
+      "encadernação",
+      "plastificação"
+    ]
+  },
+  {
+    "cnae": "2219600",
+    "ocupacao": "artesão(ã) em borracha independente",
+    "descricao": "fabricação de artefatos de borracha não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2219600",
+      "artesão(ã) em borracha independente",
+      "fabricação de artefatos de borracha não especificados anteriormente",
+      "artesão(ã)",
+      "borracha",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "2229399",
+    "ocupacao": "artesão(ã) em plástico independente",
+    "descricao": "fabricação de artefatos de material plástico para outros usos não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2229399",
+      "artesão(ã) em plástico independente",
+      "fabricação de artefatos de material plástico para outros usos não especificados anteriormente",
+      "artesão(ã)",
+      "plástico",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "material",
+      "para",
+      "outros",
+      "usos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "2319200",
+    "ocupacao": "artesão(ã) em vidro independente",
+    "descricao": "fabricação de artigos de vidro",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2319200",
+      "artesão(ã) em vidro independente",
+      "fabricação de artigos de vidro",
+      "artesão(ã)",
+      "vidro",
+      "independente",
+      "fabricação",
+      "artigos"
+    ]
+  },
+  {
+    "cnae": "2330399",
+    "ocupacao": "artesão(ã) em cimento independente",
+    "descricao": "fabricação de outros artefatos e produtos de concreto, cimento, fibrocimento, gesso e materiais semelhantes",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2330399",
+      "artesão(ã) em cimento independente",
+      "fabricação de outros artefatos e produtos de concreto, cimento, fibrocimento, gesso e materiais semelhantes",
+      "artesão(ã)",
+      "cimento",
+      "independente",
+      "fabricação",
+      "outros",
+      "artefatos",
+      "produtos",
+      "concreto,",
+      "cimento,",
+      "fibrocimento,",
+      "gesso",
+      "materiais",
+      "semelhantes"
+    ]
+  },
+  {
+    "cnae": "2342702",
+    "ocupacao": "oleiro(a) independente",
+    "descricao": "fabricação de artefatos de cerâmica e barro cozido para uso na construção, exceto azulejos e pisos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2342702",
+      "oleiro(a) independente",
+      "fabricação de artefatos de cerâmica e barro cozido para uso na construção, exceto azulejos e pisos",
+      "oleiro(a)",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "cerâmica",
+      "barro",
+      "cozido",
+      "para",
+      "uso",
+      "construção,",
+      "exceto",
+      "azulejos",
+      "pisos"
+    ]
+  },
+  {
+    "cnae": "2349499",
+    "ocupacao": "artesão(ã) em cerâmica independente",
+    "descricao": "fabricação de produtos cerâmicos não refratários não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2349499",
+      "artesão(ã) em cerâmica independente",
+      "fabricação de produtos cerâmicos não refratários não especificados anteriormente",
+      "artesão(ã)",
+      "cerâmica",
+      "independente",
+      "fabricação",
+      "produtos",
+      "cerâmicos",
+      "não",
+      "refratários",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "2391501",
+    "ocupacao": "britador independente",
+    "descricao": "britamento de pedras, exceto associado à extração",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2391501",
+      "britador independente",
+      "britamento de pedras, exceto associado à extração",
+      "britador",
+      "independente",
+      "britamento",
+      "pedras,",
+      "exceto",
+      "associado",
+      "extração"
+    ]
+  },
+  {
+    "cnae": "2391503",
+    "ocupacao": "artesão(ã) em mármore, granito, ardósia e outras pedras independente",
+    "descricao": "aparelhamento de placas e execução de trabalhos em mármore, granito, ardósia e outras pedras",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "2391503",
+      "artesão(ã) em mármore, granito, ardósia e outras pedras independente",
+      "aparelhamento de placas e execução de trabalhos em mármore, granito, ardósia e outras pedras",
+      "artesão(ã)",
+      "mármore,",
+      "granito,",
+      "ardósia",
+      "outras",
+      "pedras",
+      "independente",
+      "aparelhamento",
+      "placas",
+      "execução",
+      "trabalhos"
+    ]
+  },
+  {
+    "cnae": "2399101",
+    "ocupacao": "artesão(ã) em louças, vidro e cristal independente",
+    "descricao": "decoração, lapidação, gravação, vitrificação e outros trabalhos em cerâmica, louça, vidro e cristal",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "2399101",
+      "artesão(ã) em louças, vidro e cristal independente",
+      "decoração, lapidação, gravação, vitrificação e outros trabalhos em cerâmica, louça, vidro e cristal",
+      "artesão(ã)",
+      "louças,",
+      "vidro",
+      "cristal",
+      "independente",
+      "decoração,",
+      "lapidação,",
+      "gravação,",
+      "vitrificação",
+      "outros",
+      "trabalhos",
+      "cerâmica,",
+      "louça,"
+    ]
+  },
+  {
+    "cnae": "2512800",
+    "ocupacao": "fabricante de esquadrias metálicas sob encomenda ou não independente",
+    "descricao": "fabricação de esquadrias de metal",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "2512800",
+      "fabricante de esquadrias metálicas sob encomenda ou não independente",
+      "fabricação de esquadrias de metal",
+      "fabricante",
+      "esquadrias",
+      "metálicas",
+      "sob",
+      "encomenda",
+      "não",
+      "independente",
+      "fabricação",
+      "metal"
+    ]
+  },
+  {
+    "cnae": "2532201",
+    "ocupacao": "fabricante de artefatos de funilaria independente",
+    "descricao": "produção de artefatos estampados de metal",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2532201",
+      "fabricante de artefatos de funilaria independente",
+      "produção de artefatos estampados de metal",
+      "fabricante",
+      "artefatos",
+      "funilaria",
+      "independente",
+      "produção",
+      "estampados",
+      "metal"
+    ]
+  },
+  {
+    "cnae": "2539001",
+    "ocupacao": "soldador(a) / brasador(a) independente",
+    "descricao": "serviços de usinagem, tornearia e solda",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "2539001",
+      "soldador(a) / brasador(a) independente",
+      "serviços de usinagem, tornearia e solda",
+      "soldador(a)",
+      "brasador(a)",
+      "independente",
+      "serviços",
+      "usinagem,",
+      "tornearia",
+      "solda"
+    ]
+  },
+  {
+    "cnae": "2539002",
+    "ocupacao": "galvanizador(a) independente",
+    "descricao": "serviços de tratamento e revestimento em metais",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "2539002",
+      "galvanizador(a) independente",
+      "serviços de tratamento e revestimento em metais",
+      "galvanizador(a)",
+      "independente",
+      "serviços",
+      "tratamento",
+      "revestimento",
+      "metais"
+    ]
+  },
+  {
+    "cnae": "2541100",
+    "ocupacao": "fabricante de artigos de cutelaria independente",
+    "descricao": "fabricação de artigos de cutelaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2541100",
+      "fabricante de artigos de cutelaria independente",
+      "fabricação de artigos de cutelaria",
+      "fabricante",
+      "artigos",
+      "cutelaria",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "2542000",
+    "ocupacao": "serralheiro (a), sob encomenda ou não independente",
+    "descricao": "fabricação de artigos de serralheria, exceto esquadrias",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "2542000",
+      "serralheiro (a), sob encomenda ou não independente",
+      "fabricação de artigos de serralheria, exceto esquadrias",
+      "serralheiro",
+      "(a),",
+      "sob",
+      "encomenda",
+      "não",
+      "independente",
+      "fabricação",
+      "artigos",
+      "serralheria,",
+      "exceto",
+      "esquadrias"
+    ]
+  },
+  {
+    "cnae": "2543800",
+    "ocupacao": "ferramenteiro(a) independente",
+    "descricao": "fabricação de ferramentas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2543800",
+      "ferramenteiro(a) independente",
+      "fabricação de ferramentas",
+      "ferramenteiro(a)",
+      "independente",
+      "fabricação",
+      "ferramentas"
+    ]
+  },
+  {
+    "cnae": "2599301",
+    "ocupacao": "armador(a) de ferragens na construção civil independente",
+    "descricao": "serviços de confecção de armações metálicas para a construção",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "2599301",
+      "armador(a) de ferragens na construção civil independente",
+      "serviços de confecção de armações metálicas para a construção",
+      "armador(a)",
+      "ferragens",
+      "construção",
+      "civil",
+      "independente",
+      "serviços",
+      "confecção",
+      "armações",
+      "metálicas",
+      "para"
+    ]
+  },
+  {
+    "cnae": "2599399",
+    "ocupacao": "artesão(ã) em metais independente",
+    "descricao": "fabricação de outros produtos de metal não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2599399",
+      "artesão(ã) em metais independente",
+      "fabricação de outros produtos de metal não especificados anteriormente",
+      "artesão(ã)",
+      "metais",
+      "independente",
+      "fabricação",
+      "outros",
+      "produtos",
+      "metal",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "2740602",
+    "ocupacao": "fabricante de luminárias e outros equipamentos de iluminação independente",
+    "descricao": "fabricação de luminárias e outros equipamentos de iluminação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "2740602",
+      "fabricante de luminárias e outros equipamentos de iluminação independente",
+      "fabricação de luminárias e outros equipamentos de iluminação",
+      "fabricante",
+      "luminárias",
+      "outros",
+      "equipamentos",
+      "iluminação",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "2950600",
+    "ocupacao": "retificador(a) de motores para veículos automotores independente",
+    "descricao": "recondicionamento e recuperação de motores para veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "2950600",
+      "retificador(a) de motores para veículos automotores independente",
+      "recondicionamento e recuperação de motores para veículos automotores",
+      "retificador(a)",
+      "motores",
+      "para",
+      "veículos",
+      "automotores",
+      "independente",
+      "recondicionamento",
+      "recuperação"
+    ]
+  },
+  {
+    "cnae": "3101200",
+    "ocupacao": "marceneiro (a) sob encomenda ou não independente",
+    "descricao": "fabricação de móveis com predominância de madeira",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3101200",
+      "marceneiro (a) sob encomenda ou não independente",
+      "fabricação de móveis com predominância de madeira",
+      "marceneiro",
+      "(a)",
+      "sob",
+      "encomenda",
+      "não",
+      "independente",
+      "fabricação",
+      "móveis",
+      "com",
+      "predominância",
+      "madeira"
+    ]
+  },
+  {
+    "cnae": "3102100",
+    "ocupacao": "moveleiro(a) de móveis metálicos independente",
+    "descricao": "fabricação de móveis com predominância de metal",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3102100",
+      "moveleiro(a) de móveis metálicos independente",
+      "fabricação de móveis com predominância de metal",
+      "moveleiro(a)",
+      "móveis",
+      "metálicos",
+      "independente",
+      "fabricação",
+      "com",
+      "predominância",
+      "metal"
+    ]
+  },
+  {
+    "cnae": "3103900",
+    "ocupacao": "moveleiro(a) independente",
+    "descricao": "fabricação de móveis de outros materiais, exceto madeira e metal",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3103900",
+      "moveleiro(a) independente",
+      "fabricação de móveis de outros materiais, exceto madeira e metal",
+      "moveleiro(a)",
+      "independente",
+      "fabricação",
+      "móveis",
+      "outros",
+      "materiais,",
+      "exceto",
+      "madeira",
+      "metal"
+    ]
+  },
+  {
+    "cnae": "3104700",
+    "ocupacao": "colchoeiro(a) independente",
+    "descricao": "fabricação de colchões",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3104700",
+      "colchoeiro(a) independente",
+      "fabricação de colchões",
+      "colchoeiro(a)",
+      "independente",
+      "fabricação",
+      "colchões"
+    ]
+  },
+  {
+    "cnae": "3211601",
+    "ocupacao": "lapidador(a) independente",
+    "descricao": "lapidação de gemas",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3211601",
+      "lapidador(a) independente",
+      "lapidação de gemas",
+      "lapidador(a)",
+      "independente",
+      "lapidação",
+      "gemas"
+    ]
+  },
+  {
+    "cnae": "3211602",
+    "ocupacao": "artesão(ã) em metais preciosos independente",
+    "descricao": "fabricação de artefatos de joalheria e ourivesaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3211602",
+      "artesão(ã) em metais preciosos independente",
+      "fabricação de artefatos de joalheria e ourivesaria",
+      "artesão(ã)",
+      "metais",
+      "preciosos",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "joalheria",
+      "ourivesaria"
+    ]
+  },
+  {
+    "cnae": "3211603",
+    "ocupacao": "cunhador(a) de moedas e medalhas independente",
+    "descricao": "cunhagem de moedas e medalhas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3211603",
+      "cunhador(a) de moedas e medalhas independente",
+      "cunhagem de moedas e medalhas",
+      "cunhador(a)",
+      "moedas",
+      "medalhas",
+      "independente",
+      "cunhagem"
+    ]
+  },
+  {
+    "cnae": "3212400",
+    "ocupacao": "artesão(ã) de bijuterias independente",
+    "descricao": "fabricação de bijuterias e artefatos semelhantes",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3212400",
+      "artesão(ã) de bijuterias independente",
+      "fabricação de bijuterias e artefatos semelhantes",
+      "artesão(ã)",
+      "bijuterias",
+      "independente",
+      "fabricação",
+      "artefatos",
+      "semelhantes"
+    ]
+  },
+  {
+    "cnae": "3220500",
+    "ocupacao": "fabricante de instrumentos musicais independente",
+    "descricao": "fabricação de instrumentos musicais, peças e acessórios",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3220500",
+      "fabricante de instrumentos musicais independente",
+      "fabricação de instrumentos musicais, peças e acessórios",
+      "fabricante",
+      "instrumentos",
+      "musicais",
+      "independente",
+      "fabricação",
+      "musicais,",
+      "peças",
+      "acessórios"
+    ]
+  },
+  {
+    "cnae": "3230200",
+    "ocupacao": "fabricante de artefatos para pesca e esporte independente",
+    "descricao": "fabricação de artefatos para pesca e esporte",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3230200",
+      "fabricante de artefatos para pesca e esporte independente",
+      "fabricação de artefatos para pesca e esporte",
+      "fabricante",
+      "artefatos",
+      "para",
+      "pesca",
+      "esporte",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "3240099",
+    "ocupacao": "fabricante de brinquedos não eletrônicos independente",
+    "descricao": "fabricação de outros brinquedos e jogos recreativos não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3240099",
+      "fabricante de brinquedos não eletrônicos independente",
+      "fabricação de outros brinquedos e jogos recreativos não especificados anteriormente",
+      "fabricante",
+      "brinquedos",
+      "não",
+      "eletrônicos",
+      "independente",
+      "fabricação",
+      "outros",
+      "jogos",
+      "recreativos",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "3291400",
+    "ocupacao": "vassoureiro(a) independente",
+    "descricao": "fabricação de escovas, pincéis e vassouras",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3291400",
+      "vassoureiro(a) independente",
+      "fabricação de escovas, pincéis e vassouras",
+      "vassoureiro(a)",
+      "independente",
+      "fabricação",
+      "escovas,",
+      "pincéis",
+      "vassouras"
+    ]
+  },
+  {
+    "cnae": "3292202",
+    "ocupacao": "fabricante de produtos de tecido não tecido para uso odonto-médico-hospitalar independente",
+    "descricao": "fabricação de equipamentos e acessórios para segurança pessoal e profissional",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3292202",
+      "fabricante de produtos de tecido não tecido para uso odonto-médico-hospitalar independente",
+      "fabricação de equipamentos e acessórios para segurança pessoal e profissional",
+      "fabricante",
+      "produtos",
+      "tecido",
+      "não",
+      "para",
+      "uso",
+      "odonto-médico-hospitalar",
+      "independente",
+      "fabricação",
+      "equipamentos",
+      "acessórios",
+      "segurança",
+      "pessoal",
+      "profissional"
+    ]
+  },
+  {
+    "cnae": "3299001",
+    "ocupacao": "fabricante de guarda-chuvas e similares independente",
+    "descricao": "fabricação de guarda-chuvas e similares",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3299001",
+      "fabricante de guarda-chuvas e similares independente",
+      "fabricação de guarda-chuvas e similares",
+      "fabricante",
+      "guarda-chuvas",
+      "similares",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "3299002",
+    "ocupacao": "confeccionador(a) de carimbos independente",
+    "descricao": "fabricação de canetas, lápis e outros artigos para escritório",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3299002",
+      "confeccionador(a) de carimbos independente",
+      "fabricação de canetas, lápis e outros artigos para escritório",
+      "confeccionador(a)",
+      "carimbos",
+      "independente",
+      "fabricação",
+      "canetas,",
+      "lápis",
+      "outros",
+      "artigos",
+      "para",
+      "escritório"
+    ]
+  },
+  {
+    "cnae": "3299003",
+    "ocupacao": "fabricante de letreiros, placas e painéis não luminosos, sob encomenda ou não independente",
+    "descricao": "fabricação de letras, letreiros e placas de qualquer material, exceto luminosos",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3299003",
+      "fabricante de letreiros, placas e painéis não luminosos, sob encomenda ou não independente",
+      "fabricação de letras, letreiros e placas de qualquer material, exceto luminosos",
+      "fabricante",
+      "letreiros,",
+      "placas",
+      "painéis",
+      "não",
+      "luminosos,",
+      "sob",
+      "encomenda",
+      "independente",
+      "fabricação",
+      "letras,",
+      "letreiros",
+      "qualquer",
+      "material,",
+      "exceto",
+      "luminosos"
+    ]
+  },
+  {
+    "cnae": "3299004",
+    "ocupacao": "fabricante de painéis e letreiros luminosos independente",
+    "descricao": "fabricação de painéis e letreiros luminosos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3299004",
+      "fabricante de painéis e letreiros luminosos independente",
+      "fabricação de painéis e letreiros luminosos",
+      "fabricante",
+      "painéis",
+      "letreiros",
+      "luminosos",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "3299005",
+    "ocupacao": "fabricante de aviamentos para costura independente",
+    "descricao": "fabricação de aviamentos para costura",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3299005",
+      "fabricante de aviamentos para costura independente",
+      "fabricação de aviamentos para costura",
+      "fabricante",
+      "aviamentos",
+      "para",
+      "costura",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "3299006",
+    "ocupacao": "fabricante de velas, inclusive decorativas independente",
+    "descricao": "fabricação de velas, inclusive decorativas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3299006",
+      "fabricante de velas, inclusive decorativas independente",
+      "fabricação de velas, inclusive decorativas",
+      "fabricante",
+      "velas,",
+      "inclusive",
+      "decorativas",
+      "independente",
+      "fabricação"
+    ]
+  },
+  {
+    "cnae": "3299099",
+    "ocupacao": "artesão(ã) em outros materiais independente",
+    "descricao": "fabricação de produtos diversos não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "3299099",
+      "artesão(ã) em outros materiais independente",
+      "fabricação de produtos diversos não especificados anteriormente",
+      "artesão(ã)",
+      "outros",
+      "materiais",
+      "independente",
+      "fabricação",
+      "produtos",
+      "diversos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "3311200",
+    "ocupacao": "reparador(a) de tanques, reservatórios metálicos e caldeiras, exceto para veículos independente",
+    "descricao": "manutenção e reparação de tanques, reservatórios metálicos e caldeiras, exceto para veículos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3311200",
+      "reparador(a) de tanques, reservatórios metálicos e caldeiras, exceto para veículos independente",
+      "manutenção e reparação de tanques, reservatórios metálicos e caldeiras, exceto para veículos",
+      "reparador(a)",
+      "tanques,",
+      "reservatórios",
+      "metálicos",
+      "caldeiras,",
+      "exceto",
+      "para",
+      "veículos",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3313901",
+    "ocupacao": "reparador(a) de geradores, transformadores e motores elétricos independente",
+    "descricao": "manutenção e reparação de geradores, transformadores e motores elétricos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3313901",
+      "reparador(a) de geradores, transformadores e motores elétricos independente",
+      "manutenção e reparação de geradores, transformadores e motores elétricos",
+      "reparador(a)",
+      "geradores,",
+      "transformadores",
+      "motores",
+      "elétricos",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3313902",
+    "ocupacao": "reparador(a) de baterias e acumuladores elétricos, exceto para veículos independente",
+    "descricao": "manutenção e reparação de baterias e acumuladores elétricos, exceto para veículos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3313902",
+      "reparador(a) de baterias e acumuladores elétricos, exceto para veículos independente",
+      "manutenção e reparação de baterias e acumuladores elétricos, exceto para veículos",
+      "reparador(a)",
+      "baterias",
+      "acumuladores",
+      "elétricos,",
+      "exceto",
+      "para",
+      "veículos",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3313999",
+    "ocupacao": "reparador(a) de aparelhos e equipamentos para distribuição e controle de energia elétrica independente",
+    "descricao": "manutenção e reparação de máquinas, aparelhos e materiais elétricos não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3313999",
+      "reparador(a) de aparelhos e equipamentos para distribuição e controle de energia elétrica independente",
+      "manutenção e reparação de máquinas, aparelhos e materiais elétricos não especificados anteriormente",
+      "reparador(a)",
+      "aparelhos",
+      "equipamentos",
+      "para",
+      "distribuição",
+      "controle",
+      "energia",
+      "elétrica",
+      "independente",
+      "manutenção",
+      "reparação",
+      "máquinas,",
+      "materiais",
+      "elétricos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "3314701",
+    "ocupacao": "reparador(a) de máquinas motrizes não elétricas independente",
+    "descricao": "manutenção e reparação de máquinas motrizes não elétricas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314701",
+      "reparador(a) de máquinas motrizes não elétricas independente",
+      "manutenção e reparação de máquinas motrizes não elétricas",
+      "reparador(a)",
+      "máquinas",
+      "motrizes",
+      "não",
+      "elétricas",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314702",
+    "ocupacao": "reparador(a) de equipamentos hidráulicos e pneumáticos, exceto válvulas independente",
+    "descricao": "manutenção e reparação de equipamentos hidráulicos e pneumáticos, exceto válvulas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314702",
+      "reparador(a) de equipamentos hidráulicos e pneumáticos, exceto válvulas independente",
+      "manutenção e reparação de equipamentos hidráulicos e pneumáticos, exceto válvulas",
+      "reparador(a)",
+      "equipamentos",
+      "hidráulicos",
+      "pneumáticos,",
+      "exceto",
+      "válvulas",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314706",
+    "ocupacao": "reparador(a) de máquinas, aparelhos e equipamentos para instalações térmicas independente",
+    "descricao": "manutenção e reparação de máquinas, aparelhos e equipamentos para instalações térmicas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314706",
+      "reparador(a) de máquinas, aparelhos e equipamentos para instalações térmicas independente",
+      "manutenção e reparação de máquinas, aparelhos e equipamentos para instalações térmicas",
+      "reparador(a)",
+      "máquinas,",
+      "aparelhos",
+      "equipamentos",
+      "para",
+      "instalações",
+      "térmicas",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314707",
+    "ocupacao": "reparador(a) de máquinas e aparelhos de refrigeração e ventilação para uso industrial e comercial independente",
+    "descricao": "manutenção e reparação de máquinas e aparelhos de refrigeração e ventilação para uso industrial e comercial",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314707",
+      "reparador(a) de máquinas e aparelhos de refrigeração e ventilação para uso industrial e comercial independente",
+      "manutenção e reparação de máquinas e aparelhos de refrigeração e ventilação para uso industrial e comercial",
+      "reparador(a)",
+      "máquinas",
+      "aparelhos",
+      "refrigeração",
+      "ventilação",
+      "para",
+      "uso",
+      "industrial",
+      "comercial",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314709",
+    "ocupacao": "reparador(a) de máquinas de escrever, calcular e de outros equipamentos não eletrônicos para escritório independente",
+    "descricao": "manutenção e reparação de máquinas de escrever, calcular e de outros equipamentos não eletrônicos para escritório",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314709",
+      "reparador(a) de máquinas de escrever, calcular e de outros equipamentos não eletrônicos para escritório independente",
+      "manutenção e reparação de máquinas de escrever, calcular e de outros equipamentos não eletrônicos para escritório",
+      "reparador(a)",
+      "máquinas",
+      "escrever,",
+      "calcular",
+      "outros",
+      "equipamentos",
+      "não",
+      "eletrônicos",
+      "para",
+      "escritório",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314710",
+    "ocupacao": "reparador(a) de balanças industriais e comerciais independente",
+    "descricao": "manutenção e reparação de máquinas e equipamentos para uso geral não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314710",
+      "reparador(a) de balanças industriais e comerciais independente",
+      "manutenção e reparação de máquinas e equipamentos para uso geral não especificados anteriormente",
+      "reparador(a)",
+      "balanças",
+      "industriais",
+      "comerciais",
+      "independente",
+      "manutenção",
+      "reparação",
+      "máquinas",
+      "equipamentos",
+      "para",
+      "uso",
+      "geral",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "3314711",
+    "ocupacao": "reparador(a) de máquinas e equipamentos para agricultura e pecuária independente",
+    "descricao": "manutenção e reparação de máquinas e equipamentos para agricultura e pecuária",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314711",
+      "reparador(a) de máquinas e equipamentos para agricultura e pecuária independente",
+      "manutenção e reparação de máquinas e equipamentos para agricultura e pecuária",
+      "reparador(a)",
+      "máquinas",
+      "equipamentos",
+      "para",
+      "agricultura",
+      "pecuária",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314712",
+    "ocupacao": "reparador(a) de tratores agrícolas independente",
+    "descricao": "manutenção e reparação de tratores agrícolas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314712",
+      "reparador(a) de tratores agrícolas independente",
+      "manutenção e reparação de tratores agrícolas",
+      "reparador(a)",
+      "tratores",
+      "agrícolas",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314719",
+    "ocupacao": "reparador(a) de máquinas e equipamentos para as indústrias de alimentos, bebidas e fumo independente",
+    "descricao": "manutenção e reparação de máquinas e equipamentos para as indústrias de alimentos, bebidas e fumo",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314719",
+      "reparador(a) de máquinas e equipamentos para as indústrias de alimentos, bebidas e fumo independente",
+      "manutenção e reparação de máquinas e equipamentos para as indústrias de alimentos, bebidas e fumo",
+      "reparador(a)",
+      "máquinas",
+      "equipamentos",
+      "para",
+      "indústrias",
+      "alimentos,",
+      "bebidas",
+      "fumo",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314720",
+    "ocupacao": "reparador(a) de máquinas e equipamentos para a indústria têxtil, do vestuário, do couro e calçados independente",
+    "descricao": "manutenção e reparação de máquinas e equipamentos para a indústria têxtil, do vestuário, do couro e calçados",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314720",
+      "reparador(a) de máquinas e equipamentos para a indústria têxtil, do vestuário, do couro e calçados independente",
+      "manutenção e reparação de máquinas e equipamentos para a indústria têxtil, do vestuário, do couro e calçados",
+      "reparador(a)",
+      "máquinas",
+      "equipamentos",
+      "para",
+      "indústria",
+      "têxtil,",
+      "vestuário,",
+      "couro",
+      "calçados",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3314799",
+    "ocupacao": "reparador(a) de máquinas e aparelhos para a indústria gráfica independente",
+    "descricao": "manutenção e reparação de outras máquinas e equipamentos para usos industriais não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3314799",
+      "reparador(a) de máquinas e aparelhos para a indústria gráfica independente",
+      "manutenção e reparação de outras máquinas e equipamentos para usos industriais não especificados anteriormente",
+      "reparador(a)",
+      "máquinas",
+      "aparelhos",
+      "para",
+      "indústria",
+      "gráfica",
+      "independente",
+      "manutenção",
+      "reparação",
+      "outras",
+      "equipamentos",
+      "usos",
+      "industriais",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "3317102",
+    "ocupacao": "reparador(a) de embarcações para esporte e lazer independente",
+    "descricao": "manutenção e reparação de embarcações para esporte e lazer",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3317102",
+      "reparador(a) de embarcações para esporte e lazer independente",
+      "manutenção e reparação de embarcações para esporte e lazer",
+      "reparador(a)",
+      "embarcações",
+      "para",
+      "esporte",
+      "lazer",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "3319800",
+    "ocupacao": "reparador(a) de cordas, velames e lonas independente",
+    "descricao": "manutenção e reparação de equipamentos e produtos não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3319800",
+      "reparador(a) de cordas, velames e lonas independente",
+      "manutenção e reparação de equipamentos e produtos não especificados anteriormente",
+      "reparador(a)",
+      "cordas,",
+      "velames",
+      "lonas",
+      "independente",
+      "manutenção",
+      "reparação",
+      "equipamentos",
+      "produtos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "3321000",
+    "ocupacao": "instalador(a) de máquinas e equipamentos industriais independente",
+    "descricao": "instalação de máquinas e equipamentos industriais",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3321000",
+      "instalador(a) de máquinas e equipamentos industriais independente",
+      "instalação de máquinas e equipamentos industriais",
+      "instalador(a)",
+      "máquinas",
+      "equipamentos",
+      "industriais",
+      "independente",
+      "instalação"
+    ]
+  },
+  {
+    "cnae": "3329501",
+    "ocupacao": "montador(a) de móveis independente",
+    "descricao": "serviços de montagem de móveis de qualquer material",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3329501",
+      "montador(a) de móveis independente",
+      "serviços de montagem de móveis de qualquer material",
+      "montador(a)",
+      "móveis",
+      "independente",
+      "serviços",
+      "montagem",
+      "qualquer",
+      "material"
+    ]
+  },
+  {
+    "cnae": "3600602",
+    "ocupacao": "distribuidor(a) de água potável em caminhão pipa independente",
+    "descricao": "distribuição de água por caminhões",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3600602",
+      "distribuidor(a) de água potável em caminhão pipa independente",
+      "distribuição de água por caminhões",
+      "distribuidor(a)",
+      "água",
+      "potável",
+      "caminhão",
+      "pipa",
+      "independente",
+      "distribuição",
+      "por",
+      "caminhões"
+    ]
+  },
+  {
+    "cnae": "3702900",
+    "ocupacao": "fosseiro (limpador de fossa) independente",
+    "descricao": "atividades relacionadas a esgoto, exceto a gestão de redes",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3702900",
+      "fosseiro (limpador de fossa) independente",
+      "atividades relacionadas a esgoto, exceto a gestão de redes",
+      "fosseiro",
+      "(limpador",
+      "fossa)",
+      "independente",
+      "atividades",
+      "relacionadas",
+      "esgoto,",
+      "exceto",
+      "gestão",
+      "redes"
+    ]
+  },
+  {
+    "cnae": "3811400",
+    "ocupacao": "carroceiro – coleta de entulhos e resíduos independente",
+    "descricao": "coleta de resíduos não perigosos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "3811400",
+      "carroceiro – coleta de entulhos e resíduos independente",
+      "coleta de resíduos não perigosos",
+      "carroceiro",
+      "coleta",
+      "entulhos",
+      "resíduos",
+      "independente",
+      "não",
+      "perigosos"
+    ]
+  },
+  {
+    "cnae": "3831901",
+    "ocupacao": "reciclador (a) de sucatas de alumínio independente",
+    "descricao": "recuperação de sucatas de alumínio",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3831901",
+      "reciclador (a) de sucatas de alumínio independente",
+      "recuperação de sucatas de alumínio",
+      "reciclador",
+      "(a)",
+      "sucatas",
+      "alumínio",
+      "independente",
+      "recuperação"
+    ]
+  },
+  {
+    "cnae": "3831999",
+    "ocupacao": "reciclador (a) de materiais metálicos, exceto alumínio independente",
+    "descricao": "recuperação de materiais metálicos, exceto alumínio",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3831999",
+      "reciclador (a) de materiais metálicos, exceto alumínio independente",
+      "recuperação de materiais metálicos, exceto alumínio",
+      "reciclador",
+      "(a)",
+      "materiais",
+      "metálicos,",
+      "exceto",
+      "alumínio",
+      "independente",
+      "recuperação"
+    ]
+  },
+  {
+    "cnae": "3832700",
+    "ocupacao": "reciclador (a) de materiais plásticos independente",
+    "descricao": "recuperação de materiais plásticos",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3832700",
+      "reciclador (a) de materiais plásticos independente",
+      "recuperação de materiais plásticos",
+      "reciclador",
+      "(a)",
+      "materiais",
+      "plásticos",
+      "independente",
+      "recuperação"
+    ]
+  },
+  {
+    "cnae": "3839499",
+    "ocupacao": "reciclador(a) de borracha, madeira, papel e vidro independente",
+    "descricao": "recuperação de materiais não especificados anteriormente",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "3839499",
+      "reciclador(a) de borracha, madeira, papel e vidro independente",
+      "recuperação de materiais não especificados anteriormente",
+      "reciclador(a)",
+      "borracha,",
+      "madeira,",
+      "papel",
+      "vidro",
+      "independente",
+      "recuperação",
+      "materiais",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "4321500",
+    "ocupacao": "eletricista em residências e estabelecimentos comerciais independente",
+    "descricao": "instalação e manutenção elétrica",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4321500",
+      "eletricista em residências e estabelecimentos comerciais independente",
+      "instalação e manutenção elétrica",
+      "eletricista",
+      "residências",
+      "estabelecimentos",
+      "comerciais",
+      "independente",
+      "instalação",
+      "manutenção",
+      "elétrica"
+    ]
+  },
+  {
+    "cnae": "4322301",
+    "ocupacao": "bombeiro(a) hidráulico independente",
+    "descricao": "instalações hidráulicas, sanitárias e de gás",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4322301",
+      "bombeiro(a) hidráulico independente",
+      "instalações hidráulicas, sanitárias e de gás",
+      "bombeiro(a)",
+      "hidráulico",
+      "independente",
+      "instalações",
+      "hidráulicas,",
+      "sanitárias",
+      "gás"
+    ]
+  },
+  {
+    "cnae": "4322302",
+    "ocupacao": "instalador(a) e reparador(a) de sistemas centrais de ar condicionado, de ventilação e refrigeração independente",
+    "descricao": "instalação e manutenção de sistemas centrais de ar condicionado, de ventilação e refrigeração",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4322302",
+      "instalador(a) e reparador(a) de sistemas centrais de ar condicionado, de ventilação e refrigeração independente",
+      "instalação e manutenção de sistemas centrais de ar condicionado, de ventilação e refrigeração",
+      "instalador(a)",
+      "reparador(a)",
+      "sistemas",
+      "centrais",
+      "condicionado,",
+      "ventilação",
+      "refrigeração",
+      "independente",
+      "instalação",
+      "manutenção"
+    ]
+  },
+  {
+    "cnae": "4322303",
+    "ocupacao": "instalador(a) de sistema de prevenção contra incêndio independente",
+    "descricao": "instalações de sistema de prevenção contra incêndio",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4322303",
+      "instalador(a) de sistema de prevenção contra incêndio independente",
+      "instalações de sistema de prevenção contra incêndio",
+      "instalador(a)",
+      "sistema",
+      "prevenção",
+      "contra",
+      "incêndio",
+      "independente",
+      "instalações"
+    ]
+  },
+  {
+    "cnae": "4329101",
+    "ocupacao": "instalador(a) de painéis publicitários independente",
+    "descricao": "instalação de painéis publicitários",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4329101",
+      "instalador(a) de painéis publicitários independente",
+      "instalação de painéis publicitários",
+      "instalador(a)",
+      "painéis",
+      "publicitários",
+      "independente",
+      "instalação"
+    ]
+  },
+  {
+    "cnae": "4329102",
+    "ocupacao": "instalador(a) de equipamentos para orientação à navegação marítima, fluvial e lacustre independente",
+    "descricao": "instalação de equipamentos para orientação à navegação marítima, fluvial e lacustre",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4329102",
+      "instalador(a) de equipamentos para orientação à navegação marítima, fluvial e lacustre independente",
+      "instalação de equipamentos para orientação à navegação marítima, fluvial e lacustre",
+      "instalador(a)",
+      "equipamentos",
+      "para",
+      "orientação",
+      "navegação",
+      "marítima,",
+      "fluvial",
+      "lacustre",
+      "independente",
+      "instalação"
+    ]
+  },
+  {
+    "cnae": "4329103",
+    "ocupacao": "instalador(a) e reparador(a) de elevadores, escadas e esteiras rolantes independente",
+    "descricao": "instalação, manutenção e reparação de elevadores, escadas e esteiras rolantes",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4329103",
+      "instalador(a) e reparador(a) de elevadores, escadas e esteiras rolantes independente",
+      "instalação, manutenção e reparação de elevadores, escadas e esteiras rolantes",
+      "instalador(a)",
+      "reparador(a)",
+      "elevadores,",
+      "escadas",
+      "esteiras",
+      "rolantes",
+      "independente",
+      "instalação,",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "4329104",
+    "ocupacao": "montador(a) e instalador de sistemas e equipamentos de iluminação e sinalização em vias públicas, portos e aeroportos independente",
+    "descricao": "montagem e instalação de sistemas e equipamentos de iluminação e sinalização em vias públicas, portos e aeroportos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4329104",
+      "montador(a) e instalador de sistemas e equipamentos de iluminação e sinalização em vias públicas, portos e aeroportos independente",
+      "montagem e instalação de sistemas e equipamentos de iluminação e sinalização em vias públicas, portos e aeroportos",
+      "montador(a)",
+      "instalador",
+      "sistemas",
+      "equipamentos",
+      "iluminação",
+      "sinalização",
+      "vias",
+      "públicas,",
+      "portos",
+      "aeroportos",
+      "independente",
+      "montagem",
+      "instalação"
+    ]
+  },
+  {
+    "cnae": "4329105",
+    "ocupacao": "instalador(a) de isolantes acústicos e de vibração independente",
+    "descricao": "tratamentos térmicos, acústicos ou de vibração",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4329105",
+      "instalador(a) de isolantes acústicos e de vibração independente",
+      "tratamentos térmicos, acústicos ou de vibração",
+      "instalador(a)",
+      "isolantes",
+      "acústicos",
+      "vibração",
+      "independente",
+      "tratamentos",
+      "térmicos,"
+    ]
+  },
+  {
+    "cnae": "4330402",
+    "ocupacao": "carpinteiro(a) instalador(a) independente",
+    "descricao": "instalação de portas, janelas, tetos, divisórias e armários embutidos de qualquer material",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4330402",
+      "carpinteiro(a) instalador(a) independente",
+      "instalação de portas, janelas, tetos, divisórias e armários embutidos de qualquer material",
+      "carpinteiro(a)",
+      "instalador(a)",
+      "independente",
+      "instalação",
+      "portas,",
+      "janelas,",
+      "tetos,",
+      "divisórias",
+      "armários",
+      "embutidos",
+      "qualquer",
+      "material"
+    ]
+  },
+  {
+    "cnae": "4330403",
+    "ocupacao": "gesseiro(a) independente",
+    "descricao": "obras de acabamento em gesso e estuque",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4330403",
+      "gesseiro(a) independente",
+      "obras de acabamento em gesso e estuque",
+      "gesseiro(a)",
+      "independente",
+      "obras",
+      "acabamento",
+      "gesso",
+      "estuque"
+    ]
+  },
+  {
+    "cnae": "4330404",
+    "ocupacao": "pintor(a) de parede independente",
+    "descricao": "serviços de pintura de edifícios em geral",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4330404",
+      "pintor(a) de parede independente",
+      "serviços de pintura de edifícios em geral",
+      "pintor(a)",
+      "parede",
+      "independente",
+      "serviços",
+      "pintura",
+      "edifícios",
+      "geral"
+    ]
+  },
+  {
+    "cnae": "4330405",
+    "ocupacao": "azulejista independente",
+    "descricao": "aplicação de revestimentos e de resinas em interiores e exteriores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4330405",
+      "azulejista independente",
+      "aplicação de revestimentos e de resinas em interiores e exteriores",
+      "azulejista",
+      "independente",
+      "aplicação",
+      "revestimentos",
+      "resinas",
+      "interiores",
+      "exteriores"
+    ]
+  },
+  {
+    "cnae": "4330499",
+    "ocupacao": "vidraceiro de edificações independente",
+    "descricao": "outras obras de acabamento da construção",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4330499",
+      "vidraceiro de edificações independente",
+      "outras obras de acabamento da construção",
+      "vidraceiro",
+      "edificações",
+      "independente",
+      "outras",
+      "obras",
+      "acabamento",
+      "construção"
+    ]
+  },
+  {
+    "cnae": "4399103",
+    "ocupacao": "pedreiro independente",
+    "descricao": "obras de alvenaria",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4399103",
+      "pedreiro independente",
+      "obras de alvenaria",
+      "pedreiro",
+      "independente",
+      "obras",
+      "alvenaria"
+    ]
+  },
+  {
+    "cnae": "4399105",
+    "ocupacao": "poceiro/cisterneiro/cacimbeiro independente",
+    "descricao": "perfuração e construção de poços de água",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4399105",
+      "poceiro/cisterneiro/cacimbeiro independente",
+      "perfuração e construção de poços de água",
+      "poceiro/cisterneiro/cacimbeiro",
+      "independente",
+      "perfuração",
+      "construção",
+      "poços",
+      "água"
+    ]
+  },
+  {
+    "cnae": "4399199",
+    "ocupacao": "calheiro (a) independente",
+    "descricao": "serviços especializados para construção não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4399199",
+      "calheiro (a) independente",
+      "serviços especializados para construção não especificados anteriormente",
+      "calheiro",
+      "(a)",
+      "independente",
+      "serviços",
+      "especializados",
+      "para",
+      "construção",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "4520001",
+    "ocupacao": "mecânico(a) de veículos independente",
+    "descricao": "serviços de manutenção e reparação mecânica de veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520001",
+      "mecânico(a) de veículos independente",
+      "serviços de manutenção e reparação mecânica de veículos automotores",
+      "mecânico(a)",
+      "veículos",
+      "independente",
+      "serviços",
+      "manutenção",
+      "reparação",
+      "mecânica",
+      "automotores"
+    ]
+  },
+  {
+    "cnae": "4520002",
+    "ocupacao": "funileiro / lanterneiro independente",
+    "descricao": "serviços de lanternagem ou funilaria e pintura de veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520002",
+      "funileiro / lanterneiro independente",
+      "serviços de lanternagem ou funilaria e pintura de veículos automotores",
+      "funileiro",
+      "lanterneiro",
+      "independente",
+      "serviços",
+      "lanternagem",
+      "funilaria",
+      "pintura",
+      "veículos",
+      "automotores"
+    ]
+  },
+  {
+    "cnae": "4520003",
+    "ocupacao": "eletricista de automóveis independente",
+    "descricao": "serviços de manutenção e reparação elétrica de veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520003",
+      "eletricista de automóveis independente",
+      "serviços de manutenção e reparação elétrica de veículos automotores",
+      "eletricista",
+      "automóveis",
+      "independente",
+      "serviços",
+      "manutenção",
+      "reparação",
+      "elétrica",
+      "veículos",
+      "automotores"
+    ]
+  },
+  {
+    "cnae": "4520005",
+    "ocupacao": "lavador(a) e polidor de carro independente",
+    "descricao": "serviços de lavagem, lubrificação e polimento de veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520005",
+      "lavador(a) e polidor de carro independente",
+      "serviços de lavagem, lubrificação e polimento de veículos automotores",
+      "lavador(a)",
+      "polidor",
+      "carro",
+      "independente",
+      "serviços",
+      "lavagem,",
+      "lubrificação",
+      "polimento",
+      "veículos",
+      "automotores"
+    ]
+  },
+  {
+    "cnae": "4520006",
+    "ocupacao": "borracheiro(a) independente",
+    "descricao": "serviços de borracharia para veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520006",
+      "borracheiro(a) independente",
+      "serviços de borracharia para veículos automotores",
+      "borracheiro(a)",
+      "independente",
+      "serviços",
+      "borracharia",
+      "para",
+      "veículos",
+      "automotores"
+    ]
+  },
+  {
+    "cnae": "4520007",
+    "ocupacao": "instalador(a) e reparador (a) de acessórios automotivos independente",
+    "descricao": "serviços de instalação, manutenção e reparação de acessórios para veículos automotores",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520007",
+      "instalador(a) e reparador (a) de acessórios automotivos independente",
+      "serviços de instalação, manutenção e reparação de acessórios para veículos automotores",
+      "instalador(a)",
+      "reparador",
+      "(a)",
+      "acessórios",
+      "automotivos",
+      "independente",
+      "serviços",
+      "instalação,",
+      "manutenção",
+      "reparação",
+      "para",
+      "veículos",
+      "automotores"
+    ]
+  },
+  {
+    "cnae": "4520008",
+    "ocupacao": "capoteiro(a) independente",
+    "descricao": "serviços de capotaria",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4520008",
+      "capoteiro(a) independente",
+      "serviços de capotaria",
+      "capoteiro(a)",
+      "independente",
+      "serviços",
+      "capotaria"
+    ]
+  },
+  {
+    "cnae": "4530703",
+    "ocupacao": "comerciante de peças e acessórios novos para veículos automotores independente",
+    "descricao": "comércio a varejo de peças e acessórios novos para veículos automotores",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4530703",
+      "comerciante de peças e acessórios novos para veículos automotores independente",
+      "comércio a varejo de peças e acessórios novos para veículos automotores",
+      "comerciante",
+      "peças",
+      "acessórios",
+      "novos",
+      "para",
+      "veículos",
+      "automotores",
+      "independente",
+      "comércio",
+      "varejo"
+    ]
+  },
+  {
+    "cnae": "4530704",
+    "ocupacao": "comerciante de peças e acessórios usados para veículos automotores independente",
+    "descricao": "comércio a varejo de peças e acessórios usados para veículos automotores",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4530704",
+      "comerciante de peças e acessórios usados para veículos automotores independente",
+      "comércio a varejo de peças e acessórios usados para veículos automotores",
+      "comerciante",
+      "peças",
+      "acessórios",
+      "usados",
+      "para",
+      "veículos",
+      "automotores",
+      "independente",
+      "comércio",
+      "varejo"
+    ]
+  },
+  {
+    "cnae": "4530705",
+    "ocupacao": "comerciante de pneumáticos e câmaras-de-ar independente",
+    "descricao": "comércio a varejo de pneumáticos e câmaras-de-ar",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4530705",
+      "comerciante de pneumáticos e câmaras-de-ar independente",
+      "comércio a varejo de pneumáticos e câmaras-de-ar",
+      "comerciante",
+      "pneumáticos",
+      "câmaras-de-ar",
+      "independente",
+      "comércio",
+      "varejo"
+    ]
+  },
+  {
+    "cnae": "4541206",
+    "ocupacao": "comerciante de peças e acessórios novos para motocicletas e motononetas independente",
+    "descricao": "comércio a varejo de peças e acessórios novos para motocicletas e motonetas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4541206",
+      "comerciante de peças e acessórios novos para motocicletas e motononetas independente",
+      "comércio a varejo de peças e acessórios novos para motocicletas e motonetas",
+      "comerciante",
+      "peças",
+      "acessórios",
+      "novos",
+      "para",
+      "motocicletas",
+      "motononetas",
+      "independente",
+      "comércio",
+      "varejo",
+      "motonetas"
+    ]
+  },
+  {
+    "cnae": "4541207",
+    "ocupacao": "comerciante de peças e acessórios usados para motocicletas e motononetas independente",
+    "descricao": "comércio a varejo de peças e acessórios usados para motocicletas e motonetas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4541207",
+      "comerciante de peças e acessórios usados para motocicletas e motononetas independente",
+      "comércio a varejo de peças e acessórios usados para motocicletas e motonetas",
+      "comerciante",
+      "peças",
+      "acessórios",
+      "usados",
+      "para",
+      "motocicletas",
+      "motononetas",
+      "independente",
+      "comércio",
+      "varejo",
+      "motonetas"
+    ]
+  },
+  {
+    "cnae": "4543900",
+    "ocupacao": "mecânico(a) de motocicletas e motonetas independente",
+    "descricao": "manutenção e reparação de motocicletas e motonetas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4543900",
+      "mecânico(a) de motocicletas e motonetas independente",
+      "manutenção e reparação de motocicletas e motonetas",
+      "mecânico(a)",
+      "motocicletas",
+      "motonetas",
+      "independente",
+      "manutenção",
+      "reparação"
+    ]
+  },
+  {
+    "cnae": "4712100",
+    "ocupacao": "barraqueiro(a) independente",
+    "descricao": "comércio varejista de mercadorias em geral, com predominância de produtos alimentícios – minimercados, mercearias e armazéns",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4712100",
+      "barraqueiro(a) independente",
+      "comércio varejista de mercadorias em geral, com predominância de produtos alimentícios – minimercados, mercearias e armazéns",
+      "barraqueiro(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "mercadorias",
+      "geral,",
+      "com",
+      "predominância",
+      "produtos",
+      "alimentícios",
+      "minimercados,",
+      "mercearias",
+      "armazéns"
+    ]
+  },
+  {
+    "cnae": "4713002",
+    "ocupacao": "comerciante de miudezas e quinquilharias independente",
+    "descricao": "lojas de variedades, exceto lojas de departamentos ou magazines",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4713002",
+      "comerciante de miudezas e quinquilharias independente",
+      "lojas de variedades, exceto lojas de departamentos ou magazines",
+      "comerciante",
+      "miudezas",
+      "quinquilharias",
+      "independente",
+      "lojas",
+      "variedades,",
+      "exceto",
+      "departamentos",
+      "magazines"
+    ]
+  },
+  {
+    "cnae": "4721102",
+    "ocupacao": "comerciante de produtos de panificação independente",
+    "descricao": "padaria e confeitaria com predominância de revenda",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4721102",
+      "comerciante de produtos de panificação independente",
+      "padaria e confeitaria com predominância de revenda",
+      "comerciante",
+      "produtos",
+      "panificação",
+      "independente",
+      "padaria",
+      "confeitaria",
+      "com",
+      "predominância",
+      "revenda"
+    ]
+  },
+  {
+    "cnae": "4721103",
+    "ocupacao": "comerciante de laticínios independente",
+    "descricao": "comércio varejista de laticínios e frios",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4721103",
+      "comerciante de laticínios independente",
+      "comércio varejista de laticínios e frios",
+      "comerciante",
+      "laticínios",
+      "independente",
+      "comércio",
+      "varejista",
+      "frios"
+    ]
+  },
+  {
+    "cnae": "4721104",
+    "ocupacao": "baleiro(a) independente",
+    "descricao": "comércio varejista de doces, balas, bombons e semelhantes",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4721104",
+      "baleiro(a) independente",
+      "comércio varejista de doces, balas, bombons e semelhantes",
+      "baleiro(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "doces,",
+      "balas,",
+      "bombons",
+      "semelhantes"
+    ]
+  },
+  {
+    "cnae": "4722901",
+    "ocupacao": "açougueiro(a) independente",
+    "descricao": "comércio varejista de carnes – açougues",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4722901",
+      "açougueiro(a) independente",
+      "comércio varejista de carnes – açougues",
+      "açougueiro(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "carnes",
+      "açougues"
+    ]
+  },
+  {
+    "cnae": "4722902",
+    "ocupacao": "peixeiro(a) independente",
+    "descricao": "peixaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4722902",
+      "peixeiro(a) independente",
+      "peixaria",
+      "peixeiro(a)",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "4723700",
+    "ocupacao": "comerciante de bebidas independente",
+    "descricao": "comércio varejista de bebidas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4723700",
+      "comerciante de bebidas independente",
+      "comércio varejista de bebidas",
+      "comerciante",
+      "bebidas",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4724500",
+    "ocupacao": "abatedor(a) de aves com comercialização do produto independente",
+    "descricao": "comércio varejista de hortifrutigranjeiros",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4724500",
+      "abatedor(a) de aves com comercialização do produto independente",
+      "comércio varejista de hortifrutigranjeiros",
+      "abatedor(a)",
+      "aves",
+      "com",
+      "comercialização",
+      "produto",
+      "independente",
+      "comércio",
+      "varejista",
+      "hortifrutigranjeiros"
+    ]
+  },
+  {
+    "cnae": "4729601",
+    "ocupacao": "comerciante de produtos de tabacaria independente",
+    "descricao": "tabacaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4729601",
+      "comerciante de produtos de tabacaria independente",
+      "tabacaria",
+      "comerciante",
+      "produtos",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "4729699",
+    "ocupacao": "comerciante de cestas de café da manhã independente",
+    "descricao": "comércio varejista de produtos alimentícios em geral ou especializado em produtos alimentícios não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4729699",
+      "comerciante de cestas de café da manhã independente",
+      "comércio varejista de produtos alimentícios em geral ou especializado em produtos alimentícios não especificados anteriormente",
+      "comerciante",
+      "cestas",
+      "café",
+      "manhã",
+      "independente",
+      "comércio",
+      "varejista",
+      "produtos",
+      "alimentícios",
+      "geral",
+      "especializado",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "4732600",
+    "ocupacao": "comerciante de lubrificantes independente",
+    "descricao": "comércio varejista de lubrificantes",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4732600",
+      "comerciante de lubrificantes independente",
+      "comércio varejista de lubrificantes",
+      "comerciante",
+      "lubrificantes",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4741500",
+    "ocupacao": "comerciante de tintas e materiais para pintura independente",
+    "descricao": "comércio varejista de tintas e materiais para pintura",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4741500",
+      "comerciante de tintas e materiais para pintura independente",
+      "comércio varejista de tintas e materiais para pintura",
+      "comerciante",
+      "tintas",
+      "materiais",
+      "para",
+      "pintura",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4742300",
+    "ocupacao": "comerciante de material elétrico independente",
+    "descricao": "comércio varejista de material elétrico",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4742300",
+      "comerciante de material elétrico independente",
+      "comércio varejista de material elétrico",
+      "comerciante",
+      "material",
+      "elétrico",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4743100",
+    "ocupacao": "comerciante de vidros independente",
+    "descricao": "comércio varejista de vidros",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4743100",
+      "comerciante de vidros independente",
+      "comércio varejista de vidros",
+      "comerciante",
+      "vidros",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4744001",
+    "ocupacao": "comerciante de ferragens e ferramentas independente",
+    "descricao": "comércio varejista de ferragens e ferramentas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4744001",
+      "comerciante de ferragens e ferramentas independente",
+      "comércio varejista de ferragens e ferramentas",
+      "comerciante",
+      "ferragens",
+      "ferramentas",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4744002",
+    "ocupacao": "comerciante de madeira e artefatos independente",
+    "descricao": "comércio varejista de madeira e artefatos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4744002",
+      "comerciante de madeira e artefatos independente",
+      "comércio varejista de madeira e artefatos",
+      "comerciante",
+      "madeira",
+      "artefatos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4744003",
+    "ocupacao": "comerciante de materiais hidráulicos independente",
+    "descricao": "comércio varejista de materiais hidráulicos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4744003",
+      "comerciante de materiais hidráulicos independente",
+      "comércio varejista de materiais hidráulicos",
+      "comerciante",
+      "materiais",
+      "hidráulicos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4744004",
+    "ocupacao": "comerciante de cal, areia, pedra britada, tijolos e telhas independente",
+    "descricao": "comércio varejista de cal, areia, pedra britada, tijolos e telhas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4744004",
+      "comerciante de cal, areia, pedra britada, tijolos e telhas independente",
+      "comércio varejista de cal, areia, pedra britada, tijolos e telhas",
+      "comerciante",
+      "cal,",
+      "areia,",
+      "pedra",
+      "britada,",
+      "tijolos",
+      "telhas",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4744099",
+    "ocupacao": "comerciante de materiais de construção em geral independente",
+    "descricao": "comércio varejista de materiais de construção em geral",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4744099",
+      "comerciante de materiais de construção em geral independente",
+      "comércio varejista de materiais de construção em geral",
+      "comerciante",
+      "materiais",
+      "construção",
+      "geral",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4751201",
+    "ocupacao": "comerciante de equipamentos e suprimentos de informática independente",
+    "descricao": "comércio varejista especializado de equipamentos e suprimentos de informática",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4751201",
+      "comerciante de equipamentos e suprimentos de informática independente",
+      "comércio varejista especializado de equipamentos e suprimentos de informática",
+      "comerciante",
+      "equipamentos",
+      "suprimentos",
+      "informática",
+      "independente",
+      "comércio",
+      "varejista",
+      "especializado"
+    ]
+  },
+  {
+    "cnae": "4751202",
+    "ocupacao": "recarregador(a) de cartuchos para equipamentos de informática independente",
+    "descricao": "recarga de cartuchos para equipamentos de informática",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "4751202",
+      "recarregador(a) de cartuchos para equipamentos de informática independente",
+      "recarga de cartuchos para equipamentos de informática",
+      "recarregador(a)",
+      "cartuchos",
+      "para",
+      "equipamentos",
+      "informática",
+      "independente",
+      "recarga"
+    ]
+  },
+  {
+    "cnae": "4752100",
+    "ocupacao": "comerciante de equipamentos de telefonia e comunicação independente",
+    "descricao": "comércio varejista especializado de equipamentos de telefonia e comunicação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4752100",
+      "comerciante de equipamentos de telefonia e comunicação independente",
+      "comércio varejista especializado de equipamentos de telefonia e comunicação",
+      "comerciante",
+      "equipamentos",
+      "telefonia",
+      "comunicação",
+      "independente",
+      "comércio",
+      "varejista",
+      "especializado"
+    ]
+  },
+  {
+    "cnae": "4753900",
+    "ocupacao": "comerciante de eletrodomésticos e equipamentos de áudio e vídeo independente",
+    "descricao": "comércio varejista especializado de eletrodomésticos e equipamentos de áudio e vídeo",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4753900",
+      "comerciante de eletrodomésticos e equipamentos de áudio e vídeo independente",
+      "comércio varejista especializado de eletrodomésticos e equipamentos de áudio e vídeo",
+      "comerciante",
+      "eletrodomésticos",
+      "equipamentos",
+      "áudio",
+      "vídeo",
+      "independente",
+      "comércio",
+      "varejista",
+      "especializado"
+    ]
+  },
+  {
+    "cnae": "4754701",
+    "ocupacao": "comerciante de móveis independente",
+    "descricao": "comércio varejista de móveis",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4754701",
+      "comerciante de móveis independente",
+      "comércio varejista de móveis",
+      "comerciante",
+      "móveis",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4754702",
+    "ocupacao": "comerciante de artigos de colchoaria independente",
+    "descricao": "comércio varejista de artigos de colchoaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4754702",
+      "comerciante de artigos de colchoaria independente",
+      "comércio varejista de artigos de colchoaria",
+      "comerciante",
+      "artigos",
+      "colchoaria",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4754703",
+    "ocupacao": "comerciante de artigos de iluminação independente",
+    "descricao": "comércio varejista de artigos de iluminação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4754703",
+      "comerciante de artigos de iluminação independente",
+      "comércio varejista de artigos de iluminação",
+      "comerciante",
+      "artigos",
+      "iluminação",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4755501",
+    "ocupacao": "comerciante de tecidos independente",
+    "descricao": "comércio varejista de tecidos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4755501",
+      "comerciante de tecidos independente",
+      "comércio varejista de tecidos",
+      "comerciante",
+      "tecidos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4755502",
+    "ocupacao": "comerciante de artigos de armarinho independente",
+    "descricao": "comercio varejista de artigos de armarinho",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4755502",
+      "comerciante de artigos de armarinho independente",
+      "comercio varejista de artigos de armarinho",
+      "comerciante",
+      "artigos",
+      "armarinho",
+      "independente",
+      "comercio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4755503",
+    "ocupacao": "comerciante de artigos de cama, mesa e banho independente",
+    "descricao": "comercio varejista de artigos de cama, mesa e banho",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4755503",
+      "comerciante de artigos de cama, mesa e banho independente",
+      "comercio varejista de artigos de cama, mesa e banho",
+      "comerciante",
+      "artigos",
+      "cama,",
+      "mesa",
+      "banho",
+      "independente",
+      "comercio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4756300",
+    "ocupacao": "comerciante de instrumentos musicais e acessórios independente",
+    "descricao": "comércio varejista especializado de instrumentos musicais e acessórios",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4756300",
+      "comerciante de instrumentos musicais e acessórios independente",
+      "comércio varejista especializado de instrumentos musicais e acessórios",
+      "comerciante",
+      "instrumentos",
+      "musicais",
+      "acessórios",
+      "independente",
+      "comércio",
+      "varejista",
+      "especializado"
+    ]
+  },
+  {
+    "cnae": "4757100",
+    "ocupacao": "comerciante de peças e acessórios para aparelhos eletroeletrônicos para uso doméstico independente",
+    "descricao": "comércio varejista especializado de peças e acessórios para aparelhos eletroeletrônicos para uso doméstico, exceto informática e comunicação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4757100",
+      "comerciante de peças e acessórios para aparelhos eletroeletrônicos para uso doméstico independente",
+      "comércio varejista especializado de peças e acessórios para aparelhos eletroeletrônicos para uso doméstico, exceto informática e comunicação",
+      "comerciante",
+      "peças",
+      "acessórios",
+      "para",
+      "aparelhos",
+      "eletroeletrônicos",
+      "uso",
+      "doméstico",
+      "independente",
+      "comércio",
+      "varejista",
+      "especializado",
+      "doméstico,",
+      "exceto",
+      "informática",
+      "comunicação"
+    ]
+  },
+  {
+    "cnae": "4759801",
+    "ocupacao": "comerciante de artigos de tapeçaria, cortinas e persianas independente",
+    "descricao": "comércio varejista de artigos de tapeçaria, cortinas e persianas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4759801",
+      "comerciante de artigos de tapeçaria, cortinas e persianas independente",
+      "comércio varejista de artigos de tapeçaria, cortinas e persianas",
+      "comerciante",
+      "artigos",
+      "tapeçaria,",
+      "cortinas",
+      "persianas",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4759899",
+    "ocupacao": "comerciante de artigos de cutelaria independente",
+    "descricao": "comércio varejista de outros artigos de uso pessoal e doméstico não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4759899",
+      "comerciante de artigos de cutelaria independente",
+      "comércio varejista de outros artigos de uso pessoal e doméstico não especificados anteriormente",
+      "comerciante",
+      "artigos",
+      "cutelaria",
+      "independente",
+      "comércio",
+      "varejista",
+      "outros",
+      "uso",
+      "pessoal",
+      "doméstico",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "4761001",
+    "ocupacao": "livreiro(a) independente",
+    "descricao": "comércio varejista de livros",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4761001",
+      "livreiro(a) independente",
+      "comércio varejista de livros",
+      "livreiro(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "livros"
+    ]
+  },
+  {
+    "cnae": "4761002",
+    "ocupacao": "jornaleiro(a) independente",
+    "descricao": "comércio varejista de jornais e revistas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4761002",
+      "jornaleiro(a) independente",
+      "comércio varejista de jornais e revistas",
+      "jornaleiro(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "jornais",
+      "revistas"
+    ]
+  },
+  {
+    "cnae": "4761003",
+    "ocupacao": "papeleiro(a) independente",
+    "descricao": "comércio varejista de artigos de papelaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4761003",
+      "papeleiro(a) independente",
+      "comércio varejista de artigos de papelaria",
+      "papeleiro(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "artigos",
+      "papelaria"
+    ]
+  },
+  {
+    "cnae": "4762800",
+    "ocupacao": "comerciante de discos, cds, dvds e fitas independente",
+    "descricao": "comércio varejista de discos, cds, dvds e fitas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4762800",
+      "comerciante de discos, cds, dvds e fitas independente",
+      "comércio varejista de discos, cds, dvds e fitas",
+      "comerciante",
+      "discos,",
+      "cds,",
+      "dvds",
+      "fitas",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4763601",
+    "ocupacao": "comerciante de brinquedos e artigos recreativos independente",
+    "descricao": "comércio varejista de brinquedos e artigos recreativos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4763601",
+      "comerciante de brinquedos e artigos recreativos independente",
+      "comércio varejista de brinquedos e artigos recreativos",
+      "comerciante",
+      "brinquedos",
+      "artigos",
+      "recreativos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4763602",
+    "ocupacao": "comerciante de artigos esportivos independente",
+    "descricao": "comércio varejista de artigos esportivos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4763602",
+      "comerciante de artigos esportivos independente",
+      "comércio varejista de artigos esportivos",
+      "comerciante",
+      "artigos",
+      "esportivos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4763603",
+    "ocupacao": "comerciante de bicicletas e triciclos; peças e acessórios independente",
+    "descricao": "comércio varejista de bicicletas e triciclos; peças e acessórios",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4763603",
+      "comerciante de bicicletas e triciclos; peças e acessórios independente",
+      "comércio varejista de bicicletas e triciclos; peças e acessórios",
+      "comerciante",
+      "bicicletas",
+      "triciclos;",
+      "peças",
+      "acessórios",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4763604",
+    "ocupacao": "comerciante de artigos de caça, pesca e camping independente",
+    "descricao": "comércio varejista de artigos de caça, pesca e camping",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4763604",
+      "comerciante de artigos de caça, pesca e camping independente",
+      "comércio varejista de artigos de caça, pesca e camping",
+      "comerciante",
+      "artigos",
+      "caça,",
+      "pesca",
+      "camping",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4772500",
+    "ocupacao": "comerciante de cosméticos e artigos de perfumaria independente",
+    "descricao": "comércio varejista de cosméticos, produtos de perfumaria e de higiene pessoal",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4772500",
+      "comerciante de cosméticos e artigos de perfumaria independente",
+      "comércio varejista de cosméticos, produtos de perfumaria e de higiene pessoal",
+      "comerciante",
+      "cosméticos",
+      "artigos",
+      "perfumaria",
+      "independente",
+      "comércio",
+      "varejista",
+      "cosméticos,",
+      "produtos",
+      "higiene",
+      "pessoal"
+    ]
+  },
+  {
+    "cnae": "4773300",
+    "ocupacao": "comerciante de artigos médicos e ortopédicos independente",
+    "descricao": "comércio varejista de artigos médicos e ortopédicos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4773300",
+      "comerciante de artigos médicos e ortopédicos independente",
+      "comércio varejista de artigos médicos e ortopédicos",
+      "comerciante",
+      "artigos",
+      "médicos",
+      "ortopédicos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4774100",
+    "ocupacao": "comerciante de artigos de óptica independente",
+    "descricao": "comércio varejista de artigos de óptica",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4774100",
+      "comerciante de artigos de óptica independente",
+      "comércio varejista de artigos de óptica",
+      "comerciante",
+      "artigos",
+      "óptica",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4781400",
+    "ocupacao": "comerciante de artigos do vestuário e acessórios independente",
+    "descricao": "comércio varejista de artigos do vestuário e acessórios",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4781400",
+      "comerciante de artigos do vestuário e acessórios independente",
+      "comércio varejista de artigos do vestuário e acessórios",
+      "comerciante",
+      "artigos",
+      "vestuário",
+      "acessórios",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4782201",
+    "ocupacao": "comerciante de calçados independente",
+    "descricao": "comércio varejista de calçados",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4782201",
+      "comerciante de calçados independente",
+      "comércio varejista de calçados",
+      "comerciante",
+      "calçados",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4782202",
+    "ocupacao": "comerciante de artigos de viagem independente",
+    "descricao": "comércio varejista de artigos de viagem",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4782202",
+      "comerciante de artigos de viagem independente",
+      "comércio varejista de artigos de viagem",
+      "comerciante",
+      "artigos",
+      "viagem",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4783101",
+    "ocupacao": "comerciante de artigos de joalheria independente",
+    "descricao": "comércio varejista de artigos de joalheria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4783101",
+      "comerciante de artigos de joalheria independente",
+      "comércio varejista de artigos de joalheria",
+      "comerciante",
+      "artigos",
+      "joalheria",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4783102",
+    "ocupacao": "comerciante de artigos de relojoaria independente",
+    "descricao": "comércio varejista de artigos de relojoaria",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4783102",
+      "comerciante de artigos de relojoaria independente",
+      "comércio varejista de artigos de relojoaria",
+      "comerciante",
+      "artigos",
+      "relojoaria",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4785701",
+    "ocupacao": "antiquário(a) independente",
+    "descricao": "comércio varejista de antiguidades",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4785701",
+      "antiquário(a) independente",
+      "comércio varejista de antiguidades",
+      "antiquário(a)",
+      "independente",
+      "comércio",
+      "varejista",
+      "antiguidades"
+    ]
+  },
+  {
+    "cnae": "4785799",
+    "ocupacao": "comerciante de artigos usados independente",
+    "descricao": "comércio varejista de outros artigos usados",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4785799",
+      "comerciante de artigos usados independente",
+      "comércio varejista de outros artigos usados",
+      "comerciante",
+      "artigos",
+      "usados",
+      "independente",
+      "comércio",
+      "varejista",
+      "outros"
+    ]
+  },
+  {
+    "cnae": "4789001",
+    "ocupacao": "comerciante de suvenires, bijuterias e artesanatos independente",
+    "descricao": "comércio varejista de suvenires, bijuterias e artesanatos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789001",
+      "comerciante de suvenires, bijuterias e artesanatos independente",
+      "comércio varejista de suvenires, bijuterias e artesanatos",
+      "comerciante",
+      "suvenires,",
+      "bijuterias",
+      "artesanatos",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4789002",
+    "ocupacao": "comerciante de plantas, flores naturais, vasos e adubos independente",
+    "descricao": "comércio varejista de plantas e flores naturais",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789002",
+      "comerciante de plantas, flores naturais, vasos e adubos independente",
+      "comércio varejista de plantas e flores naturais",
+      "comerciante",
+      "plantas,",
+      "flores",
+      "naturais,",
+      "vasos",
+      "adubos",
+      "independente",
+      "comércio",
+      "varejista",
+      "plantas",
+      "naturais"
+    ]
+  },
+  {
+    "cnae": "4789003",
+    "ocupacao": "comerciante de objetos de arte independente",
+    "descricao": "comércio varejista de objetos de arte",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789003",
+      "comerciante de objetos de arte independente",
+      "comércio varejista de objetos de arte",
+      "comerciante",
+      "objetos",
+      "arte",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4789004",
+    "ocupacao": "comerciante de artigos e alimentos para animais de estimação (pet shop) independente (não inclui a venda de medicamentos)",
+    "descricao": "comércio varejista de animais vivos e de artigos e alimentos para animais de estimação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789004",
+      "comerciante de artigos e alimentos para animais de estimação (pet shop) independente (não inclui a venda de medicamentos)",
+      "comércio varejista de animais vivos e de artigos e alimentos para animais de estimação",
+      "comerciante",
+      "artigos",
+      "alimentos",
+      "para",
+      "animais",
+      "estimação",
+      "(pet",
+      "shop)",
+      "independente",
+      "(não",
+      "inclui",
+      "venda",
+      "medicamentos)",
+      "comércio",
+      "varejista",
+      "vivos"
+    ]
+  },
+  {
+    "cnae": "4789005",
+    "ocupacao": "comerciante de inseticidas e raticidas independente",
+    "descricao": "comércio varejista de produtos saneantes domissanitários",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789005",
+      "comerciante de inseticidas e raticidas independente",
+      "comércio varejista de produtos saneantes domissanitários",
+      "comerciante",
+      "inseticidas",
+      "raticidas",
+      "independente",
+      "comércio",
+      "varejista",
+      "produtos",
+      "saneantes",
+      "domissanitários"
+    ]
+  },
+  {
+    "cnae": "4789007",
+    "ocupacao": "comerciante de equipamentos para escritório independente",
+    "descricao": "comércio varejista de equipamentos para escritório",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789007",
+      "comerciante de equipamentos para escritório independente",
+      "comércio varejista de equipamentos para escritório",
+      "comerciante",
+      "equipamentos",
+      "para",
+      "escritório",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4789008",
+    "ocupacao": "comerciante de artigos fotográficos e para filmagem independente",
+    "descricao": "comércio varejista de artigos fotográficos e para filmagem",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789008",
+      "comerciante de artigos fotográficos e para filmagem independente",
+      "comércio varejista de artigos fotográficos e para filmagem",
+      "comerciante",
+      "artigos",
+      "fotográficos",
+      "para",
+      "filmagem",
+      "independente",
+      "comércio",
+      "varejista"
+    ]
+  },
+  {
+    "cnae": "4789099",
+    "ocupacao": "comerciante de artigos de bebê independente",
+    "descricao": "comércio varejista de outros produtos não especificados anteriormente",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4789099",
+      "comerciante de artigos de bebê independente",
+      "comércio varejista de outros produtos não especificados anteriormente",
+      "comerciante",
+      "artigos",
+      "bebê",
+      "independente",
+      "comércio",
+      "varejista",
+      "outros",
+      "produtos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "4923001",
+    "ocupacao": "mototaxista independente",
+    "descricao": "serviço de táxi",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4923001",
+      "mototaxista independente",
+      "serviço de táxi",
+      "mototaxista",
+      "independente",
+      "serviço",
+      "táxi"
+    ]
+  },
+  {
+    "cnae": "4924800",
+    "ocupacao": "transportador(a) escolar independente",
+    "descricao": "transporte escolar",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4924800",
+      "transportador(a) escolar independente",
+      "transporte escolar",
+      "transportador(a)",
+      "escolar",
+      "independente",
+      "transporte"
+    ]
+  },
+  {
+    "cnae": "4929901",
+    "ocupacao": "transportador(a) municipal de passageiros sob frete independente",
+    "descricao": "transporte rodoviário coletivo de passageiros, sob regime de fretamento, municipal",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4929901",
+      "transportador(a) municipal de passageiros sob frete independente",
+      "transporte rodoviário coletivo de passageiros, sob regime de fretamento, municipal",
+      "transportador(a)",
+      "municipal",
+      "passageiros",
+      "sob",
+      "frete",
+      "independente",
+      "transporte",
+      "rodoviário",
+      "coletivo",
+      "passageiros,",
+      "regime",
+      "fretamento,"
+    ]
+  },
+  {
+    "cnae": "4929902",
+    "ocupacao": "transportador(a) intermunicipal de passageiros sob frete em região metropolitana independente",
+    "descricao": "transporte rodoviário coletivo de passageiros, sob regime de fretamento, intermunicipal, interestadual e internacional",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4929902",
+      "transportador(a) intermunicipal de passageiros sob frete em região metropolitana independente",
+      "transporte rodoviário coletivo de passageiros, sob regime de fretamento, intermunicipal, interestadual e internacional",
+      "transportador(a)",
+      "intermunicipal",
+      "passageiros",
+      "sob",
+      "frete",
+      "região",
+      "metropolitana",
+      "independente",
+      "transporte",
+      "rodoviário",
+      "coletivo",
+      "passageiros,",
+      "regime",
+      "fretamento,",
+      "intermunicipal,",
+      "interestadual",
+      "internacional"
+    ]
+  },
+  {
+    "cnae": "4929903",
+    "ocupacao": "organizador(a) de excursões em veículo próprio, municipal independente",
+    "descricao": "organização de excursões em veículos rodoviários próprios, municipal",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4929903",
+      "organizador(a) de excursões em veículo próprio, municipal independente",
+      "organização de excursões em veículos rodoviários próprios, municipal",
+      "organizador(a)",
+      "excursões",
+      "veículo",
+      "próprio,",
+      "municipal",
+      "independente",
+      "organização",
+      "veículos",
+      "rodoviários",
+      "próprios,"
+    ]
+  },
+  {
+    "cnae": "4930201",
+    "ocupacao": "carroceiro – transporte de carga independente",
+    "descricao": "transporte rodoviário de carga, exceto produtos perigosos e mudanças, municipal",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "4930201",
+      "carroceiro – transporte de carga independente",
+      "transporte rodoviário de carga, exceto produtos perigosos e mudanças, municipal",
+      "carroceiro",
+      "transporte",
+      "carga",
+      "independente",
+      "rodoviário",
+      "carga,",
+      "exceto",
+      "produtos",
+      "perigosos",
+      "mudanças,",
+      "municipal"
+    ]
+  },
+  {
+    "cnae": "4930202",
+    "ocupacao": "caminhoneiro (a) de cargas não perigosas, intermunicipal e interestadual independente",
+    "descricao": "transporte rodoviário de carga, exceto produtos perigosos e mudanças, intermunicipal, interestadual e internacional",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "4930202",
+      "caminhoneiro (a) de cargas não perigosas, intermunicipal e interestadual independente",
+      "transporte rodoviário de carga, exceto produtos perigosos e mudanças, intermunicipal, interestadual e internacional",
+      "caminhoneiro",
+      "(a)",
+      "cargas",
+      "não",
+      "perigosas,",
+      "intermunicipal",
+      "interestadual",
+      "independente",
+      "transporte",
+      "rodoviário",
+      "carga,",
+      "exceto",
+      "produtos",
+      "perigosos",
+      "mudanças,",
+      "intermunicipal,",
+      "internacional"
+    ]
+  },
+  {
+    "cnae": "4930204",
+    "ocupacao": "carroceiro – transporte de mudança independente",
+    "descricao": "transporte rodoviário de mudanças",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "4930204",
+      "carroceiro – transporte de mudança independente",
+      "transporte rodoviário de mudanças",
+      "carroceiro",
+      "transporte",
+      "mudança",
+      "independente",
+      "rodoviário",
+      "mudanças"
+    ]
+  },
+  {
+    "cnae": "5011401",
+    "ocupacao": "transportador(a) marítimo de carga independente",
+    "descricao": "transporte marítimo de cabotagem – carga",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5011401",
+      "transportador(a) marítimo de carga independente",
+      "transporte marítimo de cabotagem – carga",
+      "transportador(a)",
+      "marítimo",
+      "carga",
+      "independente",
+      "transporte",
+      "cabotagem"
+    ]
+  },
+  {
+    "cnae": "5021101",
+    "ocupacao": "transportador(a) municipal hidroviário de cargas independente",
+    "descricao": "transporte por navegação interior de carga, municipal, exceto travessia",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5021101",
+      "transportador(a) municipal hidroviário de cargas independente",
+      "transporte por navegação interior de carga, municipal, exceto travessia",
+      "transportador(a)",
+      "municipal",
+      "hidroviário",
+      "cargas",
+      "independente",
+      "transporte",
+      "por",
+      "navegação",
+      "interior",
+      "carga,",
+      "municipal,",
+      "exceto",
+      "travessia"
+    ]
+  },
+  {
+    "cnae": "5091201",
+    "ocupacao": "transportador(a) municipal de travessia por navegação independente",
+    "descricao": "transporte por navegação de travessia, municipal",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5091201",
+      "transportador(a) municipal de travessia por navegação independente",
+      "transporte por navegação de travessia, municipal",
+      "transportador(a)",
+      "municipal",
+      "travessia",
+      "por",
+      "navegação",
+      "independente",
+      "transporte",
+      "travessia,"
+    ]
+  },
+  {
+    "cnae": "5091202",
+    "ocupacao": "transportador(a) intermunicipal e interestadual de travessia por navegação fluvial independente",
+    "descricao": "transporte por navegação de travessia, intermunicipal, interestadual e internacional",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5091202",
+      "transportador(a) intermunicipal e interestadual de travessia por navegação fluvial independente",
+      "transporte por navegação de travessia, intermunicipal, interestadual e internacional",
+      "transportador(a)",
+      "intermunicipal",
+      "interestadual",
+      "travessia",
+      "por",
+      "navegação",
+      "fluvial",
+      "independente",
+      "transporte",
+      "travessia,",
+      "intermunicipal,",
+      "internacional"
+    ]
+  },
+  {
+    "cnae": "5099801",
+    "ocupacao": "transportador(a) aquaviário para passeios turísticos independente",
+    "descricao": "transporte aquaviário para passeios turísticos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5099801",
+      "transportador(a) aquaviário para passeios turísticos independente",
+      "transporte aquaviário para passeios turísticos",
+      "transportador(a)",
+      "aquaviário",
+      "para",
+      "passeios",
+      "turísticos",
+      "independente",
+      "transporte"
+    ]
+  },
+  {
+    "cnae": "5099899",
+    "ocupacao": "barqueiro(a) independente",
+    "descricao": "outros transportes aquaviários não especificados anteriormente",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "5099899",
+      "barqueiro(a) independente",
+      "outros transportes aquaviários não especificados anteriormente",
+      "barqueiro(a)",
+      "independente",
+      "outros",
+      "transportes",
+      "aquaviários",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "5211702",
+    "ocupacao": "guardador(a) de móveis independente",
+    "descricao": "guarda-móveis",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5211702",
+      "guardador(a) de móveis independente",
+      "guarda-móveis",
+      "guardador(a)",
+      "móveis",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "5212500",
+    "ocupacao": "carregador (veículos de transportes terrestres) independente",
+    "descricao": "carga e descarga",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5212500",
+      "carregador (veículos de transportes terrestres) independente",
+      "carga e descarga",
+      "carregador",
+      "(veículos",
+      "transportes",
+      "terrestres)",
+      "independente",
+      "carga",
+      "descarga"
+    ]
+  },
+  {
+    "cnae": "5223100",
+    "ocupacao": "proprietário(a) de estacionamento de veículos independente",
+    "descricao": "estacionamento de veículos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5223100",
+      "proprietário(a) de estacionamento de veículos independente",
+      "estacionamento de veículos",
+      "proprietário(a)",
+      "estacionamento",
+      "veículos",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "5229002",
+    "ocupacao": "guincheiro independente (reboque de veículos)",
+    "descricao": "serviços de reboque de veículos",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "5229002",
+      "guincheiro independente (reboque de veículos)",
+      "serviços de reboque de veículos",
+      "guincheiro",
+      "independente",
+      "(reboque",
+      "veículos)",
+      "serviços",
+      "reboque",
+      "veículos"
+    ]
+  },
+  {
+    "cnae": "5310502",
+    "ocupacao": "agente de correio franqueado e permissionário independente",
+    "descricao": "atividades de franqueadas do correio nacional",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "5310502",
+      "agente de correio franqueado e permissionário independente",
+      "atividades de franqueadas do correio nacional",
+      "agente",
+      "correio",
+      "franqueado",
+      "permissionário",
+      "independente",
+      "atividades",
+      "franqueadas",
+      "nacional"
+    ]
+  },
+  {
+    "cnae": "5320201",
+    "ocupacao": "entregador de malotes independente",
+    "descricao": "serviços de malote não realizados pelo correio nacional",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "5320201",
+      "entregador de malotes independente",
+      "serviços de malote não realizados pelo correio nacional",
+      "entregador",
+      "malotes",
+      "independente",
+      "serviços",
+      "malote",
+      "não",
+      "realizados",
+      "pelo",
+      "correio",
+      "nacional"
+    ]
+  },
+  {
+    "cnae": "5320202",
+    "ocupacao": "bikeboy (ciclista mensageiro) independente",
+    "descricao": "serviços de entrega rápida",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5320202",
+      "bikeboy (ciclista mensageiro) independente",
+      "serviços de entrega rápida",
+      "bikeboy",
+      "(ciclista",
+      "mensageiro)",
+      "independente",
+      "serviços",
+      "entrega",
+      "rápida"
+    ]
+  },
+  {
+    "cnae": "5590601",
+    "ocupacao": "proprietário(a) de albergue não assistencial independente",
+    "descricao": "albergues, exceto assistenciais",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5590601",
+      "proprietário(a) de albergue não assistencial independente",
+      "albergues, exceto assistenciais",
+      "proprietário(a)",
+      "albergue",
+      "não",
+      "assistencial",
+      "independente",
+      "albergues,",
+      "exceto",
+      "assistenciais"
+    ]
+  },
+  {
+    "cnae": "5590602",
+    "ocupacao": "proprietário(a) de camping independente",
+    "descricao": "campings",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5590602",
+      "proprietário(a) de camping independente",
+      "campings",
+      "proprietário(a)",
+      "camping",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "5590603",
+    "ocupacao": "proprietário(a) de pensão independente",
+    "descricao": "pensões (alojamento)",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5590603",
+      "proprietário(a) de pensão independente",
+      "pensões (alojamento)",
+      "proprietário(a)",
+      "pensão",
+      "independente",
+      "pensões",
+      "(alojamento)"
+    ]
+  },
+  {
+    "cnae": "5590699",
+    "ocupacao": "proprietário(a) de hospedaria independente",
+    "descricao": "outros alojamentos não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5590699",
+      "proprietário(a) de hospedaria independente",
+      "outros alojamentos não especificados anteriormente",
+      "proprietário(a)",
+      "hospedaria",
+      "independente",
+      "outros",
+      "alojamentos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "5611201",
+    "ocupacao": "proprietário(a) de restaurante independente",
+    "descricao": "restaurantes e similares",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5611201",
+      "proprietário(a) de restaurante independente",
+      "restaurantes e similares",
+      "proprietário(a)",
+      "restaurante",
+      "independente",
+      "restaurantes",
+      "similares"
+    ]
+  },
+  {
+    "cnae": "5611203",
+    "ocupacao": "proprietário(a) de casa de chá independente",
+    "descricao": "lanchonetes, casas de chá, de sucos e similares",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5611203",
+      "proprietário(a) de casa de chá independente",
+      "lanchonetes, casas de chá, de sucos e similares",
+      "proprietário(a)",
+      "casa",
+      "chá",
+      "independente",
+      "lanchonetes,",
+      "casas",
+      "chá,",
+      "sucos",
+      "similares"
+    ]
+  },
+  {
+    "cnae": "5611204",
+    "ocupacao": "proprietário(a) de bar e congêneres, sem entretenimento, independente",
+    "descricao": "bares e outros estabelecimentos especializados em servir bebidas, sem entretenimento",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5611204",
+      "proprietário(a) de bar e congêneres, sem entretenimento, independente",
+      "bares e outros estabelecimentos especializados em servir bebidas, sem entretenimento",
+      "proprietário(a)",
+      "bar",
+      "congêneres,",
+      "sem",
+      "entretenimento,",
+      "independente",
+      "bares",
+      "outros",
+      "estabelecimentos",
+      "especializados",
+      "servir",
+      "bebidas,",
+      "entretenimento"
+    ]
+  },
+  {
+    "cnae": "5612100",
+    "ocupacao": "churrasqueiro(a) ambulante independente",
+    "descricao": "serviços ambulantes de alimentação",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5612100",
+      "churrasqueiro(a) ambulante independente",
+      "serviços ambulantes de alimentação",
+      "churrasqueiro(a)",
+      "ambulante",
+      "independente",
+      "serviços",
+      "ambulantes",
+      "alimentação"
+    ]
+  },
+  {
+    "cnae": "5620101",
+    "ocupacao": "fornecedor(a) de alimentos preparados para empresas independente",
+    "descricao": "fornecimento de alimentos preparados preponderantemente para empresas",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5620101",
+      "fornecedor(a) de alimentos preparados para empresas independente",
+      "fornecimento de alimentos preparados preponderantemente para empresas",
+      "fornecedor(a)",
+      "alimentos",
+      "preparados",
+      "para",
+      "empresas",
+      "independente",
+      "fornecimento",
+      "preponderantemente"
+    ]
+  },
+  {
+    "cnae": "5620102",
+    "ocupacao": "churrasqueiro(a) em domicílio independente",
+    "descricao": "serviços de alimentação para eventos e recepções – bufê",
+    "iss": true,
+    "icms": true,
+    "keywords": [
+      "5620102",
+      "churrasqueiro(a) em domicílio independente",
+      "serviços de alimentação para eventos e recepções – bufê",
+      "churrasqueiro(a)",
+      "domicílio",
+      "independente",
+      "serviços",
+      "alimentação",
+      "para",
+      "eventos",
+      "recepções",
+      "bufê"
+    ]
+  },
+  {
+    "cnae": "5620103",
+    "ocupacao": "proprietário(a) de cantinas independente",
+    "descricao": "cantinas – serviços de alimentação privativos",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5620103",
+      "proprietário(a) de cantinas independente",
+      "cantinas – serviços de alimentação privativos",
+      "proprietário(a)",
+      "cantinas",
+      "independente",
+      "serviços",
+      "alimentação",
+      "privativos"
+    ]
+  },
+  {
+    "cnae": "5620104",
+    "ocupacao": "cozinheiro(a) que fornece refeições prontas e embaladas para consumo independente",
+    "descricao": "fornecimento de alimentos preparados preponderantemente para consumo domiciliar",
+    "iss": false,
+    "icms": true,
+    "keywords": [
+      "5620104",
+      "cozinheiro(a) que fornece refeições prontas e embaladas para consumo independente",
+      "fornecimento de alimentos preparados preponderantemente para consumo domiciliar",
+      "cozinheiro(a)",
+      "que",
+      "fornece",
+      "refeições",
+      "prontas",
+      "embaladas",
+      "para",
+      "consumo",
+      "independente",
+      "fornecimento",
+      "alimentos",
+      "preparados",
+      "preponderantemente",
+      "domiciliar"
+    ]
+  },
+  {
+    "cnae": "5811500",
+    "ocupacao": "editor(a) de livros independente",
+    "descricao": "edição de livros",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5811500",
+      "editor(a) de livros independente",
+      "edição de livros",
+      "editor(a)",
+      "livros",
+      "independente",
+      "edição"
+    ]
+  },
+  {
+    "cnae": "5812301",
+    "ocupacao": "editor(a) de jornais diários independente",
+    "descricao": "edição de jornais diários",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5812301",
+      "editor(a) de jornais diários independente",
+      "edição de jornais diários",
+      "editor(a)",
+      "jornais",
+      "diários",
+      "independente",
+      "edição"
+    ]
+  },
+  {
+    "cnae": "5812302",
+    "ocupacao": "editor(a) de jornais não diários independente",
+    "descricao": "edição de jornais não diários",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5812302",
+      "editor(a) de jornais não diários independente",
+      "edição de jornais não diários",
+      "editor(a)",
+      "jornais",
+      "não",
+      "diários",
+      "independente",
+      "edição"
+    ]
+  },
+  {
+    "cnae": "5813100",
+    "ocupacao": "editor(a) de revistas independente",
+    "descricao": "edição de revistas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5813100",
+      "editor(a) de revistas independente",
+      "edição de revistas",
+      "editor(a)",
+      "revistas",
+      "independente",
+      "edição"
+    ]
+  },
+  {
+    "cnae": "5819100",
+    "ocupacao": "editor(a) de lista de dados e de outras informações independente",
+    "descricao": "edição de cadastros, listas e de outros produtos gráficos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5819100",
+      "editor(a) de lista de dados e de outras informações independente",
+      "edição de cadastros, listas e de outros produtos gráficos",
+      "editor(a)",
+      "lista",
+      "dados",
+      "outras",
+      "informações",
+      "independente",
+      "edição",
+      "cadastros,",
+      "listas",
+      "outros",
+      "produtos",
+      "gráficos"
+    ]
+  },
+  {
+    "cnae": "5912001",
+    "ocupacao": "dublador(a) independente",
+    "descricao": "serviços de dublagem",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5912001",
+      "dublador(a) independente",
+      "serviços de dublagem",
+      "dublador(a)",
+      "independente",
+      "serviços",
+      "dublagem"
+    ]
+  },
+  {
+    "cnae": "5912099",
+    "ocupacao": "editor(a) de vídeo independente",
+    "descricao": "atividades de pós-produção cinematográfica, de vídeos e de programas de televisão não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "5912099",
+      "editor(a) de vídeo independente",
+      "atividades de pós-produção cinematográfica, de vídeos e de programas de televisão não especificadas anteriormente",
+      "editor(a)",
+      "vídeo",
+      "independente",
+      "atividades",
+      "pós-produção",
+      "cinematográfica,",
+      "vídeos",
+      "programas",
+      "televisão",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "6190699",
+    "ocupacao": "instalador(a) de rede de computadores independente",
+    "descricao": "outras atividades de telecomunicações não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "6190699",
+      "instalador(a) de rede de computadores independente",
+      "outras atividades de telecomunicações não especificadas anteriormente",
+      "instalador(a)",
+      "rede",
+      "computadores",
+      "independente",
+      "outras",
+      "atividades",
+      "telecomunicações",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "6399200",
+    "ocupacao": "apurador(a), coletor(a) e fornecedor(a) de recortes de matérias publicadas em jornais e revistas independente",
+    "descricao": "outras atividades de prestação de serviços de informação não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "6399200",
+      "apurador(a), coletor(a) e fornecedor(a) de recortes de matérias publicadas em jornais e revistas independente",
+      "outras atividades de prestação de serviços de informação não especificadas anteriormente",
+      "apurador(a),",
+      "coletor(a)",
+      "fornecedor(a)",
+      "recortes",
+      "matérias",
+      "publicadas",
+      "jornais",
+      "revistas",
+      "independente",
+      "outras",
+      "atividades",
+      "prestação",
+      "serviços",
+      "informação",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "7319002",
+    "ocupacao": "panfleteiro(a) independente",
+    "descricao": "promoção de vendas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7319002",
+      "panfleteiro(a) independente",
+      "promoção de vendas",
+      "panfleteiro(a)",
+      "independente",
+      "promoção",
+      "vendas"
+    ]
+  },
+  {
+    "cnae": "7319099",
+    "ocupacao": "bike propagandista independente",
+    "descricao": "outras atividades de publicidade não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7319099",
+      "bike propagandista independente",
+      "outras atividades de publicidade não especificadas anteriormente",
+      "bike",
+      "propagandista",
+      "independente",
+      "outras",
+      "atividades",
+      "publicidade",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "7420001",
+    "ocupacao": "fotógrafo(a) independente",
+    "descricao": "atividades de produção de fotografias, exceto aérea e submarina",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7420001",
+      "fotógrafo(a) independente",
+      "atividades de produção de fotografias, exceto aérea e submarina",
+      "fotógrafo(a)",
+      "independente",
+      "atividades",
+      "produção",
+      "fotografias,",
+      "exceto",
+      "aérea",
+      "submarina"
+    ]
+  },
+  {
+    "cnae": "7420002",
+    "ocupacao": "fotógrafo(a) aéreo independente",
+    "descricao": "atividades de produção de fotografias aéreas e submarinas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7420002",
+      "fotógrafo(a) aéreo independente",
+      "atividades de produção de fotografias aéreas e submarinas",
+      "fotógrafo(a)",
+      "aéreo",
+      "independente",
+      "atividades",
+      "produção",
+      "fotografias",
+      "aéreas",
+      "submarinas"
+    ]
+  },
+  {
+    "cnae": "7420003",
+    "ocupacao": "revelador(a) fotográfico independente",
+    "descricao": "laboratórios fotográficos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7420003",
+      "revelador(a) fotográfico independente",
+      "laboratórios fotográficos",
+      "revelador(a)",
+      "fotográfico",
+      "independente",
+      "laboratórios",
+      "fotográficos"
+    ]
+  },
+  {
+    "cnae": "7420004",
+    "ocupacao": "filmador(a) independente",
+    "descricao": "filmagem de festas e eventos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7420004",
+      "filmador(a) independente",
+      "filmagem de festas e eventos",
+      "filmador(a)",
+      "independente",
+      "filmagem",
+      "festas",
+      "eventos"
+    ]
+  },
+  {
+    "cnae": "7490102",
+    "ocupacao": "mergulhador(a) (escafandrista) independente",
+    "descricao": "escafandria e mergulho",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7490102",
+      "mergulhador(a) (escafandrista) independente",
+      "escafandria e mergulho",
+      "mergulhador(a)",
+      "(escafandrista)",
+      "independente",
+      "escafandria",
+      "mergulho"
+    ]
+  },
+  {
+    "cnae": "7719599",
+    "ocupacao": "locador(a) de motocicleta, sem condutor, independente",
+    "descricao": "locação de outros meios de transporte não especificados anteriormente, sem condutor",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7719599",
+      "locador(a) de motocicleta, sem condutor, independente",
+      "locação de outros meios de transporte não especificados anteriormente, sem condutor",
+      "locador(a)",
+      "motocicleta,",
+      "sem",
+      "condutor,",
+      "independente",
+      "locação",
+      "outros",
+      "meios",
+      "transporte",
+      "não",
+      "especificados",
+      "anteriormente,",
+      "condutor"
+    ]
+  },
+  {
+    "cnae": "7721700",
+    "ocupacao": "locador(a) de bicicletas, independente",
+    "descricao": "aluguel de equipamentos recreativos e esportivos",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7721700",
+      "locador(a) de bicicletas, independente",
+      "aluguel de equipamentos recreativos e esportivos",
+      "locador(a)",
+      "bicicletas,",
+      "independente",
+      "aluguel",
+      "equipamentos",
+      "recreativos",
+      "esportivos"
+    ]
+  },
+  {
+    "cnae": "7722500",
+    "ocupacao": "locador(a) de fitas de vídeo, dvds e similares independente",
+    "descricao": "aluguel de fitas de vídeo, dvds e similares",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7722500",
+      "locador(a) de fitas de vídeo, dvds e similares independente",
+      "aluguel de fitas de vídeo, dvds e similares",
+      "locador(a)",
+      "fitas",
+      "vídeo,",
+      "dvds",
+      "similares",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7723300",
+    "ocupacao": "locador(a) de objetos do vestuário, jóias e acessórios independente",
+    "descricao": "aluguel de objetos do vestuário, jóias e acessórios",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7723300",
+      "locador(a) de objetos do vestuário, jóias e acessórios independente",
+      "aluguel de objetos do vestuário, jóias e acessórios",
+      "locador(a)",
+      "objetos",
+      "vestuário,",
+      "jóias",
+      "acessórios",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7729201",
+    "ocupacao": "locador(a) de aparelhos de jogos eletrônicos independente",
+    "descricao": "aluguel de aparelhos de jogos eletrônicos",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7729201",
+      "locador(a) de aparelhos de jogos eletrônicos independente",
+      "aluguel de aparelhos de jogos eletrônicos",
+      "locador(a)",
+      "aparelhos",
+      "jogos",
+      "eletrônicos",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7729202",
+    "ocupacao": "locador(a) de móveis e utensílios, inclusive para festas independente",
+    "descricao": "aluguel de móveis, utensílios e aparelhos de uso doméstico e pessoal; instrumentos musicais",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7729202",
+      "locador(a) de móveis e utensílios, inclusive para festas independente",
+      "aluguel de móveis, utensílios e aparelhos de uso doméstico e pessoal; instrumentos musicais",
+      "locador(a)",
+      "móveis",
+      "utensílios,",
+      "inclusive",
+      "para",
+      "festas",
+      "independente",
+      "aluguel",
+      "móveis,",
+      "utensílios",
+      "aparelhos",
+      "uso",
+      "doméstico",
+      "pessoal;",
+      "instrumentos",
+      "musicais"
+    ]
+  },
+  {
+    "cnae": "7729203",
+    "ocupacao": "locador(a) de material médico independente",
+    "descricao": "aluguel de material médico",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7729203",
+      "locador(a) de material médico independente",
+      "aluguel de material médico",
+      "locador(a)",
+      "material",
+      "médico",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7729299",
+    "ocupacao": "locador(a) de livros, revistas, plantas e flores independente",
+    "descricao": "aluguel de outros objetos pessoais e domésticos não especificados anteriormente",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7729299",
+      "locador(a) de livros, revistas, plantas e flores independente",
+      "aluguel de outros objetos pessoais e domésticos não especificados anteriormente",
+      "locador(a)",
+      "livros,",
+      "revistas,",
+      "plantas",
+      "flores",
+      "independente",
+      "aluguel",
+      "outros",
+      "objetos",
+      "pessoais",
+      "domésticos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "7731400",
+    "ocupacao": "locador(a) de máquinas e equipamentos agrícolas sem operador independente",
+    "descricao": "aluguel de máquinas e equipamentos agrícolas sem operador",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7731400",
+      "locador(a) de máquinas e equipamentos agrícolas sem operador independente",
+      "aluguel de máquinas e equipamentos agrícolas sem operador",
+      "locador(a)",
+      "máquinas",
+      "equipamentos",
+      "agrícolas",
+      "sem",
+      "operador",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7732201",
+    "ocupacao": "locador(a) de máquinas e equipamentos para construção sem operador, exceto andaimes independente",
+    "descricao": "aluguel de máquinas e equipamentos para construção sem operador, exceto andaimes",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7732201",
+      "locador(a) de máquinas e equipamentos para construção sem operador, exceto andaimes independente",
+      "aluguel de máquinas e equipamentos para construção sem operador, exceto andaimes",
+      "locador(a)",
+      "máquinas",
+      "equipamentos",
+      "para",
+      "construção",
+      "sem",
+      "operador,",
+      "exceto",
+      "andaimes",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7732202",
+    "ocupacao": "locador de andaimes independente",
+    "descricao": "aluguel de andaimes",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7732202",
+      "locador de andaimes independente",
+      "aluguel de andaimes",
+      "locador",
+      "andaimes",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7733100",
+    "ocupacao": "locador(a) de máquinas e equipamentos para escritório independente",
+    "descricao": "aluguel de máquinas e equipamentos para escritórios",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7733100",
+      "locador(a) de máquinas e equipamentos para escritório independente",
+      "aluguel de máquinas e equipamentos para escritórios",
+      "locador(a)",
+      "máquinas",
+      "equipamentos",
+      "para",
+      "escritório",
+      "independente",
+      "aluguel",
+      "escritórios"
+    ]
+  },
+  {
+    "cnae": "7739002",
+    "ocupacao": "locador(a) de equipamentos científicos, médicos e hospitalares, sem operador independente",
+    "descricao": "aluguel de equipamentos científicos, médicos e hospitalares, sem operador",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7739002",
+      "locador(a) de equipamentos científicos, médicos e hospitalares, sem operador independente",
+      "aluguel de equipamentos científicos, médicos e hospitalares, sem operador",
+      "locador(a)",
+      "equipamentos",
+      "científicos,",
+      "médicos",
+      "hospitalares,",
+      "sem",
+      "operador",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7739003",
+    "ocupacao": "locador(a) de palcos, coberturas e outras estruturas de uso temporário, exceto andaimes independente",
+    "descricao": "aluguel de palcos, coberturas e outras estruturas de uso temporário, exceto andaimes",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7739003",
+      "locador(a) de palcos, coberturas e outras estruturas de uso temporário, exceto andaimes independente",
+      "aluguel de palcos, coberturas e outras estruturas de uso temporário, exceto andaimes",
+      "locador(a)",
+      "palcos,",
+      "coberturas",
+      "outras",
+      "estruturas",
+      "uso",
+      "temporário,",
+      "exceto",
+      "andaimes",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7739099",
+    "ocupacao": "locador(a) de outras máquinas e equipamentos comerciais e industriais não especificados anteriormente, sem operador independente",
+    "descricao": "aluguel de outras máquinas e equipamentos comerciais e industriais não especificados anteriormente, sem operador",
+    "iss": false,
+    "icms": false,
+    "keywords": [
+      "7739099",
+      "locador(a) de outras máquinas e equipamentos comerciais e industriais não especificados anteriormente, sem operador independente",
+      "aluguel de outras máquinas e equipamentos comerciais e industriais não especificados anteriormente, sem operador",
+      "locador(a)",
+      "outras",
+      "máquinas",
+      "equipamentos",
+      "comerciais",
+      "industriais",
+      "não",
+      "especificados",
+      "anteriormente,",
+      "sem",
+      "operador",
+      "independente",
+      "aluguel"
+    ]
+  },
+  {
+    "cnae": "7911200",
+    "ocupacao": "agente de viagens independente",
+    "descricao": "agências de viagens",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7911200",
+      "agente de viagens independente",
+      "agências de viagens",
+      "agente",
+      "viagens",
+      "independente",
+      "agências"
+    ]
+  },
+  {
+    "cnae": "7912100",
+    "ocupacao": "guia de turismo independente",
+    "descricao": "operadores turísticos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7912100",
+      "guia de turismo independente",
+      "operadores turísticos",
+      "guia",
+      "turismo",
+      "independente",
+      "operadores",
+      "turísticos"
+    ]
+  },
+  {
+    "cnae": "7990200",
+    "ocupacao": "promotor(a) de turismo local independente",
+    "descricao": "serviços de reservas e outros serviços de turismo não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "7990200",
+      "promotor(a) de turismo local independente",
+      "serviços de reservas e outros serviços de turismo não especificados anteriormente",
+      "promotor(a)",
+      "turismo",
+      "local",
+      "independente",
+      "serviços",
+      "reservas",
+      "outros",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "8011102",
+    "ocupacao": "adestrador(a) de cães de guarda independente",
+    "descricao": "serviços de adestramento de cães de guarda",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8011102",
+      "adestrador(a) de cães de guarda independente",
+      "serviços de adestramento de cães de guarda",
+      "adestrador(a)",
+      "cães",
+      "guarda",
+      "independente",
+      "serviços",
+      "adestramento"
+    ]
+  },
+  {
+    "cnae": "8020002",
+    "ocupacao": "instalador(a) e reparador de cofres, trancas e travas de segurança independente",
+    "descricao": "outras atividades de serviços de segurança",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8020002",
+      "instalador(a) e reparador de cofres, trancas e travas de segurança independente",
+      "outras atividades de serviços de segurança",
+      "instalador(a)",
+      "reparador",
+      "cofres,",
+      "trancas",
+      "travas",
+      "segurança",
+      "independente",
+      "outras",
+      "atividades",
+      "serviços"
+    ]
+  },
+  {
+    "cnae": "8129000",
+    "ocupacao": "piscineiro(a) independente",
+    "descricao": "atividades de limpeza não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8129000",
+      "piscineiro(a) independente",
+      "atividades de limpeza não especificadas anteriormente",
+      "piscineiro(a)",
+      "independente",
+      "atividades",
+      "limpeza",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "8130300",
+    "ocupacao": "jardineiro(a) independente",
+    "descricao": "atividades paisagísticas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8130300",
+      "jardineiro(a) independente",
+      "atividades paisagísticas",
+      "jardineiro(a)",
+      "independente",
+      "atividades",
+      "paisagísticas"
+    ]
+  },
+  {
+    "cnae": "8219901",
+    "ocupacao": "fotocopiador(a) independente",
+    "descricao": "fotocópias",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8219901",
+      "fotocopiador(a) independente",
+      "fotocópias",
+      "fotocopiador(a)",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "8219999",
+    "ocupacao": "digitador(a) independente",
+    "descricao": "preparação de documentos e serviços especializados de apoio administrativo não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8219999",
+      "digitador(a) independente",
+      "preparação de documentos e serviços especializados de apoio administrativo não especificados anteriormente",
+      "digitador(a)",
+      "independente",
+      "preparação",
+      "documentos",
+      "serviços",
+      "especializados",
+      "apoio",
+      "administrativo",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "8230001",
+    "ocupacao": "promotor(a) de eventos independente",
+    "descricao": "serviços de organização de feiras, congressos, exposições e festas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8230001",
+      "promotor(a) de eventos independente",
+      "serviços de organização de feiras, congressos, exposições e festas",
+      "promotor(a)",
+      "eventos",
+      "independente",
+      "serviços",
+      "organização",
+      "feiras,",
+      "congressos,",
+      "exposições",
+      "festas"
+    ]
+  },
+  {
+    "cnae": "8230002",
+    "ocupacao": "proprietário(a) de casas de festas e eventos independente",
+    "descricao": "casas de festas e eventos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8230002",
+      "proprietário(a) de casas de festas e eventos independente",
+      "casas de festas e eventos",
+      "proprietário(a)",
+      "casas",
+      "festas",
+      "eventos",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "8291100",
+    "ocupacao": "cobrador(a) de dívidas independente",
+    "descricao": "atividades de cobranças e informações cadastrais",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8291100",
+      "cobrador(a) de dívidas independente",
+      "atividades de cobranças e informações cadastrais",
+      "cobrador(a)",
+      "dívidas",
+      "independente",
+      "atividades",
+      "cobranças",
+      "informações",
+      "cadastrais"
+    ]
+  },
+  {
+    "cnae": "8292000",
+    "ocupacao": "envasador(a) e empacotador(a) independente",
+    "descricao": "envasamento e empacotamento sob contrato",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8292000",
+      "envasador(a) e empacotador(a) independente",
+      "envasamento e empacotamento sob contrato",
+      "envasador(a)",
+      "empacotador(a)",
+      "independente",
+      "envasamento",
+      "empacotamento",
+      "sob",
+      "contrato"
+    ]
+  },
+  {
+    "cnae": "8299703",
+    "ocupacao": "gravador(a) de carimbos independente",
+    "descricao": "serviços de gravação de carimbos, exceto confecção",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8299703",
+      "gravador(a) de carimbos independente",
+      "serviços de gravação de carimbos, exceto confecção",
+      "gravador(a)",
+      "carimbos",
+      "independente",
+      "serviços",
+      "gravação",
+      "carimbos,",
+      "exceto",
+      "confecção"
+    ]
+  },
+  {
+    "cnae": "8299707",
+    "ocupacao": "proprietário(a) de sala de acesso à internet independente",
+    "descricao": "salas de acesso à internet",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8299707",
+      "proprietário(a) de sala de acesso à internet independente",
+      "salas de acesso à internet",
+      "proprietário(a)",
+      "sala",
+      "acesso",
+      "internet",
+      "independente",
+      "salas"
+    ]
+  },
+  {
+    "cnae": "8299799",
+    "ocupacao": "cartazista, pintor de faixas publicitárias e de letras independente",
+    "descricao": "outras atividades de serviços prestados principalmente às empresas não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8299799",
+      "cartazista, pintor de faixas publicitárias e de letras independente",
+      "outras atividades de serviços prestados principalmente às empresas não especificadas anteriormente",
+      "cartazista,",
+      "pintor",
+      "faixas",
+      "publicitárias",
+      "letras",
+      "independente",
+      "outras",
+      "atividades",
+      "serviços",
+      "prestados",
+      "principalmente",
+      "empresas",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "8592902",
+    "ocupacao": "instrutor(a) de artes cênicas independente",
+    "descricao": "ensino de artes cênicas, exceto dança",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8592902",
+      "instrutor(a) de artes cênicas independente",
+      "ensino de artes cênicas, exceto dança",
+      "instrutor(a)",
+      "artes",
+      "cênicas",
+      "independente",
+      "ensino",
+      "cênicas,",
+      "exceto",
+      "dança"
+    ]
+  },
+  {
+    "cnae": "8592903",
+    "ocupacao": "instrutor(a) de música independente",
+    "descricao": "ensino de música",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8592903",
+      "instrutor(a) de música independente",
+      "ensino de música",
+      "instrutor(a)",
+      "música",
+      "independente",
+      "ensino"
+    ]
+  },
+  {
+    "cnae": "8592999",
+    "ocupacao": "instrutor(a) de arte e cultura em geral independente",
+    "descricao": "ensino de arte e cultura não especificado anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8592999",
+      "instrutor(a) de arte e cultura em geral independente",
+      "ensino de arte e cultura não especificado anteriormente",
+      "instrutor(a)",
+      "arte",
+      "cultura",
+      "geral",
+      "independente",
+      "ensino",
+      "não",
+      "especificado",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "8593700",
+    "ocupacao": "instrutor(a) de idiomas independente",
+    "descricao": "ensino de idiomas",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8593700",
+      "instrutor(a) de idiomas independente",
+      "ensino de idiomas",
+      "instrutor(a)",
+      "idiomas",
+      "independente",
+      "ensino"
+    ]
+  },
+  {
+    "cnae": "8599603",
+    "ocupacao": "instrutor(a) de informática independente",
+    "descricao": "treinamento em informática",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8599603",
+      "instrutor(a) de informática independente",
+      "treinamento em informática",
+      "instrutor(a)",
+      "informática",
+      "independente",
+      "treinamento"
+    ]
+  },
+  {
+    "cnae": "8599604",
+    "ocupacao": "instrutor(a) de cursos gerenciais independente",
+    "descricao": "treinamento em desenvolvimento profissional e gerencial",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8599604",
+      "instrutor(a) de cursos gerenciais independente",
+      "treinamento em desenvolvimento profissional e gerencial",
+      "instrutor(a)",
+      "cursos",
+      "gerenciais",
+      "independente",
+      "treinamento",
+      "desenvolvimento",
+      "profissional",
+      "gerencial"
+    ]
+  },
+  {
+    "cnae": "8599605",
+    "ocupacao": "instrutor(a) de cursos preparatórios independente",
+    "descricao": "cursos preparatórios para concursos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8599605",
+      "instrutor(a) de cursos preparatórios independente",
+      "cursos preparatórios para concursos",
+      "instrutor(a)",
+      "cursos",
+      "preparatórios",
+      "independente",
+      "para",
+      "concursos"
+    ]
+  },
+  {
+    "cnae": "8599699",
+    "ocupacao": "professor(a) particular independente",
+    "descricao": "outras atividades de ensino não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8599699",
+      "professor(a) particular independente",
+      "outras atividades de ensino não especificadas anteriormente",
+      "professor(a)",
+      "particular",
+      "independente",
+      "outras",
+      "atividades",
+      "ensino",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "8712300",
+    "ocupacao": "cuidador(a) de idosos e enfermos independente",
+    "descricao": "atividades de fornecimento de infraestrutura de apoio e assistência a paciente no domicílio",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "8712300",
+      "cuidador(a) de idosos e enfermos independente",
+      "atividades de fornecimento de infraestrutura de apoio e assistência a paciente no domicílio",
+      "cuidador(a)",
+      "idosos",
+      "enfermos",
+      "independente",
+      "atividades",
+      "fornecimento",
+      "infraestrutura",
+      "apoio",
+      "assistência",
+      "paciente",
+      "domicílio"
+    ]
+  },
+  {
+    "cnae": "9001901",
+    "ocupacao": "humorista e contador de histórias independente",
+    "descricao": "produção teatral",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9001901",
+      "humorista e contador de histórias independente",
+      "produção teatral",
+      "humorista",
+      "contador",
+      "histórias",
+      "independente",
+      "produção",
+      "teatral"
+    ]
+  },
+  {
+    "cnae": "9001902",
+    "ocupacao": "cantor(a)/músico(a) independente",
+    "descricao": "produção musical",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9001902",
+      "cantor(a)/músico(a) independente",
+      "produção musical",
+      "cantor(a)/músico(a)",
+      "independente",
+      "produção",
+      "musical"
+    ]
+  },
+  {
+    "cnae": "9001906",
+    "ocupacao": "disc jockey (dj) ou video jockey (vj) independente",
+    "descricao": "atividades de sonorização e de iluminação",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9001906",
+      "disc jockey (dj) ou video jockey (vj) independente",
+      "atividades de sonorização e de iluminação",
+      "disc",
+      "jockey",
+      "(dj)",
+      "video",
+      "(vj)",
+      "independente",
+      "atividades",
+      "sonorização",
+      "iluminação"
+    ]
+  },
+  {
+    "cnae": "9002702",
+    "ocupacao": "restaurador(a) de obras de arte independente",
+    "descricao": "restauração de obras de arte",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9002702",
+      "restaurador(a) de obras de arte independente",
+      "restauração de obras de arte",
+      "restaurador(a)",
+      "obras",
+      "arte",
+      "independente",
+      "restauração"
+    ]
+  },
+  {
+    "cnae": "9329803",
+    "ocupacao": "proprietário(a) de salão de jogos de sinuca e bilhar independente",
+    "descricao": "exploração de jogos de sinuca, bilhar e similares",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9329803",
+      "proprietário(a) de salão de jogos de sinuca e bilhar independente",
+      "exploração de jogos de sinuca, bilhar e similares",
+      "proprietário(a)",
+      "salão",
+      "jogos",
+      "sinuca",
+      "bilhar",
+      "independente",
+      "exploração",
+      "sinuca,",
+      "similares"
+    ]
+  },
+  {
+    "cnae": "9329804",
+    "ocupacao": "proprietário(a) de fliperama independente",
+    "descricao": "exploração de jogos eletrônicos recreativos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9329804",
+      "proprietário(a) de fliperama independente",
+      "exploração de jogos eletrônicos recreativos",
+      "proprietário(a)",
+      "fliperama",
+      "independente",
+      "exploração",
+      "jogos",
+      "eletrônicos",
+      "recreativos"
+    ]
+  },
+  {
+    "cnae": "9329899",
+    "ocupacao": "animador(a) de festas independente",
+    "descricao": "outras atividades de recreação e lazer não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9329899",
+      "animador(a) de festas independente",
+      "outras atividades de recreação e lazer não especificadas anteriormente",
+      "animador(a)",
+      "festas",
+      "independente",
+      "outras",
+      "atividades",
+      "recreação",
+      "lazer",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "9511800",
+    "ocupacao": "técnico(a) de manutenção de computador independente",
+    "descricao": "reparação e manutenção de computadores e de equipamentos periféricos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9511800",
+      "técnico(a) de manutenção de computador independente",
+      "reparação e manutenção de computadores e de equipamentos periféricos",
+      "técnico(a)",
+      "manutenção",
+      "computador",
+      "independente",
+      "reparação",
+      "computadores",
+      "equipamentos",
+      "periféricos"
+    ]
+  },
+  {
+    "cnae": "9512600",
+    "ocupacao": "técnico(a) de manutenção de telefonia independente",
+    "descricao": "reparação e manutenção de equipamentos de comunicação",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9512600",
+      "técnico(a) de manutenção de telefonia independente",
+      "reparação e manutenção de equipamentos de comunicação",
+      "técnico(a)",
+      "manutenção",
+      "telefonia",
+      "independente",
+      "reparação",
+      "equipamentos",
+      "comunicação"
+    ]
+  },
+  {
+    "cnae": "9521500",
+    "ocupacao": "técnico(a) de manutenção de eletrodomésticos independente",
+    "descricao": "reparação e manutenção de equipamentos eletroeletrônicos de uso pessoal e doméstico",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9521500",
+      "técnico(a) de manutenção de eletrodomésticos independente",
+      "reparação e manutenção de equipamentos eletroeletrônicos de uso pessoal e doméstico",
+      "técnico(a)",
+      "manutenção",
+      "eletrodomésticos",
+      "independente",
+      "reparação",
+      "equipamentos",
+      "eletroeletrônicos",
+      "uso",
+      "pessoal",
+      "doméstico"
+    ]
+  },
+  {
+    "cnae": "9529101",
+    "ocupacao": "sapateiro(a)",
+    "descricao": "reparação de calçados, de bolsas e artigos de viagem",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529101",
+      "sapateiro(a)",
+      "reparação de calçados, de bolsas e artigos de viagem",
+      "reparação",
+      "calçados,",
+      "bolsas",
+      "artigos",
+      "viagem"
+    ]
+  },
+  {
+    "cnae": "9529102",
+    "ocupacao": "chaveiro(a) independente",
+    "descricao": "chaveiros",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529102",
+      "chaveiro(a) independente",
+      "chaveiros",
+      "chaveiro(a)",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "9529103",
+    "ocupacao": "relojoeiro(a) independente",
+    "descricao": "reparação de relógios",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529103",
+      "relojoeiro(a) independente",
+      "reparação de relógios",
+      "relojoeiro(a)",
+      "independente",
+      "reparação",
+      "relógios"
+    ]
+  },
+  {
+    "cnae": "9529104",
+    "ocupacao": "reparador(a) de bicicleta independente",
+    "descricao": "reparação de bicicletas, triciclos e outros veículos não motorizados",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529104",
+      "reparador(a) de bicicleta independente",
+      "reparação de bicicletas, triciclos e outros veículos não motorizados",
+      "reparador(a)",
+      "bicicleta",
+      "independente",
+      "reparação",
+      "bicicletas,",
+      "triciclos",
+      "outros",
+      "veículos",
+      "não",
+      "motorizados"
+    ]
+  },
+  {
+    "cnae": "9529105",
+    "ocupacao": "estofador(a) independente",
+    "descricao": "reparação de artigos do mobiliário",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529105",
+      "estofador(a) independente",
+      "reparação de artigos do mobiliário",
+      "estofador(a)",
+      "independente",
+      "reparação",
+      "artigos",
+      "mobiliário"
+    ]
+  },
+  {
+    "cnae": "9529106",
+    "ocupacao": "ourives independente",
+    "descricao": "reparação de jóias",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529106",
+      "ourives independente",
+      "reparação de jóias",
+      "ourives",
+      "independente",
+      "reparação",
+      "jóias"
+    ]
+  },
+  {
+    "cnae": "9529199",
+    "ocupacao": "amolador(a) de artigos de cutelaria independente",
+    "descricao": "reparação e manutenção de outros objetos e equipamentos pessoais e domésticos não especificados anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9529199",
+      "amolador(a) de artigos de cutelaria independente",
+      "reparação e manutenção de outros objetos e equipamentos pessoais e domésticos não especificados anteriormente",
+      "amolador(a)",
+      "artigos",
+      "cutelaria",
+      "independente",
+      "reparação",
+      "manutenção",
+      "outros",
+      "objetos",
+      "equipamentos",
+      "pessoais",
+      "domésticos",
+      "não",
+      "especificados",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "9601701",
+    "ocupacao": "lavadeiro(a) de roupas independente",
+    "descricao": "lavanderias",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9601701",
+      "lavadeiro(a) de roupas independente",
+      "lavanderias",
+      "lavadeiro(a)",
+      "roupas",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "9601702",
+    "ocupacao": "tintureiro(a) independente",
+    "descricao": "tinturarias",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9601702",
+      "tintureiro(a) independente",
+      "tinturarias",
+      "tintureiro(a)",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "9601703",
+    "ocupacao": "lavadeiro(a) de roupas profissionais independente",
+    "descricao": "toalheiros",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9601703",
+      "lavadeiro(a) de roupas profissionais independente",
+      "toalheiros",
+      "lavadeiro(a)",
+      "roupas",
+      "profissionais",
+      "independente"
+    ]
+  },
+  {
+    "cnae": "9602501",
+    "ocupacao": "barbeiro independente",
+    "descricao": "cabeleireiros, manicure e pedicure",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9602501",
+      "barbeiro independente",
+      "cabeleireiros, manicure e pedicure",
+      "barbeiro",
+      "independente",
+      "cabeleireiros,",
+      "manicure",
+      "pedicure"
+    ]
+  },
+  {
+    "cnae": "9602502",
+    "ocupacao": "depilador(a) independente",
+    "descricao": "atividades de estética e outros serviços de cuidados com a beleza",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9602502",
+      "depilador(a) independente",
+      "atividades de estética e outros serviços de cuidados com a beleza",
+      "depilador(a)",
+      "independente",
+      "atividades",
+      "estética",
+      "outros",
+      "serviços",
+      "cuidados",
+      "com",
+      "beleza"
+    ]
+  },
+  {
+    "cnae": "9603304",
+    "ocupacao": "agente funerário independente",
+    "descricao": "serviços de funerárias",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9603304",
+      "agente funerário independente",
+      "serviços de funerárias",
+      "agente",
+      "funerário",
+      "independente",
+      "serviços",
+      "funerárias"
+    ]
+  },
+  {
+    "cnae": "9609202",
+    "ocupacao": "agente matrimonial independente",
+    "descricao": "agências matrimoniais",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9609202",
+      "agente matrimonial independente",
+      "agências matrimoniais",
+      "agente",
+      "matrimonial",
+      "independente",
+      "agências",
+      "matrimoniais"
+    ]
+  },
+  {
+    "cnae": "9609206",
+    "ocupacao": "colocador(a) de piercing independente",
+    "descricao": "serviços de tatuagem e colocação de piercing",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9609206",
+      "colocador(a) de piercing independente",
+      "serviços de tatuagem e colocação de piercing",
+      "colocador(a)",
+      "piercing",
+      "independente",
+      "serviços",
+      "tatuagem",
+      "colocação"
+    ]
+  },
+  {
+    "cnae": "9609207",
+    "ocupacao": "adestrador(a) de animais independente",
+    "descricao": "alojamento de animais domésticos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9609207",
+      "adestrador(a) de animais independente",
+      "alojamento de animais domésticos",
+      "adestrador(a)",
+      "animais",
+      "independente",
+      "alojamento",
+      "domésticos"
+    ]
+  },
+  {
+    "cnae": "9609208",
+    "ocupacao": "banhista de animais domésticos independente",
+    "descricao": "higiene e embelezamento de animais domésticos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9609208",
+      "banhista de animais domésticos independente",
+      "higiene e embelezamento de animais domésticos",
+      "banhista",
+      "animais",
+      "domésticos",
+      "independente",
+      "higiene",
+      "embelezamento"
+    ]
+  },
+  {
+    "cnae": "9609299",
+    "ocupacao": "astrólogo(a) independente",
+    "descricao": "outras atividades de serviços pessoais não especificadas anteriormente",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9609299",
+      "astrólogo(a) independente",
+      "outras atividades de serviços pessoais não especificadas anteriormente",
+      "astrólogo(a)",
+      "independente",
+      "outras",
+      "atividades",
+      "serviços",
+      "pessoais",
+      "não",
+      "especificadas",
+      "anteriormente"
+    ]
+  },
+  {
+    "cnae": "9700500",
+    "ocupacao": "diarista independente",
+    "descricao": "serviços domésticos",
+    "iss": true,
+    "icms": false,
+    "keywords": [
+      "9700500",
+      "diarista independente",
+      "serviços domésticos",
+      "diarista",
+      "independente",
+      "serviços",
+      "domésticos"
+    ]
+  }
+]

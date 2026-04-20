@@ -1,0 +1,373 @@
+{
+  "feriados_consolidados_2026": [
+    {
+      "nome": "Confraternização Universal",
+      "data": "01/01/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Celebração do início do Ano Novo. Feriado nacional instituído pela Lei nº 662/1949."
+    },
+    {
+      "nome": "Lavagem do Bonfim",
+      "data": "16/01/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Salvador",
+      "codigo_ibge": "2927408",
+      "descricao": "Festa religiosa e cultural tradicional de Salvador, com a lavagem das escadarias da Igreja do Senhor do Bonfim."
+    },
+    {
+      "nome": "Carnaval",
+      "data": "17/02/2026",
+      "tipo": "ponto_facultativo",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Festa popular tradicional brasileira. Ponto facultativo nacional, regulamentado como feriado em diversos municípios."
+    },
+    {
+      "nome": "Dia Internacional da Mulher",
+      "data": "08/03/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Data dedicada à reflexão sobre direitos, conquistas e desafios das mulheres. Ações internas de diversidade e inclusão."
+    },
+    {
+      "nome": "Dia de São José",
+      "data": "19/03/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Itabuna",
+      "codigo_ibge": "2914802",
+      "descricao": "Padroeiro do município de Itabuna."
+    },
+    {
+      "nome": "Aniversário de Salvador",
+      "data": "29/03/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Salvador",
+      "codigo_ibge": "2927408",
+      "descricao": "Comemoração da fundação da cidade de Salvador, primeira capital do Brasil (1549)."
+    },
+    {
+      "nome": "Sexta-Feira Santa",
+      "data": "03/04/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Comemoração cristã da crucificação de Jesus Cristo. Feriado nacional (Lei nº 9.093/1995)."
+    },
+    {
+      "nome": "Páscoa",
+      "data": "05/04/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Celebrada no domingo. Data para ações internas e confraternizações corporativas."
+    },
+    {
+      "nome": "Dia Mundial da Atividade Física",
+      "data": "06/04/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Incentivo ao bem-estar, saúde e qualidade de vida dos colaboradores."
+    },
+    {
+      "nome": "Tiradentes",
+      "data": "21/04/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Homenagem a Joaquim José da Silva Xavier, líder da Inconfidência Mineira (Lei nº 662/1949)."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "26/04/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Amargosa",
+      "codigo_ibge": "2901007",
+      "descricao": "Feriado municipal de Amargosa."
+    },
+    {
+      "nome": "Dia Mundial da Segurança e Saúde no Trabalho",
+      "data": "28/04/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Reforço às políticas de SST, prevenção de acidentes e bem-estar ocupacional."
+    },
+    {
+      "nome": "Dia do Trabalho",
+      "data": "01/05/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Homenagem aos trabalhadores e às lutas por melhores condições laborais (CLT, art. 70)."
+    },
+    {
+      "nome": "Dia das Mães",
+      "data": "10/05/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Segundo domingo de maio. Homenagens internas e flexibilização de horários."
+    },
+    {
+      "nome": "Dia Internacional contra a Homofobia, Transfobia e Bifobia",
+      "data": "17/05/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Data dedicada à promoção da diversidade, inclusão e respeito no ambiente corporativo."
+    },
+    {
+      "nome": "Corpus Christi",
+      "data": "04/06/2026",
+      "tipo": "ponto_facultativo",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Solenidade católica. Ponto facultativo nacional, adotado como feriado na maioria dos municípios."
+    },
+    {
+      "nome": "Dia Nacional da Imunização",
+      "data": "09/06/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Campanhas internas de vacinação e conscientização sobre saúde preventiva."
+    },
+    {
+      "nome": "Dia de Santo Antônio",
+      "data": "13/06/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Alagoinhas",
+      "codigo_ibge": "2900702",
+      "descricao": "Feriado municipal de Alagoinhas em homenagem ao padroeiro."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "19/06/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Amargosa",
+      "codigo_ibge": "2901007",
+      "descricao": "Feriado municipal de Amargosa."
+    },
+    {
+      "nome": "São João",
+      "data": "24/06/2026",
+      "tipo": ["estadual", "municipal"],
+      "estado": "BA",
+      "cidade": ["Salvador", "Itabuna", "Ilhéus", "Amargosa", "Alagoinhas", "Ibirapitanga", "Camamu", "Ubaitaba"],
+      "codigo_ibge": ["2927408", "2914802", "2913606", "2901007", "2900702", "2912707", "2905800", "2932200"],
+      "descricao": "Feriado estadual na Bahia e municipal nas cidades listadas. Celebrado com grandes festejos juninos."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "27/06/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Camamu",
+      "codigo_ibge": "2905800",
+      "descricao": "Feriado municipal de Camamu."
+    },
+    {
+      "nome": "Dia Internacional do Orgulho LGBTQIA+",
+      "data": "28/06/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Ações de inclusão, diversidade e respeito às orientações sexuais e identidades de gênero."
+    },
+    {
+      "nome": "Independência da Bahia (2 de Julho)",
+      "data": "02/07/2026",
+      "tipo": "estadual",
+      "estado": "BA",
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Comemoração da adesão da Bahia à Independência do Brasil (1823). Feriado estadual (Lei nº 10.792/2007)."
+    },
+    {
+      "nome": "Aniversário da Cidade",
+      "data": "06/07/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Itabuna",
+      "codigo_ibge": "2914802",
+      "descricao": "Emancipação política do município de Itabuna."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "06/08/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Ibirapitanga",
+      "codigo_ibge": "2912707",
+      "descricao": "Feriado municipal de Ibirapitanga."
+    },
+    {
+      "nome": "Dia dos Pais",
+      "data": "10/08/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Segundo domingo de agosto. Homenagens internas."
+    },
+    {
+      "nome": "Dia do Estudante",
+      "data": "11/08/2026",
+      "tipo": "comemorativo_rh",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Incentivo à capacitação, educação continuada e programas de aprendizado."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "15/08/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Camamu",
+      "codigo_ibge": "2905800",
+      "descricao": "Feriado municipal de Camamu."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "16/08/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Ubaitaba",
+      "codigo_ibge": "2932200",
+      "descricao": "Feriado municipal de Ubaitaba."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "22/08/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Ibirapitanga",
+      "codigo_ibge": "2912707",
+      "descricao": "Feriado municipal de Ibirapitanga."
+    },
+    {
+      "nome": "Independência do Brasil",
+      "data": "07/09/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Comemoração do Grito do Ipiranga (1822). Feriado nacional (Lei nº 662/1949)."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "23/09/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Ilhéus",
+      "codigo_ibge": "2913606",
+      "descricao": "Feriado municipal de Ilhéus."
+    },
+    {
+      "nome": "Nossa Senhora Aparecida",
+      "data": "12/10/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Dia da Padroeira do Brasil. Feriado nacional (Lei nº 6.802/1980)."
+    },
+    {
+      "nome": "Finados",
+      "data": "02/11/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Dia de memória e homenagem aos falecidos. Feriado nacional (Lei nº 9.093/1995)."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "05/11/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Ubaitaba",
+      "codigo_ibge": "2932200",
+      "descricao": "Feriado municipal de Ubaitaba."
+    },
+    {
+      "nome": "Proclamação da República",
+      "data": "15/11/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Comemoração da instauração da República (1889). Feriado nacional (Lei nº 662/1949)."
+    },
+    {
+      "nome": "Consciência Negra",
+      "data": "20/11/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Dia de reflexão sobre a importância do povo negro na formação social e cultural do Brasil."
+    },
+    {
+      "nome": "Santa Bárbara",
+      "data": "04/12/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Salvador",
+      "codigo_ibge": "2927408",
+      "descricao": "Dia de Santa Bárbara, padroeira da cidade de Salvador."
+    },
+    {
+      "nome": "Nossa Senhora da Conceição",
+      "data": "08/12/2026",
+      "tipo": ["estadual", "municipal"],
+      "estado": "BA",
+      "cidade": ["Salvador"],
+      "codigo_ibge": ["2927408"],
+      "descricao": "Padroeira da Bahia e de Salvador. Feriado estadual (Lei nº 11.888/2010) e municipal."
+    },
+    {
+      "nome": "Natal",
+      "data": "25/12/2026",
+      "tipo": "nacional",
+      "estado": null,
+      "cidade": null,
+      "codigo_ibge": null,
+      "descricao": "Celebração do nascimento de Jesus Cristo. Feriado nacional (Lei nº 662/1949)."
+    },
+    {
+      "nome": "Feriado Municipal",
+      "data": "31/12/2026",
+      "tipo": "municipal",
+      "estado": "BA",
+      "cidade": "Camamu",
+      "codigo_ibge": "2905800",
+      "descricao": "Feriado municipal de Camamu."
+    }
+  ]
+}

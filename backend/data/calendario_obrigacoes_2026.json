@@ -1,0 +1,269 @@
+{
+  "2026": {
+    "Janeiro": {
+      "01": [
+        { "eventName": "Nova tabela IRRF e INSS 2026", "eventPeriod": "Vigência anual", "eventBase": "Portarias RFB/ME", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Atualização do Salário Mínimo", "eventPeriod": "Vigência anual", "eventBase": "Lei nº 14.897/2024", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "07": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "09": [
+        { "eventName": "Complemento do 13º Salário", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "Lei nº 4.090/1962", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "12": [
+        { "eventName": "Publicação de novas tabelas INSS/IRRF", "eventPeriod": "Ano-calendário 2026", "eventBase": "Portarias Interministeriais", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial (eventos periódicos)", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Envio EFD-Reinf", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE (Doméstico/MEI/Segurado Especial)", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "LC nº 150/2015", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento DARF Unificado (IRRF/PIS/COFINS/INSS)", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "IN RFB nº 2.110/2022", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento DAS + PGDAS-D (Simples Nacional)", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" }
+      ],
+      "23": [
+        { "eventName": "Vencimento PIS-PASEP sobre Folha", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "Lei nº 5.172/1966", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento PIS/COFINS (Lucro Presumido/Real)", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "Lei nº 10.637/2002 e 10.833/2003", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento IRPJ/CSLL (Mensal/Trimestral)", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" },
+        { "eventName": "Prazo Opção/Exclusão Simples Nacional", "eventPeriod": "Ano-calendário 2026", "eventBase": "LC nº 123/2006, Art. 33", "calendar": "Tributário Federal" },
+        { "eventName": "Adiantamento de Férias (1º período)", "eventPeriod": "Conforme período aquisitivo", "eventBase": "CLT, Art. 134", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Fevereiro": {
+      "06": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "07": [
+        { "eventName": "Pagamento de Salários Domésticos", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "LC nº 150/2015", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "13": [
+        { "eventName": "Envio EFD-Contribuições", "eventPeriod": "Referência: Dezembro/2025", "eventBase": "IN RFB nº 1.252/2012", "calendar": "Tributário Federal" },
+        { "eventName": "Vencimento CIDE-Combustíveis", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "Lei nº 10.336/2001", "calendar": "Tributário Federal" }
+      ],
+      "16": [
+        { "eventName": "Envio eSocial (eventos periódicos e não-periódicos)", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "18": [
+        { "eventName": "Envio EFD-Reinf", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" },
+        { "eventName": "INSS (Facultativo/Individual/Complementar)", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "Lei nº 8.212/1991", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF Unificado/PGDAS-D", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "LC nº 123/2006", "calendar": "Tributário Federal" }
+      ],
+      "21": [
+        { "eventName": "Liberação arquivo Consignado Crédito do Trabalhador", "eventPeriod": "Competência: Março/2026", "eventBase": "Portaria MTE nº 1.367/2019", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "Lei nº 10.637/2002", "calendar": "Tributário Federal" }
+      ],
+      "27": [
+        { "eventName": "Envio DCTFWeb", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento IRPJ/CSLL (Mensal/Trimestral)", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" },
+        { "eventName": "Envio DME/DOI/MIT", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "IN RFB nº 1.761/2017", "calendar": "Tributário Federal" },
+        { "eventName": "Entrega DIRPF 2026 (Início)", "eventPeriod": "Ano-calendário 2025", "eventBase": "IN RFB nº 2.130/2023", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Março": {
+      "06": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "13": [
+        { "eventName": "Envio EFD-Contribuições", "eventPeriod": "Referência: Janeiro/2026", "eventBase": "IN RFB nº 1.252/2012", "calendar": "Tributário Federal" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Envio EFD-Reinf", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "16": [
+        { "eventName": "INSS (Facultativo/Individual)", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "Lei nº 8.212/1991", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" }
+      ],
+      "21": [
+        { "eventName": "Liberação arquivo Consignado", "eventPeriod": "Competência: Abril/2026", "eventBase": "Portaria MTE", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "Lei nº 10.833/2003", "calendar": "Tributário Federal" }
+      ],
+      "31": [
+        { "eventName": "Envio DCTFWeb", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Vencimento IRPJ/CSLL", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" },
+        { "eventName": "Entrega DEFIS (Simples Nacional)", "eventPeriod": "Ano-calendário 2025", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" },
+        { "eventName": "Entrega DTTA", "eventPeriod": "Jul-Dez/2025", "eventBase": "IN RFB nº 2.110/2022", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Abril": {
+      "06": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Março/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "13": [
+        { "eventName": "Envio EFD-Contribuições", "eventPeriod": "Referência: Fevereiro/2026", "eventBase": "IN RFB nº 1.252/2012", "calendar": "Tributário Federal" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Março/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Março/2026", "eventBase": "LC nº 123/2006", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Março/2026", "eventBase": "Lei nº 10.637/2002", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Março/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Tributário Federal" },
+        { "eventName": "Reavaliação do Fator R (Março)", "eventPeriod": "Base 12 meses móveis", "eventBase": "LC nº 155/2016", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Maio": {
+      "07": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Abril/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Abril/2026", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Abril/2026", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Abril/2026", "eventBase": "Lei nº 10.833/2003", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Abril/2026", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" },
+        { "eventName": "Prazo final DIRPF 2026", "eventPeriod": "Ano-calendário 2025", "eventBase": "IN RFB nº 2.130/2023", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Junho": {
+      "06": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Maio/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Maio/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Maio/2026", "eventBase": "LC nº 123/2006", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Maio/2026", "eventBase": "Lei nº 10.637/2002", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Maio/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Tributário Federal" },
+        { "eventName": "Reavaliação do Fator R (Maio)", "eventPeriod": "Base 12 meses móveis", "eventBase": "LC nº 155/2016", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Julho": {
+      "07": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Junho/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "09": [
+        { "eventName": "13º Salário (1ª parcela)", "eventPeriod": "Competência: Junho/2026", "eventBase": "Lei nº 4.090/1962", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Junho/2026", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Junho/2026", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Junho/2026", "eventBase": "Lei nº 10.833/2003", "calendar": "Tributário Federal" }
+      ],
+      "31": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Junho/2026", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" },
+        { "eventName": "Férias Concessivas (Vencimento 1º semestre)", "eventPeriod": "Período aquisitivo 2024/2025", "eventBase": "CLT, Art. 134", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Agosto": {
+      "07": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Julho/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Julho/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Julho/2026", "eventBase": "LC nº 123/2006", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Julho/2026", "eventBase": "Lei nº 10.637/2002", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Julho/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Tributário Federal" },
+        { "eventName": "Reavaliação do Fator R (Julho)", "eventPeriod": "Base 12 meses móveis", "eventBase": "LC nº 155/2016", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Setembro": {
+      "04": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Agosto/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Agosto/2026", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Agosto/2026", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Agosto/2026", "eventBase": "Lei nº 10.833/2003", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Agosto/2026", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Outubro": {
+      "07": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Setembro/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Setembro/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Setembro/2026", "eventBase": "LC nº 123/2006", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Setembro/2026", "eventBase": "Lei nº 10.637/2002", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Setembro/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Tributário Federal" },
+        { "eventName": "Reavaliação do Fator R (Setembro)", "eventPeriod": "Base 12 meses móveis", "eventBase": "LC nº 155/2016", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Renegociação Convenções Coletivas", "eventPeriod": "Base 2026/2027", "eventBase": "CLT, Art. 614", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    },
+    "Novembro": {
+      "06": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Outubro/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "16": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Outubro/2026", "eventBase": "Portaria MTE nº 6.702/2020", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Outubro/2026", "eventBase": "Res. CGSN nº 140/2018", "calendar": "Tributário Federal" }
+      ],
+      "25": [
+        { "eventName": "Vencimento PIS-PASEP/COFINS", "eventPeriod": "Referência: Outubro/2026", "eventBase": "Lei nº 10.833/2003", "calendar": "Tributário Federal" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Outubro/2026", "eventBase": "IN RFB nº 2.070/2022", "calendar": "Tributário Federal" }
+      ]
+    },
+    "Dezembro": {
+      "05": [
+        { "eventName": "Pagamento de Salários", "eventPeriod": "Referência: Novembro/2026", "eventBase": "CLT, Art. 459", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "15": [
+        { "eventName": "Envio eSocial e EFD-Reinf", "eventPeriod": "Referência: Novembro/2026", "eventBase": "IN RFB nº 2.043/2021", "calendar": "Tributário Federal" }
+      ],
+      "20": [
+        { "eventName": "Vencimento DAE/DARF/PGDAS-D", "eventPeriod": "Referência: Novembro/2026", "eventBase": "LC nº 123/2006", "calendar": "Tributário Federal" },
+        { "eventName": "13º Salário (2ª parcela)", "eventPeriod": "Competência: Novembro/2026", "eventBase": "Lei nº 4.090/1962", "calendar": "Trabalhista e Previdenciário" }
+      ],
+      "30": [
+        { "eventName": "Envio DCTFWeb e IRPJ/CSLL", "eventPeriod": "Referência: Novembro/2026", "eventBase": "IN RFB nº 2.237/2024", "calendar": "Tributário Federal" },
+        { "eventName": "Férias Concessivas (Vencimento 2º semestre)", "eventPeriod": "Período aquisitivo 2024/2025", "eventBase": "CLT, Art. 134", "calendar": "Trabalhista e Previdenciário" },
+        { "eventName": "Encerramento do Exercício Social", "eventPeriod": "Ano-calendário 2026", "eventBase": "CC, Art. 1.050", "calendar": "Tributário Federal" },
+        { "eventName": "Reavaliação do Fator R (Novembro)", "eventPeriod": "Base 12 meses móveis", "eventBase": "LC nº 155/2016", "calendar": "Trabalhista e Previdenciário" }
+      ]
+    }
+  }
+}

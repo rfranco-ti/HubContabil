@@ -1,0 +1,94 @@
+/* ==================== CONFIGURAÇÕES STYLES ==================== */
+
+.configuracoes-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #f8fafc;
+}
+
+.configuracoes-section {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+}
+
+.configuracoes-section__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.configuracoes-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.configuracoes-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.configuracoes-form__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.configuracoes-form__input {
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.configuracoes-form__input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.configuracoes-form__hint {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.configuracoes-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-start;
+}
+
+.configuracoes-button:hover {
+  background-color: #1d4ed8;
+}
+
+@media (max-width: 768px) {
+  .configuracoes-container {
+    padding: 12px;
+  }
+
+  .configuracoes-section {
+    padding: 20px;
+  }
+}

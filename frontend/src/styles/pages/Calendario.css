@@ -1,0 +1,11 @@
+.calendario-page {
+  padding: 16px;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .calendario-page {
+    padding: 12px;
+  }
+}

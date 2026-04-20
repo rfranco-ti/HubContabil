@@ -1,0 +1,265 @@
+/* ==================== CLIENTES STYLES ==================== */
+
+/* Container Principal */
+.clientes-container {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #f8fafc;
+}
+
+/* Search Bar */
+.clientes-search-bar {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.clientes-search-bar__input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.clientes-search-bar__input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.clientes-search-bar__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Clientes Grid */
+.clientes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+/* Cliente Card */
+.cliente-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.cliente-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #93c5fd;
+}
+
+.cliente-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cliente-card__icon {
+  width: 48px;
+  height: 48px;
+  background-color: #e0e7ff;
+  color: #4338ca;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cliente-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cliente-card__nome {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cliente-card__cnpj {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.cliente-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.cliente-card__status--ativo {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.cliente-card__status--inativo {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.cliente-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cliente-card__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #475569;
+}
+
+.cliente-card__row-label {
+  font-weight: 600;
+  color: #64748b;
+  min-width: 80px;
+}
+
+.cliente-card__actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.cliente-card__button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.cliente-card__button--primary {
+  background-color: #2563eb;
+  color: white;
+}
+
+.cliente-card__button--primary:hover {
+  background-color: #1d4ed8;
+}
+
+.cliente-card__button--secondary {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+.cliente-card__button--secondary:hover {
+  background-color: #e2e8f0;
+}
+
+/* Empty State */
+.clientes-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.clientes-empty__icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.clientes-empty__text {
+  font-size: 16px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .clientes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .clientes-container {
+    padding: 12px;
+  }
+
+  .clientes-search-bar {
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .clientes-search-bar__input {
+    min-width: 100%;
+  }
+
+  .clientes-search-bar__actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .clientes-search-bar__actions button {
+    flex: 1;
+  }
+
+  .clientes-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .cliente-card {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cliente-card__header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cliente-card__actions {
+    flex-direction: column;
+  }
+
+  .cliente-card__button {
+    width: 100%;
+  }
+}

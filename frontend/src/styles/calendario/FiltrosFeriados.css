@@ -1,0 +1,290 @@
+/* ==================== FILTROS CALENDÁRIO STYLES ==================== */
+
+.calendario-filtros-container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 280px;
+  max-width: 280px;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .calendario-filtros-container {
+    width: 240px;
+    max-width: 240px;
+    padding: 12px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .calendario-filtros-container {
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+    order: 2;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendario-filtros-container {
+    max-height: none;
+    padding: 12px;
+  }
+}
+
+/* Header */
+.calendario-filtros-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.calendario-filtros-header svg {
+  color: #4338ca;
+}
+
+.calendario-filtros-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Filtros em linha horizontal */
+.calendario-filtros-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Filtro Horizontal Individual - PADRONIZADO */
+.calendario-filtro-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.calendario-filtro-horizontal:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.calendario-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #2563eb;
+  flex-shrink: 0;
+}
+
+.calendario-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  transition: color 0.2s;
+  height: 100%;
+}
+
+.calendario-checkbox-label svg {
+  flex-shrink: 0;
+}
+
+.calendario-label-text {
+  white-space: nowrap;
+}
+
+.calendario-checkbox-label.nacional {
+  color: #dc2626;
+}
+
+.calendario-checkbox-label.nacional:hover {
+  color: #b91c1c;
+}
+
+.calendario-checkbox-label.estadual {
+  color: #ea580c;
+}
+
+.calendario-checkbox-label.estadual:hover {
+  color: #c2410c;
+}
+
+.calendario-checkbox-label.municipal {
+  color: #2563eb;
+}
+
+.calendario-checkbox-label.municipal:hover {
+  color: #1d4ed8;
+}
+
+.calendario-checkbox-label.eventos {
+  color: #059669;
+}
+
+.calendario-checkbox-label.eventos:hover {
+  color: #047857;
+}
+
+/* Dropdown de Municípios */
+.calendario-municipios-dropdown {
+  position: relative;
+}
+
+.calendario-button-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.calendario-button-dropdown:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.calendario-chevron {
+  transition: transform 0.2s;
+  color: #64748b;
+}
+
+.calendario-municipios-list-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.calendario-municipio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: #475569;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.calendario-municipio-item:last-child {
+  border-bottom: none;
+}
+
+.calendario-municipio-item:hover {
+  background-color: #f8fafc;
+}
+
+.calendario-check-icon {
+  margin-left: auto;
+  color: #10B981;
+}
+
+/* Botão RMS - PADRONIZADO */
+.calendario-button-rms {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.calendario-button-rms:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.calendario-button-rms.active {
+  background-color: #dbeafe;
+  border-color: #3B82F6;
+  color: #1d4ed8;
+}
+
+/* Responsive - empilha em mobile */
+@media (max-width: 768px) {
+  .calendario-filtros-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calendario-filtro-horizontal {
+    padding: 10px 12px;
+    justify-content: center;
+  }
+
+  .calendario-municipios-dropdown {
+    width: 100%;
+  }
+
+  .calendario-button-dropdown {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .calendario-municipios-list-dropdown {
+    position: static;
+    margin-top: 8px;
+    max-height: 200px;
+    width: 100%;
+  }
+
+  .calendario-button-rms {
+    width: 100%;
+    justify-content: center;
+  }
+}
