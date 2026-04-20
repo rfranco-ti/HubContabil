@@ -19,6 +19,9 @@ import {
   MessageSquare,
   MapPin,
   Building2,
+  Landmark,
+  Map,
+  Building,
 } from "lucide-react";
 
 export const menuGroups = [
@@ -93,17 +96,30 @@ export const menuGroups = [
     label: "Automação",
     items: [
       {
-        text: "Robôs RPA",
-        icon: Bot,
-        path: "/robos",
+        text: "Governo Federal",
+        icon: Landmark,
+        path: "/robos/federal",
         submenu: [
-          { text: "Todos os Robôs", icon: Bot, path: "/robos" },
           {
             text: "Simples Nacional",
             icon: BadgeCheck,
             path: "/robos/simples-nacional",
           },
+        ],
+      },
+      {
+        text: "Estadual",
+        icon: Map,
+        path: "/robos/estadual",
+        submenu: [
           { text: "SEFAZ Bahia", icon: FileText, path: "/robos/sefaz-ba" },
+        ],
+      },
+      {
+        text: "Municipal",
+        icon: Building,
+        path: "/robos/municipal",
+        submenu: [
           { text: "Consulta IPTU", icon: MapPin, path: "/robos/iptu-salvador" },
           { text: "Ficha Cadastral", icon: Building2, path: "/robos/ficha-cadastral" },
         ],

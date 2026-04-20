@@ -1,121 +1,71 @@
-import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { AppShell, Box } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
-import { AppHeader } from "./layout/AppHeader";
-import { AppSidebar } from "./layout/AppSidebar";
+import { useMediaQuery, useDisclosure } from "@mantine/hooks";
+import { useState, useEffect } from "react";
+import { AppHeader } from "./AppHeader";
+import { DoubleNavbar } from "./DoubleNavbar";
 import { layoutTokens } from "../theme/mantineTheme";
 
-const STORAGE_KEY = "sidebar-collapsed";
 const MOBILE_BREAKPOINT = "(max-width: 47.99em)";
-
-function getInitialCollapsed() {
-  try {
-    return localStorage.getItem(STORAGE_KEY) === "true";
-  } catch {
-    return false;
-  }
-}
+const TABLET_BREAKPOINT = "(max-width: 64em) and (min-width: 48em)";
 
 export default function Layout() {
   const isMobile = useMediaQuery(MOBILE_BREAKPOINT, false);
-  const [collapsed, setCollapsed] = useState(getInitialCollapsed);
-  const [mobileNavbarOpened, setMobileNavbarOpened] = useState(false);
+  const isTablet = useMediaQuery(TABLET_BREAKPOINT, false);
+  const [mobileOpened, { toggle: toggleMobile, close: closeMobile }] = useDisclosure(false);
+  const [minimal, setMinimal] = useState(false);
 
   useEffect(() => {
-    const onKeyDown = (event) => {
-      if (!event.ctrlKey || event.key.toLowerCase() !== "b") {
-        return;
-      }
-
-      event.preventDefault();
-
-      if (isMobile) {
-        setMobileNavbarOpened((value) => !value);
-        return;
-      }
-
-      setCollapsed((value) => {
-        const next = !value;
-        try {
-          localStorage.setItem(STORAGE_KEY, String(next));
-        } catch {
-          // localStorage pode estar indisponível em modo privado
-        }
-        return next;
-      });
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isMobile]);
-
-  const toggleSidebar = () => {
-    if (isMobile) {
-      setMobileNavbarOpened((value) => !value);
-      return;
+    if (isTablet) {
+      setMinimal(true);
+    } else {
+      setMinimal(false);
     }
+  }, [isTablet]);
 
-    setCollapsed((value) => {
-      const next = !value;
-      try {
-        localStorage.setItem(STORAGE_KEY, String(next));
-      } catch {
-        // Ignora falha de persistência
-      }
-      return next;
-    });
+  const handleBurgerClick = () => {
+    if (isMobile) {
+      toggleMobile();
+    } else {
+      setMinimal((m) => !m);
+    }
   };
 
-  const closeMobileNavbar = () => setMobileNavbarOpened(false);
-
-  const navbarWidth = collapsed
-    ? layoutTokens.sidebarCollapsedWidth
-    : layoutTokens.sidebarExpandedWidth;
+  const navbarWidth = minimal ? 80 : 280;
 
   return (
     <AppShell
       header={{ height: layoutTokens.headerHeight }}
-      navbar={
-        isMobile
-          ? undefined
-          : { width: navbarWidth, breakpoint: "sm" }
-      }
+      navbar={{
+        width: navbarWidth,
+        breakpoint: "sm",
+        collapsed: { mobile: !mobileOpened },
+      }}
       padding={0}
-      styles={(theme) => ({
-        main: {
-          minHeight: "100vh",
-          background:
-            theme.colorScheme === "dark"
-              ? `linear-gradient(180deg, ${theme.colors.dark[8]} 0%, ${theme.colors.dark[9]} 100%)`
-              : `linear-gradient(180deg, ${theme.colors.gray[0]} 0%, ${theme.white} 100%)`,
-        },
-      })}
+      transitionDuration={300}
+      transitionTimingFunction="ease"
     >
-      <AppHeader
-        isMobile={isMobile}
-        burgerOpened={isMobile ? mobileNavbarOpened : !collapsed}
-        onBurgerClick={toggleSidebar}
+      <AppHeader 
+        burgerOpened={isMobile ? mobileOpened : !minimal} 
+        toggleBurger={handleBurgerClick} 
       />
 
-      {!isMobile && (
-        <AppSidebar
-          collapsed={collapsed}
-          isMobile={false}
-          onToggleCollapsed={toggleSidebar}
+      <AppShell.Navbar p={0} style={{ overflow: 'hidden', transition: 'width 0.3s ease' }}>
+        <DoubleNavbar 
+          onCloseMobile={closeMobile} 
+          isMinimal={minimal}
+          onToggleMinimal={() => setMinimal(!minimal)}
         />
-      )}
-
-      {isMobile && (
-        <AppSidebar
-          isMobile
-          onClose={closeMobileNavbar}
-          opened={mobileNavbarOpened}
-        />
-      )}
+      </AppShell.Navbar>
 
       <AppShell.Main>
-        <Box p={{ base: "sm", sm: "md", lg: "lg" }}>
+        <Box 
+          p={{ base: "xs", sm: "md", lg: "xl" }} 
+          style={{ 
+            minHeight: "calc(100vh - 60px)",
+            backgroundColor: 'var(--bg-page)',
+          }}
+        >
           <Outlet />
         </Box>
       </AppShell.Main>

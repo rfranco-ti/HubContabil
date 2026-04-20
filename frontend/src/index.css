@@ -2,6 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Sapphire Blue Palette */
+  --color-primary-50: #E6EEF8;
+  --color-primary-100: #C2D6EE;
+  --color-primary-200: #9DBFE4;
+  --color-primary-300: #78A7DA;
+  --color-primary-400: #538FD0;
+  --color-primary-500: #0F52BA;
+  --color-primary-600: #0C4295;
+  --color-primary-700: #093270;
+  --color-primary-800: #06214B;
+  --color-primary-900: #031126;
+
+  /* Neutrals */
+  --color-gray-50: #F8FAFC;
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;
+  --color-gray-500: #64748B;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1E293B;
+  --color-gray-900: #0F172A;
+
+  /* Feedback */
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Application Tokens */
+  --bg-page: var(--color-gray-50);
+  --bg-surface: #ffffff;
+  --text-primary: var(--color-gray-900);
+  --border-default: var(--color-gray-200);
+}
+
+[data-mantine-color-scheme='dark'] {
+  --bg-page: #0B0E14;
+  --bg-surface: #14171F;
+  --text-primary: #F8FAFC;
+  --border-default: #2D333F;
+
+  --color-success: #34D399;
+  --color-warning: #FBBF24;
+  --color-error: #F87171;
+  --color-info: #60A5FA;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mantine-AppShell-main {
+  background-color: var(--bg-page);
+}
+
+/* Override for legacy Dashboard classes to support Dark Mode */
+.bg-white {
+  background-color: var(--bg-surface) !important;
+}
+
+.border-gray-200, .border-gray-100 {
+  border-color: var(--border-default) !important;
+}
+
+.text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+.bg-gray-50 {
+  background-color: var(--bg-page) !important;
+}
+
+.text-gray-500, .text-gray-400 {
+  color: var(--color-gray-400) !important;
+}
+
 /* ============================================
    HubContabil Custom Styles
    ============================================ */
