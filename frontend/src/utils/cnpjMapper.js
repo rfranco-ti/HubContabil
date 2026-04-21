@@ -1,0 +1,80 @@
+import { formatCpf, formatPhoneDisplay } from './masks';
+
+export const formatDateToInput = (dateStr) => {
+  if (!dateStr) return '';
+  if (dateStr.includes('/')) {
+    const [d, m, y] = dateStr.split('/');
+    return `${y}-${m}-${d}`;
+  }
+  return dateStr;
+};
+
+export const mapCnpjDataToForm = (data, prevData) => {
+  return {
+    ...prevData,
+    cnpj: data.cnpj || prevData.cnpj,
+    razao_social: data.razaoSocial || prevData.razao_social,
+    nome_fantasia: data.nomeFantasia || prevData.nome_fantasia,
+    data_abertura: formatDateToInput(data.dataAbertura) || prevData.data_abertura,
+    natureza_juridica: data.naturezaJuridica || prevData.natureza_juridica,
+    inscricao_estadual: data.inscricaoEstadual || prevData.inscricao_estadual,
+    inscricao_municipal: data.inscricaoMunicipal || prevData.inscricao_municipal,
+    status: data.situacao?.descricao || prevData.status,
+    situacao_sefaz_estadual: data.situacao_sefaz || data.situacao?.descricao || prevData.situacao_sefaz_estadual,
+    situacao_sefaz_municipal: data.situacao_sefaz_municipal || prevData.situacao_sefaz_municipal,
+    is_mei: data.opcaoMei || false,
+    cnae_principal: {
+      codigo: data.cnaePrincipal?.codigo || prevData.cnae_principal.codigo,
+      descricao: data.cnaePrincipal?.descricao || prevData.cnae_principal.descricao
+    },
+    cnaes_secundarios: (data.cnaesSecundarios || []).map(a => ({
+      codigo: a.codigo || '',
+      descricao: a.descricao || ''
+    })),
+    qsa: (data.socios || []).map(m => ({
+      nome: m.nome || '',
+      cpf_cnpj: formatCpf(m.cpfCnpj || ''),
+      qualificacao: m.qualificacao || '',
+      participacao: 0
+    })),
+    endereco: {
+      cep: data.endereco?.cep || prevData.endereco.cep,
+      logradouro: data.endereco?.logradouro || prevData.endereco.logradouro,
+      numero: data.endereco?.numero || prevData.endereco.numero,
+      complemento: data.endereco?.complemento || prevData.endereco.complemento,
+      bairro: data.endereco?.bairro || prevData.endereco.bairro,
+      cidade: data.endereco?.cidade || prevData.endereco.cidade,
+      uf: data.endereco?.uf || prevData.endereco.uf
+    },
+    contato_principal: {
+      nome: data.razaoSocial || prevData.contato_principal.nome,
+      email: data.email || prevData.contato_principal.email,
+      telefone: data.telefones?.[0] ? 
+        `${data.telefones[0].ddd}${data.telefones[0].numero}` : 
+        prevData.contato_principal.telefone
+    },
+    regime_tributario: (data.regimeTributario && data.regimeTributario !== 'Nao Informado') ? data.regimeTributario : 'Não Enquadrado'
+  };
+};
+
+export const mapCnpjDataToEditableFields = (data, currentEditableFields) => {
+  const newEditableFields = { ...currentEditableFields };
+  
+  if (!data.razaoSocial) newEditableFields.razao_social = true;
+  if (!data.nomeFantasia) newEditableFields.nome_fantasia = true;
+  if (!data.dataAbertura) newEditableFields.data_abertura = true;
+  if (!data.naturezaJuridica) newEditableFields.natureza_juridica = true;
+  if (!data.endereco?.cep) newEditableFields.cep = true;
+  if (!data.endereco?.logradouro) newEditableFields.logradouro = true;
+  if (!data.endereco?.numero) newEditableFields.numero = true;
+  if (!data.endereco?.complemento) newEditableFields.complemento = true;
+  if (!data.endereco?.bairro) newEditableFields.bairro = true;
+  if (!data.endereco?.cidade) newEditableFields.cidade = true;
+  if (!data.endereco?.uf) newEditableFields.uf = true;
+  if (!data.email) newEditableFields.email = true;
+  if (!data.telefones?.[0]) newEditableFields.telefone = true;
+  if (!data.cnaePrincipal?.codigo) newEditableFields.cnae_codigo = true;
+  if (!data.cnaePrincipal?.descricao) newEditableFields.cnae_descricao = true;
+
+  return newEditableFields;
+};

@@ -89,7 +89,7 @@ const DB_CACHE_TTL = 24 * 60 * 60 * 1000;
 
 async function getDbCache(cnpj) {
   try {
-    const prisma = require("../../../config/prisma");
+    const prisma = require("../../config/prisma");
     const cached = await prisma.cnpjCache.findFirst({
       where: {
         cnpj,
@@ -111,7 +111,7 @@ async function getDbCache(cnpj) {
 
 async function setDbCache(cnpj, data) {
   try {
-    const prisma = require("../../../config/prisma");
+    const prisma = require("../../config/prisma");
     const validoAte = new Date(Date.now() + DB_CACHE_TTL);
 
     await prisma.cnpjCache.upsert({

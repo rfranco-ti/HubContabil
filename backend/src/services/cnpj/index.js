@@ -113,11 +113,23 @@ async function getApiConfigs() {
   return DEFAULT_CONFIG;
 }
 
+// Cache de instâncias de APIs (Singleton per API)
+let apiInstancesCache = null;
+
 /**
  * Cria instâncias de APIs dinamicamente baseado na config
+ * Mantém o estado dos Circuit Breakers em memória
  */
 async function buildApiInstances() {
   const configs = await getApiConfigs();
+  
+  // Se já temos instâncias e a config não mudou, retorna cache
+  // Nota: Aqui simplificamos assumindo que se temos instâncias e o cache de config é válido, usamos o cache.
+  if (apiInstancesCache && configCache && Date.now() < configCacheExpiry) {
+    return apiInstancesCache;
+  }
+
+  console.log("[CNPJ] Reconstruindo instâncias de APIs e Circuit Breakers...");
   const apis = [];
 
   for (const cfg of configs) {
@@ -127,8 +139,11 @@ async function buildApiInstances() {
       continue;
     }
 
+    // Se já existia uma instância desta API, podemos reaproveitar o CB se for o caso,
+    // mas aqui vamos recriar o array para garantir a ordem correta da config atual.
+    const existingApi = apiInstancesCache?.find(a => a.nome === cfg.nome);
+
     const adapter = new AdapterClass();
-    // Override URL se configurada
     if (cfg.url) adapter.baseUrl = cfg.url;
     if (cfg.nome === "cnpja" && adapter.apiBaseUrl)
       adapter.apiBaseUrl = cfg.url;
@@ -137,22 +152,24 @@ async function buildApiInstances() {
       nome: cfg.nome,
       adapter,
       consomeCredito: cfg.consomeCredito,
-      circuitBreaker: new CircuitBreaker({
+      circuitBreaker: existingApi?.circuitBreaker || new CircuitBreaker({
         threshold: cfg.cbThreshold || 5,
         timeout: 60000,
       }),
     });
   }
 
+  apiInstancesCache = apis;
   return apis;
 }
 
 /**
- * Invalida cache de configuração (chamado após updates)
+ * Invalida cache de configuração e instâncias
  */
 function invalidateConfigCache() {
   configCache = null;
   configCacheExpiry = 0;
+  apiInstancesCache = null;
 }
 
 /**

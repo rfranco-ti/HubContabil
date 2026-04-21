@@ -104,44 +104,17 @@ export default function PesquisaEmpresas() {
         );
       }
 
-      const detalheData = await response.json();
-      if (!detalheData.data?.razaoSocial) {
+      const result = await response.json();
+      if (!result.success || !result.data) {
         throw new Error("Dados inválidos recebidos da API");
       }
 
-      const dados = detalheData.data;
-
-      const dadosPreenchidos = {
-        cnpj: cleanCnpj,
-        razao_social: dados.razaoSocial || "",
-        nome_fantasia: dados.nomeFantasia || "",
-        data_abertura: dados.dataAbertura
-          ? new Date(dados.dataAbertura).toISOString().split("T")[0]
-          : "",
-        natureza_juridica: dados.naturezaJuridica || "",
-        cnae_principal: dados.cnaePrincipal || { codigo: "", descricao: "" },
-        cnaes_secundarios: dados.cnaesSecundarios || [],
-        qso: dados.qso || [],
-        endereco: dados.endereco || {
-          cep: "",
-          logradouro: "",
-          numero: "",
-          complemento: "",
-          bairro: "",
-          cidade: "",
-          uf: "",
-        },
-        contato_principal: { nome: "", email: "", telefone: "" },
-        status: dados.situacao?.descricao === "ATIVA" ? "Ativo" : "Inativo",
-        categoria: "Serviços",
-        is_bpo: false,
-        observacoes: "",
-      };
+      const rawData = result.data;
 
       toast.success("Dados carregados! Redirecionando para cadastro...");
       setTimeout(() => {
         navigate("/clientes/novo", {
-          state: { novoCliente: true, dadosPreenchidos },
+          state: { novoCliente: true, rawData },
         });
       }, 1500);
     } catch (err) {
@@ -304,7 +277,7 @@ export default function PesquisaEmpresas() {
                                 <span className="hidden sm:inline">
                                   {saving === taxId
                                     ? "Cadastrando..."
-                                    : "Cadastrar"}
+                                    : "Cadastrar Cliente"}
                                 </span>
                               </button>
                             )}

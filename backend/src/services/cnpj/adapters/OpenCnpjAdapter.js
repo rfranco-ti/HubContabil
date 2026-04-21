@@ -146,7 +146,7 @@ class OpenCnpjAdapter extends BaseAdapter {
   determinarRegime(raw) {
     if (raw.opcao_mei === "S") return "Simples Nacional - MEI";
     if (raw.opcao_simples === "S") return "Simples Nacional";
-    return "Nao Informado";
+    return "Não Enquadrado";
   }
 }
 

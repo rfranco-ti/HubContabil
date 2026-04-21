@@ -1,203 +1,116 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
-const prisma = require("../config/prisma");
+const AuthService = require("../services/authService");
+const asyncHandler = require("../utils/asyncHandler");
 
-const gerarAccessToken = (userId) => {
-  return jwt.sign(
-    { id: userId },
-    process.env.JWT_SECRET || "fallback-key-change-in-production",
-    { expiresIn: "8h" },
-  );
-};
+/**
+ * @swagger
+ * /api/auth/registrar:
+ *   post:
+ *     summary: Registrar um novo usuário
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [nome, email, senha]
+ *             properties:
+ *               nome: { type: string }
+ *               email: { type: string }
+ *               senha: { type: string }
+ *               cargo: { type: string }
+ *     responses:
+ *       201:
+ *         description: Usuário criado com sucesso
+ *       400:
+ *         description: Erro na validação ou usuário já existe
+ */
+const registrarUsuario = asyncHandler(async (req, res) => {
+  const result = await AuthService.registrar(req.body);
+  res.status(201).json(result);
+});
 
-const gerarRefreshToken = (userId) => {
-  return jwt.sign(
-    { id: userId, type: "refresh" },
-    process.env.JWT_REFRESH_SECRET || "fallback-refresh-change-in-production",
-    { expiresIn: "7d" },
-  );
-};
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Login de usuário
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [email, senha]
+ *             properties:
+ *               email: { type: string }
+ *               senha: { type: string }
+ *     responses:
+ *       200:
+ *         description: Login bem-sucedido
+ *       401:
+ *         description: Credenciais inválidas
+ */
+const loginUsuario = asyncHandler(async (req, res) => {
+  const { email, senha } = req.body;
+  const result = await AuthService.login(email, senha);
+  res.json(result);
+});
 
-const registrarUsuario = async (req, res) => {
-  try {
-    const { nome, email, senha, cargo } = req.body;
+/**
+ * @swagger
+ * /api/auth/refresh:
+ *   post:
+ *     summary: Renovar token de acesso
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [refreshToken]
+ *             properties:
+ *               refreshToken: { type: string }
+ *     responses:
+ *       200:
+ *         description: Tokens renovados
+ *       401:
+ *         description: Refresh token inválido ou expirado
+ */
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  const { refreshToken } = req.body;
+  const result = await AuthService.refresh(refreshToken);
+  res.json(result);
+});
 
-    const userExists = await prisma.user.findUnique({ where: { email } });
-    if (userExists) {
-      return res
-        .status(400)
-        .json({ message: "Usuario ja existe com este e-mail" });
-    }
-
-    const senhaHash = await bcrypt.hash(senha, 12);
-
-    const user = await prisma.user.create({
-      data: {
-        nome,
-        email,
-        senha: senhaHash,
-        cargo: cargo || "Contador",
-      },
-    });
-
-    if (user) {
-      const accessToken = gerarAccessToken(user.id);
-      const refreshToken = gerarRefreshToken(user.id);
-      const refreshHash = crypto
-        .createHash("sha256")
-        .update(refreshToken)
-        .digest("hex");
-
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { refreshToken: refreshHash },
-      });
-
-      res.status(201).json({
-        id: user.id,
-        nome: user.nome,
-        email: user.email,
-        cargo: user.cargo,
-        accessToken,
-        refreshToken,
-      });
-    } else {
-      res.status(400).json({ message: "Dados invalidos" });
-    }
-  } catch (error) {
-    console.error("Erro ao registrar usuario:", error);
-    res
-      .status(500)
-      .json({ message: "Erro interno no servidor", error: error.message });
-  }
-};
-
-const loginUsuario = async (req, res) => {
-  try {
-    const { email, senha } = req.body;
-
-    console.log("[LOGIN] Body recebido:", JSON.stringify(req.body));
-    console.log("[LOGIN] Email:", email, "| Senha length:", senha?.length);
-
-    const user = await prisma.user.findUnique({ where: { email } });
-
-    if (!user) {
-      console.log("[LOGIN] Usuario nao encontrado com email:", email);
-      return res.status(401).json({ message: "E-mail ou senha invalidos" });
-    }
-
-    console.log("[LOGIN] Usuario encontrado, comparando senhas...");
-    console.log("[LOGIN] Hash no DB:", user.senha.substring(0, 30) + "...");
-
-    const senhaMatch = await bcrypt.compare(senha, user.senha);
-    console.log("[LOGIN] bcrypt.compare result:", senhaMatch);
-
-    if (!senhaMatch) {
-      console.log("[LOGIN] Senha NAO confere!");
-      return res.status(401).json({ message: "E-mail ou senha invalidos" });
-    }
-
-    console.log("[LOGIN] Login OK! Gerando tokens...");
-
-    const accessToken = gerarAccessToken(user.id);
-    const refreshToken = gerarRefreshToken(user.id);
-    const refreshHash = crypto
-      .createHash("sha256")
-      .update(refreshToken)
-      .digest("hex");
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { refreshToken: refreshHash },
-    });
-
-    res.json({
-      id: user.id,
-      nome: user.nome,
-      email: user.email,
-      cargo: user.cargo,
-      accessToken,
-      refreshToken,
-    });
-  } catch (error) {
-    console.error("Erro ao fazer login:", error);
-    res
-      .status(500)
-      .json({ message: "Erro interno no servidor", error: error.message });
-  }
-};
-
-const refreshAccessToken = async (req, res) => {
-  try {
-    const { refreshToken } = req.body;
-    if (!refreshToken) {
-      return res.status(401).json({ message: "Refresh token obrigatorio" });
-    }
-
-    const decoded = jwt.verify(
-      refreshToken,
-      process.env.JWT_REFRESH_SECRET || "fallback-refresh-change-in-production",
-    );
-
-    const refreshHash = crypto
-      .createHash("sha256")
-      .update(refreshToken)
-      .digest("hex");
-    const user = await prisma.user.findUnique({ where: { id: decoded.id } });
-
-    if (!user || user.refreshToken !== refreshHash) {
-      return res
-        .status(401)
-        .json({ message: "Refresh token invalido ou revogado" });
-    }
-
-    const newAccessToken = gerarAccessToken(user.id);
-    const newRefreshToken = gerarRefreshToken(user.id);
-    const newRefreshHash = crypto
-      .createHash("sha256")
-      .update(newRefreshToken)
-      .digest("hex");
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { refreshToken: newRefreshHash },
-    });
-
-    res.json({
-      accessToken: newAccessToken,
-      refreshToken: newRefreshToken,
-    });
-  } catch (error) {
-    console.error("Erro ao renovar token:", error);
-    res.status(401).json({ message: "Refresh token invalido ou expirado" });
-  }
-};
-
-const logoutUsuario = async (req, res) => {
-  try {
-    const { refreshToken } = req.body;
-    if (refreshToken) {
-      const refreshHash = crypto
-        .createHash("sha256")
-        .update(refreshToken)
-        .digest("hex");
-      const user = await prisma.user.findFirst({
-        where: { refreshToken: refreshHash },
-      });
-      if (user) {
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { refreshToken: null },
-        });
-      }
-    }
-    res.json({ message: "Logout realizado com sucesso" });
-  } catch (error) {
-    console.error("Erro ao fazer logout:", error);
-    res.status(500).json({ message: "Erro interno no servidor" });
-  }
-};
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Logout do usuário
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [refreshToken]
+ *             properties:
+ *               refreshToken: { type: string }
+ *     responses:
+ *       200:
+ *         description: Logout realizado
+ */
+const logoutUsuario = asyncHandler(async (req, res) => {
+  const { refreshToken } = req.body;
+  await AuthService.logout(refreshToken);
+  res.json({ message: "Logout realizado com sucesso" });
+});
 
 module.exports = {
   registrarUsuario,

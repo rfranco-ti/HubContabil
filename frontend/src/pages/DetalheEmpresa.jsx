@@ -57,6 +57,27 @@ export default function DetalheEmpresa() {
     if (!clean || clean.length !== 14) return;
 
     let cancelled = false;
+    
+    // Verificar se já existe no banco
+    const checkRegistered = async () => {
+      try {
+        const response = await fetch(`/api/clientes`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        });
+        const clients = await response.json();
+        const exists = clients.find(c => c.cnpj === clean);
+        if (exists && !cancelled) {
+          setSavedToDatabase(true);
+          setDados(exists);
+          setDadosEdit(exists);
+        }
+      } catch (err) {
+        console.error("Erro ao verificar CNPJ no banco:", err);
+      }
+    };
+
+    checkRegistered();
+    
     console.log("🔍 [DetalheEmpresa] Buscando dados frescos para:", clean);
 
     (async () => {
@@ -388,10 +409,21 @@ export default function DetalheEmpresa() {
           )}
           {!savedToDatabase && !editMode && (
             <button
-              onClick={() => setEditMode(true)}
+              onClick={() => {
+                const cleanCnpj = cnpj.replace(/\D/g, "");
+                // Se já detectamos no banco (embora savedToDatabase devesse ser true)
+                if (savedToDatabase) {
+                  alert("Este cliente já está cadastrado!");
+                  return;
+                }
+                
+                navigate("/clientes/novo", {
+                  state: { novoCliente: true, rawData: dadosApi }
+                });
+              }}
               className="flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl transition-colors text-sm"
             >
-              <Save size={16} className="mr-1.5" /> Salvar no Banco
+              <Save size={16} className="mr-1.5" /> Cadastrar Cliente
             </button>
           )}
         </div>

@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const dotenv = require('dotenv');
+
+// Carregar variáveis de ambiente IMEDIATAMENTE
+dotenv.config();
+
 const prisma = require('./config/prisma');
 const path = require('path');
 const fs = require('fs');
@@ -19,9 +23,6 @@ const swaggerSpec = require('./docs/swagger');
 
 // Rotas
 const routes = require('./routes');
-
-// Carregar variáveis de ambiente
-dotenv.config();
 
 /**
  * Conectar ao banco de dados Supabase PostgreSQL

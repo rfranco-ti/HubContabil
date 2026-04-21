@@ -1,38 +1,31 @@
 const { z } = require('zod');
 
-/**
- * Schema de validação para registro de usuário
- */
+const loginSchema = z.object({
+  body: z.object({
+    email: z.string().email('E-mail inválido'),
+    senha: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres')
+  })
+});
+
 const registerSchema = z.object({
   body: z.object({
-    nome: z.string({
-      required_error: 'Nome é obrigatório'
-    }).min(2, 'Nome deve ter no mínimo 2 caracteres'),
-    email: z.string({
-      required_error: 'Email é obrigatório'
-    }).email('Email inválido'),
-    senha: z.string({
-      required_error: 'Senha é obrigatória'
-    }).min(6, 'Senha deve ter no mínimo 6 caracteres'),
+    nome: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
+    email: z.string().email('E-mail inválido'),
+    senha: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
     cargo: z.string().optional()
   })
 });
 
-/**
- * Schema de validação para login
- */
-const loginSchema = z.object({
+const refreshSchema = z.object({
   body: z.object({
-    email: z.string({
-      required_error: 'Email é obrigatório'
-    }).email('Email inválido'),
-    senha: z.string({
-      required_error: 'Senha é obrigatória'
+    refreshToken: z.string({
+      required_error: 'Refresh token é obrigatório'
     })
   })
 });
 
 module.exports = {
+  loginSchema,
   registerSchema,
-  loginSchema
+  refreshSchema
 };

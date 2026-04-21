@@ -1,16 +1,3 @@
-// Enums para o sistema de calendário
-
-enum AbrangenciaFeriado {
-  NACIONAL
-  ESTADUAL
-  MUNICIPAL
-}
-
-enum TipoAlerta {
-  UM_DIA_ANTE
-  NO_DIA
-}
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -22,25 +9,31 @@ datasource db {
 }
 
 model User {
-  id                 String             @id @default(uuid()) @db.Uuid
-  nome               String
-  email              String             @unique
-  senha              String
-  cargo              String             @default("Contador")
-  refreshToken       String?            @map("refresh_token")
-  createdAt          DateTime           @default(now()) @map("created_at")
-  updatedAt          DateTime           @updatedAt @map("updated_at")
-  calendarioEventos  CalendarioEvento[]
-  clientsResponsable Client[]           @relation("UsuarioResponsavel")
-  documentosUploaded Documento[]        @relation("DocumentoUploadedBy")
-  pastasCriadas      PastaDocumento[]   @relation("PastaCriadaPor")
-  stickyNotes        StickyNote[]
-  pastasNotas        PastaNota[]
-  templatesCriados   Template[]         @relation("TemplateCriadoPor")
-  notificacoes       Notificacao[]
-  agendamentosCriados AgendamentoRpa[]  @relation("AgendamentoCriadoPor")
-  agendamentos       AgendamentoRpa[]
-  apiKeys            ApiKey[]
+  id                  String               @id @default(uuid()) @db.Uuid
+  nome                String
+  email               String               @unique
+  senha               String
+  cargo               String               @default("Contador")
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
+  refreshToken        String?              @map("refresh_token")
+  assinatura_texto    String?
+  cargo_responsavel   String?
+  carimbo_url         String?
+  cpf_responsavel     String?
+  agendamentosCriados AgendamentoRpa[]     @relation("AgendamentoCriadoPor")
+  agendamentos        AgendamentoRpa[]
+  apiKeys             ApiKey[]
+  calculos_salvos     calculos_salvos[]
+  calendarioEventos   CalendarioEvento[]
+  clientsResponsable  Client[]             @relation("UsuarioResponsavel")
+  documentosUploaded  Documento[]          @relation("DocumentoUploadedBy")
+  documentos_gerados  documentos_gerados[]
+  notificacoes        Notificacao[]
+  pastasCriadas       PastaDocumento[]     @relation("PastaCriadaPor")
+  pastasNotas         PastaNota[]
+  stickyNotes         StickyNote[]
+  templatesCriados    Template[]           @relation("TemplateCriadoPor")
 
   @@map("users")
 }
@@ -74,8 +67,13 @@ model Client {
   certificadoVencimento   DateTime?        @map("certificado_vencimento")
   honorariosValor         Decimal          @default(0) @map("honorarios_valor") @db.Decimal(10, 2)
   honorariosDiaVencimento Int?             @map("honorarios_dia_vencimento")
+  servicosPrestados       String?          @map("servicos_prestados")
+  temContabil             Boolean          @default(false) @map("tem_contabil")
+  temFiscal               Boolean          @default(false) @map("tem_fiscal")
+  temDp                   Boolean          @default(false) @map("tem_dp")
   categoria               String           @default("Serviços")
   isBpo                   Boolean          @default(false) @map("is_bpo")
+  isMei                   Boolean          @default(false) @map("is_mei")
   observacoes             String?
   status                  String           @default("Ativo")
   usuarioResponsavelId    String?          @map("usuario_responsavel_id") @db.Uuid
@@ -218,6 +216,8 @@ model Recibo {
   valor     Decimal       @map("valor") @db.Decimal(10, 2)
   status    String        @default("gerado")
   createdAt DateTime      @default(now()) @map("created_at")
+  codigo    String?
+  gerado_em DateTime?
   cliente   Client        @relation(fields: [clienteId], references: [id], onDelete: Cascade)
   modelo    ReciboModelo? @relation(fields: [modeloId], references: [id])
 
@@ -269,15 +269,15 @@ model StickyNote {
   conteudo     String?
   cor          String     @default("yellow")
   ordem        Int        @default(0)
-  lembrete     Boolean    @default(false)
-  dataLembrete DateTime?  @map("data_lembrete")
-  fixada       Boolean    @default(false)
-  dataFixacao  DateTime?  @map("data_fixacao")
-  pastaId      String?    @map("pasta_id") @db.Uuid
   createdAt    DateTime   @default(now()) @map("created_at")
   updatedAt    DateTime   @updatedAt @map("updated_at")
+  dataLembrete DateTime?  @map("data_lembrete")
+  lembrete     Boolean    @default(false)
+  pastaId      String?    @map("pasta_id") @db.Uuid
+  dataFixacao  DateTime?  @map("data_fixacao")
+  fixada       Boolean    @default(false)
+  pasta        PastaNota? @relation(fields: [pastaId], references: [id])
   usuario      User       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-  pasta        PastaNota? @relation(fields: [pastaId], references: [id], onDelete: SetNull)
 
   @@index([usuarioId])
   @@index([ordem])
@@ -295,9 +295,8 @@ model PastaNota {
   ordem     Int          @default(0)
   createdAt DateTime     @default(now()) @map("created_at")
   updatedAt DateTime     @updatedAt @map("updated_at")
-
-  notas     StickyNote[]
   usuario   User         @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  notas     StickyNote[]
 
   @@index([usuarioId])
   @@index([ordem])
@@ -305,18 +304,18 @@ model PastaNota {
 }
 
 model TipoEvento {
-  id        String             @id @default(uuid()) @db.Uuid
-  nome      String             @unique               // slug: 'trabalhista', 'tributario', 'feriado', etc.
-  label     String                                   // label exibível: 'Trabalhista', 'Tributário', etc.
-  cor       String             @default("#3b82f6")
-  icone     String?
-  descricao String?
-  ativo     Boolean            @default(true)
-  ordem     Int                @default(0)
-  ehPadrao  Boolean            @default(false)       // true = tipos fixos do sistema, false = customizados pelo admin
-  createdAt DateTime           @default(now()) @map("created_at")
-  eventos   CalendarioEvento[]
-  obrigacoes CalendarioObrigacao[]
+  id           String                @id @default(uuid()) @db.Uuid
+  nome         String                @unique
+  label        String
+  cor          String                @default("#3b82f6")
+  icone        String?
+  descricao    String?
+  ativo        Boolean               @default(true)
+  ordem        Int                   @default(0)
+  createdAt    DateTime              @default(now()) @map("created_at")
+  ehPadrao     Boolean               @default(false)
+  eventos      CalendarioEvento[]
+  obrigacoes   CalendarioObrigacao[]
   notificacoes Notificacao[]
 
   @@index([ativo])
@@ -361,20 +360,20 @@ model CnpjCache {
 }
 
 model CalendarioObrigacao {
-  id                 String       @id @default(uuid()) @db.Uuid
+  id                 String      @id @default(uuid()) @db.Uuid
   ano                Int
   mes                Int
   dia                Int
-  nomeEvento         String       @map("nome_evento")
-  periodoApuracao    String?      @map("periodo_apuracao")
-  baseLegal          String?      @map("base_legal")
+  nomeEvento         String      @map("nome_evento")
+  periodoApuracao    String?     @map("periodo_apuracao")
+  baseLegal          String?     @map("base_legal")
   categoria          String
-  isFeriado          Boolean      @default(false) @map("is_feriado")
-  isPontoFacultativo Boolean      @default(false) @map("is_ponto_facultativo")
-  tipoEventoId       String?      @map("tipo_evento_id") @db.Uuid
-  tipoEvento         TipoEvento?  @relation(fields: [tipoEventoId], references: [id])
-  createdAt          DateTime     @default(now()) @map("created_at")
-  updatedAt          DateTime     @updatedAt @map("updated_at")
+  isFeriado          Boolean     @default(false) @map("is_feriado")
+  isPontoFacultativo Boolean     @default(false) @map("is_ponto_facultativo")
+  createdAt          DateTime    @default(now()) @map("created_at")
+  updatedAt          DateTime    @updatedAt @map("updated_at")
+  tipoEventoId       String?     @map("tipo_evento_id") @db.Uuid
+  tipoEvento         TipoEvento? @relation(fields: [tipoEventoId], references: [id])
 
   @@index([ano])
   @@index([mes])
@@ -385,18 +384,18 @@ model CalendarioObrigacao {
 }
 
 model CalendarioFeriado {
-  id            String            @id @default(uuid()) @db.Uuid
-  data          DateTime          @unique
-  nome          String
-  abrangencia   AbrangenciaFeriado @default(NACIONAL)  // NACIONAL, ESTADUAL, MUNICIPAL
-  uf            String?                               // para feriados estaduais
-  municipio     String?                               // para feriados municipais
-  ano           Int
-  recorrente    Boolean           @default(true)       // se true, repete todo ano automaticamente
-  setorAfetado  String[]          @default(["geral"])  // quais setores são impactados: tributario, trabalhista, geral, etc.
-  descricao     String?
-  createdAt     DateTime          @default(now()) @map("created_at")
-  updatedAt     DateTime          @default(now()) @map("updated_at")
+  id           String             @id @default(uuid()) @db.Uuid
+  data         DateTime           @unique
+  nome         String
+  municipio    String?
+  ano          Int
+  createdAt    DateTime           @default(now()) @map("created_at")
+  abrangencia  AbrangenciaFeriado @default(NACIONAL)
+  descricao    String?
+  recorrente   Boolean            @default(true)
+  setorAfetado String[]           @default(["geral"])
+  uf           String?
+  updatedAt    DateTime           @default(now()) @map("updated_at")
 
   @@index([ano])
   @@index([abrangencia])
@@ -408,17 +407,17 @@ model CalendarioFeriado {
 model Notificacao {
   id            String      @id @default(uuid()) @db.Uuid
   usuarioId     String      @map("usuario_id") @db.Uuid
-  titulo        String                          // título curto da notificação
-  mensagem      String                          // mensagem completa
+  titulo        String
+  mensagem      String
   tipoEventoId  String?     @map("tipo_evento_id") @db.Uuid
-  tipoEvento    TipoEvento? @relation(fields: [tipoEventoId], references: [id])
-  eventoId      String?     @map("evento_id") @db.Uuid  // pode apontar para CalendarioEvento ou CalendarioObrigacao
-  tipoAlerta    TipoAlerta  @map("tipo_alerta")         // UM_DIA_ANTE ou NO_DIA
+  eventoId      String?     @map("evento_id") @db.Uuid
+  tipoAlerta    TipoAlerta  @map("tipo_alerta")
   lida          Boolean     @default(false)
   dataEnvio     DateTime    @default(now()) @map("data_envio")
-  dataExpiracao DateTime?   @map("data_expiracao")      // notificacao expira após X tempo
-  metadata      Json?       @default("{}")              // dados extras (url do evento, etc.)
+  dataExpiracao DateTime?   @map("data_expiracao")
+  metadata      Json?       @default("{}")
   createdAt     DateTime    @default(now()) @map("created_at")
+  tipoEvento    TipoEvento? @relation(fields: [tipoEventoId], references: [id])
   usuario       User        @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@index([usuarioId])
@@ -429,27 +428,26 @@ model Notificacao {
   @@map("notificacoes")
 }
 
-// Agendamentos de Robôs (RPA)
 model AgendamentoRpa {
-  id              String              @id @default(uuid()) @db.Uuid
-  usuarioId       String              @map("usuario_id") @db.Uuid
-  nome            String                                  // nome descritivo do agendamento
-  tipoRobo        TipoRobo            @map("tipo_robo")   // SIMPLES_NACIONAL ou SEFAZ_BA
-  cnpj            String                                  // CNPJ alvo
-  recorrencia     RecorrenciaAgendamento                  // unica, diaria, semanal, mensal, x_vezes_dia, x_vezes_semana
-  diasSemana      Int?                @map("dias_semana") // [0-6] para semanal (0=domingo)
-  horaExecucao    String              @map("hora_execucao") // "HH:MM" formato 24h
-  vezesPorDia     Int                 @default(1) @map("vezes_por_dia")
-  vezesPorSemana  Int                 @default(0) @map("vezes_por_semana")
-  proximaExecucao DateTime?           @map("proxima_execucao")
-  ativo           Boolean             @default(true)
-  ultimoResultado Json?               @default("{}") @map("ultimo_resultado")
-  totalExecucoes  Int                 @default(0) @map("total_execucoes")
-  criadoPorId     String?             @map("criado_por_id") @db.Uuid
-  criadoPor       User?               @relation("AgendamentoCriadoPor", fields: [criadoPorId], references: [id])
-  createdAt       DateTime            @default(now()) @map("created_at")
-  updatedAt       DateTime            @updatedAt @map("updated_at")
-  usuario         User                @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  id              String                 @id @default(uuid()) @db.Uuid
+  usuarioId       String                 @map("usuario_id") @db.Uuid
+  nome            String
+  tipoRobo        TipoRobo               @map("tipo_robo")
+  cnpj            String
+  recorrencia     RecorrenciaAgendamento
+  diasSemana      Int?                   @map("dias_semana")
+  horaExecucao    String                 @map("hora_execucao")
+  vezesPorDia     Int                    @default(1) @map("vezes_por_dia")
+  vezesPorSemana  Int                    @default(0) @map("vezes_por_semana")
+  proximaExecucao DateTime?              @map("proxima_execucao")
+  ativo           Boolean                @default(true)
+  ultimoResultado Json?                  @default("{}") @map("ultimo_resultado")
+  totalExecucoes  Int                    @default(0) @map("total_execucoes")
+  criadoPorId     String?                @map("criado_por_id") @db.Uuid
+  createdAt       DateTime               @default(now()) @map("created_at")
+  updatedAt       DateTime               @updatedAt @map("updated_at")
+  criadoPor       User?                  @relation("AgendamentoCriadoPor", fields: [criadoPorId], references: [id])
+  usuario         User                   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@index([usuarioId])
   @@index([ativo])
@@ -457,6 +455,143 @@ model AgendamentoRpa {
   @@index([recorrencia])
   @@index([proximaExecucao])
   @@map("agendamentos_rpa")
+}
+
+model ApiKey {
+  id               String    @id @default(uuid()) @db.Uuid
+  usuarioId        String    @map("usuario_id") @db.Uuid
+  nome             String
+  chave            String    @unique
+  prefixo          String
+  permissoes       Json      @default("[]")
+  ultimaUtilizacao DateTime? @map("ultima_utilizacao")
+  totalRequisicoes Int       @default(0) @map("total_requisicoes")
+  expiraEm         DateTime? @map("expira_em")
+  ativa            Boolean   @default(true)
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+  usuario          User      @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@index([usuarioId])
+  @@index([ativa])
+  @@index([chave])
+  @@map("api_keys")
+}
+
+model CnpjApiConfig {
+  id             String   @id @default(uuid()) @db.Uuid
+  nome           String   @unique
+  label          String
+  url            String
+  ativa          Boolean  @default(true)
+  ordem          Int
+  consomeCredito Boolean  @default(false)
+  timeout        Int      @default(5000)
+  cbThreshold    Int      @default(5)
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@index([ordem])
+  @@index([ativa])
+  @@map("cnpj_api_config")
+}
+
+model audit_log {
+  id          String   @id @db.Uuid
+  calculo_id  String?  @db.Uuid
+  user_id     String?  @db.Uuid
+  acao        String
+  metadata    Json?
+  ip          String?
+  user_agent  String?
+  token_usado String?
+  created_at  DateTime @default(now())
+
+  @@index([calculo_id])
+  @@index([created_at])
+  @@index([user_id])
+}
+
+model biblioteca_clausulas {
+  id         String   @id @db.Uuid
+  user_id    String?  @db.Uuid
+  titulo     String
+  conteudo   String
+  categoria  String
+  is_global  Boolean  @default(true)
+  ordem      Int      @default(0)
+  created_at DateTime @default(now())
+
+  @@index([categoria])
+  @@index([user_id])
+}
+
+model calculos_salvos {
+  id                String              @id @db.Uuid
+  user_id           String              @db.Uuid
+  nome              String
+  calculo_tipo      String
+  payload           Json
+  hash_sha256       String              @default("")
+  created_at        DateTime            @default(now())
+  updated_at        DateTime
+  users             User                @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  compartilhamentos compartilhamentos[]
+
+  @@index([calculo_tipo])
+  @@index([user_id])
+}
+
+model compartilhamentos {
+  id                       String          @id @db.Uuid
+  calculo_id               String          @db.Uuid
+  criado_por               String          @db.Uuid
+  token                    String          @unique
+  expira_em                DateTime
+  permitir_dados_completos Boolean         @default(false)
+  ativo                    Boolean         @default(true)
+  created_at               DateTime        @default(now())
+  calculos_salvos          calculos_salvos @relation(fields: [calculo_id], references: [id], onDelete: Cascade)
+
+  @@index([calculo_id])
+  @@index([token])
+}
+
+model documentos_gerados {
+  id                       String               @id @db.Uuid
+  user_id                  String               @db.Uuid
+  client_id                String?              @db.Uuid
+  parent_id                String?              @db.Uuid
+  tipo_documento           String
+  titulo                   String
+  payload                  Json
+  status                   String               @default("finalizado")
+  carimbo_aplicado         Boolean              @default(false)
+  acoes_log                Json                 @default("[]")
+  created_at               DateTime             @default(now())
+  updated_at               DateTime
+  documentos_gerados       documentos_gerados?  @relation("documentos_geradosTodocumentos_gerados", fields: [parent_id], references: [id])
+  other_documentos_gerados documentos_gerados[] @relation("documentos_geradosTodocumentos_gerados")
+  users                    User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([tipo_documento])
+  @@index([user_id])
+}
+
+model recibo_sequences {
+  date      String   @id
+  seq       Int      @default(0)
+  updatedAt DateTime
+}
+
+enum AbrangenciaFeriado {
+  NACIONAL
+  ESTADUAL
+  MUNICIPAL
+}
+
+enum TipoAlerta {
+  UM_DIA_ANTE
+  NO_DIA
 }
 
 enum TipoRobo {
@@ -471,44 +606,4 @@ enum RecorrenciaAgendamento {
   mensal
   x_vezes_dia
   x_vezes_semana
-}
-
-// API Keys para acesso externo ao sistema
-model ApiKey {
-  id              String     @id @default(uuid()) @db.Uuid
-  usuarioId       String     @map("usuario_id") @db.Uuid
-  nome            String                        // nome descritivo da chave
-  chave           String     @unique            // token hash da API key
-  prefixo         String                        // primeiros 8 caracteres para exibicao (sk_live_...)
-  permissoes      Json       @default("[]")     // ["read:clientes", "write:documentos", etc]
-  ultimaUtilizacao DateTime? @map("ultima_utilizacao")
-  totalRequisicoes Int       @default(0) @map("total_requisicoes")
-  expiraEm        DateTime?  @map("expira_em")  // null = nunca expira
-  ativa           Boolean    @default(true)
-  createdAt       DateTime   @default(now()) @map("created_at")
-  updatedAt       DateTime   @updatedAt @map("updated_at")
-  usuario         User       @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
-  @@index([usuarioId])
-  @@index([ativa])
-  @@index([chave])
-  @@map("api_keys")
-}
-
-// Configuração de APIs de consulta CNPJ
-model CnpjApiConfig {
-  id            String   @id @default(uuid()) @db.Uuid
-  nome          String   @unique              // slug: "opencnpj", "invertexto", etc.
-  label         String                        // nome exibível: "OpenCNPJ", "Invertexto"
-  url           String                        // endpoint base
-  ativa         Boolean  @default(true)
-  ordem         Int                           // ordem de execução (menor = primeiro)
-  consomeCredito Boolean @default(false)      // se consome créditos pagos
-  timeout       Int      @default(5000)       // timeout em ms
-  cbThreshold   Int      @default(5)          // circuit breaker threshold
-  updatedAt     DateTime @updatedAt @map("updated_at")
-
-  @@index([ordem])
-  @@index([ativa])
-  @@map("cnpj_api_config")
 }

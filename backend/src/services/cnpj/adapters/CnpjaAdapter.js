@@ -195,7 +195,7 @@ class CnpjaAdapter extends BaseAdapter {
   determinarRegime(simples, simei) {
     if (simei.optant) return "Simples Nacional - MEI";
     if (simples.optant) return "Simples Nacional";
-    return "Nao Informado";
+    return "Não Enquadrado";
   }
 }
 

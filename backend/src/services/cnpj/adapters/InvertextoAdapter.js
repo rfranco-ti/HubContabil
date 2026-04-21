@@ -141,7 +141,7 @@ class InvertextoAdapter extends BaseAdapter {
   determinarRegime(simples, mei) {
     if (mei.optante_mei === "S") return "Simples Nacional - MEI";
     if (simples.optante_simples === "S") return "Simples Nacional";
-    return "Nao Informado";
+    return "Não Enquadrado";
   }
 
   extrairTelefones(raw) {

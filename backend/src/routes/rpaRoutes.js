@@ -4,6 +4,7 @@ const { buscarSimplesNacional } = require('../controllers/rpa/SimplesNacionalCon
 const { buscarSefazBahia, buscarInscricaoEstadualSefazBahia } = require('../controllers/rpa/SefazBahiaController');
 const { buscarIptuSalvador } = require('../controllers/rpa/IptuSalvadorController');
 const { buscarFichaCadastralSalvador } = require('../controllers/rpa/FichaCadastralController');
+const { buscarInscricaoMunicipalSalvador } = require('../controllers/rpa/SalvadorMunicipalController');
 
 
 
@@ -211,6 +212,7 @@ router.post('/sefaz-ba', buscarSefazBahia);
 
 router.post('/sefaz-ba/inscricao', buscarInscricaoEstadualSefazBahia);
 router.post('/ficha-cadastral', buscarFichaCadastralSalvador);
+router.post('/salvador/inscricao', buscarInscricaoMunicipalSalvador);
 
 module.exports = router;
 
