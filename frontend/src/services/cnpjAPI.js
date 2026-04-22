@@ -12,6 +12,8 @@
  * - Rate limiting gerenciado pelo servidor
  */
 
+import api from "./api";
+
 const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 /**
@@ -108,30 +110,8 @@ async function consultarCnpj(cnpj) {
     throw new Error("CNPJ inválido. Deve conter 14 dígitos.");
   }
 
-  const token = localStorage.getItem("token");
-  const headers = { "Content-Type": "application/json" };
-  if (token) headers.Authorization = `Bearer ${token}`;
-
-  const response = await fetch(`${API_URL}/clientes/consulta/${cleanCnpj}`, {
-    headers,
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    if (response.status === 429) {
-      throw new Error(
-        "Limite de consultas atingido. Aguarde alguns segundos e tente novamente.",
-      );
-    }
-    if (response.status === 404) {
-      throw new Error("CNPJ não encontrado em nenhuma base de dados.");
-    }
-    throw new Error(
-      errorData.message || `Erro ao consultar CNPJ (${response.status})`,
-    );
-  }
-
-  const result = await response.json();
+  const response = await api.get(`/clientes/consulta/${cleanCnpj}`);
+  const result = response.data;
   const normalized = normalizarDadosCnpj(result.data, result.apiUsed);
 
   if (!normalized || !normalized.cnpj) {
@@ -177,20 +157,11 @@ async function buscarEmpresas(query) {
     throw new Error("Digite pelo menos 3 caracteres para pesquisar.");
   }
 
-  const token = localStorage.getItem("token");
-  const headers = {};
-  if (token) headers.Authorization = `Bearer ${token}`;
+  const response = await api.get(`/clientes/pesquisa`, {
+    params: { query }
+  });
 
-  const response = await fetch(
-    `${API_URL}/clientes/pesquisa?query=${encodeURIComponent(query)}`,
-    { headers },
-  );
-
-  if (!response.ok) {
-    throw new Error("Erro ao pesquisar empresas.");
-  }
-
-  const result = await response.json();
+  const result = response.data;
   return result.empresas || result.data || [];
 }
 

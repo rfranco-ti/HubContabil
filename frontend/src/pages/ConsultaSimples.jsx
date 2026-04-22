@@ -12,6 +12,7 @@ import {
   Clock,
   AlertTriangle,
 } from "lucide-react";
+import api from "../services/api";
 
 export default function ConsultaSimples() {
   const [cnpj, setCnpj] = useState("");
@@ -48,14 +49,8 @@ export default function ConsultaSimples() {
     setResultado(null);
 
     try {
-      const response = await fetch(`/api/simples/${clean}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Erro ao consultar Simples Nacional");
-      }
+      const response = await api.get(`/simples/${clean}`);
+      const result = response.data;
 
       setResultado(result.data);
     } catch (err) {

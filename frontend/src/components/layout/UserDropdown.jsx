@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Settings, Shield, LogOut, ChevronDown, User } from "lucide-react";
-import { clearAuth, getUser } from "../../utils/auth";
+import { useAuth } from "../../context/AuthProvider";
 
 export function UserDropdown() {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  const user = getUser();
+  const { user, logout } = useAuth();
 
   const userName = user?.nome || "Administrador";
-  const userCargo = user?.cargo || "Socio Diretor";
+  const userCargo = user?.role || user?.cargo || "Socio Diretor";
   const userEmail = user?.email || "";
   const userInitial = userName.charAt(0).toUpperCase();
   const isAdmin =
@@ -27,7 +27,7 @@ export function UserDropdown() {
   }, []);
 
   const handleLogout = () => {
-    clearAuth();
+    logout();
     navigate("/login");
   };
 

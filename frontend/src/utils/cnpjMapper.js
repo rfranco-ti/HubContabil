@@ -16,7 +16,7 @@ export const mapCnpjDataToForm = (data, prevData) => {
     razao_social: data.razaoSocial || prevData.razao_social,
     nome_fantasia: data.nomeFantasia || prevData.nome_fantasia,
     data_abertura: formatDateToInput(data.dataAbertura) || prevData.data_abertura,
-    natureza_juridica: data.naturezaJuridica || prevData.natureza_juridica,
+    natureza_juridica: data.naturezaJuridica || data.natureza_juridica || prevData.natureza_juridica,
     inscricao_estadual: data.inscricaoEstadual || prevData.inscricao_estadual,
     inscricao_municipal: data.inscricaoMunicipal || prevData.inscricao_municipal,
     status: data.situacao?.descricao || prevData.status,
@@ -35,6 +35,9 @@ export const mapCnpjDataToForm = (data, prevData) => {
       nome: m.nome || '',
       cpf_cnpj: formatCpf(m.cpfCnpj || ''),
       qualificacao: m.qualificacao || '',
+      data_entrada: m.dataEntrada || '',
+      pais: m.pais || '',
+      representante_legal: m.representanteLegal || '',
       participacao: 0
     })),
     endereco: {
@@ -53,7 +56,16 @@ export const mapCnpjDataToForm = (data, prevData) => {
         `${data.telefones[0].ddd}${data.telefones[0].numero}` : 
         prevData.contato_principal.telefone
     },
-    regime_tributario: (data.regimeTributario && data.regimeTributario !== 'Nao Informado') ? data.regimeTributario : 'Não Enquadrado'
+    regime_tributario: (data.regimeTributario && data.regimeTributario !== 'Nao Informado') ? data.regimeTributario : 'Não Enquadrado',
+    capital_social: data.capitalSocial || prevData.capital_social,
+    porte: data.porte?.descricao || data.porte || prevData.porte,
+    situacao_data: data.situacao?.data || prevData.situacao_data,
+    situacao_motivo: data.situacao?.motivo || prevData.situacao_motivo,
+    opcao_simples: data.opcaoSimples || false,
+    data_opcao_simples: data.dataOpcaoSimples || prevData.data_opcao_simples,
+    data_exclusao_simples: data.dataExclusaoSimples || prevData.data_exclusao_simples,
+    data_opcao_mei: data.dataOpcaoMei || prevData.data_opcao_mei,
+    data_exclusao_mei: data.dataExclusaoMei || prevData.data_exclusao_mei,
   };
 };
 

@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { clientesAPI } from "../services/api";
-import { formatCnpj, formatPhoneByType, formatCpf } from "../utils/masks";
+import api, { clientesAPI } from "../../services/api";
+import { formatCnpj, formatPhoneByType, formatCpf } from "../../utils/masks";
 
 export default function PesquisaEmpresas() {
   const [query, setQuery] = useState("");
@@ -90,21 +90,9 @@ export default function PesquisaEmpresas() {
 
     try {
       // Usar endpoint fresh para buscar sempre das APIs externas (ignora cache)
-      const response = await fetch(
-        `/api/clientes/consulta-fresh/${cleanCnpj}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        },
-      );
+      const response = await api.get(`/clientes/consulta-fresh/${cleanCnpj}`);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          errorData.message || "Erro ao consultar dados da empresa",
-        );
-      }
-
-      const result = await response.json();
+      const result = response.data;
       if (!result.success || !result.data) {
         throw new Error("Dados inválidos recebidos da API");
       }

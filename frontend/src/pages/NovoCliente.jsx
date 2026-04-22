@@ -13,7 +13,7 @@ import {
   Textarea, 
   Group, 
   ActionIcon, 
-  Text, 
+  Text as MantineText, 
   Title, 
   Box, 
   ThemeIcon,
@@ -47,6 +47,15 @@ export default function NovoCliente() {
     situacao_sefaz_municipal: '',
     regime_tributario: 'Não Enquadrado',
     is_mei: false,
+    capital_social: 0,
+    porte: '',
+    situacao_data: '',
+    situacao_motivo: '',
+    opcao_simples: false,
+    data_opcao_simples: '',
+    data_exclusao_simples: '',
+    data_opcao_mei: '',
+    data_exclusao_mei: '',
     cnae_principal: { codigo: '', descricao: '' },
     cnaes_secundarios: [],
     qsa: [],
@@ -384,6 +393,15 @@ export default function NovoCliente() {
         inscricao_estadual: formData.inscricao_estadual,
         inscricao_municipal: formData.inscricao_municipal,
         regime_tributario: formData.regime_tributario,
+        capital_social: formData.capital_social,
+        porte: formData.porte,
+        situacao_data: formData.situacao_data,
+        situacao_motivo: formData.situacao_motivo,
+        opcao_simples: formData.opcao_simples,
+        data_opcao_simples: formData.data_opcao_simples,
+        data_exclusao_simples: formData.data_exclusao_simples,
+        data_opcao_mei: formData.data_opcao_mei,
+        data_exclusao_mei: formData.data_exclusao_mei,
         cnae_principal: {
           codigo: String(formData.cnae_principal.codigo || ''), // Converte para string
           descricao: formData.cnae_principal.descricao || ''
@@ -434,7 +452,7 @@ export default function NovoCliente() {
 
     const labelContent = (
       <Group gap="xs" mb={4}>
-        <Text span size="sm" fw={700} c="slate.7">{label}</Text>
+        <MantineText span size="sm" fw={700} c="slate.7">{label}</MantineText>
         {isEmpty && (
           <ActionIcon 
             variant="subtle" 
@@ -467,7 +485,7 @@ export default function NovoCliente() {
 
     if (type === 'textarea') {
       return (
-        <Textarea
+        <MantineTextarea
           label={labelContent}
           value={value}
           onChange={(e) => onChange(e.target.value)}
@@ -476,6 +494,21 @@ export default function NovoCliente() {
           size="md"
           radius="md"
           minRows={minRows || 3}
+          styles={styles}
+        />
+      );
+    }
+
+    if (type === 'currency') {
+      return (
+        <TextInput
+          label={labelContent}
+          value={formatCurrencyInput(value)}
+          onChange={(e) => onChange(unformatCurrency(e.target.value))}
+          disabled={!isEditable && !isEmpty}
+          placeholder={isEditable ? placeholder : 'R$ 0,00'}
+          size="md"
+          radius="md"
           styles={styles}
         />
       );
@@ -521,13 +554,13 @@ export default function NovoCliente() {
               </ThemeIcon>
               <div>
                 <Title order={3} fw={900}>Novo Cliente</Title>
-                <Text size="sm" c="dimmed">Preencha os dados da empresa para cadastrar no sistema.</Text>
+                <MantineText size="sm" c="dimmed">Preencha os dados da empresa para cadastrar no sistema.</MantineText>
               </div>
             </Group>
 
           <Grid gutter="md">
             <Grid.Col span={12}>
-              <TextInput
+              <MantineTextInput
                 label="CNPJ *"
                 value={formatCnpj(formData.cnpj)}
                 onChange={(e) => handleChange('cnpj', e.target.value)}
@@ -601,6 +634,27 @@ export default function NovoCliente() {
               />
             </Grid.Col>
 
+            <Grid.Col span={{ base: 12, md: 6 }}>
+              <EditableField
+                label="Porte da Empresa"
+                value={formData.porte}
+                onChange={(v) => handleChange('porte', v)}
+                fieldKey="porte"
+                placeholder="Ex: DEMAIS"
+              />
+            </Grid.Col>
+
+            <Grid.Col span={{ base: 12, md: 6 }}>
+              <EditableField
+                label="Capital Social"
+                value={formData.capital_social}
+                onChange={(v) => handleChange('capital_social', v)}
+                fieldKey="capital_social"
+                type="currency"
+                placeholder="Ex: 100.000,00"
+              />
+            </Grid.Col>
+
             <Grid.Col span={{ base: 12, md: 4 }}>
               <Select
                 label="Regime Tributário"
@@ -624,7 +678,7 @@ export default function NovoCliente() {
               <Box pt={32}>
                 <Paper withBorder radius="md" p="xs" bg={formData.is_mei ? "green.0" : "red.0"}>
                   <Group justify="space-between" wrap="nowrap">
-                    <Text fw={700} size="sm">É MEI?</Text>
+                    <MantineText fw={700} size="sm">É MEI?</MantineText>
                     <Badge 
                       color={formData.is_mei ? "green" : "red"} 
                       variant="filled"
@@ -639,7 +693,7 @@ export default function NovoCliente() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 6 }}>
-              <TextInput
+              <MantineTextInput
                 label="Inscrição Estadual"
                 value={formData.inscricao_estadual}
                 onChange={(e) => handleChange('inscricao_estadual', e.target.value.replace(/\D/g, ''))}
@@ -663,7 +717,7 @@ export default function NovoCliente() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 6 }}>
-              <TextInput
+              <MantineTextInput
                 label="Inscrição Municipal"
                 value={formData.inscricao_municipal}
                 onChange={(e) => handleChange('inscricao_municipal', e.target.value.replace(/\D/g, ''))}
@@ -687,7 +741,7 @@ export default function NovoCliente() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 6 }}>
-              <TextInput
+              <MantineTextInput
                 label="Situação SEFAZ Estadual"
                 value={formData.situacao_sefaz_estadual}
                 onChange={(e) => handleChange('situacao_sefaz_estadual', e.target.value)}
@@ -701,7 +755,7 @@ export default function NovoCliente() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 6 }}>
-              <TextInput
+              <MantineTextInput
                 label="Situação SEFAZ Municipal"
                 value={formData.situacao_sefaz_municipal}
                 onChange={(e) => handleChange('situacao_sefaz_municipal', e.target.value)}
@@ -731,7 +785,7 @@ export default function NovoCliente() {
             </Grid.Col>
 
             <Grid.Col span={{ base: 12, md: 6 }}>
-              <TextInput
+              <MantineTextInput
                 label="Categoria"
                 value={formData.categoria}
                 onChange={(e) => handleChange('categoria', e.target.value)}
@@ -752,7 +806,7 @@ export default function NovoCliente() {
             </ThemeIcon>
             <div>
               <Title order={4} fw={900}>Endereço</Title>
-              <Text size="sm" c="dimmed">Localização da sede da empresa.</Text>
+              <MantineText size="sm" c="dimmed">Localização da sede da empresa.</MantineText>
             </div>
           </Group>
 
@@ -840,7 +894,7 @@ export default function NovoCliente() {
               </ThemeIcon>
               <div>
                 <Title order={4} fw={900}>Contatos</Title>
-                <Text size="sm" c="dimmed">Informações de contato e responsáveis.</Text>
+                <MantineText size="sm" c="dimmed">Informações de contato e responsáveis.</MantineText>
               </div>
             </Group>
             <Button
@@ -857,7 +911,7 @@ export default function NovoCliente() {
             {/* Primeiro contato - preenchido automaticamente pela API */}
             <Paper withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800">
               <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md">
-                <TextInput
+                <MantineTextInput
                   label="Nome do Cliente"
                   value={formData.contato_principal.nome || ''}
                   onChange={(e) => setFormData(prev => ({ ...prev, contato_principal: { ...prev.contato_principal, nome: e.target.value } }))}
@@ -866,7 +920,7 @@ export default function NovoCliente() {
                   radius="md"
                   styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
                 />
-                <TextInput
+                <MantineTextInput
                   label="E-mail"
                   type="email"
                   value={formData.contato_principal.email}
@@ -876,7 +930,7 @@ export default function NovoCliente() {
                   radius="md"
                   styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
                 />
-                <TextInput
+                <MantineTextInput
                   label="Telefone"
                   value={formatPhoneDisplay(formData.contato_principal.telefone, 'mobile')}
                   onChange={(e) => setFormData(prev => ({ ...prev, contato_principal: { ...prev.contato_principal, telefone: unformatPhone(e.target.value) } }))}
@@ -906,7 +960,7 @@ export default function NovoCliente() {
 
                 <Grid gutter="md" align="flex-end">
                   <Grid.Col span={{ base: 12, md: 4 }}>
-                    <TextInput
+                    <MantineTextInput
                       label="Nome do Contato"
                       value={contato.nome}
                       onChange={(e) => handleContatoChange(index, 'nome', e.target.value)}
@@ -917,7 +971,7 @@ export default function NovoCliente() {
                     />
                   </Grid.Col>
                   <Grid.Col span={{ base: 12, md: 4 }}>
-                    <TextInput
+                    <MantineTextInput
                       label="E-mail"
                       type="email"
                       value={contato.email}
@@ -929,7 +983,7 @@ export default function NovoCliente() {
                     />
                   </Grid.Col>
                   <Grid.Col span={{ base: 12, md: 4 }}>
-                    <TextInput
+                    <MantineTextInput
                       label="Telefone"
                       value={formatPhoneDisplay(contato.telefone, 'mobile')}
                       onChange={(e) => handleContatoChange(index, 'telefone', e.target.value)}
@@ -954,7 +1008,7 @@ export default function NovoCliente() {
             </ThemeIcon>
             <div>
               <Title order={4} fw={900}>CNAE Principal</Title>
-              <Text size="sm" c="dimmed">Classificação da atividade econômica principal.</Text>
+              <MantineText size="sm" c="dimmed">Classificação da atividade econômica principal.</MantineText>
             </div>
           </Group>
 
@@ -993,7 +1047,7 @@ export default function NovoCliente() {
               </ThemeIcon>
               <div>
                 <Title order={4} fw={900}>CNAEs Secundários</Title>
-                <Text size="sm" c="dimmed">Atividades econômicas secundárias.</Text>
+                <MantineText size="sm" c="dimmed">Atividades econômicas secundárias.</MantineText>
               </div>
             </Group>
             <Button
@@ -1007,7 +1061,7 @@ export default function NovoCliente() {
           </Group>
 
           {formData.cnaes_secundarios.length === 0 ? (
-            <Text size="sm" c="dimmed" ta="center" py="xl">Nenhum CNAE secundário cadastrado.</Text>
+            <MantineText size="sm" c="dimmed" ta="center" py="xl">Nenhum CNAE secundário cadastrado.</MantineText>
           ) : (
             <Stack gap="md">
               {formData.cnaes_secundarios.map((cnae, index) => (
@@ -1026,7 +1080,7 @@ export default function NovoCliente() {
 
                   <Grid gutter="md" align="flex-end">
                     <Grid.Col span={{ base: 12, md: 2 }}>
-                      <TextInput
+                      <MantineTextInput
                         label="Código"
                         value={cnae.codigo}
                         onChange={(e) => handleCnaeSecundarioChange(index, 'codigo', e.target.value)}
@@ -1040,7 +1094,7 @@ export default function NovoCliente() {
                       />
                     </Grid.Col>
                     <Grid.Col span={{ base: 12, md: 10 }}>
-                      <Textarea
+                      <MantineTextarea
                         label="Descrição"
                         value={cnae.descricao}
                         onChange={(e) => handleCnaeSecundarioChange(index, 'descricao', e.target.value)}
@@ -1068,7 +1122,7 @@ export default function NovoCliente() {
               </ThemeIcon>
               <div>
                 <Title order={4} fw={900}>Quadro Societário (QSA)</Title>
-                <Text size="sm" c="dimmed">Sócios e administradores da empresa.</Text>
+                <MantineText size="sm" c="dimmed">Sócios e administradores da empresa.</MantineText>
               </div>
             </Group>
             <Button
@@ -1082,7 +1136,7 @@ export default function NovoCliente() {
           </Group>
 
           {formData.qsa.length === 0 ? (
-            <Text size="sm" c="dimmed" ta="center" py="xl">Nenhum sócio cadastrado.</Text>
+            <MantineText size="sm" c="dimmed" ta="center" py="xl">Nenhum sócio cadastrado.</MantineText>
           ) : (
             <Stack gap="md">
               {formData.qsa.map((membro, index) => (
@@ -1101,7 +1155,7 @@ export default function NovoCliente() {
 
                   <Grid gutter="md" align="flex-end">
                     <Grid.Col span={{ base: 12, md: 4 }}>
-                      <TextInput
+                      <MantineTextInput
                         label="Nome"
                         value={membro.nome}
                         onChange={(e) => handleQsaChange(index, 'nome', e.target.value)}
@@ -1112,7 +1166,7 @@ export default function NovoCliente() {
                       />
                     </Grid.Col>
                     <Grid.Col span={{ base: 12, md: 2 }}>
-                      <TextInput
+                      <MantineTextInput
                         label="CPF/CNPJ"
                         value={formatCpf(membro.cpf_cnpj)}
                         onChange={(e) => handleQsaChange(index, 'cpf_cnpj', e.target.value)}
@@ -1123,7 +1177,7 @@ export default function NovoCliente() {
                       />
                     </Grid.Col>
                     <Grid.Col span={{ base: 12, md: 3 }}>
-                      <TextInput
+                      <MantineTextInput
                         label="Qualificação"
                         value={membro.qualificacao}
                         onChange={(e) => handleQsaChange(index, 'qualificacao', e.target.value)}
@@ -1134,7 +1188,7 @@ export default function NovoCliente() {
                       />
                     </Grid.Col>
                     <Grid.Col span={{ base: 12, md: 3 }}>
-                      <TextInput
+                      <MantineTextInput
                         label="Participação (R$)"
                         value={formatCurrencyInput(membro.participacao)}
                         onChange={(e) => handleQsaChange(index, 'participacao', unformatCurrency(e.target.value))}
@@ -1159,13 +1213,13 @@ export default function NovoCliente() {
             </ThemeIcon>
             <div>
               <Title order={4} fw={900}>Financeiro</Title>
-              <Text size="sm" c="dimmed">Informações contratuais e honorários.</Text>
+              <MantineText size="sm" c="dimmed">Informações contratuais e honorários.</MantineText>
             </div>
           </Group>
 
           <Grid gutter="md">
             <Grid.Col span={{ base: 12, md: 6 }}>
-              <TextInput
+              <MantineTextInput
                 label="Valor do Honorário (R$)"
                 value={formatCurrencyInput(formData.honorarios.valor)}
                 onChange={(e) => setFormData(prev => ({ 
@@ -1195,7 +1249,7 @@ export default function NovoCliente() {
             </Grid.Col>
 
             <Grid.Col span={12}>
-              <Textarea
+              <MantineTextarea
                 label="Descrição dos Serviços"
                 value={formData.servicos_prestados}
                 onChange={(e) => handleChange('servicos_prestados', e.target.value)}
@@ -1211,10 +1265,10 @@ export default function NovoCliente() {
             <Grid.Col span={12}>
               <Paper withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800">
                 <Group justify="space-between">
-                  <Text fw={700} size="sm">Serviços Prestados:</Text>
+                  <MantineText fw={700} size="sm">Serviços Prestados:</MantineText>
                   <Group gap="xl">
                     <Group gap="xs">
-                      <Text size="sm" fw={500}>Contábil</Text>
+                      <MantineText size="sm" fw={500}>Contábil</MantineText>
                       <Badge 
                         color={formData.tem_contabil ? "green" : "red"} 
                         variant="filled"
@@ -1225,7 +1279,7 @@ export default function NovoCliente() {
                       </Badge>
                     </Group>
                     <Group gap="xs">
-                      <Text size="sm" fw={500}>Fiscal</Text>
+                      <MantineText size="sm" fw={500}>Fiscal</MantineText>
                       <Badge 
                         color={formData.tem_fiscal ? "green" : "red"} 
                         variant="filled"
@@ -1236,7 +1290,7 @@ export default function NovoCliente() {
                       </Badge>
                     </Group>
                     <Group gap="xs">
-                      <Text size="sm" fw={500}>DP</Text>
+                      <MantineText size="sm" fw={500}>DP</MantineText>
                       <Badge 
                         color={formData.tem_dp ? "green" : "red"} 
                         variant="filled"
@@ -1261,11 +1315,11 @@ export default function NovoCliente() {
             </ThemeIcon>
             <div>
               <Title order={4} fw={900}>Observações</Title>
-              <Text size="sm" c="dimmed">Informações adicionais sobre o cliente.</Text>
+              <MantineText size="sm" c="dimmed">Informações adicionais sobre o cliente.</MantineText>
             </div>
           </Group>
 
-          <Textarea
+          <MantineTextarea
             value={formData.observacoes}
             onChange={(e) => handleChange('observacoes', e.target.value)}
             placeholder="Digite observações importantes sobre este cliente..."

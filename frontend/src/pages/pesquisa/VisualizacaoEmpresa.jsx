@@ -28,10 +28,12 @@ import {
   Shield,
   Info,
 } from "lucide-react";
-import { useSalvarCliente } from "../hooks/useCnpj";
-import DocumentosCliente from "../components/DocumentosCliente";
+import { useSalvarCliente } from "../../hooks/useCnpj";
+import api from "../../services/api";
+import DocumentosCliente from "../../components/DocumentosCliente";
+import { useAuth } from "../../context/AuthProvider";
 
-export default function DetalheEmpresa() {
+export default function VisualizacaoEmpresa() {
   const { cnpj } = useParams();
   const navigate = useNavigate();
 
@@ -61,15 +63,16 @@ export default function DetalheEmpresa() {
     // Verificar se já existe no banco
     const checkRegistered = async () => {
       try {
-        const response = await fetch(`/api/clientes`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-        });
-        const clients = await response.json();
-        const exists = clients.find(c => c.cnpj === clean);
-        if (exists && !cancelled) {
-          setSavedToDatabase(true);
-          setDados(exists);
-          setDadosEdit(exists);
+        const response = await api.get(`/clientes`);
+        const clients = response.data;
+        
+        if (Array.isArray(clients)) {
+          const exists = clients.find(c => c.cnpj === clean);
+          if (exists && !cancelled) {
+            // Se já existe, oferecemos ir para o perfil do cliente
+            setSavedToDatabase(true);
+            setDados(exists);
+          }
         }
       } catch (err) {
         console.error("Erro ao verificar CNPJ no banco:", err);
@@ -85,24 +88,19 @@ export default function DetalheEmpresa() {
       setErrorApi(null);
       try {
         const ts = Date.now();
-        const response = await fetch(
-          `/api/clientes/consulta-fresh/${clean}?_t=${ts}&_k=${fetchKey}`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-              "Cache-Control": "no-cache, no-store, must-revalidate",
-              Pragma: "no-cache",
-              Expires: "0",
-            },
-          },
-        );
-        const result = await response.json();
+        const response = await api.get(`/clientes/consulta-fresh/${clean}`, {
+          params: { _t: ts, _k: fetchKey },
+          headers: {
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            Pragma: "no-cache",
+            Expires: "0",
+          }
+        });
+        const result = response.data;
 
         if (cancelled) return;
 
-        if (!response.ok) {
-          throw new Error(result.message || "Erro ao consultar CNPJ");
-        }
+        // O Axios já lança erro para status != 2xx
 
         console.log("✅ [DetalheEmpresa] Dados recebidos:", {
           apiUsed: result.data?.apiUsed,
@@ -133,45 +131,7 @@ export default function DetalheEmpresa() {
     };
   }, [cnpj, fetchKey]);
 
-  const handleSalvarEdicao = () => {
-    if (!dadosEdit) return;
-
-    const dadosParaEnviar = {
-      razao_social: dadosEdit.razaoSocial,
-      nome_fantasia: dadosEdit.nomeFantasia,
-      regime_tributario: dadosEdit.regimeTributario,
-      natureza_juridica: dadosEdit.naturezaJuridica,
-      categoria: dadosEdit.categoria || "Serviços",
-      status: dadosEdit.situacao?.descricao?.toLowerCase().includes("ativa")
-        ? "Ativo"
-        : "Inativo",
-      observacoes: dadosEdit.observacoes || "",
-      endereco: dadosEdit.endereco,
-      cnae_principal: dadosEdit.cnaePrincipal,
-      cnaes_secundarios: dadosEdit.cnaesSecundarios,
-      contatos: dadosEdit.contatos,
-      qsa: dadosEdit.socios,
-      honorarios: dadosEdit.honorarios,
-    };
-
-    salvarCliente(dadosParaEnviar, {
-      onSuccess: (data) => {
-        setDados(data);
-        setDadosEdit(data);
-        setEditMode(false);
-        setSavedToDatabase(true);
-        alert("Dados salvos com sucesso!");
-      },
-      onError: (err) => {
-        alert("Erro ao salvar: " + err.message);
-      },
-    });
-  };
-
-  const handleCancelEdicao = () => {
-    setDadosEdit(savedToDatabase && dados ? dados : dadosApi || null);
-    setEditMode(false);
-  };
+  // Removido handleSalvarEdicao e handleCancelEdicao (movidos para DetalheCliente)
 
   // Helpers
   const formatCnpj = (raw) => {
@@ -381,31 +341,13 @@ export default function DetalheEmpresa() {
               <RefreshCw size={16} className="mr-1.5" /> Atualizar
             </button>
           )}
-          {savedToDatabase && !editMode && (
+          {savedToDatabase && (
             <button
-              onClick={() => setEditMode(true)}
+              onClick={() => navigate(`/clientes/${cleanCnpj}`)}
               className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl transition-colors text-sm"
             >
-              <Edit size={16} className="mr-1.5" /> Editar
+              <Users size={16} className="mr-1.5" /> Ver Perfil do Cliente
             </button>
-          )}
-          {editMode && (
-            <>
-              <button
-                onClick={handleCancelEdicao}
-                className="flex items-center bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold px-4 py-2 rounded-xl transition-colors text-sm"
-              >
-                <X size={16} className="mr-1.5" /> Cancelar
-              </button>
-              <button
-                onClick={handleSalvarEdicao}
-                disabled={saving}
-                className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl transition-colors text-sm disabled:opacity-50"
-              >
-                <Save size={16} className="mr-1.5" />{" "}
-                {saving ? "Salvando..." : "Salvar"}
-              </button>
-            </>
           )}
           {!savedToDatabase && !editMode && (
             <button
@@ -496,26 +438,17 @@ export default function DetalheEmpresa() {
                 />
               </div>
               <div>
-                {editMode ? (
-                  <input
-                    type="text"
-                    value={cliente.razaoSocial || ""}
-                    onChange={(e) => updateField("razaoSocial", e.target.value)}
-                    className="text-xl font-black text-slate-800 dark:text-white border-b-2 border-blue-300 focus:border-blue-500 focus:outline-none bg-transparent w-full max-w-lg"
-                  />
-                ) : (
-                  <>
-                    <h1 className="text-xl font-black text-slate-800 dark:text-white">
-                      {cliente.razaoSocial || "—"}
-                    </h1>
-                    {cliente.nomeFantasia &&
-                      cliente.nomeFantasia !== cliente.razaoSocial && (
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-                          Fantasia: {cliente.nomeFantasia}
-                        </p>
-                      )}
-                  </>
-                )}
+                <>
+                  <h1 className="text-xl font-black text-slate-800 dark:text-white">
+                    {cliente.razaoSocial || "—"}
+                  </h1>
+                  {cliente.nomeFantasia &&
+                    cliente.nomeFantasia !== cliente.razaoSocial && (
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                        Fantasia: {cliente.nomeFantasia}
+                      </p>
+                    )}
+                </>
               </div>
             </div>
 

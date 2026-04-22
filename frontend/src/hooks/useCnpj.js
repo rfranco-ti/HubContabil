@@ -1,6 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { clientesAPI } from "../services/api";
-import { getToken } from "../utils/auth";
+import api, { clientesAPI } from "../services/api";
 
 /**
  * Hook para consulta de CNPJ com cache (5 min staleTime)
@@ -16,17 +15,10 @@ export function useConsultaCnpj(cnpj) {
         throw new Error("CNPJ inválido. Deve conter 14 dígitos.");
       }
 
-      const response = await fetch(
-        `/api/clientes/consulta-fresh/${cleanCnpj}`,
-        {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        },
-      );
-      const result = await response.json();
+      const response = await api.get(`/clientes/consulta-fresh/${cleanCnpj}`);
+      const result = response.data;
 
-      if (!response.ok) {
-        throw new Error(result.message || "Erro ao consultar CNPJ");
-      }
+      // Axios já lança erro para status != 2xx
 
       return result.data;
     },
@@ -61,17 +53,10 @@ export function useConsultaCnpjFresh(cnpj) {
       }
 
       // Consulta o endpoint fresh que ignora TODOS os caches do backend
-      const response = await fetch(
-        `/api/clientes/consulta-fresh/${cleanCnpj}`,
-        {
-          headers: { Authorization: `Bearer ${getToken()}` },
-        },
-      );
-      const result = await response.json();
+      const response = await api.get(`/clientes/consulta-fresh/${cleanCnpj}`);
+      const result = response.data;
 
-      if (!response.ok) {
-        throw new Error(result.message || "Erro ao consultar CNPJ");
-      }
+      // Axios já lança erro para status != 2xx
 
       return result.data;
     },
@@ -152,11 +137,8 @@ export function useCnpjApiConfigs() {
   return useQuery({
     queryKey: ["cnpj-api-configs"],
     queryFn: async () => {
-      const response = await fetch("/api/cnpj-api-config", {
-        headers: { Authorization: `Bearer ${getToken()}` },
-      });
-      if (!response.ok) throw new Error("Erro ao buscar configs");
-      return response.json();
+      const response = await api.get("/cnpj-api-config");
+      return response.data;
     },
     staleTime: 30 * 1000, // 30s (mesmo TTL do backend)
     gcTime: 5 * 60 * 1000,

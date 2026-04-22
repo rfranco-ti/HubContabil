@@ -26,6 +26,32 @@ import {
 import { documentosAPI } from "../services/api";
 import { formatDate } from "../utils/masks";
 import { toast } from "sonner";
+import { 
+  Box, 
+  Text as MantineText, 
+  Badge, 
+  Button, 
+  Group, 
+  Stack, 
+  ThemeIcon,
+  SimpleGrid,
+  Card,
+  Title,
+  TextInput,
+  ActionIcon,
+  Tooltip,
+  Paper,
+  Divider,
+  ScrollArea,
+  Menu,
+  Modal,
+  Transition,
+  Breadcrumbs,
+  Anchor,
+  Loader,
+  Progress,
+  Container
+} from "@mantine/core";
 
 export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome }) {
   const [documentos, setDocumentos] = useState([]);
@@ -830,176 +856,143 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <Loader2 className="animate-spin text-primary-600" size={32} />
-        <span className="ml-3 text-slate-500">Carregando documentos...</span>
-      </div>
+      <Stack align="center" justify="center" py={50}>
+        <Loader size="xl" color="blue" variant="bars" />
+        <MantineText c="dimmed" fw={500}>Carregando documentos...</MantineText>
+      </Stack>
     );
   }
 
+  const breadcrumbs = [
+    <Anchor key="root" size="sm" fw={700} onClick={() => { setHistoricoNavegacao([]); setPastaSelecionada(null); }}>
+      <Group gap={4}><FolderOpen size={16} /> Todos Documentos</Group>
+    </Anchor>,
+    ...getBreadcrumbPath().map((p, i) => (
+      <Anchor key={p.id} size="sm" fw={500} onClick={() => handleNavegarBreadcrumb(p.id, i)}>
+        {p.nome}
+      </Anchor>
+    ))
+  ];
+
   return (
-    <div>
+    <Box>
       {/* Header com Navegação de Pastas e Upload */}
-      <div className="space-y-4 mb-6">
-        {/* Breadcrumb e Botões */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 flex-1">
-            {pastaSelecionada && (
-              <button
-                onClick={handleVoltarPasta}
-                className="flex items-center text-slate-500 hover:text-primary-600 transition-colors"
-              >
-                <ArrowLeft size={18} className="mr-1" />
-                Voltar
-              </button>
-            )}
-            <h2 className="text-lg font-black text-slate-800 flex items-center">
-              <FolderOpen size={20} className="mr-2 text-primary-600" />
-              {pastaSelecionada ? "Documentos na Pasta" : "Todos Documentos"} (
-              {documentos.length})
-            </h2>
-          </div>
-          <div className="flex gap-2">
-            <button
+      <Stack gap="lg" mb="xl">
+        <Group justify="space-between" align="flex-start">
+          <Stack gap={4}>
+            <Breadcrumbs separator="/" separatorMargin="md">
+              {breadcrumbs}
+            </Breadcrumbs>
+            <MantineText size="xs" c="dimmed" fw={500}>
+              Exibindo {documentos.length} documento(s) {pastaSelecionada ? 'nesta pasta' : ''}
+            </MantineText>
+          </Stack>
+
+          <Group gap="sm">
+            <Button 
+              variant="light" 
+              color="slate" 
+              leftSection={<Folder size={16} />}
               onClick={() => setShowNovaPasta(true)}
-              className="flex items-center bg-slate-700 hover:bg-slate-800 text-white text-sm font-bold px-3 py-2 rounded-lg transition-colors"
+              radius="md"
             >
-              <Folder size={16} className="mr-1.5" />
               Nova Pasta
-            </button>
-            <button
+            </Button>
+            <Button 
+              variant="filled" 
+              color="blue" 
+              leftSection={showUploadForm ? <X size={16} /> : <Plus size={16} />}
               onClick={() => setShowUploadForm(!showUploadForm)}
-              className="flex items-center bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold px-3 py-2 rounded-lg transition-colors"
+              radius="md"
             >
-              <Plus size={16} className="mr-1.5" />
               {showUploadForm ? "Cancelar" : "Novo Documento"}
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Group>
+        </Group>
 
-        {/* Breadcrumb de Navegação Aninhada */}
-        {getBreadcrumbPath().length > 0 && (
-          <div className="flex items-center gap-2 text-sm text-slate-500 bg-slate-100 rounded-lg px-4 py-2">
-            <button
-              onClick={() => {
-                setHistoricoNavegacao([]);
-                setPastaSelecionada(null);
-              }}
-              className="hover:text-primary-600 transition-colors"
-            >
-              📁 Todas
-            </button>
-            <span className="text-slate-300">/</span>
-            {getBreadcrumbPath().map((pasta, index, arr) => (
-              <span key={pasta.id} className="flex items-center gap-2">
-                <button
-                  onClick={() => handleNavegarBreadcrumb(pasta.id, index)}
-                  className="hover:text-primary-600 transition-colors font-medium"
-                >
-                  {pasta.nome}
-                </button>
-                {index < arr.length - 1 && (
-                  <span className="text-slate-300">/</span>
-                )}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Busca de Pastas */}
         {!pastaSelecionada && (
-          <div className="relative">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-              size={18}
-            />
-            <input
-              type="text"
-              placeholder="Buscar pastas..."
-              value={buscaPastas}
-              onChange={(e) => setBuscaPastas(e.target.value)}
-              className="w-full max-w-md pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
-            />
-          </div>
+          <TextInput
+            placeholder="Buscar pastas..."
+            leftSection={<Search size={18} />}
+            value={buscaPastas}
+            onChange={(e) => setBuscaPastas(e.target.value)}
+            className="max-w-md"
+            radius="md"
+          />
         )}
+      </Stack>
 
-        {/* Lista de Pastas (se não houver pasta selecionada) */}
-        {!pastaSelecionada && pastas.length > 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+      {/* Lista de Pastas (se não houver pasta selecionada) */}
+      {!pastaSelecionada && pastas.length > 0 && (
+        <Box mb="xl">
+          <MantineText size="xs" fw={900} c="dimmed" mb="md" className="uppercase tracking-widest">Pastas</MantineText>
+          <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing="md">
             {pastasFiltradas.map((pasta) => (
-              <div
-                key={pasta._id}
-                className="relative bg-white rounded-xl border-2 border-slate-200 p-4 hover:border-primary-300 hover:shadow-md transition-all cursor-pointer group"
+              <Card 
+                key={pasta._id} 
+                padding="md" 
+                radius="lg" 
+                withBorder 
+                className="hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer group bg-white dark:bg-slate-800"
                 onClick={() => handleNavegarPasta(pasta._id)}
               >
-                <div className="flex flex-col items-center text-center">
-                  <Folder
-                    size={40}
-                    className="text-primary-400 mb-2 group-hover:text-primary-500"
-                  />
-                  <p className="text-sm font-bold text-slate-700 truncate w-full">
+                <Stack align="center" gap="xs">
+                  <div className="relative">
+                    <ThemeIcon size={56} variant="light" color="blue" radius="xl">
+                      <Folder size={32} />
+                    </ThemeIcon>
+                    <Badge 
+                      size="xs" 
+                      variant="filled" 
+                      color="blue" 
+                      className="absolute -top-1 -right-1"
+                    >
+                      {getDocumentosCount(pasta._id)}
+                    </Badge>
+                  </div>
+
+                  <MantineText size="sm" fw={800} className="truncate w-full text-center">
                     {pasta.nome}
-                  </p>
-                  <p className="text-xs text-slate-400 mt-1">
-                    {pasta.descricao || "Sem descrição"}
-                  </p>
-                  <p className="text-xs text-primary-600 mt-2 font-bold bg-primary-50 px-2 py-1 rounded-full">
-                    📄 {getDocumentosCount(pasta._id)}{" "}
-                    {getDocumentosCount(pasta._id) === 1 ? "doc" : "docs"}
-                  </p>
-                </div>
+                  </MantineText>
+                  
+                  {pasta.descricao && (
+                    <MantineText size="xs" c="dimmed" className="truncate w-full text-center" lineClamp={1}>
+                      {pasta.descricao}
+                    </MantineText>
+                  )}
+                </Stack>
 
                 {/* Menu de Ações da Pasta */}
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setPastaMenuOpen(
-                        pastaMenuOpen === pasta._id ? null : pasta._id,
-                      );
-                    }}
-                    className="p-1 hover:bg-slate-100 rounded"
-                  >
-                    <MoreVertical size={14} />
-                  </button>
+                  <Menu shadow="md" width={150} position="bottom-end">
+                    <Menu.Target>
+                      <ActionIcon variant="subtle" color="gray" size="sm" onClick={(e) => e.stopPropagation()}>
+                        <MoreVertical size={14} />
+                      </ActionIcon>
+                    </Menu.Target>
 
-                  {pastaMenuOpen === pasta._id && (
-                    <>
-                      <div
-                        className="fixed inset-0 z-10"
-                        onClick={() => setPastaMenuOpen(null)}
-                      />
-                      <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-slate-200 py-1 z-20 min-w-[120px]">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditandoPasta(pasta._id);
-                            setPastaMenuOpen(null);
-                          }}
-                          className="w-full flex items-center px-3 py-2 text-xs text-slate-700 hover:bg-slate-50"
-                        >
-                          <Edit2 size={12} className="mr-2" />
-                          Editar
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeletarPasta(pasta._id, pasta.nome);
-                            setPastaMenuOpen(null);
-                          }}
-                          className="w-full flex items-center px-3 py-2 text-xs text-red-600 hover:bg-red-50"
-                        >
-                          <Trash2 size={12} className="mr-2" />
-                          Excluir
-                        </button>
-                      </div>
-                    </>
-                  )}
+                    <Menu.Dropdown onClick={(e) => e.stopPropagation()}>
+                      <Menu.Item 
+                        leftSection={<Edit2 size={14} />} 
+                        onClick={() => setEditandoPasta(pasta._id)}
+                      >
+                        Editar
+                      </Menu.Item>
+                      <Menu.Item 
+                        color="red" 
+                        leftSection={<Trash2 size={14} />}
+                        onClick={() => handleDeletarPasta(pasta._id, pasta.nome)}
+                      >
+                        Excluir
+                      </Menu.Item>
+                    </Menu.Dropdown>
+                  </Menu>
                 </div>
-              </div>
+              </Card>
             ))}
-          </div>
-        )}
+          </SimpleGrid>
+        </Box>
+      )}
       </div>
 
       {showUploadForm && (
@@ -1008,485 +1001,185 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
             Enviar Novo Documento
           </h3>
 
-          {/* Info de Limites */}
-          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-blue-700 font-medium">
-                📁 {selectedFiles.length} / {MAX_FILES} arquivos selecionados
-              </span>
-              <span className="text-blue-600">Máx: 10MB por arquivo</span>
-            </div>
-          </div>
+      {/* Upload Form */}
+      {showUploadForm && (
+        <Card withBorder padding="xl" radius="lg" mb="xl" className="bg-slate-50/50 dark:bg-slate-800/50">
+          <Stack gap="md">
+            <Group justify="space-between">
+              <Title order={4} className="text-slate-800 dark:text-slate-200">Enviar Novo Documento</Title>
+              <Badge variant="light" size="lg" color="blue">
+                {selectedFiles.length} / {MAX_FILES} arquivos selecionados
+              </Badge>
+            </Group>
 
-          {/* Drag and Drop Zone */}
-          <div
-            ref={dropZoneRef}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-            className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-colors ${
-              isDragging
-                ? "border-primary-500 bg-primary-50"
-                : selectedFiles.length >= MAX_FILES
-                  ? "border-red-300 bg-red-50 cursor-not-allowed"
-                  : "border-slate-300 hover:border-primary-400 hover:bg-slate-100"
-            }`}
-          >
-            <input
-              type="file"
-              multiple
-              onChange={handleFileSelect}
-              disabled={selectedFiles.length >= MAX_FILES}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
-            />
-            <Upload
-              size={48}
-              className={`mx-auto mb-3 ${
-                selectedFiles.length >= MAX_FILES
-                  ? "text-red-400"
-                  : "text-slate-400"
-              }`}
-            />
-            <p
-              className={`font-medium ${
-                selectedFiles.length >= MAX_FILES
-                  ? "text-red-600"
-                  : "text-slate-600"
+            <div
+              ref={dropZoneRef}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`relative border-2 border-dashed rounded-2xl p-10 text-center transition-all ${
+                isDragging
+                  ? "border-blue-500 bg-blue-50 dark:bg-blue-900/10"
+                  : selectedFiles.length >= MAX_FILES
+                    ? "border-red-300 bg-red-50 dark:bg-red-900/10 cursor-not-allowed"
+                    : "border-slate-300 hover:border-blue-400 dark:border-slate-600 hover:bg-slate-100/50"
               }`}
             >
-              {selectedFiles.length >= MAX_FILES
-                ? "Limite máximo de arquivos atingido"
-                : "Arraste e solte arquivos aqui"}
-            </p>
-            <p className="text-sm text-slate-400 mt-1">
-              ou clique para selecionar
-            </p>
-            <p className="text-xs text-slate-400 mt-2">
-              PDF, PNG, JPG, DOC, DOCX (máx. 10MB)
-            </p>
-          </div>
-
-          {/* Preview de Imagens */}
-          {imagePreviews.length > 0 && (
-            <div className="mt-4">
-              <h4 className="font-bold text-slate-700 mb-2 text-sm">
-                🖼️ Imagens ({imagePreviews.length})
-              </h4>
-              <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
-                {imagePreviews.map((preview, index) => (
-                  <div key={index} className="relative group aspect-square">
-                    <img
-                      src={preview.url}
-                      alt={preview.name}
-                      className="w-full h-full object-cover rounded-lg border border-slate-200"
-                    />
-                    <button
-                      onClick={() => removePreview(index, true)}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={12} />
-                    </button>
-                    <p className="text-xs text-slate-500 truncate mt-1">
-                      {preview.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <input
+                type="file"
+                multiple
+                onChange={handleFileSelect}
+                disabled={selectedFiles.length >= MAX_FILES}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
+              />
+              <Upload size={48} className={`mx-auto mb-3 ${selectedFiles.length >= MAX_FILES ? "text-red-400" : "text-blue-400"}`} />
+              <MantineText fw={700} size="lg" c={selectedFiles.length >= MAX_FILES ? "red.6" : "slate.7"}>
+                {selectedFiles.length >= MAX_FILES ? "Limite máximo de arquivos atingido" : "Arraste e solte arquivos aqui"}
+              </MantineText>
+              <MantineText size="sm" c="dimmed" mt={4}>ou clique para selecionar (PDF, PNG, JPG, DOC - Máx 10MB)</MantineText>
             </div>
-          )}
 
-          {/* Preview de PDFs */}
-          {pdfPreviews.length > 0 && (
-            <div className="mt-4">
-              <h4 className="font-bold text-slate-700 mb-2 text-sm">
-                📄 PDFs ({pdfPreviews.length})
-              </h4>
-              <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
-                {pdfPreviews.map((preview, index) => (
-                  <div key={index} className="relative group aspect-square">
-                    {preview.isThumbnail && preview.url ? (
-                      <img
-                        src={preview.url}
-                        alt={preview.name}
-                        className="w-full h-full object-cover rounded-lg border border-slate-200"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-red-50 rounded-lg border border-red-200 flex items-center justify-center">
-                        <File className="text-red-500" size={40} />
-                      </div>
-                    )}
-                    <button
-                      onClick={() => removePreview(index, false)}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={12} />
-                    </button>
-                    <p className="text-xs text-slate-500 truncate mt-1">
-                      {preview.name}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Upload Queue com Prioridade */}
-          {uploadQueue.length > 0 && (
-            <div className="mt-4">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="font-bold text-slate-700 text-sm flex items-center">
-                  📋 Fila de Upload ({uploadQueue.length})
-                </h4>
-                <div className="flex gap-2">
-                  <button
-                    onClick={togglePause}
-                    disabled={uploadQueue.length === 0}
-                    className="flex items-center text-xs font-bold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50 bg-amber-100 text-amber-700 hover:bg-amber-200"
+            {/* Previews */}
+            <Group gap="xs">
+              {imagePreviews.map((preview, index) => (
+                <div key={index} className="relative group">
+                  <Paper radius="md" withBorder className="overflow-hidden w-20 h-20">
+                    <img src={preview.url} alt="" className="w-full h-full object-cover" />
+                  </Paper>
+                  <ActionIcon 
+                    variant="filled" 
+                    color="red" 
+                    size="xs" 
+                    radius="xl" 
+                    className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => removePreview(index, true)}
                   >
-                    {isPaused ? (
-                      <PlayCircle size={14} className="mr-1" />
-                    ) : (
-                      <PauseCircle size={14} className="mr-1" />
-                    )}
-                    {isPaused ? "Retomar" : "Pausar"}
-                  </button>
-                  <button
-                    onClick={clearCompleted}
-                    className="text-xs font-bold px-3 py-1.5 rounded-lg transition-colors bg-slate-100 text-slate-600 hover:bg-slate-200"
-                  >
-                    Limpar Concluídos
-                  </button>
+                    <X size={10} />
+                  </ActionIcon>
                 </div>
-              </div>
-              <div className="space-y-2 max-h-64 overflow-y-auto">
-                {uploadQueue.map((item, _index) => (
-                  <div
-                    key={item.id}
-                    className="bg-white p-3 rounded-lg border border-slate-200"
+              ))}
+              {pdfPreviews.map((preview, index) => (
+                <div key={index} className="relative group">
+                  <Paper radius="md" withBorder className="overflow-hidden w-20 h-20 bg-red-50 flex items-center justify-center">
+                    {preview.isThumbnail ? <img src={preview.url} alt="" className="w-full h-full object-cover" /> : <File size={32} className="text-red-500" />}
+                  </Paper>
+                  <ActionIcon 
+                    variant="filled" 
+                    color="red" 
+                    size="xs" 
+                    radius="xl" 
+                    className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => removePreview(index, false)}
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2 flex-1">
-                        <FileText size={16} className="text-slate-400" />
-                        <span className="text-sm font-medium truncate">
-                          {item.file.name}
-                        </span>
-                        <span
-                          className={`text-xs px-2 py-0.5 rounded-full font-bold ${
-                            item.priority === "high"
-                              ? "bg-red-100 text-red-700"
-                              : item.priority === "low"
-                                ? "bg-slate-100 text-slate-600"
-                                : "bg-blue-100 text-blue-700"
-                          }`}
-                        >
-                          {item.priority === "high"
-                            ? "🔴 Alta"
-                            : item.priority === "low"
-                              ? "⚪ Baixa"
-                              : "🔵 Normal"}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`text-xs font-bold ${
-                            item.status === "completed"
-                              ? "text-emerald-600"
-                              : item.status === "error"
-                                ? "text-red-600"
-                                : item.status === "cancelled"
-                                  ? "text-amber-600"
-                                  : "text-slate-500"
-                          }`}
-                        >
-                          {item.status === "completed" && "✅ "}
-                          {item.status === "error" && "❌ "}
-                          {item.status === "cancelled" && "⏸️ "}
-                          {item.status === "uploading" && "⏳ "}
-                          {item.status === "pending" && "⏳ "}
-                          {item.status === "completed"
-                            ? "Concluído"
-                            : item.status === "error"
-                              ? "Erro"
-                              : item.status === "cancelled"
-                                ? "Cancelado"
-                                : item.status === "uploading"
-                                  ? "Enviando..."
-                                  : "Aguardando..."}
-                        </span>
-                        {item.status === "error" && (
-                          <button
-                            onClick={() => retryUpload(item.id)}
-                            className="text-xs text-primary-600 hover:text-primary-700 font-bold"
-                          >
-                            🔄 Retry
-                          </button>
-                        )}
-                        {(item.status === "pending" ||
-                          item.status === "uploading") && (
-                          <button
-                            onClick={() => cancelUpload(item.id)}
-                            className="text-xs text-red-600 hover:text-red-700 font-bold"
-                          >
-                            <X size={14} />
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                    <div className="relative h-2 bg-slate-100 rounded-full overflow-hidden">
-                      <div
-                        className={`absolute left-0 top-0 h-full transition-all ${
-                          item.status === "completed"
-                            ? "bg-emerald-500"
-                            : item.status === "error"
-                              ? "bg-red-500"
-                              : item.status === "cancelled"
-                                ? "bg-amber-500"
-                                : "bg-primary-500"
-                        }`}
-                        style={{ width: `${item.progress}%` }}
-                      />
-                    </div>
-                    {item.error && (
-                      <p className="text-xs text-red-500 mt-1 flex items-center">
-                        <AlertCircle size={10} className="mr-1" />
-                        {item.error}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+                    <X size={10} />
+                  </ActionIcon>
+                </div>
+              ))}
+            </Group>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-1">
-                Tipo
-              </label>
-              <select
+            <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+              <Select
+                label="Tipo de Documento"
                 value={tipoDocumento}
-                onChange={(e) => setTipoDocumento(e.target.value)}
-                className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-              >
-                <option value="documento">Documento</option>
-                <option value="nota_fiscal">Nota Fiscal</option>
-                <option value="contrato">Contrato</option>
-                <option value="certidao">Certidão</option>
-                <option value="outro">Outro</option>
-              </select>
-            </div>
+                onChange={setTipoDocumento}
+                data={[
+                  { value: 'documento', label: 'Documento' },
+                  { value: 'nota_fiscal', label: 'Nota Fiscal' },
+                  { value: 'contrato', label: 'Contrato' },
+                  { value: 'certidao', label: 'Certidão' },
+                  { value: 'outro', label: 'Outro' }
+                ]}
+                radius="md"
+              />
+              <TextInput
+                label="Descrição"
+                placeholder="Ex: NF Janeiro 2024"
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
+                radius="md"
+              />
+            </SimpleGrid>
 
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-1">
-                Pasta
-              </label>
-              <select
-                value={pastaSelecionada || ""}
-                onChange={(e) => setPastaSelecionada(e.target.value || null)}
-                className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
+            <Group justify="flex-end" pt="md">
+              <Button variant="subtle" color="gray" onClick={() => setShowUploadForm(false)} radius="md">Cancelar</Button>
+              <Button 
+                variant="filled" 
+                color="blue" 
+                onClick={handleUpload} 
+                loading={uploading} 
+                disabled={selectedFiles.length === 0}
+                radius="md"
+                leftSection={<Upload size={16} />}
               >
-                <option value="">Sem pasta</option>
-                {pastas.map((pasta) => (
-                  <option key={pasta._id} value={pasta._id}>
-                    {pasta.nome}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">
-              Descrição
-            </label>
-            <input
-              type="text"
-              value={descricao}
-              onChange={(e) => setDescricao(e.target.value)}
-              placeholder="Ex: NF Janeiro 2024"
-              className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-            />
-          </div>
-
-          <div className="flex gap-3 pt-2">
-            {uploading && (
-              <button
-                onClick={handleCancelAllUploads}
-                className="flex-1 bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors flex items-center justify-center"
-              >
-                <PauseCircle size={18} className="mr-2" />
-                Cancelar Todos
-              </button>
-            )}
-            <button
-              onClick={() => {
-                setShowUploadForm(false);
-                setSelectedFiles([]);
-                setUploadProgress([]);
-              }}
-              disabled={uploading}
-              className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 rounded-xl transition-colors disabled:opacity-50"
-            >
-              {uploading ? "Enviando..." : "Cancelar"}
-            </button>
-            <button
-              onClick={handleUpload}
-              disabled={uploading || selectedFiles.length === 0}
-              className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center"
-            >
-              {uploading ? (
-                <>
-                  <Loader2 className="animate-spin mr-2" size={18} />
-                  Enviando...
-                </>
-              ) : (
-                <>
-                  <Upload size={18} className="mr-2" />
-                  Enviar ({selectedFiles.length})
-                </>
-              )}
-            </button>
-          </div>
-        </div>
+                Enviar {selectedFiles.length} arquivo(s)
+              </Button>
+            </Group>
+          </Stack>
+        </Card>
       )}
 
-      {/* Barra de Progresso dos Uploads */}
+      {/* Progress */}
       {uploadProgress.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6 mb-6">
-          <h3 className="font-bold text-slate-700 mb-4 flex items-center">
-            <Upload size={20} className="mr-2 text-primary-600" />
-            Progresso dos Uploads
-          </h3>
-          <div className="space-y-3">
-            {uploadProgress.map((item, index) => (
-              <div key={index} className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-slate-700 truncate flex-1">
-                    {item.name}
-                  </span>
-                  <span
-                    className={`ml-4 text-xs font-bold ${
-                      item.status === "success"
-                        ? "text-emerald-600"
-                        : item.status === "error"
-                          ? "text-red-600"
-                          : item.status === "cancelled"
-                            ? "text-amber-600"
-                            : "text-slate-500"
-                    }`}
-                  >
-                    {item.status === "success" && "✅ "}
-                    {item.status === "error" && "❌ "}
-                    {item.status === "cancelled" && "⏸️ "}
-                    {item.status === "uploading" && "⏳ "}
-                    {item.status === "pending" && "⏳ "}
-                    {item.status === "success"
-                      ? "Concluído"
-                      : item.status === "error"
-                        ? "Erro"
-                        : item.status === "cancelled"
-                          ? "Cancelado"
-                          : item.status === "uploading"
-                            ? "Enviando..."
-                            : "Aguardando..."}
-                  </span>
-                </div>
-                <div className="relative h-3 bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className={`absolute left-0 top-0 h-full transition-all duration-300 ${
-                      item.status === "success"
-                        ? "bg-emerald-500"
-                        : item.status === "error"
-                          ? "bg-red-500"
-                          : item.status === "cancelled"
-                            ? "bg-amber-500"
-                            : "bg-primary-500"
-                    }`}
-                    style={{ width: `${item.progress}%` }}
-                  />
-                </div>
-                {item.error && (
-                  <p className="text-xs text-red-500 flex items-center">
-                    <AlertCircle size={12} className="mr-1" />
-                    {item.error}
-                  </p>
-                )}
-                {(item.status === "error" || item.status === "cancelled") && (
-                  <button
-                    onClick={() => handleRetryUpload(index)}
-                    className="text-xs text-primary-600 hover:text-primary-700 font-bold"
-                  >
-                    🔄 Tentar novamente
-                  </button>
-                )}
-              </div>
+        <Card withBorder radius="lg" mb="xl" padding="md">
+          <Stack gap="xs">
+            <Group justify="space-between">
+              <MantineText fw={700} size="sm">Progresso dos Uploads</MantineText>
+              {uploading && <Button variant="subtle" size="compact-xs" color="red" onClick={handleCancelAllUploads}>Cancelar Todos</Button>}
+            </Group>
+            {uploadProgress.map((item, idx) => (
+              <Box key={idx}>
+                <Group justify="space-between" mb={4}>
+                  <MantineText size="xs" fw={500} className="truncate max-w-[200px]">{item.name}</MantineText>
+                  <MantineText size="xs" fw={700} c={item.status === 'success' ? 'teal' : item.status === 'error' ? 'red' : 'blue'}>
+                    {item.status === 'success' ? 'Concluído' : item.status === 'error' ? 'Erro' : `${item.progress}%`}
+                  </MantineText>
+                </Group>
+                <Progress value={item.progress} color={item.status === 'success' ? 'teal' : item.status === 'error' ? 'red' : 'blue'} size="sm" radius="xl" striped={item.status === 'uploading'} animated={item.status === 'uploading'} />
+              </Box>
             ))}
-          </div>
-        </div>
+          </Stack>
+        </Card>
       )}
 
       {/* Modal de Nova Pasta */}
-      {showNovaPasta && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-bold text-lg flex items-center">
-                <Folder size={20} className="mr-2 text-primary-600" />
-                Nova Pasta
-              </h3>
-              <button
-                onClick={() => setShowNovaPasta(false)}
-                className="text-slate-400 hover:text-slate-600"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-bold text-slate-700 mb-1">
-                  Nome da Pasta *
-                </label>
-                <input
-                  type="text"
-                  value={novaPastaNome}
-                  onChange={(e) => setNovaPastaNome(e.target.value)}
-                  placeholder="Ex: Notas Fiscais 2024"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  autoFocus
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-bold text-slate-700 mb-1">
-                  Descrição
-                </label>
-                <input
-                  type="text"
-                  value={novaPastaDescricao}
-                  onChange={(e) => setNovaPastaDescricao(e.target.value)}
-                  placeholder="Ex: NFs de entrada"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-              </div>
-              <div className="flex gap-3 pt-2">
-                <button
-                  onClick={() => setShowNovaPasta(false)}
-                  className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 rounded-xl transition-colors"
-                >
-                  Cancelar
-                </button>
-                <button
-                  onClick={handleCriarPasta}
-                  disabled={criandoPasta || !novaPastaNome.trim()}
-                  className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50"
-                >
-                  {criandoPasta ? "Criando..." : "Criar Pasta"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal 
+        opened={showNovaPasta} 
+        onClose={() => setShowNovaPasta(false)} 
+        title={<Group gap={4}><Folder size={20} className="text-blue-600" /> Nova Pasta</Group>}
+        radius="lg"
+        centered
+      >
+        <Stack gap="md">
+          <TextInput
+            label="Nome da Pasta"
+            placeholder="Ex: Notas Fiscais 2024"
+            value={novaPastaNome}
+            onChange={(e) => setNovaPastaNome(e.target.value)}
+            radius="md"
+            autoFocus
+          />
+          <TextInput
+            label="Descrição"
+            placeholder="Ex: NFs de entrada"
+            value={novaPastaDescricao}
+            onChange={(e) => setNovaPastaDescricao(e.target.value)}
+            radius="md"
+          />
+          <Group justify="flex-end" pt="md">
+            <Button variant="subtle" color="gray" onClick={() => setShowNovaPasta(false)}>Cancelar</Button>
+            <Button 
+              color="blue" 
+              onClick={handleCriarPasta} 
+              loading={criandoPasta} 
+              disabled={!novaPastaNome.trim()}
+              radius="md"
+            >
+              Criar Pasta
+            </Button>
+          </Group>
+        </Stack>
+      </Modal>
 
       {/* Modal de Editar Pasta */}
       {editandoPasta && (
@@ -1501,243 +1194,192 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
       )}
 
       {/* Lista de Documentos */}
-      {documentos.length === 0 ? (
-        <div className="text-center py-12 bg-slate-50 rounded-xl border border-slate-200">
-          <FileText size={48} className="mx-auto text-slate-300 mb-3" />
-          <p className="text-slate-500 font-medium">Nenhum documento enviado</p>
-          <p className="text-sm text-slate-400 mt-1">
-            Clique em "Novo Documento" para enviar
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-3">
-          {documentos.map((doc) => (
-            <div
-              key={doc._id}
-              className="bg-white rounded-xl border border-slate-200 p-4 hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-4 flex-1">
-                  {/* Thumbnail ou Ícone */}
-                  {doc.thumbnail_path ? (
-                    <img
-                      src={`http://localhost:3000${doc.thumbnail_path}`}
-                      alt={doc.nome_original}
-                      className="w-16 h-16 object-cover rounded-lg border border-slate-200"
-                    />
-                  ) : (
-                    <div className="text-3xl">{getTipoIcon(doc.tipo)}</div>
-                  )}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-bold text-slate-800">
-                        {doc.nome_original}
-                      </h4>
-                      {doc.ocr_realizado && (
-                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">
-                          OCR
-                        </span>
-                      )}
-                    </div>
-                    {doc.descricao && (
-                      <p className="text-sm text-slate-500 mb-2">
-                        {doc.descricao}
-                      </p>
-                    )}
-                    <div className="flex flex-wrap gap-3 text-xs text-slate-400">
-                      <span>{formatTamanho(doc.tamanho)}</span>
-                      <span>•</span>
-                      <span>{formatDate(doc.createdAt)}</span>
-                      <span>•</span>
-                      <span className="capitalize">
-                        {doc.tipo.replace("_", " ")}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-2">
-                  <button
-                    onClick={() =>
-                      doc.mimetype === "application/pdf"
-                        ? setShowPdfViewer(doc)
-                        : handleDownload(doc)
-                    }
-                    className="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
-                    title={
-                      doc.mimetype === "application/pdf"
-                        ? "Visualizar PDF"
-                        : "Baixar"
-                    }
-                  >
-                    {doc.mimetype === "application/pdf" ? (
-                      <File size={18} />
+      <Box mt="xl">
+        <MantineText size="xs" fw={900} c="dimmed" mb="md" className="uppercase tracking-widest">Documentos</MantineText>
+        {documentos.length === 0 ? (
+          <Paper withBorder radius="lg" p={50} className="bg-slate-50/50 dark:bg-slate-800/50 border-dashed">
+            <Stack align="center" gap="xs">
+              <FileText size={48} className="text-slate-300" />
+              <MantineText fw={700} c="slate.6">Nenhum documento enviado</MantineText>
+              <MantineText size="sm" c="dimmed">Clique em "Novo Documento" para começar</MantineText>
+            </Stack>
+          </Paper>
+        ) : (
+          <Stack gap="sm">
+            {documentos.map((doc) => (
+              <Card 
+                key={doc._id} 
+                withBorder 
+                radius="lg" 
+                padding="md" 
+                className="hover:shadow-md transition-all bg-white dark:bg-slate-800"
+              >
+                <Group justify="space-between" align="flex-start" wrap="nowrap">
+                  <Group align="flex-start" wrap="nowrap" flex={1}>
+                    {doc.thumbnail_path ? (
+                      <Paper radius="md" withBorder className="overflow-hidden w-16 h-16 flex-shrink-0">
+                        <img src={`http://localhost:3000${doc.thumbnail_path}`} alt="" className="w-full h-full object-cover" />
+                      </Paper>
                     ) : (
-                      <Download size={18} />
+                      <ThemeIcon size={64} variant="light" color="slate" radius="md" className="flex-shrink-0">
+                        <MantineText size="xl">{getTipoIcon(doc.tipo)}</MantineText>
+                      </ThemeIcon>
                     )}
-                  </button>
-                  <button
-                    onClick={() => handleDownload(doc)}
-                    className="p-2 text-slate-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
-                    title="Baixar"
-                  >
-                    <Download size={18} />
-                  </button>
-                  <button
-                    onClick={() =>
-                      setShowMoverDoc(showMoverDoc === doc._id ? null : doc._id)
-                    }
-                    className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"
-                    title="Mover para outra pasta"
-                  >
-                    <Move size={18} />
-                  </button>
-                  <button
-                    onClick={() => handleOcr(doc._id)}
-                    disabled={ocrLoading === doc._id}
-                    className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors disabled:opacity-50"
-                    title="Executar OCR"
-                  >
-                    {ocrLoading === doc._id ? (
-                      <Loader2 className="animate-spin" size={18} />
-                    ) : (
-                      <Eye size={18} />
-                    )}
-                  </button>
-                  <button
-                    onClick={() => handleDelete(doc._id)}
-                    className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                    title="Excluir"
-                  >
-                    <Trash2 size={18} />
-                  </button>
+                    
+                    <Box style={{ minWidth: 0 }} flex={1}>
+                      <Group gap="xs" mb={4}>
+                        <MantineText fw={800} size="md" className="truncate">{doc.nome_original}</MantineText>
+                        {doc.ocr_realizado && <Badge size="xs" color="teal" variant="light">OCR</Badge>}
+                      </Group>
+                      
+                      {doc.descricao && <MantineText size="sm" c="dimmed" mb={4} lineClamp={1}>{doc.descricao}</MantineText>}
+                      
+                      <Group gap="md">
+                        <MantineText size="xs" c="dimmed" fw={600}>{formatTamanho(doc.tamanho)}</MantineText>
+                        <MantineText size="xs" c="dimmed">•</MantineText>
+                        <MantineText size="xs" c="dimmed" fw={600}>{formatDate(doc.createdAt)}</MantineText>
+                        <MantineText size="xs" c="dimmed">•</MantineText>
+                        <Badge size="xs" variant="outline" color="gray" className="capitalize">{doc.tipo.replace("_", " ")}</Badge>
+                      </Group>
+                    </Box>
+                  </Group>
 
-                  {/* Menu de Mover Documento */}
-                  {showMoverDoc === doc._id && (
-                    <>
-                      <div
-                        className="fixed inset-0 z-10"
-                        onClick={() => setShowMoverDoc(null)}
-                      />
-                      <div className="absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-slate-200 py-2 z-20 min-w-[200px] max-h-64 overflow-y-auto">
-                        <p className="text-xs font-bold text-slate-500 px-3 py-1 uppercase">
-                          Mover para:
-                        </p>
-                        <button
-                          onClick={() => handleMoverDocumento(doc._id, null)}
-                          className="w-full flex items-center px-3 py-2 text-xs text-slate-700 hover:bg-slate-50"
+                  <Group gap={8}>
+                    <Tooltip label={doc.mimetype === "application/pdf" ? "Visualizar PDF" : "Baixar"}>
+                      <ActionIcon 
+                        variant="light" 
+                        color="blue" 
+                        radius="md" 
+                        size="lg"
+                        onClick={() => doc.mimetype === "application/pdf" ? setShowPdfViewer(doc) : handleDownload(doc)}
+                      >
+                        {doc.mimetype === "application/pdf" ? <Eye size={18} /> : <Download size={18} />}
+                      </ActionIcon>
+                    </Tooltip>
+                    
+                    <Menu shadow="md" width={200} position="bottom-end">
+                      <Menu.Target>
+                        <ActionIcon variant="light" color="gray" radius="md" size="lg">
+                          <MoreVertical size={18} />
+                        </ActionIcon>
+                      </Menu.Target>
+                      <Menu.Dropdown>
+                        <Menu.Item leftSection={<Download size={16} />} onClick={() => handleDownload(doc)}>Download</Menu.Item>
+                        <Menu.Item leftSection={<Move size={16} />} onClick={() => setShowMoverDoc(doc._id)}>Mover para...</Menu.Item>
+                        <Menu.Item 
+                          leftSection={ocrLoading === doc._id ? <Loader size="xs" /> : <Search size={16} />} 
+                          onClick={() => handleOcr(doc._id)}
+                          disabled={ocrLoading === doc._id}
                         >
-                          <Folder size={12} className="mr-2" />
+                          Executar OCR
+                        </Menu.Item>
+                        <Menu.Divider />
+                        <Menu.Item color="red" leftSection={<Trash2 size={16} />} onClick={() => handleDelete(doc._id)}>Excluir</Menu.Item>
+                      </Menu.Dropdown>
+                    </Menu>
+                  </Group>
+                </Group>
+
+                {/* Inline Mover Folder Picker */}
+                {showMoverDoc === doc._id && (
+                  <Box mt="md" p="sm" className="bg-slate-50 dark:bg-slate-900/50 rounded-lg border border-slate-200">
+                    <Group justify="space-between" mb="xs">
+                      <MantineText size="xs" fw={700} c="dimmed">MOVER PARA:</MantineText>
+                      <ActionIcon size="xs" variant="subtle" onClick={() => setShowMoverDoc(null)}><X size={12} /></ActionIcon>
+                    </Group>
+                    <ScrollArea.Autosize mah={150}>
+                      <Stack gap={4}>
+                        <Button 
+                          variant="subtle" 
+                          color="gray" 
+                          size="xs" 
+                          fullWidth 
+                          justify="flex-start" 
+                          leftSection={<Folder size={12} />}
+                          onClick={() => handleMoverDocumento(doc._id, null)}
+                        >
                           Sem pasta
-                        </button>
+                        </Button>
                         {todasPastas.map((pasta) => (
-                          <button
+                          <Button 
                             key={pasta._id}
-                            onClick={() =>
-                              handleMoverDocumento(doc._id, pasta._id)
-                            }
-                            className="w-full flex items-center px-3 py-2 text-xs text-slate-700 hover:bg-slate-50"
+                            variant="subtle" 
+                            color="blue" 
+                            size="xs" 
+                            fullWidth 
+                            justify="flex-start" 
+                            leftSection={<Folder size={12} />}
+                            onClick={() => handleMoverDocumento(doc._id, pasta._id)}
                           >
-                            <Folder
-                              size={12}
-                              className="mr-2 text-primary-400"
-                            />
                             {pasta.nome}
-                          </button>
+                          </Button>
                         ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+                      </Stack>
+                    </ScrollArea.Autosize>
+                  </Box>
+                )}
+              </Card>
+            ))}
+          </Stack>
+        )}
+      </Box>
 
       {/* Modal de Visualização de OCR */}
-      {selectedDoc && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
-            <div className="p-6 border-b border-slate-200 flex items-center justify-between">
-              <h3 className="font-bold text-lg">{selectedDoc.nome_original}</h3>
-              <button
-                onClick={() => setSelectedDoc(null)}
-                className="text-slate-400 hover:text-slate-600"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            <div className="p-6 overflow-y-auto max-h-96">
-              <pre className="whitespace-pre-wrap text-sm text-slate-700 font-sans">
-                {selectedDoc.ocr_texto || "Nenhum texto extraído."}
-              </pre>
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal 
+        opened={!!selectedDoc} 
+        onClose={() => setSelectedDoc(null)} 
+        title={selectedDoc?.nome_original}
+        size="lg"
+        radius="lg"
+      >
+        <Paper withBorder p="md" className="bg-slate-50 dark:bg-slate-900">
+          <pre className="whitespace-pre-wrap text-sm text-slate-700 dark:text-slate-300 font-sans">
+            {selectedDoc?.ocr_texto || "Nenhum texto extraído."}
+          </pre>
+        </Paper>
+      </Modal>
 
       {/* Modal de Visualização de PDF */}
-      {showPdfViewer && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col">
-            <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
-              <div className="flex items-center gap-3">
-                <File className="text-primary-600" size={24} />
-                <div>
-                  <h3 className="font-bold text-slate-800">
-                    {showPdfViewer.nome_original}
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    {formatDate(showPdfViewer.createdAt)} •{" "}
-                    {formatTamanho(showPdfViewer.tamanho)}
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <a
-                  href={`http://localhost:3000${showPdfViewer.path}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
-                >
-                  <Download size={16} className="mr-2" />
-                  Download
-                </a>
-                <button
-                  onClick={() => setShowPdfViewer(null)}
-                  className="text-slate-400 hover:text-slate-600 p-2 hover:bg-slate-200 rounded-lg transition-colors"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-            </div>
-            <div className="flex-1 overflow-hidden bg-slate-100">
-              <iframe
-                src={`http://localhost:3000${showPdfViewer.path}#toolbar=0`}
-                className="w-full h-full"
-                title="Visualizador de PDF"
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal 
+        opened={!!showPdfViewer} 
+        onClose={() => setShowPdfViewer(null)} 
+        title={showPdfViewer?.nome_original}
+        size="70%"
+        radius="lg"
+        padding={0}
+        styles={{ body: { height: '80vh', display: 'flex', flexDirection: 'column' } }}
+      >
+        <Box flex={1} bg="slate.1">
+          <iframe
+            src={showPdfViewer ? `http://localhost:3000${showPdfViewer.path}#toolbar=0` : ''}
+            className="w-full h-full border-none"
+            title="Visualizador de PDF"
+          />
+        </Box>
+        <Group p="md" justify="flex-end" className="bg-slate-50 border-t border-slate-200">
+          <Button 
+            variant="filled" 
+            color="blue" 
+            component="a" 
+            href={showPdfViewer ? `http://localhost:3000${showPdfViewer.path}` : '#'} 
+            download 
+            leftSection={<Download size={16} />}
+          >
+            Download
+          </Button>
+        </Group>
+      </Modal>
     </div>
   );
 }
 
-// Modal de Editar Pasta
 function EditarPastaModal({ pastaId, onClose, onSaved }) {
   const [nome, setNome] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Carregar dados da pasta
-    documentosAPI.pastas
-      .getById(pastaId)
-      .then((res) => {
-        setNome(res.data.nome);
-      })
+    documentosAPI.pastas.getById(pastaId)
+      .then((res) => setNome(res.data.nome))
       .catch((err) => {
         console.error(err);
         onClose();
@@ -1746,7 +1388,6 @@ function EditarPastaModal({ pastaId, onClose, onSaved }) {
 
   const handleSalvar = async () => {
     if (!nome.trim()) return;
-
     try {
       setLoading(true);
       await documentosAPI.pastas.update(pastaId, { nome });
@@ -1759,50 +1400,20 @@ function EditarPastaModal({ pastaId, onClose, onSaved }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-lg flex items-center">
-            <Edit2 size={20} className="mr-2 text-amber-600" />
-            Editar Pasta
-          </h3>
-          <button
-            onClick={onClose}
-            className="text-slate-400 hover:text-slate-600"
-          >
-            <X size={20} />
-          </button>
-        </div>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-bold text-slate-700 mb-1">
-              Nome da Pasta *
-            </label>
-            <input
-              type="text"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
-              autoFocus
-            />
-          </div>
-          <div className="flex gap-3 pt-2">
-            <button
-              onClick={onClose}
-              className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 rounded-xl transition-colors"
-            >
-              Cancelar
-            </button>
-            <button
-              onClick={handleSalvar}
-              disabled={loading || !nome.trim()}
-              className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl transition-colors disabled:opacity-50"
-            >
-              {loading ? "Salvando..." : "Salvar"}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Modal opened onClose={onClose} title="Editar Pasta" centered radius="lg">
+      <Stack gap="md">
+        <TextInput
+          label="Nome da Pasta"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          radius="md"
+          autoFocus
+        />
+        <Group justify="flex-end" pt="md">
+          <Button variant="subtle" color="gray" onClick={onClose}>Cancelar</Button>
+          <Button color="amber" onClick={handleSalvar} loading={loading} radius="md">Salvar</Button>
+        </Group>
+      </Stack>
+    </Modal>
   );
 }

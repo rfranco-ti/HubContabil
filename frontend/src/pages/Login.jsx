@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { LogIn, Building2, AlertCircle } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { authAPI } from "../services/api";
-import { setTokens } from "../utils/auth";
+import { useAuth } from "../context/AuthProvider";
 import { 
   TextInput, 
   PasswordInput, 
@@ -24,6 +24,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login: performLogin } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -49,14 +51,18 @@ export default function Login() {
         return;
       }
 
-      setTokens(accessToken, refreshToken);
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ nome, email: userEmail, cargo }),
-      );
+      const user = { 
+        id: response.data.id || "1", // Fallback para dev
+        nome, 
+        email: userEmail, 
+        role: cargo || "user" 
+      };
 
-      console.log("[LOGIN] Tokens saved, navigating to dashboard");
-      navigate("/dashboard");
+      performLogin(accessToken, refreshToken, user);
+
+      console.log("[LOGIN] Session established, navigating");
+      const destination = location.state?.from || "/dashboard";
+      navigate(destination, { replace: true });
     } catch (err) {
       console.error("[LOGIN] Error:", err);
       console.error("[LOGIN] Response data:", err.response?.data);

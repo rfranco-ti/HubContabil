@@ -80,6 +80,15 @@ class ClientService {
       tem_contabil,
       tem_fiscal,
       tem_dp,
+      capital_social,
+      porte,
+      situacao_data,
+      situacao_motivo,
+      opcao_simples,
+      data_opcao_simples,
+      data_exclusao_simples,
+      data_opcao_mei,
+      data_exclusao_mei,
     } = data;
 
     const client = await prisma.client.create({
@@ -121,6 +130,16 @@ class ClientService {
         temFiscal: tem_fiscal || false,
         temDp: tem_dp || false,
 
+        capitalSocial: capital_social ? Number(capital_social) : 0,
+        porte: porte || null,
+        situacaoData: situacao_data || null,
+        situacaoMotivo: situacao_motivo || null,
+        opcaoSimples: opcao_simples || false,
+        dataOpcaoSimples: data_opcao_simples || null,
+        dataExclusaoSimples: data_exclusao_simples || null,
+        dataOpcaoMei: data_opcao_mei || null,
+        dataExclusaoMei: data_exclusao_mei || null,
+
         contatos: contatos?.length ? {
           create: contatos.map(c => ({
             nome: c.nome || "",
@@ -144,6 +163,9 @@ class ClientService {
             cpfCnpj: s.cpf_cnpj || "",
             qualificacao: s.qualificacao || "",
             participacao: s.participacao || 0,
+            dataEntrada: s.data_entrada || "",
+            pais: s.pais || "",
+            representanteLegal: s.representante_legal || "",
           })),
         } : undefined,
       },
@@ -194,6 +216,15 @@ class ClientService {
       tem_contabil,
       tem_fiscal,
       tem_dp,
+      capital_social,
+      porte,
+      situacao_data,
+      situacao_motivo,
+      opcao_simples,
+      data_opcao_simples,
+      data_exclusao_simples,
+      data_opcao_mei,
+      data_exclusao_mei,
     } = data;
 
     const client = await prisma.client.update({
@@ -223,6 +254,16 @@ class ClientService {
         temContabil: tem_contabil,
         temFiscal: tem_fiscal,
         temDp: tem_dp,
+
+        capitalSocial: capital_social !== undefined ? Number(capital_social) : undefined,
+        porte: porte,
+        situacaoData: situacao_data,
+        situacaoMotivo: situacao_motivo,
+        opcaoSimples: opcao_simples,
+        dataOpcaoSimples: data_opcao_simples,
+        dataExclusaoSimples: data_exclusao_simples,
+        dataOpcaoMei: data_opcao_mei,
+        dataExclusaoMei: data_exclusao_mei,
 
         cnaePrincipalCodigo: cnae_principal?.codigo,
         cnaePrincipalDescricao: cnae_principal?.descricao,
@@ -264,6 +305,9 @@ class ClientService {
             cpfCnpj: s.cpf_cnpj || "",
             qualificacao: s.qualificacao || "",
             participacao: s.participacao || 0,
+            dataEntrada: s.data_entrada || "",
+            pais: s.pais || "",
+            representanteLegal: s.representante_legal || "",
           })),
         } : undefined,
       },
@@ -295,10 +339,12 @@ class ClientService {
    */
   static formatForFrontend(client) {
     return {
+      id: client.id,
       _id: client.id,
       cnpj: client.cnpj,
       razao_social: client.razaoSocial,
       nome_fantasia: client.nomeFantasia,
+      honorariosValor: Number(client.honorariosValor || 0),
       data_abertura: client.dataAbertura,
       natureza_juridica: client.naturezaJuridica,
       inscricao_estadual: client.inscricaoEstadual,
@@ -308,6 +354,15 @@ class ClientService {
       situacao_sefaz_estadual: client.situacaoSefazEstadual,
       situacao_sefaz_municipal: client.situacaoSefazMunicipal,
       regime_tributario: client.regimeTributario,
+      capital_social: Number(client.capitalSocial || 0),
+      porte: client.porte,
+      situacao_data: client.situacaoData,
+      situacao_motivo: client.situacaoMotivo,
+      opcao_simples: client.opcaoSimples,
+      data_opcao_simples: client.dataOpcaoSimples,
+      data_exclusao_simples: client.dataExclusaoSimples,
+      data_opcao_mei: client.dataOpcaoMei,
+      data_exclusao_mei: client.dataExclusaoMei,
       cnae_principal: {
         codigo: client.cnaePrincipalCodigo,
         descricao: client.cnaePrincipalDescricao,
@@ -327,7 +382,12 @@ class ClientService {
         telefone: client.contatoTelefone,
       },
       contatos: client.contatos,
-      qsa: client.qsa,
+      qsa: (client.qsa || []).map(s => ({
+        ...s,
+        cpf_cnpj: s.cpfCnpj,
+        data_entrada: s.dataEntrada,
+        representante_legal: s.representanteLegal
+      })),
       senhas_portais: client.senhasPortais,
       certificado_digital: {
         possui: client.certificadoPossui,
@@ -335,7 +395,7 @@ class ClientService {
         vencimento: client.certificadoVencimento,
       },
       financeiro: {
-        honorario_valor: client.honorariosValor,
+        honorario_valor: Number(client.honorariosValor || 0),
         honorario_dia_vencimento: client.honorariosDiaVencimento,
         servicos_prestados: client.servicosPrestados,
         tem_contabil: client.temContabil,

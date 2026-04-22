@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Search, Loader2, FileDown, Building2, Download, Info, XCircle } from "lucide-react";
+import api from "../services/api";
 
 export default function ComprovanteSimples() {
   const [cnpj, setCnpj] = useState("");
@@ -34,17 +35,12 @@ export default function ComprovanteSimples() {
     setSucesso(null);
 
     try {
-      const response = await fetch(`/api/simples/certificate/${clean}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      const response = await api.get(`/simples/certificate/${clean}`, {
+        responseType: "blob",
       });
 
-      if (!response.ok) {
-        const result = await response.json().catch(() => ({}));
-        throw new Error(result.message || "Erro ao gerar comprovante");
-      }
-
       // Recebe o PDF e faz download
-      const blob = await response.blob();
+      const blob = response.data;
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;

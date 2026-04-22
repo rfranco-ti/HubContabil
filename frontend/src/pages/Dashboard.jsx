@@ -41,11 +41,14 @@ import {
   Paper,
   useMantineTheme,
 } from "@mantine/core";
+import { toast } from "sonner";
 import { Calendar } from "@mantine/dates";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 
 dayjs.locale("pt-br");
+
+import api from "../services/api";
 
 import feriadosJSON from "../data/feriados_2026.json";
 import obrigacoesJSON from "../data/obrigacoes_2026.json";
@@ -104,34 +107,62 @@ export default function Dashboard() {
   const carregarDados = useCallback(async () => {
     setLoading(true);
     try {
-      const data = {
+      // 1. Calendário (estático por enquanto via JSONs locais)
+      const dataCalendario = {
         feriados: feriadosJSON.feriados_consolidados_2026 || [],
         obrigacoes: obrigacoesJSON["2026"] || {}
       };
-      setCalendarioData(data);
-      setKpis({
-        clientes: { ativos: 42, total: 45 },
-        honorarios: { total: 15420.50 },
-        certificados: { validos: 38, expirando: [{}, {}] },
-        documentos: { mes: 156 },
-        notificacoes: { naoLidas: 3 }
-      });
-      setAtividades([
-        { id: 1, titulo: "Novo Cliente", descricao: "Empresa XPTO cadastrada", tempo: "10m", cor: "blue" },
-        { id: 2, titulo: "NFS-e Recebida", descricao: "Serviços tomados", tempo: "1h", cor: "green" },
-        { id: 3, titulo: "Vencimento A1", descricao: "Certificado vence em 5 dias", tempo: "4h", cor: "red" },
-      ]);
+      setCalendarioData(dataCalendario);
 
-      // Encontra data inicial com eventos
+      // 2. Dados Reais do Backend
+      const response = await api.get("/dashboard");
+      const { dashboard } = response.data;
+
+      if (dashboard) {
+        // Mapear KPIs
+        setKpis({
+          clientes: { 
+            ativos: dashboard.kpis?.clientes?.ativos || 0, 
+            total: dashboard.kpis?.clientes?.total || 0 
+          },
+          honorarios: { 
+            total: dashboard.kpis?.honorarios?.total || 0 
+          },
+          certificados: { 
+            validos: dashboard.kpis?.certificados?.validos || 0, 
+            expirando: dashboard.kpis?.certificados?.expirando || [] 
+          },
+          documentos: { 
+            mes: dashboard.kpis?.documentos?.mes || 0 
+          },
+          notificacoes: { 
+            naoLidas: dashboard.kpis?.notificacoes?.naoLidas || 0 
+          }
+        });
+
+        // Mapear Atividades
+        if (dashboard.atividades && Array.isArray(dashboard.atividades)) {
+          setAtividades(dashboard.atividades.map(a => ({
+            id: Math.random(), // id temporário para key
+            titulo: a.titulo,
+            descricao: a.descricao,
+            tempo: a.tempoRelativo,
+            cor: a.cor
+          })));
+        }
+      }
+
+      // Encontra data inicial com eventos no calendário
       const hoje = new Date();
-      if (getEventsForDate(hoje, data).length > 0) {
+      if (getEventsForDate(hoje, dataCalendario).length > 0) {
         setDisplayedDate(hoje);
         setSelectedDate(hoje);
       } else {
+        // Buscar o próximo dia com evento
         for (let d = 1; d <= 31; d++) {
           const test = new Date(hoje.getFullYear(), hoje.getMonth(), d);
           if (test.getMonth() !== hoje.getMonth()) break;
-          if (getEventsForDate(test, data).length > 0) {
+          if (getEventsForDate(test, dataCalendario).length > 0) {
             setDisplayedDate(test);
             setSelectedDate(test);
             break;
@@ -139,11 +170,12 @@ export default function Dashboard() {
         }
       }
     } catch (e) {
-      console.error(e);
+      console.error("Erro ao carregar dados do dashboard:", e);
+      toast.error("Erro ao carregar dados do dashboard.");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => { carregarDados(); }, [carregarDados]);
 
@@ -254,11 +286,45 @@ export default function Dashboard() {
       </Group>
 
       <SimpleGrid cols={{ base: 1, sm: 2, lg: 5 }} spacing="md" mb="xl">
-        <KPICard title="Clientes" value={fmtNumber(kpis.clientes.ativos)} subtitle="Ativos" icon={Users} color="blue" />
-        <KPICard title="Honorários" value={fmtCurrency(kpis.honorarios.total)} subtitle="Março" icon={DollarSign} color="green" />
-        <KPICard title="Certificados" value={kpis.certificados.validos} subtitle="Válidos" icon={Shield} color="orange" />
-        <KPICard title="Docs" value={kpis.documentos.mes} subtitle="Mês" icon={FileCheck} color="cyan" />
-        <KPICard title="Alertas" value={kpis.notificacoes.naoLidas} subtitle="Pendentes" icon={Bell} color="red" />
+        <KPICard 
+          title="Clientes" 
+          value={fmtNumber(kpis.clientes.ativos)} 
+          subtitle="Ativos" 
+          icon={Users} 
+          color="blue" 
+          onClick={() => navigate("/clientes")} 
+        />
+        <KPICard 
+          title="Honorários" 
+          value={fmtCurrency(kpis.honorarios.total)} 
+          subtitle="Março" 
+          icon={DollarSign} 
+          color="green" 
+          onClick={() => navigate("/clientes")} 
+        />
+        <KPICard 
+          title="Certificados" 
+          value={kpis.certificados.validos} 
+          subtitle="Válidos" 
+          icon={Shield} 
+          color="orange" 
+          onClick={() => navigate("/certificados")} 
+        />
+        <KPICard 
+          title="Docs" 
+          value={kpis.documentos.mes} 
+          subtitle="Mês" 
+          icon={FileCheck} 
+          color="cyan" 
+          onClick={() => navigate("/documentos")} 
+        />
+        <KPICard 
+          title="Alertas" 
+          value={kpis.notificacoes.naoLidas} 
+          subtitle="Pendentes" 
+          icon={Bell} 
+          color="red" 
+        />
       </SimpleGrid>
 
       <Card withBorder radius="md" padding={0} mb="xl">

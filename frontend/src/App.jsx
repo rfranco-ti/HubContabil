@@ -9,6 +9,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { Toaster } from "@/components/ui/Toaster";
 import Layout from "./components/Layout";
+import { AuthProvider } from "./context/AuthProvider";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import RoleBasedRoute from "./routes/RoleBasedRoute";
 
 // Configuração do TanStack Query
 const queryClient = new QueryClient({
@@ -26,12 +29,12 @@ const queryClient = new QueryClient({
 import Login from "./pages/Login";
 
 // Lazy load todas as outras páginas
-const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
-const Clientes = lazy(() => import("./pages/Clientes"));
+const Clientes = lazy(() => import("./pages/clientes/ListaClientes"));
 const NovoCliente = lazy(() => import("./pages/NovoCliente"));
-const PesquisaEmpresas = lazy(() => import("./pages/PesquisaEmpresas"));
-const DetalheEmpresa = lazy(() => import("./pages/DetalheEmpresa"));
+const PesquisaEmpresas = lazy(() => import("./pages/pesquisa/PesquisaEmpresas"));
+const VisualizacaoEmpresa = lazy(() => import("./pages/pesquisa/VisualizacaoEmpresa"));
+const DetalheCliente = lazy(() => import("./pages/clientes/DetalheCliente"));
 const Robos = lazy(() => import("./pages/Robos"));
 const RoboSimples = lazy(() => import("./pages/RoboSimples"));
 const RoboSefaz = lazy(() => import("./pages/RoboSefaz"));
@@ -102,6 +105,7 @@ const SimuladorSimplesNacional = lazy(
 const SimuladorLucroPresumido = lazy(
   () => import("./pages/calculos/SimuladorLucroPresumido"),
 );
+const Error403 = lazy(() => import("./pages/Error403"));
 
 // Loading fallback component
 function PageLoader() {
@@ -123,19 +127,14 @@ function LazyRoute({ children, fallback = <PageLoader /> }) {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <AuthProvider>
+        <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/403" element={<LazyRoute><Error403 /></LazyRoute>} />
 
-          {/* Rotas protegidas com Layout */}
-          <Route
-            element={
-              <LazyRoute>
-                <ProtectedRoute />
-              </LazyRoute>
-            }
-          >
+          <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route
                 path="/dashboard"
@@ -158,6 +157,14 @@ function App() {
                 element={
                   <LazyRoute>
                     <NovoCliente />
+                  </LazyRoute>
+                }
+              />
+              <Route
+                path="/clientes/:cnpj"
+                element={
+                  <LazyRoute>
+                    <DetalheCliente />
                   </LazyRoute>
                 }
               />
@@ -189,7 +196,7 @@ function App() {
                 path="/empresa/:cnpj"
                 element={
                   <LazyRoute>
-                    <DetalheEmpresa />
+                    <VisualizacaoEmpresa />
                   </LazyRoute>
                 }
               />
@@ -297,22 +304,24 @@ function App() {
                   </LazyRoute>
                 }
               />
-              <Route
-                path="/logs"
-                element={
-                  <LazyRoute>
-                    <LogsSistema />
-                  </LazyRoute>
-                }
-              />
-              <Route
-                path="/admin"
-                element={
-                  <LazyRoute>
-                    <PainelAdmin />
-                  </LazyRoute>
-                }
-              />
+              <Route element={<RoleBasedRoute allowedRoles={["admin"]} />}>
+                <Route
+                  path="/logs"
+                  element={
+                    <LazyRoute>
+                      <LogsSistema />
+                    </LazyRoute>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <LazyRoute>
+                      <PainelAdmin />
+                    </LazyRoute>
+                  }
+                />
+              </Route>
               <Route
                 path="/simulador-rescisao"
                 element={
@@ -502,6 +511,7 @@ function App() {
         </Routes>
         <Toaster position="top-right" richColors closeButton />
       </Router>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

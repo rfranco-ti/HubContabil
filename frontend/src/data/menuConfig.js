@@ -30,6 +30,7 @@ export const menuGroups = [
     items: [
       { text: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
       { text: "Clientes", icon: Users, path: "/clientes", badge: true },
+      { text: "Pesquisar Empresas", icon: Search, path: "/pesquisa/empresas" },
     ],
   },
   {

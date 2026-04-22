@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { handleCommand } from "../data/slashCommands";
-import { getToken } from "../utils/auth";
+import api from "../services/api";
 
 const STORAGE_KEY = "chatbot_history";
 const SESSION_KEY = "chatbot_session";
@@ -136,20 +136,10 @@ Experimente os comandos rápidos abaixo ou digite sua pergunta!`,
     ]);
 
     try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
-        body: JSON.stringify({ message, sessionId }),
-      });
+      const response = await api.post("/chat", { message, sessionId });
+      const data = response.data;
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Erro na requisição");
-      }
+      // O axios lança erro para status != 2xx, então o check de response.ok não é necessário aqui
 
       if (data.sessionId) {
         setSessionId(data.sessionId);

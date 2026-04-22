@@ -464,25 +464,54 @@ async function getVisaoSemanaData() {
 }
 
 async function getAtividadesData(req) {
-  const novosClientes = await prisma.client.findMany({
-    take: 3,
-    orderBy: { createdAt: "desc" },
-    select: { id: true, razaoSocial: true, createdAt: true, status: true },
+  const [novosClientes, novosDocs] = await Promise.all([
+    prisma.client.findMany({
+      take: 5,
+      orderBy: { createdAt: "desc" },
+      select: { id: true, razaoSocial: true, createdAt: true, status: true },
+    }),
+    prisma.documento.findMany({
+      take: 5,
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        nomeOriginal: true,
+        tipo: true,
+        createdAt: true,
+        client: { select: { razaoSocial: true } },
+      },
+    }),
+  ]);
+
+  const atividades = [];
+
+  novosClientes.forEach((c) => {
+    atividades.push({
+      tipo: "cliente_novo",
+      titulo: `Cliente "${c.razaoSocial}" cadastrado`,
+      descricao: `Status: ${c.status}`,
+      data: c.createdAt,
+      cor: "blue",
+    });
   });
 
-  const novosDocs = await prisma.documento.findMany({
-    take: 3,
-    orderBy: { createdAt: "desc" },
-    select: {
-      id: true,
-      nomeOriginal: true,
-      tipo: true,
-      createdAt: true,
-      client: { select: { razaoSocial: true } },
-    },
+  novosDocs.forEach((d) => {
+    atividades.push({
+      tipo: "documento_upload",
+      titulo: `Documento "${d.nomeOriginal}" enviado`,
+      descricao: `Tipo: ${d.tipo} • ${d.client?.razaoSocial || "N/A"}`,
+      data: d.createdAt,
+      cor: "green",
+    });
   });
 
-  return { novosClientes, novosDocs };
+  return atividades
+    .sort((a, b) => b.data - a.data)
+    .slice(0, 10)
+    .map((a) => ({
+      ...a,
+      tempoRelativo: getTempoRelativo(a.data),
+    }));
 }
 
 function getTempoRelativo(data) {

@@ -13,7 +13,8 @@ import {
   Phone,
   Mail,
   MapPin,
-  AlertCircle
+  AlertCircle,
+  DollarSign
 } from "lucide-react";
 import { 
   Button, 
@@ -24,7 +25,7 @@ import {
   Group, 
   Stack, 
   Title, 
-  Text, 
+  Text as MantineText, 
   Card, 
   Center, 
   Alert, 
@@ -38,10 +39,10 @@ import { useMediaQuery } from "@mantine/hooks";
 import { DataTable } from 'mantine-datatable';
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { clientesAPI } from "../services/api";
-import { formatPhoneDisplay, formatCnpj } from "../utils/masks";
+import { clientesAPI } from "../../services/api";
+import { formatPhoneDisplay, formatCnpj } from "../../utils/masks";
 
-export default function Clientes() {
+export default function ListaClientes() {
   const [clientes, setClientes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -89,8 +90,8 @@ export default function Clientes() {
     if (!confirm(`Tem certeza que deseja excluir "${razaoSocial}"? Esta ação não pode ser desfeita.`)) return;
 
     try {
-      await clientesAPI.delete(cliente._id);
-      setClientes(clientes.filter((c) => c._id !== cliente._id));
+      await clientesAPI.delete(cliente.id);
+      setClientes(clientes.filter((c) => c.id !== cliente.id));
       toast.success("Cliente excluído com sucesso!");
     } catch (err) {
       toast.error("Erro ao excluir cliente.");
@@ -152,8 +153,8 @@ export default function Clientes() {
         </ActionIcon>
       </Menu.Target>
       <Menu.Dropdown onClick={(e) => e.stopPropagation()}>
-        <Menu.Item leftSection={<Eye size={14} />} onClick={() => navigate(`/empresa/${record.cnpj.replace(/\D/g, "")}`)}>Ver Detalhes</Menu.Item>
-        <Menu.Item leftSection={<Edit2 size={14} />} onClick={() => navigate(`/empresa/${record.cnpj.replace(/\D/g, "")}`)}>Editar</Menu.Item>
+        <Menu.Item leftSection={<Eye size={14} />} onClick={() => navigate(`/clientes/${record.cnpj.replace(/\D/g, "")}`)}>Ver Detalhes</Menu.Item>
+        <Menu.Item leftSection={<Edit2 size={14} />} onClick={() => navigate(`/clientes/${record.cnpj.replace(/\D/g, "")}`)}>Editar</Menu.Item>
         <Menu.Item leftSection={<FolderOpen size={14} />} onClick={() => toast.info("Em breve: Documentos do cliente")}>Documentos</Menu.Item>
         <Menu.Item leftSection={<Receipt size={14} />} onClick={() => toast.info("Em breve: Gerar recibo de honorários")}>Gerar Recibo</Menu.Item>
         <Menu.Divider />
@@ -167,7 +168,7 @@ export default function Clientes() {
       <Center h="100vh">
         <Stack align="center">
           <Loader size="xl" type="bars" />
-          <Text c="dimmed" fw={500}>Carregando clientes...</Text>
+          <MantineText c="dimmed" fw={500}>Carregando clientes...</MantineText>
         </Stack>
       </Center>
     );
@@ -182,7 +183,7 @@ export default function Clientes() {
           </ThemeIcon>
           <Box>
             <Title order={2} fw={800} c="dark.9" className="dark:text-white">Clientes</Title>
-            <Text c="dimmed" size="sm">Gerencie as empresas e acesse rapidamente seus dados fiscais</Text>
+            <MantineText c="dimmed" size="sm">Gerencie as empresas e acesse rapidamente seus dados fiscais</MantineText>
           </Box>
         </Group>
         
@@ -207,7 +208,7 @@ export default function Clientes() {
 
       {error && (
         <Alert icon={<AlertCircle size={16} />} title="Erro!" color="red" variant="light" mb="xl">
-          <Text size="sm">{error}</Text>
+          <MantineText size="sm">{error}</MantineText>
           <Button variant="subtle" color="red" size="xs" mt="sm" onClick={fetchClientes}>
             Tentar novamente
           </Button>
@@ -222,7 +223,7 @@ export default function Clientes() {
                 <Building size={40} />
               </ThemeIcon>
               <Title order={3}>Nenhum cliente cadastrado</Title>
-              <Text c="dimmed" ta="center" maw={400}>Comece adicionando uma nova empresa ao seu portfólio.</Text>
+              <MantineText c="dimmed" ta="center" maw={400}>Comece adicionando uma nova empresa ao seu portfólio.</MantineText>
               <Group mt="md">
                 <Button variant="default" onClick={() => navigate("/pesquisa/empresas")} leftSection={<Search size={16} />}>Pesquisar</Button>
                 <Button onClick={() => navigate("/clientes/novo")} leftSection={<Plus size={16} />}>Cadastrar</Button>
@@ -234,16 +235,16 @@ export default function Clientes() {
         <Card withBorder padding={0} radius="md" shadow="sm" style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
           <Box p="md" style={{ borderBottom: '1px solid var(--mantine-color-gray-2)' }} className="dark:border-slate-800 dark:bg-slate-900">
             <Group justify="space-between">
-              <TextInput
+              <MantineTextInput
                 placeholder="Buscar por Razão Social, Fantasia ou CNPJ..."
                 leftSection={<Search size={16} />}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 w={{ base: '100%', sm: 400 }}
               />
-              <Text size="sm" c="dimmed" fw={500}>
+              <MantineText size="sm" c="dimmed" fw={500}>
                 {filteredAndSortedRecords.length} de {clientes.length} clientes
-              </Text>
+              </MantineText>
             </Group>
           </Box>
 
@@ -254,6 +255,7 @@ export default function Clientes() {
                 withColumnBorders={false}
                 striped
                 highlightOnHover
+                idAccessor="id"
                 records={paginatedRecords}
                 columns={[
                   {
@@ -261,13 +263,13 @@ export default function Clientes() {
                     title: 'Empresa',
                     sortable: true,
                     render: (record) => (
-                      <Group wrap="nowrap" gap="sm" style={{ cursor: 'pointer' }} onClick={() => navigate(`/empresa/${record.cnpj.replace(/\D/g, "")}`)}>
+                      <Group wrap="nowrap" gap="sm" style={{ cursor: 'pointer' }} onClick={() => navigate(`/clientes/${record.cnpj.replace(/\D/g, "")}`)}>
                         <ThemeIcon variant="light" color="blue" size="md" radius="xl">
                           <Building size={14} />
                         </ThemeIcon>
                         <Box>
-                          <Text fw={600} size="sm">{record.razao_social}</Text>
-                          {record.nome_fantasia && <Text size="xs" c="dimmed">{record.nome_fantasia}</Text>}
+                          <MantineText fw={600} size="sm">{record.razao_social}</MantineText>
+                          {record.nome_fantasia && <MantineText size="xs" c="dimmed">{record.nome_fantasia}</MantineText>}
                         </Box>
                       </Group>
                     ),
@@ -276,7 +278,7 @@ export default function Clientes() {
                     accessor: 'cnpj',
                     title: 'CNPJ',
                     sortable: true,
-                    render: (record) => <Text size="sm" ff="monospace" c="dimmed">{formatCnpj(record.cnpj)}</Text>,
+                    render: (record) => <MantineText size="sm" ff="monospace" c="dimmed">{formatCnpj(record.cnpj)}</MantineText>,
                   },
                   {
                     accessor: 'contato',
@@ -285,12 +287,22 @@ export default function Clientes() {
                     render: (record) => (
                       <Box>
                         {record.contato_principal?.telefone ? (
-                          <Text size="sm">{formatPhoneDisplay(record.contato_principal.telefone)}</Text>
-                        ) : <Text size="sm" c="dimmed">—</Text>}
+                          <MantineText size="sm">{formatPhoneDisplay(record.contato_principal.telefone)}</MantineText>
+                        ) : <MantineText size="sm" c="dimmed">—</MantineText>}
                         {record.contato_principal?.email ? (
-                          <Text size="xs" c="dimmed">{record.contato_principal.email}</Text>
+                          <MantineText size="xs" c="dimmed">{record.contato_principal.email}</MantineText>
                         ) : null}
                       </Box>
+                    ),
+                  },
+                  {
+                    accessor: 'honorariosValor',
+                    title: 'Honorários',
+                    sortable: true,
+                    render: (record) => (
+                      <MantineText size="sm" fw={600} c="green.7">
+                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(record.honorariosValor || 0)}
+                      </MantineText>
                     ),
                   },
                   {
@@ -323,15 +335,15 @@ export default function Clientes() {
               <Box p="md" style={{ flex: 1, overflowY: 'auto' }}>
                 <Stack gap="md">
                   {paginatedRecords.map(record => (
-                    <Card key={record._id} withBorder radius="md" p="md" shadow="xs" onClick={() => navigate(`/empresa/${record.cnpj.replace(/\D/g, "")}`)} style={{ cursor: 'pointer' }}>
+                    <Card key={record.id} withBorder radius="md" p="md" shadow="xs" onClick={() => navigate(`/clientes/${record.cnpj.replace(/\D/g, "")}`)} style={{ cursor: 'pointer' }}>
                       <Group justify="space-between" align="flex-start" wrap="nowrap" mb="sm">
                         <Group gap="sm" wrap="nowrap">
                           <ThemeIcon variant="light" color="blue" size="lg" radius="md">
                             <Building size={20} />
                           </ThemeIcon>
                           <Box>
-                            <Text fw={700} size="sm" lineClamp={1}>{record.razao_social}</Text>
-                            <Text size="xs" ff="monospace" c="dimmed">{formatCnpj(record.cnpj)}</Text>
+                            <MantineText fw={700} size="sm" lineClamp={1}>{record.razao_social}</MantineText>
+                            <MantineText size="xs" ff="monospace" c="dimmed">{formatCnpj(record.cnpj)}</MantineText>
                           </Box>
                         </Group>
                         <ActionMenu record={record} />
@@ -341,28 +353,34 @@ export default function Clientes() {
                       
                       <Stack gap="xs">
                         <Group justify="space-between">
-                          <Text size="xs" fw={600} c="dimmed" tt="uppercase">Status</Text>
+                          <MantineText size="xs" fw={600} c="dimmed" tt="uppercase">Status</MantineText>
                           <Badge color={getStatusColor(record.status)} variant="light" size="sm">{record.status}</Badge>
                         </Group>
                         {record.contato_principal?.telefone && (
                           <Group wrap="nowrap" gap="xs">
                             <Phone size={14} className="text-gray-400" />
-                            <Text size="sm">{formatPhoneDisplay(record.contato_principal.telefone)}</Text>
+                            <MantineText size="sm">{formatPhoneDisplay(record.contato_principal.telefone)}</MantineText>
                           </Group>
                         )}
                         {record.contato_principal?.email && (
                           <Group wrap="nowrap" gap="xs">
                             <Mail size={14} className="text-gray-400" />
-                            <Text size="sm" truncate>{record.contato_principal.email}</Text>
+                            <MantineText size="sm" truncate>{record.contato_principal.email}</MantineText>
                           </Group>
                         )}
+                        <Group wrap="nowrap" gap="xs">
+                          <DollarSign size={14} className="text-green-600" />
+                          <MantineText size="sm" fw={600} c="green.7">
+                            {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(record.honorariosValor || 0)}
+                          </MantineText>
+                        </Group>
                       </Stack>
                     </Card>
                   ))}
                   
                   {paginatedRecords.length === 0 && (
                     <Center py="xl">
-                      <Text c="dimmed">Nenhum cliente encontrado com este filtro.</Text>
+                      <MantineText c="dimmed">Nenhum cliente encontrado com este filtro.</MantineText>
                     </Center>
                   )}
                   

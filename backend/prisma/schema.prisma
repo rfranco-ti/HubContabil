@@ -74,6 +74,15 @@ model Client {
   categoria               String           @default("Serviços")
   isBpo                   Boolean          @default(false) @map("is_bpo")
   isMei                   Boolean          @default(false) @map("is_mei")
+  capitalSocial           Decimal          @default(0) @map("capital_social") @db.Decimal(20, 2)
+  porte                   String?          @map("porte")
+  situacaoData            String?          @map("situacao_data")
+  situacaoMotivo          String?          @map("situacao_motivo")
+  opcaoSimples            Boolean          @default(false) @map("opcao_simples")
+  dataOpcaoSimples        String?          @map("data_opcao_simples")
+  dataExclusaoSimples     String?          @map("data_exclusao_simples")
+  dataOpcaoMei            String?          @map("data_opcao_mei")
+  dataExclusaoMei         String?          @map("data_exclusao_mei")
   observacoes             String?
   status                  String           @default("Ativo")
   usuarioResponsavelId    String?          @map("usuario_responsavel_id") @db.Uuid
@@ -115,6 +124,9 @@ model ClientQsa {
   cpfCnpj      String?  @map("cpf_cnpj")
   qualificacao String
   participacao Decimal? @db.Decimal(5, 2)
+  dataEntrada  String?  @map("data_entrada")
+  pais         String?  @map("pais")
+  representanteLegal String? @map("representante_legal")
   createdAt    DateTime @default(now()) @map("created_at")
   client       Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
 

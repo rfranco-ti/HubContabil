@@ -29,7 +29,7 @@ import {
   Moon,
 } from "lucide-react";
 import { useTheme } from "../../context/useTheme.js";
-import { clearAuth } from "../../utils/auth";
+import { useAuth } from "../../context/AuthProvider";
 import NotificationBell from "../NotificationBell";
 import { menuGroups } from "../../data/menuConfig";
 
@@ -72,17 +72,11 @@ export function AppHeader({ isMobile, burgerOpened, onBurgerClick }) {
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef(null);
 
-  const user = useMemo(() => {
-    try {
-      return JSON.parse(localStorage.getItem("user") || "{}");
-    } catch {
-      return {};
-    }
-  }, []);
+  const { user, logout } = useAuth();
 
-  const userName = user.nome || "Administrador";
-  const userCargo = user.cargo || "Contador";
-  const userEmail = user.email || "";
+  const userName = user?.nome || "Administrador";
+  const userCargo = user?.role || user?.cargo || "Contador";
+  const userEmail = user?.email || "";
   const userInitial = userName.charAt(0).toUpperCase();
   const isAdmin = ["admin", "administrador"].includes(userCargo.toLowerCase());
 
@@ -95,7 +89,7 @@ export function AppHeader({ isMobile, burgerOpened, onBurgerClick }) {
   }, [searchOpen]);
 
   const handleLogout = () => {
-    clearAuth();
+    logout();
     window.location.href = "/login";
   };
 

@@ -25,5 +25,8 @@ export default defineConfig({
         proxyTimeout: 120000
       }
     }
+  },
+  build: {
+    sourcemap: false
   }
 })
