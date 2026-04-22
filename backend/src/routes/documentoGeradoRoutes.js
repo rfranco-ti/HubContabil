@@ -60,6 +60,7 @@ router.post('/', upload.single('pdf'), documentoGeradoController.salvarDocumento
  *         description: Estatísticas retornadas com sucesso
  */
 router.get('/estatisticas', documentoGeradoController.getEstatisticas);
+router.get('/proximo-numero/:tipo', documentoGeradoController.getProximoNumero);
 
 /**
  * @swagger

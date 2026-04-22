@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { 
+  TextInput, 
+  Select, 
+  Stack, 
+  Group, 
+  Title, 
+  SimpleGrid, 
+  Divider,
+  Checkbox,
+  Textarea,
+  Paper,
+  Box
+} from '@mantine/core';
+import { IconUser, IconHome, IconBuilding, IconGavel, IconCalendar } from '@tabler/icons-react';
 
 /**
  * Formulário para preenchimento da Procuração
- * 
- * @param {Object} formData - Dados atuais do formulário
- * @param {Function} onChange - Callback para mudanças nos dados
  */
 const ProcuracaoForm = ({ formData = {}, onChange }) => {
   const [localData, setLocalData] = useState({
@@ -15,20 +26,27 @@ const ProcuracaoForm = ({ formData = {}, onChange }) => {
     outorganteRG: '',
     outorganteCPF: '',
     outorganteEndereco: '',
-    outorgadoNome: '',
+    outorgadoNome: 'Ricardo Franco',
     outorgadoNacionalidade: 'Brasileiro(a)',
-    outorgadoEstadoCivil: '',
-    outorgadoProfissao: '',
-    outorgadoRG: '',
-    outorgadoCPF: '',
-    outorgadoEndereco: '',
+    outorgadoEstadoCivil: 'Casado(a)',
+    outorgadoProfissao: 'Contador',
+    outorgadoRG: '00.000.000-0',
+    outorgadoCPF: '000.000.000-00',
+    outorgadoEndereco: 'Rua das Flores, 123, Salvador - BA',
     poderes: [],
     poderesOutros: '',
     dataEmissao: new Date().toISOString().split('T')[0],
-    cidade: '',
+    cidade: 'Salvador',
     validade: '',
     ...formData
   });
+
+  // Sincronizar dados externos
+  useEffect(() => {
+    if (formData && Object.keys(formData).length > 0) {
+      setLocalData(prev => ({ ...prev, ...formData }));
+    }
+  }, [formData]);
 
   const handleChange = (field, value) => {
     const newData = { ...localData, [field]: value };
@@ -36,344 +54,156 @@ const ProcuracaoForm = ({ formData = {}, onChange }) => {
     onChange?.(newData);
   };
 
-  const handlePoderesToggle = (poderKey) => {
-    const currentPoderes = localData.poderes || [];
-    const newPoderes = currentPoderes.includes(poderKey)
-      ? currentPoderes.filter(p => p !== poderKey)
-      : [...currentPoderes, poderKey];
-    
-    handleChange('poderes', newPoderes);
-  };
-
-  const handleDocumentoChange = (field, value) => {
-    let val = value.replace(/\D/g, '');
-    if (val.length <= 9) {
-      val = val.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3');
-    } else {
-      val = val.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-    }
-    handleChange(field, val);
-  };
-
   const estadoCivilOptions = [
-    'Solteiro(a)',
-    'Casado(a)',
-    'Divorciado(a)',
-    'Viúvo(a)',
-    'Separado(a)',
-    'União Estável'
+    { value: 'Solteiro(a)', label: 'Solteiro(a)' },
+    { value: 'Casado(a)', label: 'Casado(a)' },
+    { value: 'Divorciado(a)', label: 'Divorciado(a)' },
+    { value: 'Viúvo(a)', label: 'Viúvo(a)' },
+    { value: 'União Estável', label: 'União Estável' }
   ];
 
   const poderesOptions = [
-    { key: 'receita_federal', label: 'Representar perante a Receita Federal' },
-    { key: 'assinaturas', label: 'Assinar declarações e obrigações fiscais' },
-    { key: 'protocolar', label: 'Protocolizar documentos' },
-    { key: 'certidoes', label: 'Solicitar certidões' },
-    { key: 'bancos', label: 'Representar perante instituições bancárias' },
-    { key: 'orgaos_publicos', label: 'Representar perante órgãos públicos em geral' }
+    { value: 'receita_federal', label: 'Representar perante a Receita Federal' },
+    { value: 'assinaturas', label: 'Assinar declarações e obrigações fiscais' },
+    { value: 'protocolar', label: 'Protocolizar documentos' },
+    { value: 'certidoes', label: 'Solicitar certidões' },
+    { value: 'bancos', label: 'Representar perante instituições bancárias' },
+    { value: 'orgaos_publicos', label: 'Representar perante órgãos públicos' }
   ];
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h3 style={{ marginBottom: '20px', color: '#333' }}>📜 Procuração</h3>
-      
-      <div style={{ display: 'grid', gap: '15px' }}>
-        {/* Dados do Outorgante */}
-        <div style={{ borderBottom: '1px solid #eee', paddingBottom: '15px' }}>
-          <h4 style={{ marginBottom: '15px', color: '#666' }}>Dados do Outorgante (Cliente)</h4>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Nome Completo *
-            </label>
-            <input
-              type="text"
-              value={localData.outorganteNome}
-              onChange={(e) => handleChange('outorganteNome', e.target.value)}
-              placeholder="Nome completo"
-              style={inputStyle}
+    <Stack gap="lg">
+      {/* Outorgante */}
+      <Box>
+        <Title order={5} c="blue.7" mb="sm">👤 Dados do Outorgante (Cliente)</Title>
+        <Stack gap="sm">
+          <TextInput
+            label="Nome Completo"
+            placeholder="Nome do cliente ou representante"
+            leftSection={<IconUser size={16} />}
+            value={localData.outorganteNome}
+            onChange={(e) => handleChange('outorganteNome', e.target.value)}
+            required
+          />
+          <SimpleGrid cols={3} spacing="sm">
+            <TextInput
+              label="Nacionalidade"
+              value={localData.outorganteNacionalidade}
+              onChange={(e) => handleChange('outorganteNacionalidade', e.target.value)}
             />
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px', marginTop: '15px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Nacionalidade
-              </label>
-              <input
-                type="text"
-                value={localData.outorganteNacionalidade}
-                onChange={(e) => handleChange('outorganteNacionalidade', e.target.value)}
-                placeholder="Brasileiro(a)"
-                style={inputStyle}
-              />
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Estado Civil
-              </label>
-              <select
-                value={localData.outorganteEstadoCivil}
-                onChange={(e) => handleChange('outorganteEstadoCivil', e.target.value)}
-                style={inputStyle}
-              >
-                <option value="">Selecione...</option>
-                {estadoCivilOptions.map(op => (
-                  <option key={op} value={op}>{op}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Profissão
-              </label>
-              <input
-                type="text"
-                value={localData.outorganteProfissao}
-                onChange={(e) => handleChange('outorganteProfissao', e.target.value)}
-                placeholder="Profissão"
-                style={inputStyle}
-              />
-            </div>
-          </div>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '15px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                RG *
-              </label>
-              <input
-                type="text"
-                value={localData.outorganteRG}
-                onChange={(e) => handleChange('outorganteRG', e.target.value)}
-                placeholder="00.000.000"
-                maxLength={12}
-                style={inputStyle}
-              />
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                CPF *
-              </label>
-              <input
-                type="text"
-                value={localData.outorganteCPF}
-                onChange={(e) => handleDocumentoChange('outorganteCPF', e.target.value)}
-                placeholder="000.000.000-00"
-                maxLength={14}
-                style={inputStyle}
-              />
-            </div>
-          </div>
-
-          <div style={{ marginTop: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Endereço Completo *
-            </label>
-            <input
-              type="text"
-              value={localData.outorganteEndereco}
-              onChange={(e) => handleChange('outorganteEndereco', e.target.value)}
-              placeholder="Rua, número, bairro, cidade - UF"
-              style={inputStyle}
+            <Select
+              label="Estado Civil"
+              data={estadoCivilOptions}
+              value={localData.outorganteEstadoCivil}
+              onChange={(val) => handleChange('outorganteEstadoCivil', val)}
             />
-          </div>
-        </div>
-
-        {/* Dados do Outorgado */}
-        <div style={{ borderBottom: '1px solid #eee', paddingBottom: '15px' }}>
-          <h4 style={{ marginBottom: '15px', color: '#666' }}>Dados do Outorgado (Procurador)</h4>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Nome Completo *
-            </label>
-            <input
-              type="text"
-              value={localData.outorgadoNome}
-              onChange={(e) => handleChange('outorgadoNome', e.target.value)}
-              placeholder="Nome completo"
-              style={inputStyle}
+            <TextInput
+              label="Profissão"
+              value={localData.outorganteProfissao}
+              onChange={(e) => handleChange('outorganteProfissao', e.target.value)}
             />
-          </div>
+          </SimpleGrid>
+          <SimpleGrid cols={2} spacing="sm">
+            <TextInput
+              label="RG"
+              value={localData.outorganteRG}
+              onChange={(e) => handleChange('outorganteRG', e.target.value)}
+            />
+            <TextInput
+              label="CPF"
+              value={localData.outorganteCPF}
+              onChange={(e) => handleChange('outorganteCPF', e.target.value)}
+            />
+          </SimpleGrid>
+          <TextInput
+            label="Endereço Completo"
+            placeholder="Rua, nº, Bairro, Cidade - UF"
+            leftSection={<IconHome size={16} />}
+            value={localData.outorganteEndereco}
+            onChange={(e) => handleChange('outorganteEndereco', e.target.value)}
+          />
+        </Stack>
+      </Box>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px', marginTop: '15px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Nacionalidade
-              </label>
-              <input
-                type="text"
-                value={localData.outorgadoNacionalidade}
-                onChange={(e) => handleChange('outorgadoNacionalidade', e.target.value)}
-                placeholder="Brasileiro(a)"
-                style={inputStyle}
-              />
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Estado Civil
-              </label>
-              <select
-                value={localData.outorgadoEstadoCivil}
-                onChange={(e) => handleChange('outorgadoEstadoCivil', e.target.value)}
-                style={inputStyle}
-              >
-                <option value="">Selecione...</option>
-                {estadoCivilOptions.map(op => (
-                  <option key={op} value={op}>{op}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Profissão
-              </label>
-              <input
-                type="text"
-                value={localData.outorgadoProfissao}
-                onChange={(e) => handleChange('outorgadoProfissao', e.target.value)}
-                placeholder="Profissão"
-                style={inputStyle}
-              />
-            </div>
-          </div>
+      <Divider />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '15px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                RG *
-              </label>
-              <input
-                type="text"
-                value={localData.outorgadoRG}
-                onChange={(e) => handleChange('outorgadoRG', e.target.value)}
-                placeholder="00.000.000"
-                maxLength={12}
-                style={inputStyle}
-              />
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                CPF *
-              </label>
-              <input
-                type="text"
-                value={localData.outorgadoCPF}
-                onChange={(e) => handleDocumentoChange('outorgadoCPF', e.target.value)}
-                placeholder="000.000.000-00"
-                maxLength={14}
-                style={inputStyle}
-              />
-            </div>
-          </div>
-
-          <div style={{ marginTop: '15px' }}>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Endereço Completo *
-            </label>
-            <input
-              type="text"
+      {/* Outorgado */}
+      <Box>
+        <Title order={5} c="blue.7" mb="sm">⚖️ Dados do Outorgado (Procurador)</Title>
+        <Stack gap="sm">
+          <TextInput
+            label="Nome do Procurador"
+            value={localData.outorgadoNome}
+            onChange={(e) => handleChange('outorgadoNome', e.target.value)}
+          />
+          <SimpleGrid cols={2} spacing="sm">
+            <TextInput
+              label="CPF"
+              value={localData.outorgadoCPF}
+              onChange={(e) => handleChange('outorgadoCPF', e.target.value)}
+            />
+            <TextInput
+              label="Endereço do Procurador"
               value={localData.outorgadoEndereco}
               onChange={(e) => handleChange('outorgadoEndereco', e.target.value)}
-              placeholder="Rua, número, bairro, cidade - UF"
-              style={inputStyle}
             />
-          </div>
-        </div>
+          </SimpleGrid>
+        </Stack>
+      </Box>
 
-        {/* Poderes */}
-        <div style={{ borderBottom: '1px solid #eee', paddingBottom: '15px' }}>
-          <h4 style={{ marginBottom: '15px', color: '#666' }}>Poderes Concedidos</h4>
-          
-          <div style={{ display: 'grid', gap: '10px' }}>
-            {poderesOptions.map((poder) => (
-              <label key={poder.key} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={(localData.poderes || []).includes(poder.key)}
-                  onChange={() => handlePoderesToggle(poder.key)}
-                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                />
-                <span>{poder.label}</span>
-              </label>
+      <Divider />
+
+      {/* Poderes */}
+      <Box>
+        <Title order={5} c="blue.7" mb="sm">📜 Poderes Concedidos</Title>
+        <Checkbox.Group
+          value={localData.poderes}
+          onChange={(vals) => handleChange('poderes', vals)}
+        >
+          <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xs">
+            {poderesOptions.map((op) => (
+              <Checkbox key={op.value} value={op.value} label={op.label} />
             ))}
-            
-            <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #ddd' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-                Outros Poderes (Especificar)
-              </label>
-              <textarea
-                value={localData.poderesOutros}
-                onChange={(e) => handleChange('poderesOutros', e.target.value)}
-                placeholder="Descreva outros poderes concedidos..."
-                rows={3}
-                style={{ ...inputStyle, resize: 'vertical' }}
-              />
-            </div>
-          </div>
-        </div>
+          </SimpleGrid>
+        </Checkbox.Group>
+        <Textarea
+          label="Outros Poderes (Especificar)"
+          placeholder="Descreva poderes adicionais..."
+          mt="md"
+          value={localData.poderesOutros}
+          onChange={(e) => handleChange('poderesOutros', e.target.value)}
+          rows={3}
+        />
+      </Box>
 
-        {/* Dados da Emissão */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Cidade *
-            </label>
-            <input
-              type="text"
-              value={localData.cidade}
-              onChange={(e) => handleChange('cidade', e.target.value)}
-              placeholder="Nome da cidade"
-              style={inputStyle}
-            />
-          </div>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Data de Emissão *
-            </label>
-            <input
-              type="date"
-              value={localData.dataEmissao}
-              onChange={(e) => handleChange('dataEmissao', e.target.value)}
-              style={inputStyle}
-            />
-          </div>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Validade (Opcional)
-            </label>
-            <input
-              type="text"
-              value={localData.validade}
-              onChange={(e) => handleChange('validade', e.target.value)}
-              placeholder="Ex: 1 ano, indeterminado"
-              style={inputStyle}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+      <Divider />
+
+      {/* Emissão */}
+      <Box>
+        <Title order={5} c="blue.7" mb="sm">📅 Dados da Emissão</Title>
+        <SimpleGrid cols={3} spacing="sm">
+          <TextInput
+            label="Cidade"
+            value={localData.cidade}
+            onChange={(e) => handleChange('cidade', e.target.value)}
+          />
+          <TextInput
+            label="Data"
+            type="date"
+            leftSection={<IconCalendar size={16} />}
+            value={localData.dataEmissao}
+            onChange={(e) => handleChange('dataEmissao', e.target.value)}
+          />
+          <TextInput
+            label="Validade"
+            placeholder="Ex: 1 ano"
+            value={localData.validade}
+            onChange={(e) => handleChange('validade', e.target.value)}
+          />
+        </SimpleGrid>
+      </Box>
+    </Stack>
   );
-};
-
-const inputStyle = {
-  width: '100%',
-  padding: '10px 12px',
-  border: '1px solid #ddd',
-  borderRadius: '6px',
-  fontSize: '14px',
-  boxSizing: 'border-box',
-  outline: 'none',
-  transition: 'border-color 0.2s'
 };
 
 export default ProcuracaoForm;

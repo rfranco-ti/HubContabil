@@ -383,6 +383,46 @@ const getEstatisticas = async (req, res, next) => {
   }
 };
 
+/**
+ * GET /api/documentos-gerados/proximo-numero/:tipo
+ * Obter próximo número sequencial para um tipo de documento hoje
+ */
+const getProximoNumero = async (req, res, next) => {
+  try {
+    const { tipo } = req.params;
+    
+    // Usuário logado
+    const usuarioId = req.usuario?.id;
+
+    if (!usuarioId) {
+      throw new AppError("Usuário não autenticado", 401);
+    }
+
+    const inicioDia = new Date();
+    inicioDia.setHours(0, 0, 0, 0);
+
+    const fimDia = new Date();
+    fimDia.setHours(23, 59, 59, 999);
+
+    const count = await prisma.documentoGerado.count({
+      where: {
+        tipo,
+        createdAt: {
+          gte: inicioDia,
+          lte: fimDia,
+        },
+      },
+    });
+
+    return res.json({
+      success: true,
+      proximo: count + 1,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   salvarDocumento,
   listarDocumentos,
@@ -391,4 +431,5 @@ module.exports = {
   deletarDocumento,
   atualizarStatus,
   getEstatisticas,
+  getProximoNumero,
 };

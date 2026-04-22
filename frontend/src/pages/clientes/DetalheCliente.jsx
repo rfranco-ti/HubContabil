@@ -27,6 +27,7 @@ import {
   TrendingUp,
   Shield,
   Info,
+  FileSignature,
 } from "lucide-react";
 import { 
   Text as MantineText, 
@@ -315,6 +316,14 @@ export default function DetalheCliente() {
               <>
                 <Button 
                   variant="light" 
+                  color="indigo" 
+                  onClick={() => navigate(`/gerador-documentos?cnpj=${cleanCnpj}`)}
+                  leftSection={<FileSignature size={16} />}
+                >
+                  Gerar Documento
+                </Button>
+                <Button 
+                  variant="light" 
                   color="blue" 
                   onClick={handleAutoFill}
                   loading={refreshing}
@@ -413,8 +422,8 @@ export default function DetalheCliente() {
                         <MantineText size="xs" fw={700}>{socio.data_entrada || "—"}</MantineText>
                       </div>
                       <div className="p-2 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                        <MantineText size="10px" fw={700} c="dimmed" className="uppercase tracking-tighter">Participação</MantineText>
-                        <MantineText size="xs" fw={700}>{socio.participacao ? `${socio.participacao}%` : "—"}</MantineText>
+                        <MantineText size="10px" fw={700} c="dimmed" className="uppercase tracking-tighter">Participação (Valor)</MantineText>
+                        <MantineText size="xs" fw={700}>{formatCurrency(socio.participacao)}</MantineText>
                       </div>
                     </SimpleGrid>
 

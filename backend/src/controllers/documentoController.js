@@ -63,175 +63,167 @@ function processarCertificado(buffer, senha) {
   }
 }
 
+// Processar e salvar um único arquivo (Helper)
+async function processarESalvarArquivo({ file, cliente, pasta, clienteId, usuarioId, tipo, senha }) {
+  const fileBuffer = fs.readFileSync(file.path);
+
+  // 1. Validação de Magic Bytes
+  const { fileTypeFromBuffer } = await import('file-type');
+  const fileType = await fileTypeFromBuffer(fileBuffer);
+  
+  if (!fileType) {
+    fs.unlinkSync(file.path);
+    throw new Error(`Tipo de arquivo desconhecido ou corrompido: ${file.originalname}`);
+  }
+
+  // 2. Validação contra Whitelist
+  if (!ALLOWED_MIME_TYPES.includes(fileType.mime)) {
+    fs.unlinkSync(file.path);
+    throw new Error(`Tipo de arquivo não permitido: ${fileType.mime} (${file.originalname})`);
+  }
+
+  // Gerar nome de arquivo UUID seguro
+  const ext = `.${fileType.ext}`;
+  const safeFilename = crypto.randomUUID() + ext;
+
+  // Upload para Supabase Storage
+  const storagePath = gerarStoragePath(cliente, pasta?.nome, safeFilename);
+
+  await storage.upload(BUCKET_DOCUMENTOS, storagePath, fileBuffer, {
+    contentType: fileType.mime,
+    upsert: false
+  });
+
+  // Gerar thumbnail se for imagem
+  let thumbnailPath = null;
+  if (fileType.mime.startsWith('image/')) {
+    try {
+      const thumbPath = gerarThumbnailPath(file.originalname);
+      await storage.upload(BUCKET_THUMBNAILS, thumbPath, fileBuffer, {
+        contentType: fileType.mime,
+        upsert: false
+      });
+      thumbnailPath = thumbPath;
+    } catch (thumbErr) {
+      console.log('[Upload] Thumbnail falhou, continuando:', thumbErr.message);
+    }
+  }
+
+  // Salvar registro no banco
+  const isCertificado = tipo === 'certificado_digital' || fileType.mime.includes('pkcs12') || file.originalname.toLowerCase().match(/\.(pfx|p12)$/);
+  const initialStatus = isCertificado ? 'CONCLUIDO' : 'PENDENTE';
+
+  const documento = await prisma.documento.create({
+    data: {
+      clientId: clienteId,
+      nomeOriginal: file.originalname,
+      nomeArquivo: safeFilename,
+      storagePath,
+      thumbnailPath,
+      mimetype: fileType.mime,
+      tamanhoBytes: file.size,
+      tamanhoOriginalBytes: file.size,
+      tipo: isCertificado ? 'certificado_digital' : (tipo || 'documento'),
+      status: initialStatus,
+      descricao: isCertificado ? 'Certificado Digital' : null,
+      pastaId: pasta?.id || null,
+      uploadedById: usuarioId || null
+    }
+  });
+
+  // Remover arquivo local temporário
+  fs.unlinkSync(file.path);
+
+  // Processamento especial para Certificado Digital
+  if (isCertificado) {
+    if (senha) {
+      try {
+        const certInfo = processarCertificado(fileBuffer, senha);
+        const encryptedSenha = encrypt(senha);
+
+        await prisma.client.update({
+          where: { id: clienteId },
+          data: {
+            certificadoPossui: true,
+            certificadoSenha: encryptedSenha,
+            certificadoEmissao: certInfo.emissao,
+            certificadoVencimento: certInfo.vencimento
+          }
+        });
+        console.log(`[Upload] Certificado processado para o cliente ${cliente.razaoSocial}.`);
+      } catch (certErr) {
+        console.error('[Upload] Falha ao processar metadados do certificado:', certErr.message);
+      }
+    }
+  } else {
+    // Enviar para fila de processamento
+    try {
+      await queueService.enqueueDocumentOptimization(documento.id);
+    } catch (queueErr) {
+      console.error('[Upload] Falha ao adicionar à fila:', queueErr.message);
+    }
+  }
+
+  return documento;
+}
+
 // Upload de documento
 const uploadDocumento = async (req, res) => {
   try {
-    const { clienteId, pastaId, descricao, tipo } = req.body;
+    const { clienteId, pastaId, descricao, tipo, senha } = req.body;
     const usuarioId = req.usuario?.id;
 
-    if (!clienteId) {
-      return res.status(400).json({ error: 'clienteId é obrigatório' });
-    }
-    if (!req.file) {
-      return res.status(400).json({ error: 'Nenhum arquivo enviado' });
-    }
+    if (!clienteId) return res.status(400).json({ error: 'clienteId é obrigatório' });
+    if (!req.file) return res.status(400).json({ error: 'Nenhum arquivo enviado' });
 
-    // Buscar cliente e pasta
     const cliente = await prisma.client.findUnique({ where: { id: clienteId } });
-    if (!cliente) {
-      return res.status(404).json({ error: 'Cliente não encontrado' });
-    }
+    if (!cliente) return res.status(404).json({ error: 'Cliente não encontrado' });
 
     let pasta = null;
     if (pastaId) {
-      pasta = await prisma.pastaDocumento.findFirst({
-        where: { id: pastaId, clientId: clienteId }
+      pasta = await prisma.pastaDocumento.findUnique({ where: { id: pastaId } });
+    }
+
+    const documento = await processarESalvarArquivo({
+      file: req.file,
+      cliente,
+      pasta,
+      clienteId,
+      usuarioId,
+      tipo,
+      senha
+    });
+
+    // Se houver descrição manual, atualiza
+    if (descricao) {
+      await prisma.documento.update({
+        where: { id: documento.id },
+        data: { descricao }
       });
-      if (!pasta) {
-        return res.status(404).json({ error: 'Pasta não encontrada' });
-      }
-    }
-
-    const fileBuffer = fs.readFileSync(req.file.path);
-
-    // 1. Validação de Magic Bytes
-    const { fileTypeFromBuffer } = await import('file-type');
-    const fileType = await fileTypeFromBuffer(fileBuffer);
-    
-    if (!fileType) {
-      fs.unlinkSync(req.file.path);
-      return res.status(400).json({ error: 'Tipo de arquivo desconhecido ou corrompido.' });
-    }
-
-    // 2. Validação contra Whitelist
-    if (!ALLOWED_MIME_TYPES.includes(fileType.mime)) {
-      fs.unlinkSync(req.file.path);
-      return res.status(400).json({ error: `Tipo de arquivo não permitido: ${fileType.mime}` });
-    }
-
-    // Gerar nome de arquivo UUID seguro
-    const ext = `.${fileType.ext}`;
-    const safeFilename = crypto.randomUUID() + ext;
-
-    // Upload para Supabase Storage
-    const storagePath = gerarStoragePath(cliente, pasta?.nome, safeFilename);
-
-    await storage.upload(BUCKET_DOCUMENTOS, storagePath, fileBuffer, {
-      contentType: fileType.mime,
-      upsert: false
-    });
-
-    // Gerar thumbnail se for imagem
-    let thumbnailPath = null;
-    if (req.file.mimetype.startsWith('image/')) {
-      try {
-        const thumbPath = gerarThumbnailPath(req.file.originalname);
-        await storage.upload(BUCKET_THUMBNAILS, thumbPath, fileBuffer, {
-          contentType: req.file.mimetype,
-          upsert: false
-        });
-        thumbnailPath = thumbPath;
-      } catch (thumbErr) {
-        console.log('[Upload] Thumbnail falhou, continuando:', thumbErr.message);
-      }
-    }
-
-    // Salvar registro no banco
-    const isCertificado = tipo === 'certificado_digital' || fileType.mime.includes('pkcs12') || req.file.originalname.toLowerCase().match(/\.(pfx|p12)$/);
-    const initialStatus = isCertificado ? 'CONCLUIDO' : 'PENDENTE';
-
-    const documento = await prisma.documento.create({
-      data: {
-        clientId: clienteId,
-        nomeOriginal: req.file.originalname,
-        nomeArquivo: safeFilename,
-        storagePath,
-        thumbnailPath,
-        mimetype: fileType.mime,
-        tamanhoBytes: req.file.size,
-        tamanhoOriginalBytes: req.file.size,
-        tipo: isCertificado ? 'certificado_digital' : (tipo || 'documento'),
-        status: initialStatus,
-        descricao,
-        pastaId: pastaId || null,
-        uploadedById: usuarioId || null
-      },
-      include: {
-        client: { select: { razaoSocial: true, nomeFantasia: true } },
-        pasta: { select: { nome: true } },
-        uploadedBy: { select: { nome: true } }
-      }
-    });
-
-    // Remover arquivo local temporário
-    fs.unlinkSync(req.file.path);
-
-    // Processamento especial para Certificado Digital
-    if (tipo === 'certificado_digital' || path.extname(req.file.originalname).toLowerCase().match(/\.(pfx|p12)$/)) {
-      const { senha } = req.body;
-      if (!senha) {
-        // Se for certificado mas não enviou senha, apenas logamos (o front deveria ter enviado)
-        console.warn('[Upload] Certificado enviado sem senha para processamento de datas.');
-      } else {
-        try {
-          const certInfo = processarCertificado(fileBuffer, senha);
-          const encryptedSenha = encrypt(senha);
-
-          await prisma.client.update({
-            where: { id: clienteId },
-            data: {
-              certificadoPossui: true,
-              certificadoSenha: encryptedSenha,
-              certificadoEmissao: certInfo.emissao,
-              certificadoVencimento: certInfo.vencimento
-            }
-          });
-          console.log(`[Upload] Certificado processado para o cliente ${cliente.razaoSocial}. Vencimento: ${certInfo.vencimento}`);
-        } catch (certErr) {
-          console.error('[Upload] Falha ao processar metadados do certificado:', certErr.message);
-          // Não falhamos o upload total se o processamento do certificado falhar (talvez senha errada),
-          // mas o registro do documento já foi criado acima.
-        }
-      }
-    } else {
-      // Enviar para fila de processamento se não for certificado
-      try {
-        await queueService.enqueueDocumentOptimization(documento.id);
-      } catch (queueErr) {
-        console.error('[Upload] Falha ao adicionar à fila:', queueErr.message);
-      }
     }
 
     res.status(201).json(documento);
   } catch (error) {
     console.error('[Upload] Erro:', error);
-    res.status(500).json({ error: 'Erro ao fazer upload do documento', details: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
 // Upload múltiplo
 const uploadMultiplo = async (req, res) => {
   try {
-    const { clienteId, pastaId, tipo } = req.body;
+    const { clienteId, pastaId, tipo, senha } = req.body;
     const usuarioId = req.usuario?.id;
 
-    if (!clienteId) {
-      return res.status(400).json({ error: 'clienteId é obrigatório' });
-    }
-    if (!req.files || req.files.length === 0) {
-      return res.status(400).json({ error: 'Nenhum arquivo enviado' });
-    }
+    if (!clienteId) return res.status(400).json({ error: 'clienteId é obrigatório' });
+    if (!req.files || req.files.length === 0) return res.status(400).json({ error: 'Nenhum arquivo enviado' });
 
     const cliente = await prisma.client.findUnique({ where: { id: clienteId } });
-    if (!cliente) {
-      return res.status(404).json({ error: 'Cliente não encontrado' });
-    }
+    if (!cliente) return res.status(404).json({ error: 'Cliente não encontrado' });
 
     let pasta = null;
     if (pastaId) {
-      pasta = await prisma.pastaDocumento.findFirst({
-        where: { id: pastaId, clientId: clienteId }
-      });
+      pasta = await prisma.pastaDocumento.findUnique({ where: { id: pastaId } });
     }
 
     const resultados = [];
@@ -239,46 +231,30 @@ const uploadMultiplo = async (req, res) => {
 
     for (const file of req.files) {
       try {
-        const storagePath = gerarStoragePath(cliente, pasta?.nome, file.originalname);
-        const fileBuffer = fs.readFileSync(file.path);
-
-        await storage.upload(BUCKET_DOCUMENTOS, storagePath, fileBuffer, {
-          contentType: file.mimetype,
-          upsert: false
+        const documento = await processarESalvarArquivo({
+          file,
+          cliente,
+          pasta,
+          clienteId,
+          usuarioId,
+          tipo,
+          senha
         });
-
-        const documento = await prisma.documento.create({
-          data: {
-            clientId: clienteId,
-            nomeOriginal: file.originalname,
-            nomeArquivo: file.filename,
-            storagePath,
-            mimetype: file.mimetype,
-            tamanhoBytes: file.size,
-            tamanhoOriginalBytes: file.size,
-            tipo: tipo || 'documento',
-            pastaId: pastaId || null,
-            uploadedById: usuarioId || null
-          }
-        });
-
-        fs.unlinkSync(file.path);
-        resultados.push({ arquivo: file.originalname, status: 'sucesso', documentoId: documento.id });
+        resultados.push(documento);
       } catch (err) {
         erros.push({ arquivo: file.originalname, erro: err.message });
-        if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
       }
     }
 
     res.status(201).json({
       sucesso: resultados.length,
-      falhas: erros.length,
-      resultados,
-      erros
+      falha: erros.length,
+      documentos: resultados,
+      erros: erros.length > 0 ? erros : undefined
     });
   } catch (error) {
-    console.error('[Upload Multiplo] Erro:', error);
-    res.status(500).json({ error: 'Erro ao fazer uploads', details: error.message });
+    console.error('[Upload Múltiplo] Erro:', error);
+    res.status(500).json({ error: 'Erro ao processar uploads múltiplos', detalhes: error.message });
   }
 };
 

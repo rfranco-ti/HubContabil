@@ -1,16 +1,52 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Save, Loader2, Building2, MapPin, User, Phone, Mail, Edit2, Plus, Trash2, Users, Search } from 'lucide-react';
+import { 
+  ArrowLeft, 
+  Save, 
+  Building2, 
+  MapPin, 
+  User, 
+  Phone, 
+  Mail, 
+  Edit2, 
+  Plus, 
+  Trash2, 
+  Users, 
+  Search,
+  Shield,
+  FileText,
+  CreditCard,
+  CheckCircle2,
+  AlertCircle,
+  Hash,
+  Globe,
+  Briefcase,
+  FileCode,
+  Lock,
+  CalendarDays,
+  FileUp,
+  Scale,
+  TrendingUp,
+  Info
+} from 'lucide-react';
 import { toast } from 'sonner';
-import { clientesAPI } from '../services/api';
-import { formatCnpj, formatPhoneDisplay, formatCep, formatCpf, formatPhoneByType, unformatPhone, formatCurrencyInput, unformatCurrency } from '../utils/masks';
+import api, { clientesAPI } from '../services/api';
+import { 
+  formatCnpj, 
+  formatPhoneDisplay, 
+  formatCep, 
+  formatCpf, 
+  unformatPhone, 
+  formatCurrencyInput, 
+  unformatCurrency 
+} from '../utils/masks';
 import { mapCnpjDataToForm, mapCnpjDataToEditableFields } from '../utils/cnpjMapper';
 import { 
   Button, 
   Card, 
-  TextInput, 
+  TextInput as MantineTextInput, 
   Select, 
-  Textarea, 
+  Textarea as MantineTextarea, 
   Group, 
   ActionIcon, 
   Text as MantineText, 
@@ -24,7 +60,13 @@ import {
   Paper,
   Stack,
   Divider,
-  Grid
+  Grid,
+  Stepper,
+  Switch,
+  NumberInput,
+  FileInput,
+  Checkbox,
+  Tooltip
 } from "@mantine/core";
 
 export default function NovoCliente() {
@@ -32,9 +74,11 @@ export default function NovoCliente() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [fetchingCnpj, setFetchingCnpj] = useState(false);
-  const [lastApiUsed, setLastApiUsed] = useState(null); // 'open_cnpja', 'invertexto', 'cache'
+  const [lastApiUsed, setLastApiUsed] = useState(null);
   const [fetchingInscricaoEstadual, setFetchingInscricaoEstadual] = useState(false);
   const [fetchingInscricaoMunicipal, setFetchingInscricaoMunicipal] = useState(false);
+  const [active, setActive] = useState(0);
+
   const [formData, setFormData] = useState({
     cnpj: '',
     razao_social: '',
@@ -45,6 +89,7 @@ export default function NovoCliente() {
     inscricao_municipal: '',
     situacao_sefaz_estadual: '',
     situacao_sefaz_municipal: '',
+    nire: '',
     regime_tributario: 'Não Enquadrado',
     is_mei: false,
     capital_social: 0,
@@ -54,12 +99,13 @@ export default function NovoCliente() {
     opcao_simples: false,
     data_opcao_simples: '',
     data_exclusao_simples: '',
+    motivo_exclusao_simples: '',
     data_opcao_mei: '',
     data_exclusao_mei: '',
     cnae_principal: { codigo: '', descricao: '' },
     cnaes_secundarios: [],
     qsa: [],
-    contatos: [], // Múltiplos contatos: [{nome, email, telefone}]
+    contatos: [],
     endereco: {
       cep: '',
       logradouro: '',
@@ -74,42 +120,26 @@ export default function NovoCliente() {
       email: '',
       telefone: ''
     },
+    certificado_digital: {
+      possui: false,
+      senha: '',
+      emissao: '',
+      vencimento: '',
+      arquivo: null
+    },
     status: 'Ativo',
     categoria: 'Serviços',
-    is_bpo: false,
+
     honorarios: { valor: 0, dia_vencimento: 10 },
     servicos_prestados: '',
     tem_contabil: false,
     tem_fiscal: false,
-    tem_dp: false,
     observacoes: ''
   });
 
-  // Carregar dados preenchidos se vier da Pesquisa de Empresas ou Detalhes
-  useEffect(() => {
-    if (location.state?.rawData) {
-      const data = location.state.rawData;
-      const newFormData = mapCnpjDataToForm(data, formData);
-      const newEditableFields = mapCnpjDataToEditableFields(data, editableFields);
-      
-      setFormData(newFormData);
-      setEditableFields(newEditableFields);
-      setLastApiUsed(data.apiUsed);
-      
-      toast.info('📋 Dados carregados da pesquisa. Revise e complete as informações!');
-    } else if (location.state?.dadosPreenchidos) {
-      // Legado para compatibilidade
-      const dados = location.state.dadosPreenchidos;
-      setFormData(prev => ({
-        ...prev,
-        ...dados,
-        cnpj: formatCnpj(dados.cnpj)
-      }));
-      toast.info('📋 Dados carregados. Revise e complete as informações!');
-    }
-  }, [location.state]);
+  const [showManualSimplesHistory, setShowManualSimplesHistory] = useState(false);
+  const [showManualMeiHistory, setShowManualMeiHistory] = useState(false);
 
-  // Campos editáveis (que vieram em branco da API)
   const [editableFields, setEditableFields] = useState({
     razao_social: false,
     nome_fantasia: false,
@@ -127,22 +157,15 @@ export default function NovoCliente() {
     email: false,
     telefone: false,
     cnae_codigo: false,
-    cnae_descricao: false
+    cnae_descricao: false,
+    capital_social: false
   });
 
+  // Handlers
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (field === 'cnpj') setLastApiUsed(null);
   };
-
-  // Busca automática ao completar 14 dígitos do CNPJ
-  useEffect(() => {
-    const cleanCnpj = formData.cnpj.replace(/\D/g, '');
-    if (cleanCnpj.length === 14 && !loading && !fetchingCnpj && lastApiUsed === null) {
-      handleCnpjBlur();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.cnpj]);
 
   const handleEnderecoChange = (field, value) => {
     setFormData(prev => ({
@@ -151,184 +174,86 @@ export default function NovoCliente() {
     }));
   };
 
-  const handleCnaeChange = (field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      cnae_principal: { ...prev.cnae_principal, [field]: value }
-    }));
-  };
-
-  const toggleEditable = (field) => {
-    setEditableFields(prev => ({ ...prev, [field]: !prev[field] }));
-  };
-
   const handleCnpjBlur = async () => {
     const cleanCnpj = formData.cnpj.replace(/\D/g, '');
     if (cleanCnpj.length !== 14) return;
 
     setFetchingCnpj(true);
     try {
-      // Usar API do backend (com fallback automático)
-      const response = await fetch(`/api/clientes/consulta/${cleanCnpj}`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      });
-      
-      if (!response.ok) {
-        setFetchingCnpj(false);
-        return;
-      }
-      
-      const result = await response.json();
+      const response = await clientesAPI.consultarCnpj(cleanCnpj);
+      const result = response.data;
 
-      if (result.success && result.data && (result.data.cnpj || result.data.razaoSocial)) {
+      if (result.success && result.data) {
         const cnpjData = result.data;
-        // Usar mapper extraído e testável
+        // Ajuste para o capital_social vindo da API externa
         const newFormData = mapCnpjDataToForm(cnpjData, formData);
         const newEditableFields = mapCnpjDataToEditableFields(cnpjData, editableFields);
 
         setFormData(newFormData);
         setEditableFields(newEditableFields);
-        
-        // Salvar qual API foi usada
         setLastApiUsed(cnpjData.apiUsed);
+        toast.success('Dados do CNPJ carregados com sucesso!');
       }
     } catch (err) {
       console.error('Erro ao buscar CNPJ:', err);
+      toast.error('Erro ao consultar CNPJ. Preencha manualmente.');
     } finally {
       setFetchingCnpj(false);
     }
   };
 
-  // Adicionar CNAE secundário manualmente
-  const handleAddCnaeSecundario = () => {
-    setFormData(prev => ({
-      ...prev,
-      cnaes_secundarios: [...prev.cnaes_secundarios, { codigo: '', descricao: '' }]
-    }));
-  };
-
-  // Buscar Inscrição Estadual via RPA SEFAZ BA
   const handleFetchInscricaoEstadual = async () => {
     const cleanCnpj = formData.cnpj.replace(/\D/g, '');
-    const uf = formData.endereco.uf?.toUpperCase();
-    
     if (cleanCnpj.length !== 14) {
-      toast.warning('Por favor, preencha o CNPJ completo antes de buscar a Inscrição Estadual.');
+      toast.warning('Preencha o CNPJ primeiro.');
       return;
     }
-    
-    if (uf !== 'BA') {
-      toast.warning('A busca automática de Inscrição Estadual via SEFAZ está disponível apenas para empresas da Bahia (UF = BA).');
-      return;
-    }
-    
     setFetchingInscricaoEstadual(true);
-    
     try {
-      // Chama o endpoint do backend que fará o scraping
-      const response = await fetch('/api/rpa/sefaz-ba/inscricao', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ cnpj: cleanCnpj })
-      });
+      const response = await api.post('/rpa/sefaz-ba/inscricao', { cnpj: cleanCnpj });
+      const { inscricaoEstadual, situacaoCadastral } = response.data;
       
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Erro ao buscar Inscrição Estadual');
-      }
-      
-      const data = await response.json();
-      
-      // Atualiza os campos de Inscrição Estadual e Situação SEFAZ
       setFormData(prev => ({
         ...prev,
-        inscricao_estadual: data.inscricaoEstadual || '',
-        situacao_sefaz_estadual: data.situacaoCadastral || ''
+        inscricao_estadual: inscricaoEstadual || prev.inscricao_estadual,
+        situacao_sefaz_estadual: situacaoCadastral || prev.situacao_sefaz_estadual
       }));
       
-      // Notificação de sucesso
-      toast.success(`✅ Inscrição Estadual obtida com sucesso!\nInscrição: ${data.inscricaoEstadual}`);
-      
-    } catch (error) {
-      console.error('Erro ao buscar Inscrição Estadual:', error);
-      toast.error(`❌ Erro ao buscar Inscrição Estadual: ${error.message}\n\nPor favor, preencha manualmente.`);
+      toast.success('Inscrição Estadual obtida com sucesso!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Erro ao buscar Inscrição Estadual. Tente preencher manualmente.');
     } finally {
       setFetchingInscricaoEstadual(false);
     }
   };
 
-  // Buscar Inscrição Municipal (CGA) via RPA Salvador
   const handleFetchInscricaoMunicipal = async () => {
     const cleanCnpj = formData.cnpj.replace(/\D/g, '');
-    const cidade = formData.endereco.cidade?.toUpperCase();
-    
     if (cleanCnpj.length !== 14) {
-      toast.warning('Por favor, preencha o CNPJ completo antes de buscar a Inscrição Municipal.');
+      toast.warning('Preencha o CNPJ primeiro.');
       return;
     }
-    
-    if (!cidade.includes('SALVADOR')) {
-      toast.warning('A busca automática de Inscrição Municipal via SEFAZ Salvador está disponível apenas para empresas de Salvador.');
-      return;
-    }
-    
     setFetchingInscricaoMunicipal(true);
-    
     try {
-      const response = await fetch('/api/rpa/salvador/inscricao', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify({ cnpj: cleanCnpj })
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Erro ao buscar Inscrição Municipal');
-      }
-      
-      const data = await response.json();
+      const response = await api.post('/rpa/salvador/inscricao', { cnpj: cleanCnpj });
+      const { inscricaoMunicipal, situacaoMunicipal } = response.data;
       
       setFormData(prev => ({
         ...prev,
-        inscricao_municipal: data.inscricaoMunicipal || '',
-        situacao_sefaz_municipal: data.situacaoMunicipal || ''
+        inscricao_municipal: inscricaoMunicipal || prev.inscricao_municipal,
+        situacao_sefaz_municipal: situacaoMunicipal || prev.situacao_sefaz_municipal
       }));
       
-      toast.success(`✅ Inscrição Municipal obtida com sucesso!\nCGA: ${data.inscricaoMunicipal}`);
-      
-    } catch (error) {
-      console.error('Erro ao buscar Inscrição Municipal:', error);
-      toast.error(`❌ Erro ao buscar Inscrição Municipal: ${error.message}\n\nPor favor, preencha manualmente.`);
+      toast.success('Inscrição Municipal obtida com sucesso!');
+    } catch (err) {
+      console.error(err);
+      toast.error('Erro ao buscar Inscrição Municipal. Tente preencher manualmente.');
     } finally {
       setFetchingInscricaoMunicipal(false);
     }
   };
 
-  const handleRemoveCnaeSecundario = (index) => {
-    setFormData(prev => ({
-      ...prev,
-      cnaes_secundarios: prev.cnaes_secundarios.filter((_, i) => i !== index)
-    }));
-  };
-
-  const handleCnaeSecundarioChange = (index, field, value) => {
-    setFormData(prev => ({
-      ...prev,
-      cnaes_secundarios: prev.cnaes_secundarios.map((cnae, i) => 
-        i === index ? { ...cnae, [field]: value } : cnae
-      )
-    }));
-  };
-
-  // Adicionar membro do QSA manualmente
   const handleAddQsa = () => {
     setFormData(prev => ({
       ...prev,
@@ -346,13 +271,10 @@ export default function NovoCliente() {
   const handleQsaChange = (index, field, value) => {
     setFormData(prev => ({
       ...prev,
-      qsa: prev.qsa.map((membro, i) => 
-        i === index ? { ...membro, [field]: field === 'participacao' ? parseFloat(value) || 0 : value } : membro
-      )
+      qsa: prev.qsa.map((item, i) => i === index ? { ...item, [field]: value } : item)
     }));
   };
 
-  // Funções para múltiplos contatos
   const handleAddContato = () => {
     setFormData(prev => ({
       ...prev,
@@ -370,989 +292,518 @@ export default function NovoCliente() {
   const handleContatoChange = (index, field, value) => {
     setFormData(prev => ({
       ...prev,
-      contatos: prev.contatos.map((contato, i) => 
-        i === index ? { ...contato, [field]: field === 'telefone' ? unformatPhone(value) : value } : contato
-      )
+      contatos: prev.contatos.map((item, i) => i === index ? { ...item, [field]: value } : item)
     }));
   };
 
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setLoading(true);
-
     try {
-      const cleanCnpj = formData.cnpj.replace(/\D/g, '');
-      
-      // Preparar dados limpos para envio
-      const dataToSave = {
-        cnpj: cleanCnpj,
-        razao_social: formData.razao_social,
-        nome_fantasia: formData.nome_fantasia,
-        data_abertura: formData.data_abertura || null,
-        natureza_juridica: formData.natureza_juridica,
-        inscricao_estadual: formData.inscricao_estadual,
-        inscricao_municipal: formData.inscricao_municipal,
-        regime_tributario: formData.regime_tributario,
-        capital_social: formData.capital_social,
-        porte: formData.porte,
-        situacao_data: formData.situacao_data,
-        situacao_motivo: formData.situacao_motivo,
-        opcao_simples: formData.opcao_simples,
-        data_opcao_simples: formData.data_opcao_simples,
-        data_exclusao_simples: formData.data_exclusao_simples,
-        data_opcao_mei: formData.data_opcao_mei,
-        data_exclusao_mei: formData.data_exclusao_mei,
-        cnae_principal: {
-          codigo: String(formData.cnae_principal.codigo || ''), // Converte para string
-          descricao: formData.cnae_principal.descricao || ''
-        },
-        cnaes_secundarios: (formData.cnaes_secundarios || []).map(cnae => ({
-          codigo: String(cnae.codigo || ''), // Converte para string
-          descricao: cnae.descricao || ''
+      const payload = {
+        ...formData,
+        cnpj: formData.cnpj.replace(/\D/g, ''),
+        capital_social: typeof formData.capital_social === 'string' ? unformatCurrency(formData.capital_social) : (formData.capital_social / 100),
+        qsa: formData.qsa.map(s => ({
+          ...s,
+          participacao: typeof s.participacao === 'string' ? unformatCurrency(s.participacao) : s.participacao
         })),
-        endereco: formData.endereco,
-        contato_principal: formData.contato_principal,
-        contatos: formData.contatos, // Múltiplos contatos
-        qsa: (formData.qsa || []).map(socio => ({
-          nome: socio.nome || '',
-          cpf_cnpj: socio.cpf_cnpj || '',
-          qualificacao: socio.qualificacao || '',
-          participacao: socio.participacao || 0
-        })),
-        categoria: formData.categoria,
-        is_bpo: formData.is_bpo,
-        observacoes: formData.observacoes,
-        status: formData.status
+        honorarios: {
+          ...formData.honorarios,
+          valor: typeof formData.honorarios.valor === 'string' ? unformatCurrency(formData.honorarios.valor) : formData.honorarios.valor
+        }
       };
-
-      console.log('📋 Enviando dados:', dataToSave);
-
-      await clientesAPI.create(dataToSave);
-      toast.success('✅ Cliente cadastrado com sucesso!');
+      
+      // Nota: Se houver arquivo de certificado, precisaríamos de FormData
+      // Por enquanto, seguindo o padrão JSON
+      await clientesAPI.create(payload);
+      toast.success('Cliente cadastrado com sucesso!');
       navigate('/clientes');
     } catch (err) {
-      console.error('❌ Erro ao cadastrar:', err);
-      console.error('Response:', err.response?.data);
-      
-      if (err.response?.status === 400 || err.response?.status === 409) {
-        toast.warning('⚠️ Este CNPJ já está cadastrado no sistema!');
-      } else {
-        const errorMsg = err.response?.data?.error || err.message || 'Erro ao cadastrar cliente';
-        toast.error(`❌ ${errorMsg}`);
-      }
+      console.error(err);
+      toast.error(err.response?.data?.message || 'Erro ao cadastrar cliente');
     } finally {
       setLoading(false);
     }
   };
 
-  // Componente de campo editável com Mantine
-  const EditableField = ({ label, value, onChange, type = 'text', fieldKey, placeholder, maxLength, options, styles, minRows }) => {
+  const toggleEditable = (field) => {
+    setEditableFields(prev => ({ ...prev, [field]: !prev[field] }));
+  };
+
+  // UI Components
+  const SectionHeader = ({ icon: Icon, title, color = "blue" }) => (
+    <Group gap="sm" mb="md">
+      <ThemeIcon variant="light" color={color} size="lg">
+        <Icon size={20} />
+      </ThemeIcon>
+      <Title order={5} fw={900}>{title}</Title>
+    </Group>
+  );
+
+  const EditableField = ({ label, value, onChange, type = 'text', fieldKey, placeholder, icon: Icon }) => {
     const isEditable = editableFields[fieldKey];
     const isEmpty = !value || value === '';
 
-    const labelContent = (
-      <Group gap="xs" mb={4}>
-        <MantineText span size="sm" fw={700} c="slate.7">{label}</MantineText>
-        {isEmpty && (
-          <ActionIcon 
-            variant="subtle" 
-            size="xs" 
-            color="blue"
-            onClick={() => toggleEditable(fieldKey)}
-            title={isEditable ? 'Preencher campo' : 'Editar campo'}
-          >
-            <Edit2 size={12} />
-          </ActionIcon>
-        )}
-      </Group>
-    );
-
-    if (options) {
-      return (
-        <Select
-          label={labelContent}
-          data={options}
-          value={value}
-          onChange={(val) => onChange(val || '')}
-          disabled={!isEditable && !isEmpty}
-          placeholder={isEditable ? placeholder : ''}
-          size="md"
-          radius="md"
-          styles={styles}
-        />
-      );
-    }
-
-    if (type === 'textarea') {
-      return (
-        <MantineTextarea
-          label={labelContent}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          disabled={!isEditable && !isEmpty}
-          placeholder={isEditable ? placeholder : ''}
-          size="md"
-          radius="md"
-          minRows={minRows || 3}
-          styles={styles}
-        />
-      );
-    }
-
-    if (type === 'currency') {
-      return (
-        <TextInput
-          label={labelContent}
-          value={formatCurrencyInput(value)}
-          onChange={(e) => onChange(unformatCurrency(e.target.value))}
-          disabled={!isEditable && !isEmpty}
-          placeholder={isEditable ? placeholder : 'R$ 0,00'}
-          size="md"
-          radius="md"
-          styles={styles}
-        />
-      );
-    }
-
     return (
-      <TextInput
+      <MantineTextInput
         type={type === 'date' ? 'date' : 'text'}
-        label={labelContent}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        maxLength={maxLength}
+        leftSection={Icon && <Icon size={16} className="text-slate-400" />}
+        label={
+          <Group gap="xs" mb={4}>
+            <MantineText span size="sm">{label}</MantineText>
+            {(isEmpty || isEditable) && (
+              <Tooltip label="Editar campo">
+                <ActionIcon variant="subtle" size="xs" onClick={() => toggleEditable(fieldKey)}>
+                  <Edit2 size={12} />
+                </ActionIcon>
+              </Tooltip>
+            )}
+          </Group>
+        }
+        value={type === 'currency' ? formatCurrencyInput(value) : value}
+        onChange={(e) => {
+          const val = e.target.value;
+          onChange(type === 'currency' ? unformatCurrency(val) : val);
+        }}
         disabled={!isEditable && !isEmpty}
-        placeholder={isEditable ? placeholder : ''}
-        size="md"
-        radius="md"
-        styles={styles}
+        placeholder={placeholder}
+
       />
     );
   };
 
+  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+
   return (
-    <Box p="md" className="h-full overflow-y-auto min-h-screen">
-      {/* Header */}
-      <Group mb="lg">
-        <Button 
-          variant="subtle" 
-          color="gray" 
-          leftSection={<ArrowLeft size={18} />} 
-          onClick={() => navigate('/clientes')}
-        >
-          Voltar para Clientes
-        </Button>
-      </Group>
-
-      <form onSubmit={handleSubmit} style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <Stack gap="xl">
-          {/* Dados Principais */}
-          <Card padding="xl" radius="md" withBorder shadow="sm">
-            <Group mb="xl">
-              <ThemeIcon variant="light" size={56} radius="xl">
-                <Building2 size={28} />
-              </ThemeIcon>
-              <div>
-                <Title order={3} fw={900}>Novo Cliente</Title>
-                <MantineText size="sm" c="dimmed">Preencha os dados da empresa para cadastrar no sistema.</MantineText>
-              </div>
-            </Group>
-
-          <Grid gutter="md">
-            <Grid.Col span={12}>
-              <MantineTextInput
-                label="CNPJ *"
-                value={formatCnpj(formData.cnpj)}
-                onChange={(e) => handleChange('cnpj', e.target.value)}
-                onBlur={handleCnpjBlur}
-                placeholder="00.000.000/0000-00"
-                required
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                rightSection={
-                  formData.cnpj.replace(/\D/g, '').length === 14 && (
-                    <ActionIcon 
-                      onClick={handleCnpjBlur}
-                      loading={fetchingCnpj}
-                      variant="subtle"
-                      color="blue"
-                    >
-                      <Search size={18} />
-                    </ActionIcon>
-                  )
-                }
-                description={fetchingCnpj ? 'Buscando dados do CNPJ...' : 'Digite o CNPJ completo e clique na lupa para buscar os dados automaticamente.'}
-              />
-              {/* Indicador de API usada */}
-              {lastApiUsed && formData.cnpj.replace(/\D/g, '').length === 14 && (
-                <Badge size="xs" color="gray" variant="light" mt={5}>
-                  {lastApiUsed === 'open_cnpja' && '🟢 open.cnpja.com'}
-                  {lastApiUsed === 'invertexto' && '🔵 invertexto.com'}
-                  {lastApiUsed === 'cache' && '⚡ Cache'}
-                </Badge>
-              )}
-            </Grid.Col>
-
-            <Grid.Col span={12}>
-              <EditableField
-                label="Razão Social *"
-                value={formData.razao_social}
-                onChange={(v) => handleChange('razao_social', v)}
-                fieldKey="razao_social"
-                placeholder="Ex: Empresa Exemplo LTDA"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <EditableField
-                label="Nome Fantasia"
-                value={formData.nome_fantasia}
-                onChange={(v) => handleChange('nome_fantasia', v)}
-                fieldKey="nome_fantasia"
-                placeholder="Ex: Empresa Exemplo"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <EditableField
-                label="Data de Abertura"
-                value={formData.data_abertura}
-                onChange={(v) => handleChange('data_abertura', v)}
-                type="date"
-                fieldKey="data_abertura"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <EditableField
-                label="Natureza Jurídica"
-                value={formData.natureza_juridica}
-                onChange={(v) => handleChange('natureza_juridica', v)}
-                fieldKey="natureza_juridica"
-                placeholder="Ex: Sociedade Empresária Limitada"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <EditableField
-                label="Porte da Empresa"
-                value={formData.porte}
-                onChange={(v) => handleChange('porte', v)}
-                fieldKey="porte"
-                placeholder="Ex: DEMAIS"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <EditableField
-                label="Capital Social"
-                value={formData.capital_social}
-                onChange={(v) => handleChange('capital_social', v)}
-                fieldKey="capital_social"
-                type="currency"
-                placeholder="Ex: 100.000,00"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <Select
-                label="Regime Tributário"
-                value={formData.regime_tributario}
-                onChange={(v) => handleChange('regime_tributario', v)}
-                data={[
-                  { value: 'Simples Nacional', label: 'Simples Nacional' },
-                  { value: 'Simples Nacional - MEI', label: 'Simples Nacional - MEI' },
-                  { value: 'Lucro Presumido', label: 'Lucro Presumido' },
-                  { value: 'Lucro Real', label: 'Lucro Real' },
-                  { value: 'Não Enquadrado', label: 'Não Enquadrado' },
-                  { value: 'Outro', label: 'Outro' }
-                ]}
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 2 }}>
-              <Box pt={32}>
-                <Paper withBorder radius="md" p="xs" bg={formData.is_mei ? "green.0" : "red.0"}>
-                  <Group justify="space-between" wrap="nowrap">
-                    <MantineText fw={700} size="sm">É MEI?</MantineText>
-                    <Badge 
-                      color={formData.is_mei ? "green" : "red"} 
-                      variant="filled"
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => handleChange('is_mei', !formData.is_mei)}
-                    >
-                      {formData.is_mei ? 'SIM' : 'NÃO'}
-                    </Badge>
-                  </Group>
-                </Paper>
-              </Box>
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <MantineTextInput
-                label="Inscrição Estadual"
-                value={formData.inscricao_estadual}
-                onChange={(e) => handleChange('inscricao_estadual', e.target.value.replace(/\D/g, ''))}
-                placeholder="Apenas números"
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                rightSection={
-                  <ActionIcon 
-                    onClick={handleFetchInscricaoEstadual}
-                    loading={fetchingInscricaoEstadual}
-                    disabled={formData.endereco.uf?.toUpperCase() !== 'BA'}
-                    variant="subtle"
-                    color="blue"
-                  >
-                    <Search size={18} />
-                  </ActionIcon>
-                }
-                description={formData.endereco.uf?.toUpperCase() === 'BA' ? 'Clique na lupa para buscar automaticamente na SEFAZ BA' : 'Disponível apenas para empresas da Bahia'}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <MantineTextInput
-                label="Inscrição Municipal"
-                value={formData.inscricao_municipal}
-                onChange={(e) => handleChange('inscricao_municipal', e.target.value.replace(/\D/g, ''))}
-                placeholder="Apenas números"
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                rightSection={
-                  <ActionIcon 
-                    onClick={handleFetchInscricaoMunicipal}
-                    loading={fetchingInscricaoMunicipal}
-                    disabled={!formData.endereco.cidade?.toUpperCase().includes('SALVADOR')}
-                    variant="subtle"
-                    color="blue"
-                  >
-                    <Search size={18} />
-                  </ActionIcon>
-                }
-                description={formData.endereco.cidade?.toUpperCase().includes('SALVADOR') ? 'Clique na lupa para buscar automaticamente na SEFAZ Salvador' : 'Disponível apenas para empresas de Salvador'}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <MantineTextInput
-                label="Situação SEFAZ Estadual"
-                value={formData.situacao_sefaz_estadual}
-                onChange={(e) => handleChange('situacao_sefaz_estadual', e.target.value)}
-                placeholder="ATIVO, INATIVO, etc."
-                disabled={fetchingInscricaoEstadual}
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                description="Preenchido automaticamente ao buscar na SEFAZ Estadual ou editável manualmente"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <MantineTextInput
-                label="Situação SEFAZ Municipal"
-                value={formData.situacao_sefaz_municipal}
-                onChange={(e) => handleChange('situacao_sefaz_municipal', e.target.value)}
-                placeholder="ATIVO, INATIVO, etc."
-                disabled={fetchingInscricaoMunicipal}
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                description="Preenchido automaticamente ao buscar na Prefeitura ou editável manualmente"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <Select
-                label="Status Receita Federal"
-                value={formData.status}
-                onChange={(v) => handleChange('status', v)}
-                data={[
-                  { value: 'Ativo', label: 'Ativo' },
-                  { value: 'Inativo', label: 'Inativo' },
-                  { value: 'Bloqueado', label: 'Bloqueado' }
-                ]}
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <MantineTextInput
-                label="Categoria"
-                value={formData.categoria}
-                onChange={(e) => handleChange('categoria', e.target.value)}
-                placeholder="Ex: Serviços, Comércio..."
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-              />
-            </Grid.Col>
-          </Grid>
-        </Card>
-
-        {/* Endereço */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group mb="xl">
-            <ThemeIcon variant="light" size={56} radius="xl" color="orange">
-              <MapPin size={28} />
-            </ThemeIcon>
-            <div>
-              <Title order={4} fw={900}>Endereço</Title>
-              <MantineText size="sm" c="dimmed">Localização da sede da empresa.</MantineText>
-            </div>
-          </Group>
-
-          <Grid gutter="md">
-            <Grid.Col span={{ base: 12, md: 4 }}>
-              <EditableField
-                label="CEP"
-                value={formatCep(formData.endereco.cep)}
-                onChange={(v) => handleEnderecoChange('cep', v)}
-                fieldKey="cep"
-                placeholder="00000-000"
-                maxLength={9}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 8 }}>
-              <EditableField
-                label="Logradouro"
-                value={formData.endereco.logradouro}
-                onChange={(v) => handleEnderecoChange('logradouro', v)}
-                fieldKey="logradouro"
-                placeholder="Rua, Avenida, etc."
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 3 }}>
-              <EditableField
-                label="Número"
-                value={formData.endereco.numero}
-                onChange={(v) => handleEnderecoChange('numero', v)}
-                fieldKey="numero"
-                placeholder="123"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 9 }}>
-              <EditableField
-                label="Complemento"
-                value={formData.endereco.complemento}
-                onChange={(v) => handleEnderecoChange('complemento', v)}
-                fieldKey="complemento"
-                placeholder="Sala, Andar, etc."
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 5 }}>
-              <EditableField
-                label="Bairro"
-                value={formData.endereco.bairro}
-                onChange={(v) => handleEnderecoChange('bairro', v)}
-                fieldKey="bairro"
-                placeholder="Nome do bairro"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 5 }}>
-              <EditableField
-                label="Cidade"
-                value={formData.endereco.cidade}
-                onChange={(v) => handleEnderecoChange('cidade', v)}
-                fieldKey="cidade"
-                placeholder="Salvador"
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 2 }}>
-              <EditableField
-                label="UF"
-                value={formData.endereco.uf}
-                onChange={(v) => handleEnderecoChange('uf', v.toUpperCase())}
-                fieldKey="uf"
-                placeholder="BA"
-                maxLength={2}
-              />
-            </Grid.Col>
-          </Grid>
-        </Card>
-
-        {/* Contatos */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group justify="space-between" mb="xl">
-            <Group>
-              <ThemeIcon variant="light" size={56} radius="xl" color="green">
-                <Mail size={28} />
-              </ThemeIcon>
-              <div>
-                <Title order={4} fw={900}>Contatos</Title>
-                <MantineText size="sm" c="dimmed">Informações de contato e responsáveis.</MantineText>
-              </div>
-            </Group>
-            <Button
-              variant="light"
-              color="green"
-              leftSection={<Plus size={18} />}
-              onClick={handleAddContato}
+    <Box p="md" className="max-w-[1200px] mx-auto bg-gray-50/50 min-h-screen">
+      <Stack gap="xl">
+        <Group justify="space-between" align="flex-start">
+          <Stack gap={0}>
+            <Button 
+              variant="subtle" 
+              color="gray" 
+              leftSection={<ArrowLeft size={16} />} 
+              onClick={() => navigate('/clientes')}
+              size="xs"
+              p={0}
+              mb={8}
             >
-              Adicionar Contato
+              Voltar para Lista
             </Button>
-          </Group>
-
-          <Stack gap="md">
-            {/* Primeiro contato - preenchido automaticamente pela API */}
-            <Paper withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800">
-              <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md">
-                <MantineTextInput
-                  label="Nome do Cliente"
-                  value={formData.contato_principal.nome || ''}
-                  onChange={(e) => setFormData(prev => ({ ...prev, contato_principal: { ...prev.contato_principal, nome: e.target.value } }))}
-                  placeholder="Nome do cliente"
-                  size="sm"
-                  radius="md"
-                  styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                />
-                <MantineTextInput
-                  label="E-mail"
-                  type="email"
-                  value={formData.contato_principal.email}
-                  onChange={(e) => setFormData(prev => ({ ...prev, contato_principal: { ...prev.contato_principal, email: e.target.value } }))}
-                  placeholder="contato@empresa.com"
-                  size="sm"
-                  radius="md"
-                  styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                />
-                <MantineTextInput
-                  label="Telefone"
-                  value={formatPhoneDisplay(formData.contato_principal.telefone, 'mobile')}
-                  onChange={(e) => setFormData(prev => ({ ...prev, contato_principal: { ...prev.contato_principal, telefone: unformatPhone(e.target.value) } }))}
-                  placeholder="(71) 9 99999-9999"
-                  maxLength={16}
-                  size="sm"
-                  radius="md"
-                  styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                />
-              </SimpleGrid>
-            </Paper>
-
-            {/* Contatos adicionais */}
-            {formData.contatos.map((contato, index) => (
-              <Paper key={index} withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800" pos="relative">
-                <ActionIcon
-                  variant="subtle"
-                  color="red"
-                  onClick={() => handleRemoveContato(index)}
-                  pos="absolute"
-                  top={10}
-                  right={10}
-                  style={{ zIndex: 10 }}
-                >
-                  <Trash2 size={18} />
-                </ActionIcon>
-
-                <Grid gutter="md" align="flex-end">
-                  <Grid.Col span={{ base: 12, md: 4 }}>
-                    <MantineTextInput
-                      label="Nome do Contato"
-                      value={contato.nome}
-                      onChange={(e) => handleContatoChange(index, 'nome', e.target.value)}
-                      placeholder="Nome da pessoa para contato"
-                      size="sm"
-                      radius="md"
-                      styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={{ base: 12, md: 4 }}>
-                    <MantineTextInput
-                      label="E-mail"
-                      type="email"
-                      value={contato.email}
-                      onChange={(e) => handleContatoChange(index, 'email', e.target.value)}
-                      placeholder="contato@empresa.com"
-                      size="sm"
-                      radius="md"
-                      styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={{ base: 12, md: 4 }}>
-                    <MantineTextInput
-                      label="Telefone"
-                      value={formatPhoneDisplay(contato.telefone, 'mobile')}
-                      onChange={(e) => handleContatoChange(index, 'telefone', e.target.value)}
-                      placeholder="(71) 9 99999-9999"
-                      maxLength={16}
-                      size="sm"
-                      radius="md"
-                      styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                    />
-                  </Grid.Col>
-                </Grid>
-              </Paper>
-            ))}
+            <Title order={2} fw={900} className="text-slate-800">Novo Cliente</Title>
+            <MantineText c="dimmed" size="sm" fw={500}>Cadastro completo com integração RPA e dados fiscais</MantineText>
           </Stack>
-        </Card>
 
-        {/* CNAE Principal */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group mb="xl">
-            <ThemeIcon variant="light" size={56} radius="xl" color="cyan">
-              <Building2 size={28} />
-            </ThemeIcon>
-            <div>
-              <Title order={4} fw={900}>CNAE Principal</Title>
-              <MantineText size="sm" c="dimmed">Classificação da atividade econômica principal.</MantineText>
-            </div>
+          <Group gap="sm">
+            <Button variant="light" color="gray" onClick={() => navigate('/clientes')}>Cancelar</Button>
+            {active < 3 ? (
+              <Button color="blue" onClick={nextStep}>Próximo Passo</Button>
+            ) : (
+              <Button color="emerald" onClick={handleSubmit} loading={loading} leftSection={<Save size={18} />}>
+                Finalizar Cadastro
+              </Button>
+            )}
           </Group>
-
-          <Grid gutter="md" align="flex-start">
-            <Grid.Col span={{ base: 12, md: 2 }}>
-              <EditableField
-                label="Código CNAE"
-                value={formData.cnae_principal.codigo}
-                onChange={(v) => handleCnaeChange('codigo', v)}
-                fieldKey="cnae_codigo"
-                placeholder="0000-0/00"
-                styles={{ input: { height: '62px' } }}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 10 }}>
-              <EditableField
-                label="Descrição"
-                value={formData.cnae_principal.descricao}
-                onChange={(v) => handleCnaeChange('descricao', v)}
-                fieldKey="cnae_descricao"
-                placeholder="Descrição da atividade principal"
-                type="textarea"
-                minRows={2}
-              />
-            </Grid.Col>
-          </Grid>
-        </Card>
-
-        {/* CNAEs Secundários */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group justify="space-between" mb="xl">
-            <Group>
-              <ThemeIcon variant="light" size={56} radius="xl" color="cyan">
-                <Building2 size={28} />
-              </ThemeIcon>
-              <div>
-                <Title order={4} fw={900}>CNAEs Secundários</Title>
-                <MantineText size="sm" c="dimmed">Atividades econômicas secundárias.</MantineText>
-              </div>
-            </Group>
-            <Button
-              variant="light"
-              color="cyan"
-              leftSection={<Plus size={18} />}
-              onClick={handleAddCnaeSecundario}
-            >
-              Adicionar
-            </Button>
-          </Group>
-
-          {formData.cnaes_secundarios.length === 0 ? (
-            <MantineText size="sm" c="dimmed" ta="center" py="xl">Nenhum CNAE secundário cadastrado.</MantineText>
-          ) : (
-            <Stack gap="md">
-              {formData.cnaes_secundarios.map((cnae, index) => (
-                <Paper key={index} withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800" pos="relative">
-                  <ActionIcon
-                    variant="subtle"
-                    color="red"
-                    onClick={() => handleRemoveCnaeSecundario(index)}
-                    pos="absolute"
-                    top={10}
-                    right={10}
-                    style={{ zIndex: 10 }}
-                  >
-                    <Trash2 size={18} />
-                  </ActionIcon>
-
-                  <Grid gutter="md" align="flex-end">
-                    <Grid.Col span={{ base: 12, md: 2 }}>
-                      <MantineTextInput
-                        label="Código"
-                        value={cnae.codigo}
-                        onChange={(e) => handleCnaeSecundarioChange(index, 'codigo', e.target.value)}
-                        placeholder="0000-0/00"
-                        size="sm"
-                        radius="md"
-                        styles={{ 
-                          label: { fontWeight: 700, marginBottom: 4 },
-                          input: { height: '62px' }
-                        }}
-                      />
-                    </Grid.Col>
-                    <Grid.Col span={{ base: 12, md: 10 }}>
-                      <MantineTextarea
-                        label="Descrição"
-                        value={cnae.descricao}
-                        onChange={(e) => handleCnaeSecundarioChange(index, 'descricao', e.target.value)}
-                        placeholder="Descrição da atividade"
-                        size="sm"
-                        radius="md"
-                        autosize
-                        minRows={2}
-                        styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                      />
-                    </Grid.Col>
-                  </Grid>
-                </Paper>
-              ))}
-            </Stack>
-          )}
-        </Card>
-
-        {/* Quadro Societário (QSA) */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group justify="space-between" mb="xl">
-            <Group>
-              <ThemeIcon variant="light" size={56} radius="xl" color="indigo">
-                <Users size={28} />
-              </ThemeIcon>
-              <div>
-                <Title order={4} fw={900}>Quadro Societário (QSA)</Title>
-                <MantineText size="sm" c="dimmed">Sócios e administradores da empresa.</MantineText>
-              </div>
-            </Group>
-            <Button
-              variant="light"
-              color="indigo"
-              leftSection={<Plus size={18} />}
-              onClick={handleAddQsa}
-            >
-              Adicionar Sócio
-            </Button>
-          </Group>
-
-          {formData.qsa.length === 0 ? (
-            <MantineText size="sm" c="dimmed" ta="center" py="xl">Nenhum sócio cadastrado.</MantineText>
-          ) : (
-            <Stack gap="md">
-              {formData.qsa.map((membro, index) => (
-                <Paper key={index} withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800" pos="relative">
-                  <ActionIcon
-                    variant="subtle"
-                    color="red"
-                    onClick={() => handleRemoveQsa(index)}
-                    pos="absolute"
-                    top={10}
-                    right={10}
-                    style={{ zIndex: 10 }}
-                  >
-                    <Trash2 size={18} />
-                  </ActionIcon>
-
-                  <Grid gutter="md" align="flex-end">
-                    <Grid.Col span={{ base: 12, md: 4 }}>
-                      <MantineTextInput
-                        label="Nome"
-                        value={membro.nome}
-                        onChange={(e) => handleQsaChange(index, 'nome', e.target.value)}
-                        placeholder="Nome do sócio"
-                        size="sm"
-                        radius="md"
-                        styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                      />
-                    </Grid.Col>
-                    <Grid.Col span={{ base: 12, md: 2 }}>
-                      <MantineTextInput
-                        label="CPF/CNPJ"
-                        value={formatCpf(membro.cpf_cnpj)}
-                        onChange={(e) => handleQsaChange(index, 'cpf_cnpj', e.target.value)}
-                        placeholder="000.000.000-00"
-                        size="sm"
-                        radius="md"
-                        styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                      />
-                    </Grid.Col>
-                    <Grid.Col span={{ base: 12, md: 3 }}>
-                      <MantineTextInput
-                        label="Qualificação"
-                        value={membro.qualificacao}
-                        onChange={(e) => handleQsaChange(index, 'qualificacao', e.target.value)}
-                        placeholder="Ex: Administrador"
-                        size="sm"
-                        radius="md"
-                        styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                      />
-                    </Grid.Col>
-                    <Grid.Col span={{ base: 12, md: 3 }}>
-                      <MantineTextInput
-                        label="Participação (R$)"
-                        value={formatCurrencyInput(membro.participacao)}
-                        onChange={(e) => handleQsaChange(index, 'participacao', unformatCurrency(e.target.value))}
-                        placeholder="R$ 0,00"
-                        size="sm"
-                        radius="md"
-                        styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-                      />
-                    </Grid.Col>
-                  </Grid>
-                </Paper>
-              ))}
-            </Stack>
-          )}
-        </Card>
-
-        {/* Financeiro */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group mb="xl">
-            <ThemeIcon variant="light" size={56} radius="xl" color="blue">
-              <Save size={28} />
-            </ThemeIcon>
-            <div>
-              <Title order={4} fw={900}>Financeiro</Title>
-              <MantineText size="sm" c="dimmed">Informações contratuais e honorários.</MantineText>
-            </div>
-          </Group>
-
-          <Grid gutter="md">
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <MantineTextInput
-                label="Valor do Honorário (R$)"
-                value={formatCurrencyInput(formData.honorarios.valor)}
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  honorarios: { ...prev.honorarios, valor: unformatCurrency(e.target.value) } 
-                }))}
-                placeholder="R$ 0,00"
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={{ base: 12, md: 6 }}>
-              <Select
-                label="Dia do Vencimento"
-                value={formData.honorarios.dia_vencimento?.toString()}
-                onChange={(v) => setFormData(prev => ({ 
-                  ...prev, 
-                  honorarios: { ...prev.honorarios, dia_vencimento: parseInt(v) } 
-                }))}
-                data={Array.from({ length: 31 }, (_, i) => ({ value: (i + 1).toString(), label: (i + 1).toString() }))}
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={12}>
-              <MantineTextarea
-                label="Descrição dos Serviços"
-                value={formData.servicos_prestados}
-                onChange={(e) => handleChange('servicos_prestados', e.target.value)}
-                placeholder="Descreva os detalhes dos serviços acordados..."
-                autosize
-                minRows={2}
-                size="md"
-                radius="md"
-                styles={{ label: { fontWeight: 700, marginBottom: 4 } }}
-              />
-            </Grid.Col>
-
-            <Grid.Col span={12}>
-              <Paper withBorder p="md" radius="md" bg="gray.0" className="dark:bg-slate-800">
-                <Group justify="space-between">
-                  <MantineText fw={700} size="sm">Serviços Prestados:</MantineText>
-                  <Group gap="xl">
-                    <Group gap="xs">
-                      <MantineText size="sm" fw={500}>Contábil</MantineText>
-                      <Badge 
-                        color={formData.tem_contabil ? "green" : "red"} 
-                        variant="filled"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => handleChange('tem_contabil', !formData.tem_contabil)}
-                      >
-                        {formData.tem_contabil ? 'SIM' : 'NÃO'}
-                      </Badge>
-                    </Group>
-                    <Group gap="xs">
-                      <MantineText size="sm" fw={500}>Fiscal</MantineText>
-                      <Badge 
-                        color={formData.tem_fiscal ? "green" : "red"} 
-                        variant="filled"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => handleChange('tem_fiscal', !formData.tem_fiscal)}
-                      >
-                        {formData.tem_fiscal ? 'SIM' : 'NÃO'}
-                      </Badge>
-                    </Group>
-                    <Group gap="xs">
-                      <MantineText size="sm" fw={500}>DP</MantineText>
-                      <Badge 
-                        color={formData.tem_dp ? "green" : "red"} 
-                        variant="filled"
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => handleChange('tem_dp', !formData.tem_dp)}
-                      >
-                        {formData.tem_dp ? 'SIM' : 'NÃO'}
-                      </Badge>
-                    </Group>
-                  </Group>
-                </Group>
-              </Paper>
-            </Grid.Col>
-          </Grid>
-        </Card>
-
-        {/* Observações */}
-        <Card padding="xl" radius="md" withBorder shadow="sm">
-          <Group mb="xl">
-            <ThemeIcon variant="light" size={56} radius="xl" color="gray">
-              <User size={28} />
-            </ThemeIcon>
-            <div>
-              <Title order={4} fw={900}>Observações</Title>
-              <MantineText size="sm" c="dimmed">Informações adicionais sobre o cliente.</MantineText>
-            </div>
-          </Group>
-
-          <MantineTextarea
-            value={formData.observacoes}
-            onChange={(e) => handleChange('observacoes', e.target.value)}
-            placeholder="Digite observações importantes sobre este cliente..."
-            minRows={4}
-            size="md"
-            radius="md"
-            className="w-full"
-          />
-        </Card>
-
-        {/* Botões de Ação */}
-        <Group grow gap="md">
-          <Button
-            type="button"
-            variant="default"
-            size="lg"
-            radius="md"
-            onClick={() => navigate('/clientes')}
-          >
-            Cancelar
-          </Button>
-          <Button
-            type="submit"
-            size="lg"
-            radius="md"
-            loading={loading || fetchingCnpj}
-            leftSection={<Save size={20} />}
-          >
-            Salvar Cliente
-          </Button>
         </Group>
+
+        <Card withBorder radius="xl" p={0} shadow="sm" className="overflow-hidden border-slate-200">
+          <Box p="xl" className="bg-white border-b border-slate-100">
+             <Stepper active={active} onStepClick={setActive} breakpoint="sm" allowNextStepsSelect={false}
+               styles={{
+                 stepIcon: { borderSize: 3 },
+                 stepCompletedIcon: { color: 'var(--mantine-color-white)' }
+               }}
+             >
+               <Stepper.Step label="Identificação" description="Dados básicos" icon={<Building2 size={18} />} />
+               <Stepper.Step label="Localização" description="Endereço e Fisco" icon={<MapPin size={18} />} />
+               <Stepper.Step label="Pessoas" description="Sócios e Contatos" icon={<Users size={18} />} />
+               <Stepper.Step label="Finalização" description="Financeiro e Outros" icon={<Shield size={18} />} />
+             </Stepper>
+          </Box>
+
+          <Box p="xl">
+            {/* PASSO 1: IDENTIFICAÇÃO */}
+            {active === 0 && (
+              <Stack gap="xl">
+                <Box>
+                  <SectionHeader icon={Building2} title="Informações Jurídicas" />
+                  <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
+                    <MantineTextInput
+                      label="CNPJ"
+                      placeholder="00.000.000/0000-00"
+                      value={formatCnpj(formData.cnpj)}
+                      onChange={(e) => handleChange('cnpj', e.target.value)}
+                      onBlur={handleCnpjBlur}
+                      required
+                     
+                     
+                     
+                      leftSection={<Hash size={16} className="text-slate-400" />}
+                      rightSection={fetchingCnpj ? <Loader size={16} /> : <Search size={18} className="text-blue-500" />}
+                    />
+                    <Select
+                      label="Regime Tributário"
+                      value={formData.regime_tributario}
+                      onChange={(v) => handleChange('regime_tributario', v)}
+                      data={['Simples Nacional', 'Simples Nacional - MEI', 'Lucro Presumido', 'Lucro Real', 'Não Enquadrado', 'Isento', 'Imune', 'Outro']}
+                     
+                     
+                     
+                      leftSection={<Scale size={16} className="text-slate-400" />}
+                    />
+                  </SimpleGrid>
+
+                  <Box mt="lg">
+                    <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
+                      <EditableField label="Razão Social" value={formData.razao_social} onChange={(v) => handleChange('razao_social', v)} fieldKey="razao_social" icon={FileText} />
+                      <EditableField label="Nome Fantasia" value={formData.nome_fantasia} onChange={(v) => handleChange('nome_fantasia', v)} fieldKey="nome_fantasia" icon={Briefcase} />
+                    </SimpleGrid>
+                  </Box>
+
+                  <Box mt="lg">
+                    <SimpleGrid cols={{ base: 1, md: 3 }} spacing="lg">
+                      <EditableField label="Data de Abertura" value={formData.data_abertura} onChange={(v) => handleChange('data_abertura', v)} type="date" fieldKey="data_abertura" icon={CalendarDays} />
+                      <EditableField label="Porte" value={formData.porte} onChange={(v) => handleChange('porte', v)} fieldKey="porte" icon={TrendingUp} />
+                      <EditableField label="Capital Social" value={formData.capital_social} onChange={(v) => handleChange('capital_social', v)} type="currency" fieldKey="capital_social" icon={TrendingUp} />
+                    </SimpleGrid>
+                  </Box>
+
+                  <Box mt="lg">
+                    <SimpleGrid cols={{ base: 1, md: 4 }} spacing="lg">
+                      <Select label="Status" value={formData.status} onChange={(v) => handleChange('status', v)} data={['Ativo', 'Inativo', 'Suspenso', 'Bloqueado']} />
+                      <EditableField label="Categoria" value={formData.categoria} onChange={(v) => handleChange('categoria', v)} fieldKey="categoria" icon={Briefcase} />
+                      <MantineTextInput label="NIRE" value={formData.nire} onChange={(e) => handleChange('nire', e.target.value)} leftSection={<Hash size={16} className="text-slate-400" />} />
+                      <MantineTextInput label="Data Opção Simples" type="date" value={formData.data_opcao_simples} onChange={(e) => handleChange('data_opcao_simples', e.target.value)} leftSection={<CalendarDays size={16} className="text-slate-400" />} />
+                    </SimpleGrid>
+                  </Box>
+                  
+                  <Group mt="xl" gap="xl">
+                    <Switch 
+                      label="Microempreendedor Individual (MEI)" 
+                      checked={formData.is_mei} 
+                      onChange={(e) => handleChange('is_mei', e.currentTarget.checked)}
+                     
+                    />
+                  </Group>
+
+                  {/* HISTÓRICO DINÂMICO */}
+                  {(formData.data_exclusao_simples || formData.data_exclusao_mei || showManualSimplesHistory || showManualMeiHistory) ? (
+                    <>
+                      <Divider mt="xl" mb="lg" label={<MantineText c="dimmed" size="xs">HISTÓRICO FISCAL</MantineText>} labelPosition="center" />
+                      
+                      <Stack gap="xl">
+                        {(formData.data_exclusao_simples || showManualSimplesHistory) && (
+                          <Paper withBorder p="md" className="bg-blue-50/10">
+                            <Stack gap="xs">
+                              <MantineText size="xs" c="blue">SIMPLES NACIONAL - REGISTRO HISTÓRICO</MantineText>
+                              <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md">
+                                <MantineTextInput label="Data Inclusão" type="date" value={formData.data_opcao_simples} onChange={(e) => handleChange('data_opcao_simples', e.target.value)} />
+                                <MantineTextInput label="Data Exclusão" type="date" value={formData.data_exclusao_simples} onChange={(e) => handleChange('data_exclusao_simples', e.target.value)} />
+                                <Select 
+                                  label="Motivo da Exclusão" 
+                                  placeholder="Selecione o motivo..."
+                                  value={formData.motivo_exclusao_simples} 
+                                  onChange={(v) => handleChange('motivo_exclusao_simples', v)} 
+                                  data={[
+                                    'Exclusão por Opção',
+                                    'Exclusão de Ofício por Débitos',
+                                    'Exclusão por Excesso de Faturamento',
+                                    'Exclusão por Atividade Vedada',
+                                    'Exclusão por Transformação em Natureza Jurídica Não Permitida',
+                                    'Exclusão por Participação em Outra Empresa',
+                                    'Outros Motivos'
+                                  ]}
+                                  clearable
+                                />
+                              </SimpleGrid>
+                            </Stack>
+                          </Paper>
+                        )}
+
+                        {(formData.data_exclusao_mei || showManualMeiHistory || formData.is_mei) && (
+                          <Paper withBorder p="md" className="bg-orange-50/10">
+                            <Stack gap="xs">
+                              <MantineText size="xs" c="orange">MEI - REGISTRO HISTÓRICO</MantineText>
+                              <SimpleGrid cols={{ base: 1, md: 2 }} spacing="md">
+                                <MantineTextInput label="Data Opção MEI" type="date" value={formData.data_opcao_mei} disabled title="Preenchido automaticamente via API" />
+                                <MantineTextInput label="Data Exclusão MEI" type="date" value={formData.data_exclusao_mei} disabled title="Preenchido automaticamente via API" />
+                              </SimpleGrid>
+                            </Stack>
+                          </Paper>
+                        )}
+                      </Stack>
+                    </>
+                  ) : (
+                    <Group mt="xl" justify="center">
+                      <Button variant="subtle" color="blue" size="xs" leftSection={<Plus size={14} />} onClick={() => setShowManualSimplesHistory(true)}>Adicionar Histórico Simples</Button>
+                      <Button variant="subtle" color="orange" size="xs" leftSection={<Plus size={14} />} onClick={() => setShowManualMeiHistory(true)}>Adicionar Histórico MEI</Button>
+                    </Group>
+                  )}
+                </Box>
+              </Stack>
+            )}
+
+            {/* PASSO 2: LOCALIZAÇÃO */}
+            {active === 1 && (
+              <Stack gap="xl">
+                <Box>
+                  <SectionHeader icon={MapPin} title="Endereço Comercial" color="red" />
+                  <Grid gutter="lg">
+                    <Grid.Col span={{ base: 12, md: 3 }}>
+                      <MantineTextInput label="CEP" value={formatCep(formData.endereco.cep)} onChange={(e) => handleEnderecoChange('cep', e.target.value)} leftSection={<MapPin size={16} className="text-slate-400" />} />
+                    </Grid.Col>
+                    <Grid.Col span={{ base: 12, md: 7 }}>
+                      <MantineTextInput label="Logradouro" value={formData.endereco.logradouro} onChange={(e) => handleEnderecoChange('logradouro', e.target.value)} />
+                    </Grid.Col>
+                    <Grid.Col span={{ base: 12, md: 2 }}>
+                      <MantineTextInput label="Nº" value={formData.endereco.numero} onChange={(e) => handleEnderecoChange('numero', e.target.value)} />
+                    </Grid.Col>
+                  </Grid>
+
+                  <SimpleGrid cols={{ base: 1, md: 3 }} spacing="lg" mt="lg">
+                    <MantineTextInput label="Bairro" value={formData.endereco.bairro} onChange={(e) => handleEnderecoChange('bairro', e.target.value)} />
+                    <MantineTextInput label="Cidade" value={formData.endereco.cidade} onChange={(e) => handleEnderecoChange('cidade', e.target.value)} />
+                    <MantineTextInput label="UF" value={formData.endereco.uf} onChange={(e) => handleEnderecoChange('uf', e.target.value)} />
+                  </SimpleGrid>
+                </Box>
+
+                <Divider label={<MantineText c="dimmed" size="xs">INFORMAÇÕES FISCAIS (RPA)</MantineText>} labelPosition="center" />
+
+                <Box>
+                  <SectionHeader icon={Scale} title="Inscrições e Situações" color="orange" />
+                  <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
+                    <Stack gap={4}>
+                      <MantineTextInput 
+                        label="Inscrição Estadual" 
+                        value={formData.inscricao_estadual} 
+                        onChange={(e) => handleChange('inscricao_estadual', e.target.value)}
+                       
+                        rightSection={<Tooltip label="Buscar via SEFAZ BA"><ActionIcon variant="subtle" onClick={handleFetchInscricaoEstadual} loading={fetchingInscricaoEstadual}><Search size={16}/></ActionIcon></Tooltip>}
+                      />
+                      <MantineTextInput 
+                        label="Situação SEFAZ Estadual" 
+                        placeholder="Ex: Ativo, Baixado..."
+                        value={formData.situacao_sefaz_estadual} 
+                        onChange={(e) => handleChange('situacao_sefaz_estadual', e.target.value)}
+                       
+                      />
+                    </Stack>
+
+                    <Stack gap={4}>
+                      <MantineTextInput 
+                        label="Inscrição Municipal" 
+                        value={formData.inscricao_municipal} 
+                        onChange={(e) => handleChange('inscricao_municipal', e.target.value)}
+                       
+                        rightSection={<Tooltip label="Buscar via Salvador"><ActionIcon variant="subtle" onClick={handleFetchInscricaoMunicipal} loading={fetchingInscricaoMunicipal}><Search size={16}/></ActionIcon></Tooltip>}
+                      />
+                      <MantineTextInput 
+                        label="Situação SEFAZ Municipal" 
+                        placeholder="Ex: Ativo, Suspenso..."
+                        value={formData.situacao_sefaz_municipal} 
+                        onChange={(e) => handleChange('situacao_sefaz_municipal', e.target.value)}
+                       
+                      />
+                    </Stack>
+                  </SimpleGrid>
+                </Box>
+              </Stack>
+            )}
+
+            {/* PASSO 3: PESSOAS */}
+            {active === 2 && (
+              <Stack gap="xl">
+                <Box>
+                  <SectionHeader icon={Mail} title="Outros Contatos" color="cyan" />
+                  <Stack gap="sm">
+                    <Stack gap="sm">
+                      {formData.contatos.map((contato, idx) => (
+                        <Paper key={idx} withBorder p="md" radius="lg" className="bg-slate-50/50">
+                          <Grid align="flex-end" gutter="sm">
+                          <Grid.Col span={{ base: 12, md: 4 }}>
+                            <MantineTextInput label="Nome" value={contato.nome} onChange={(e) => handleContatoChange(idx, 'nome', e.target.value)} size="sm" />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 3.5 }}>
+                            <MantineTextInput label="E-mail" value={contato.email} onChange={(e) => handleContatoChange(idx, 'email', e.target.value)} size="sm" />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 3.5 }}>
+                            <MantineTextInput label="Telefone" value={contato.telefone} onChange={(e) => handleContatoChange(idx, 'telefone', e.target.value)} size="sm" />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 1 }} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <ActionIcon color="red" variant="subtle" size="lg" onClick={() => handleRemoveContato(idx)}>
+                              <Trash2 size={20} />
+                            </ActionIcon>
+                          </Grid.Col>
+                          </Grid>
+                        </Paper>
+                      ))}
+                    </Stack>
+                    <Button variant="dashed" color="cyan" fullWidth leftSection={<Plus size={16} />} onClick={handleAddContato}>Adicionar Contato</Button>
+                  </Stack>
+                </Box>
+
+                <Divider />
+
+                <Box>
+                  <SectionHeader icon={Users} title="Quadro de Sócios (QSA)" color="indigo" />
+                  <Stack gap="sm">
+                    {formData.qsa.map((socio, idx) => (
+                      <Paper key={idx} withBorder p="md" radius="lg" className="bg-slate-50/50">
+                        <Grid align="flex-end" gutter="xs">
+                          <Grid.Col span={{ base: 12, md: 3.5 }}><MantineTextInput label="Nome Completo" value={socio.nome} onChange={(e) => handleQsaChange(idx, 'nome', e.target.value)} size="sm" /></Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 2.5 }}><MantineTextInput label="CPF/CNPJ" value={socio.cpf_cnpj} onChange={(e) => handleQsaChange(idx, 'cpf_cnpj', e.target.value)} size="sm" /></Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 2.5 }}>
+                            <MantineTextInput 
+                              label="Participação (R$)" 
+                              value={formatCurrencyInput(socio.participacao)} 
+                              onChange={(e) => handleQsaChange(idx, 'participacao', unformatCurrency(e.target.value))} 
+                              size="sm" 
+                              leftSection="R$"
+                            />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 2.5 }}>
+                            <MantineTextInput 
+                              label="Data Entrada" 
+                              type="date"
+                              value={socio.data_entrada} 
+                              onChange={(e) => handleQsaChange(idx, 'data_entrada', e.target.value)} 
+                              size="sm" 
+                            />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 1 }} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <ActionIcon color="red" variant="subtle" onClick={() => handleRemoveQsa(idx)} size="lg">
+                              <Trash2 size={20} />
+                            </ActionIcon>
+                          </Grid.Col>
+                        </Grid>
+                      </Paper>
+                    ))}
+                    <Button variant="dashed" color="indigo" fullWidth leftSection={<Plus size={16} />} onClick={handleAddQsa}>Adicionar Sócio</Button>
+                  </Stack>
+                </Box>
+              </Stack>
+            )}
+
+            {/* PASSO 4: FINALIZAÇÃO */}
+            {active === 3 && (
+              <Stack gap="xl">
+                <Box>
+                  <SectionHeader icon={CreditCard} title="Honorários e Serviços" color="emerald" />
+                  <Paper withBorder p="lg" radius="xl">
+                    <SimpleGrid cols={{ base: 1, md: 2 }} spacing="xl">
+                      <Stack gap="md">
+                        <MantineTextInput 
+                          label="Honorário Mensal" 
+                          value={formatCurrencyInput(formData.honorarios.valor)} 
+                          onChange={(e) => handleChange('honorarios', { ...formData.honorarios, valor: unformatCurrency(e.target.value) })}
+                         
+                          leftSection={<DollarSign size={18} className="text-emerald-600" />}
+                          styles={{ input: { fontSize: '1.2rem', color: 'var(--mantine-color-emerald-7)' } }}
+                        />
+                        <NumberInput 
+                          label="Dia de Vencimento" 
+                          value={formData.honorarios.dia_vencimento} 
+                          onChange={(v) => handleChange('honorarios', { ...formData.honorarios, dia_vencimento: v })}
+                          min={1} max={31}
+                        />
+                      </Stack>
+
+                      <Stack gap="xs">
+                        <MantineText size="sm" mb={4}>Escopo de Atendimento</MantineText>
+                        <Checkbox label="Serviços Contábeis" checked={formData.tem_contabil} onChange={(e) => handleChange('tem_contabil', e.currentTarget.checked)} />
+                        <Checkbox label="Escrituração Fiscal" checked={formData.tem_fiscal} onChange={(e) => handleChange('tem_fiscal', e.currentTarget.checked)} />
+                        <Checkbox label="Departamento Pessoal" checked={formData.tem_dp} onChange={(e) => handleChange('tem_dp', e.currentTarget.checked)} />
+                      </Stack>
+                    </SimpleGrid>
+
+                    <MantineTextarea 
+                      label="Serviços Adicionais / Detalhamento" 
+                      placeholder="Descreva particularidades do contrato ou serviços extras..."
+                      value={formData.servicos_prestados} 
+                      onChange={(e) => handleChange('servicos_prestados', e.target.value)} 
+                      minRows={3} mt="lg"
+                    />
+                  </Paper>
+                </Box>
+
+                <Box>
+                  <SectionHeader icon={BadgeCheck} title="Certificado Digital" color="blue" />
+                  <Paper withBorder p="lg" radius="xl" className={formData.certificado_digital.possui ? "bg-blue-50/20" : ""}>
+                    <Stack gap="md">
+                      <Switch 
+                        label="O cliente possui Certificado Digital?" 
+                        checked={formData.certificado_digital.possui} 
+                        onChange={(e) => handleChange('certificado_digital', { ...formData.certificado_digital, possui: e.currentTarget.checked })} 
+                       
+                       
+                      />
+                      
+                      {formData.certificado_digital.possui && (
+                        <Grid gutter="md">
+                          <Grid.Col span={{ base: 12, md: 6 }}>
+                            <MantineTextInput label="Senha do Certificado" type="password" value={formData.certificado_digital.senha} onChange={(e) => handleChange('certificado_digital', { ...formData.certificado_digital, senha: e.target.value })} leftSection={<Lock size={16} />} />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 6 }}>
+                             <FileInput 
+                               label="Upload do Certificado (.pfx, .p12)" 
+                               placeholder="Clique para selecionar o arquivo" 
+                               value={formData.certificado_digital.arquivo} 
+                               onChange={(file) => handleChange('certificado_digital', { ...formData.certificado_digital, arquivo: file })}
+                              
+                               leftSection={<FileUp size={16} />}
+                               accept=".pfx,.p12"
+                             />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 6 }}>
+                            <MantineTextInput label="Data de Emissão" type="date" value={formData.certificado_digital.emissao} onChange={(e) => handleChange('certificado_digital', { ...formData.certificado_digital, emissao: e.target.value })} />
+                          </Grid.Col>
+                          <Grid.Col span={{ base: 12, md: 6 }}>
+                            <MantineTextInput label="Data de Vencimento" type="date" value={formData.certificado_digital.vencimento} onChange={(e) => handleChange('certificado_digital', { ...formData.certificado_digital, vencimento: e.target.value })} />
+                          </Grid.Col>
+                        </Grid>
+                      )}
+                    </Stack>
+                  </Paper>
+                </Box>
+
+                <Box>
+                  <SectionHeader icon={Info} title="Observações Finais" color="gray" />
+                  <MantineTextarea 
+                    placeholder="Alguma informação interna importante sobre este cliente?"
+                    value={formData.observacoes} 
+                    onChange={(e) => handleChange('observacoes', e.target.value)} 
+                    minRows={4} 
+                  />
+                </Box>
+              </Stack>
+            )}
+          </Box>
+
+          <Box p="xl" className="bg-slate-50 border-t border-slate-100">
+            <Group justify="space-between">
+              <Button variant="subtle" color="gray" onClick={prevStep} disabled={active === 0} leftSection={<ArrowLeft size={16} />}>
+                Voltar Passo
+              </Button>
+              {active < 3 ? (
+                <Button color="blue" onClick={nextStep} px="xl">
+                  Próximo Passo
+                </Button>
+              ) : (
+                <Button color="emerald" onClick={handleSubmit} loading={loading} px="xl" leftSection={<CheckCircle2 size={20} />}>
+                  Concluir Cadastro
+                </Button>
+              )}
+            </Group>
+          </Box>
+        </Card>
       </Stack>
-    </form>
-  </Box>
-);
+    </Box>
+  );
 }
+
+// Subcomponentes icones adicionais para manter consistência
+const DollarSign = ({ size, className }) => <CreditCard size={size} className={className} />;
+const BadgeCheck = ({ size, className }) => <Shield size={size} className={className} />;

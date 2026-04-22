@@ -30,7 +30,8 @@ const ReciboHonorarios = forwardRef((props, ref) => {
     contadorCRC = '',
     empresaNome = '',
     empresaCNPJ = '',
-    cidade = ''
+    cidade = '',
+    tipoRecibo = 'mensal'
   } = props.data || {};
 
   return (
@@ -51,7 +52,7 @@ const ReciboHonorarios = forwardRef((props, ref) => {
           Recebemos de <span className="bold">{clienteNome}</span>,
           inscrito(a) no CPF/CNPJ sob nº {formatCPF(clienteDocumento)},
           a importância de <span className="bold">{formatCurrency(valor)}</span> ({currencyToWords(valor)}),
-          referente aos serviços contábeis do mês de <span className="bold">{referencia}</span>.
+          referente aos {tipoRecibo === 'avulso' ? 'serviços contábeis avulsos' : 'serviços contábeis do mês'} de <span className="bold">{referencia}</span>.
         </p>
 
         <p className="text-justify" style={{ marginTop: '30px' }}>

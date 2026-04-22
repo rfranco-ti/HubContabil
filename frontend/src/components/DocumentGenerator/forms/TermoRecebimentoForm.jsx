@@ -1,23 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { 
+  TextInput, 
+  Stack, 
+  Group, 
+  Title, 
+  SimpleGrid, 
+  Divider,
+  Checkbox,
+  Box,
+  Text
+} from '@mantine/core';
+import { IconUser, IconBuilding, IconFileCheck, IconCalendar } from '@tabler/icons-react';
 
 /**
  * Formulário para preenchimento do Termo de Recebimento de Documentos
- * 
- * @param {Object} formData - Dados atuais do formulário
- * @param {Function} onChange - Callback para mudanças nos dados
  */
 const TermoRecebimentoForm = ({ formData = {}, onChange }) => {
   const [localData, setLocalData] = useState({
     clienteNome: '',
     clienteDocumento: '',
-    empresaNome: '',
+    empresaNome: 'HubContabil Assessoria',
     finalidade: 'processamento contábil',
     documentos: [],
     dataRecebimento: new Date().toISOString().split('T')[0],
-    responsavelNome: '',
-    responsavelCargo: '',
+    responsavelNome: 'Ricardo Franco',
+    responsavelCargo: 'Contador',
     ...formData
   });
+
+  // Sincronizar dados externos
+  useEffect(() => {
+    if (formData && Object.keys(formData).length > 0) {
+      setLocalData(prev => ({ ...prev, ...formData }));
+    }
+  }, [formData]);
 
   const handleChange = (field, value) => {
     const newData = { ...localData, [field]: value };
@@ -57,178 +73,89 @@ const TermoRecebimentoForm = ({ formData = {}, onChange }) => {
   };
 
   const documentoOptions = [
-    { key: 'ctps', label: 'Carteira de Trabalho (CTPS)' },
-    { key: 'rg', label: 'RG' },
-    { key: 'cpf', label: 'CPF' },
-    { key: 'cnh', label: 'CNH' },
-    { key: 'certidao_nascimento', label: 'Certidão de Nascimento/Casamento' },
-    { key: 'comprovante_residencia', label: 'Comprovante de Residência' },
-    { key: 'holerites', label: 'Holerites/Contracheques' },
-    { key: 'extratos_bancarios', label: 'Extratos Bancários' },
-    { key: 'declaracao_ir', label: 'Declaração de IR' }
+    { value: 'ctps', label: 'Carteira de Trabalho (CTPS)' },
+    { value: 'rg', label: 'RG' },
+    { value: 'cpf', label: 'CPF' },
+    { value: 'cnh', label: 'CNH' },
+    { value: 'certidao_nascimento', label: 'Certidão de Nascimento/Casamento' },
+    { value: 'comprovante_residencia', label: 'Comprovante de Residência' },
+    { value: 'holerites', label: 'Holerites/Contracheques' },
+    { value: 'extratos_bancarios', label: 'Extratos Bancários' },
+    { value: 'declaracao_ir', label: 'Declaração de IR' }
   ];
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h3 style={{ marginBottom: '20px', color: '#333' }}>📋 Termo de Recebimento</h3>
+    <Stack gap="md">
+      <Title order={5} c="blue.7">📥 Termo de Recebimento</Title>
       
-      <div style={{ display: 'grid', gap: '15px' }}>
-        {/* Dados do Cliente */}
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-            Nome do Cliente *
-          </label>
-          <input
-            type="text"
-            value={localData.clienteNome}
-            onChange={(e) => handleChange('clienteNome', e.target.value)}
-            placeholder="Nome completo"
-            style={inputStyle}
-          />
-        </div>
+      <TextInput
+        label="Nome do Cliente"
+        placeholder="Nome completo ou Razão Social"
+        leftSection={<IconUser size={16} />}
+        value={localData.clienteNome}
+        onChange={(e) => handleChange('clienteNome', e.target.value)}
+        required
+      />
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-            CPF/CNPJ do Cliente *
-          </label>
-          <input
-            type="text"
-            value={localData.clienteDocumento}
-            onChange={handleDocumentoChange}
-            placeholder="000.000.000-00"
-            maxLength={18}
-            style={inputStyle}
-          />
-        </div>
+      <TextInput
+        label="CPF/CNPJ do Cliente"
+        value={localData.clienteDocumento}
+        onChange={(e) => handleChange('clienteDocumento', e.target.value)}
+        required
+      />
 
-        {/* Dados do Escritório */}
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-            Nome do Escritório *
-          </label>
-          <input
-            type="text"
-            value={localData.empresaNome}
-            onChange={(e) => handleChange('empresaNome', e.target.value)}
-            placeholder="Razão social"
-            style={inputStyle}
-          />
-        </div>
+      <TextInput
+        label="Nome do Escritório"
+        leftSection={<IconBuilding size={16} />}
+        value={localData.empresaNome}
+        onChange={(e) => handleChange('empresaNome', e.target.value)}
+      />
 
-        {/* Finalidade */}
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-            Finalidade *
-          </label>
-          <input
-            type="text"
-            value={localData.finalidade}
-            onChange={(e) => handleChange('finalidade', e.target.value)}
-            placeholder="Ex: processamento contábil, análise documental"
-            style={inputStyle}
-          />
-        </div>
+      <TextInput
+        label="Finalidade"
+        placeholder="Ex: processamento contábil"
+        value={localData.finalidade}
+        onChange={(e) => handleChange('finalidade', e.target.value)}
+      />
 
-        {/* Lista de Documentos */}
-        <div style={{ 
-          border: '1px solid #ddd', 
-          borderRadius: '6px', 
-          padding: '15px',
-          backgroundColor: '#fafafa'
-        }}>
-          <label style={{ display: 'block', marginBottom: '10px', fontWeight: '600' }}>
-            📄 Documentos Entregues
-          </label>
-          
-          <div style={{ display: 'grid', gap: '10px' }}>
-            {documentoOptions.map((doc) => (
-              <label key={doc.key} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={(localData.documentos || []).includes(doc.key)}
-                  onChange={() => handleDocumentoToggle(doc.key)}
-                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                />
-                <span>{doc.label}</span>
-              </label>
-            ))}
-            
-            <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #ddd' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={(localData.documentos || []).includes('outros')}
-                  onChange={() => handleDocumentoToggle('outros')}
-                  style={{ width: '18px', height: '18px', cursor: 'pointer' }}
-                />
-                <span>Outros</span>
-              </label>
-              {(localData.documentos || []).includes('outros') && (
-                <input
-                  type="text"
-                  placeholder="Especifique quais documentos..."
-                  onChange={handleOutrosDocumentos}
-                  style={{ ...inputStyle, marginTop: '8px', marginLeft: '26px', width: 'calc(100% - 26px)' }}
-                />
-              )}
-            </div>
-          </div>
-        </div>
+      <Divider label="Documentos Entregues" labelPosition="center" my="sm" />
 
-        {/* Data e Responsável */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Data do Recebimento *
-            </label>
-            <input
-              type="date"
-              value={localData.dataRecebimento}
-              onChange={(e) => handleChange('dataRecebimento', e.target.value)}
-              style={inputStyle}
-            />
-          </div>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-              Nome do Responsável *
-            </label>
-            <input
-              type="text"
-              value={localData.responsavelNome}
-              onChange={(e) => handleChange('responsavelNome', e.target.value)}
-              placeholder="Nome completo"
-              style={inputStyle}
-            />
-          </div>
-        </div>
+      <Checkbox.Group
+        label="Selecione os documentos recebidos"
+        value={localData.documentos}
+        onChange={(vals) => handleChange('documentos', vals)}
+      >
+        <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xs">
+          {documentoOptions.map((op) => (
+            <Checkbox key={op.value} value={op.value} label={op.label} />
+          ))}
+        </SimpleGrid>
+      </Checkbox.Group>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
-            Cargo do Responsável *
-          </label>
-          <input
-            type="text"
-            value={localData.responsavelCargo}
-            onChange={(e) => handleChange('responsavelCargo', e.target.value)}
-            placeholder="Ex: Contador, Assistente Contábil"
-            style={inputStyle}
-          />
-        </div>
-      </div>
-    </div>
+      <Divider />
+
+      <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md">
+        <TextInput
+          label="Data do Recebimento"
+          type="date"
+          leftSection={<IconCalendar size={16} />}
+          value={localData.dataRecebimento}
+          onChange={(e) => handleChange('dataRecebimento', e.target.value)}
+        />
+        <TextInput
+          label="Responsável"
+          value={localData.responsavelNome}
+          onChange={(e) => handleChange('responsavelNome', e.target.value)}
+        />
+      </SimpleGrid>
+
+      <TextInput
+        label="Cargo do Responsável"
+        value={localData.responsavelCargo}
+        onChange={(e) => handleChange('responsavelCargo', e.target.value)}
+      />
+    </Stack>
   );
-};
-
-const inputStyle = {
-  width: '100%',
-  padding: '10px 12px',
-  border: '1px solid #ddd',
-  borderRadius: '6px',
-  fontSize: '14px',
-  boxSizing: 'border-box',
-  outline: 'none',
-  transition: 'border-color 0.2s'
 };
 
 export default TermoRecebimentoForm;

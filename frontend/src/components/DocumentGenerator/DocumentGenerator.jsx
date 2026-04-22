@@ -1,6 +1,39 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { Printer, ChevronDown, X, History, Save } from 'lucide-react';
+import { 
+  Box, 
+  Paper, 
+  Grid, 
+  Stack, 
+  Group, 
+  Text, 
+  Title, 
+  Button, 
+  Select, 
+  ActionIcon, 
+  Divider, 
+  ScrollArea,
+  Badge,
+  ThemeIcon,
+  Tooltip,
+  SimpleGrid,
+  LoadingOverlay,
+  Collapse,
+} from '@mantine/core';
+import { useSearchParams, useParams, useNavigate } from 'react-router-dom';
+import { 
+  Printer, 
+  ChevronDown, 
+  X, 
+  History, 
+  Save, 
+  FileSignature, 
+  Users, 
+  Plus, 
+  FileText,
+  ChevronUp,
+  ArrowLeft
+} from 'lucide-react';
 import { clientesAPI, documentosGeradosAPI } from '../../services/documentosAPI';
 import ReciboHonorarios from './templates/ReciboHonorarios';
 import TermoRecebimento from './templates/TermoRecebimento';
@@ -14,7 +47,9 @@ import TermoDevolucaoForm from './forms/TermoDevolucaoForm';
 import ComunicadoForm from './forms/ComunicadoForm';
 import DeclaracaoForm from './forms/DeclaracaoForm';
 import ProcuracaoForm from './forms/ProcuracaoForm';
-import '../../styles/document/DocumentGenerator.css';
+import { toast } from 'sonner';
+// Remover import do CSS antigo para evitar conflitos
+// import '../../styles/document/DocumentGenerator.css';
 
 /**
  * Lista de templates disponíveis
@@ -28,7 +63,10 @@ const DOCUMENT_TEMPLATES = [
   { id: 'procuracao', name: 'Procuração Simples', icon: '✒️' }
 ];
 const DocumentGenerator = () => {
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
+  const { templateId } = useParams();
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedTemplate = templateId || null;
   const [formData, setFormData] = useState({});
   const [documentRef, setDocumentRef] = useState(null);
   const [clientes, setClientes] = useState([]);
@@ -36,20 +74,43 @@ const DocumentGenerator = () => {
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState([]);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [collapsedSections, setCollapsedSections] = useState({ form: false, preview: false });
 
   // Carregar clientes e histórico ao montar
   useEffect(() => {
-    loadClientes();
-    loadHistory();
+    const init = async () => {
+      setIsLoading(true);
+      await Promise.all([loadClientes(), loadHistory()]);
+      setIsLoading(false);
+    };
+    init();
   }, []);
+
+  // Monitorar mudança de clientes para auto-selecionar se vier via URL
+  useEffect(() => {
+    const cnpjParam = searchParams.get('cnpj');
+    if (cnpjParam && clientes.length > 0 && !selectedCliente) {
+      const found = clientes.find(c => c.cnpj?.replace(/\D/g, '') === cnpjParam.replace(/\D/g, ''));
+      if (found) {
+        handleSelectCliente(found.id || found._id);
+        // Se não houver template selecionado e viermos da tela de cliente, padrão é recibo
+        if (!selectedTemplate) {
+          navigate(`/gerador-documentos/recibo?${searchParams.toString()}`, { replace: true });
+        }
+      }
+    }
+  }, [clientes, searchParams]);
 
   const loadClientes = async () => {
     try {
       const response = await clientesAPI.listar();
-      setClientes(response.data || []);
+      // O backend retorna o array diretamente ou dentro de um objeto data
+      const data = Array.isArray(response) ? response : (response.data || []);
+      setClientes(data);
     } catch (error) {
       console.error('Erro ao carregar clientes:', error);
+      toast.error('Erro ao carregar lista de clientes');
     }
   };
 
@@ -74,6 +135,8 @@ const DocumentGenerator = () => {
         clienteDocumento: cliente.cnpj || cliente.cpf || '',
         empresaNome: cliente.razao_social || '',
         empresaCNPJ: cliente.cnpj || '',
+        valor: cliente.honorarios?.valor || prev.valor || '',
+        cidade: cliente.endereco?.cidade || 'Salvador',
       }));
     }
   };
@@ -91,10 +154,10 @@ const DocumentGenerator = () => {
       });
 
       loadHistory();
-      alert('Documento salvo com sucesso!');
+      toast.success('Documento salvo no histórico com sucesso!');
     } catch (error) {
       console.error('Erro ao salvar documento:', error);
-      alert('Erro ao salvar documento');
+      toast.error('Erro ao salvar documento');
     } finally {
       setIsSaving(false);
     }
@@ -102,43 +165,35 @@ const DocumentGenerator = () => {
 
   // Configuração dos templates
   const templateConfig = {
-    recibo: { component: ReciboHonorarios, form: ReciboForm, title: 'Recibo de Honorários' },
-    termo_recebimento: { component: TermoRecebimento, form: TermoRecebimentoForm, title: 'Termo de Recebimento de Documentos' },
-    termo_devolucao: { component: TermoDevolucao, form: TermoDevolucaoForm, title: 'Termo de Devolução de Documentos' },
-    comunicado: { component: Comunicado, form: ComunicadoForm, title: 'Comunicado Oficial' },
-    declaracao: { component: DeclaracaoRegularidade, form: DeclaracaoForm, title: 'Declaração de Regularidade' },
-    procuracao: { component: Procuracao, form: ProcuracaoForm, title: 'Procuração Simples' }
+    recibo: { component: ReciboHonorarios, form: ReciboForm, title: 'Recibo de Honorários', icon: '💰' },
+    termo_recebimento: { component: TermoRecebimento, form: TermoRecebimentoForm, title: 'Termo de Recebimento', icon: '📥' },
+    termo_devolucao: { component: TermoDevolucao, form: TermoDevolucaoForm, title: 'Termo de Devolução', icon: '📤' },
+    comunicado: { component: Comunicado, form: ComunicadoForm, title: 'Comunicado Oficial', icon: '📢' },
+    declaracao: { component: DeclaracaoRegularidade, form: DeclaracaoForm, title: 'Declaração de Regularidade', icon: '📜' },
+    procuracao: { component: Procuracao, form: ProcuracaoForm, title: 'Procuração Simples', icon: '✒️' }
   };
 
   // Hook de impressão
   const handlePrint = useReactToPrint({
     content: () => documentRef,
     documentTitle: selectedTemplate ? templateConfig[selectedTemplate]?.title : 'Documento',
-    onAfterPrint: () => console.log('Documento impresso com sucesso'),
-    onPrintError: (error) => console.error('Erro ao imprimir:', error)
   });
 
   // Selecionar template
   const handleSelectTemplate = (templateId) => {
-    setSelectedTemplate(templateId);
-    setFormData({});
-    setSelectedCliente(null);
+    navigate(`/gerador-documentos/${templateId}`);
+    // Preservar dados se já houver um cliente selecionado, senão limpar
+    if (!selectedCliente) {
+      setFormData({});
+    }
   };
 
   // Voltar para tela inicial do gerador
   const handleBack = () => {
-    setSelectedTemplate(null);
+    navigate('/gerador-documentos');
     setFormData({});
     setSelectedCliente(null);
     setCollapsedSections({ form: false, preview: false });
-  };
-
-  // Toggle collapse sections
-  const toggleSection = (section) => {
-    setCollapsedSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
   };
 
   // Renderizar formulário
@@ -149,7 +204,7 @@ const DocumentGenerator = () => {
     return <FormComponent formData={formData} onChange={setFormData} />;
   };
 
-  // Renderizar documento - A4 direto no container
+  // Renderizar documento
   const renderDocument = () => {
     if (!selectedTemplate) return null;
     const config = templateConfig[selectedTemplate];
@@ -159,276 +214,219 @@ const DocumentGenerator = () => {
   };
 
   return (
-    <div className="dg-container">
-      {/* CSS para escala responsiva do A4 */}
+    <Box pos="relative">
+      <LoadingOverlay visible={isLoading} overlayProps={{ blur: 2 }} />
+
       <style>{`
-        /* A4 document base styles */
+        .a4-preview-container {
+          background: #f1f5f9;
+          padding: 20px;
+          display: flex;
+          justify-content: center;
+          overflow-y: auto;
+          height: calc(100vh - 100px);
+          border-radius: 0 0 12px 0;
+        }
+
+        .a4-document-wrapper {
+          transform: scale(0.65);
+          transform-origin: top center;
+          width: 210mm;
+          height: 297mm;
+        }
+
         .a4-document {
           width: 210mm;
           min-height: 297mm;
           background: white;
-          box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-          margin: 0 auto;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
           padding: 20mm;
           box-sizing: border-box;
           font-family: 'Times New Roman', Times, serif;
           font-size: 12pt;
           line-height: 1.5;
           color: #000;
-          max-width: 100%;
         }
 
-        /* Responsive scaling */
-        @media (max-width: 850px) {
-          .a4-document {
-            transform: scale(0.9);
-            transform-origin: top center;
-            padding: 15mm;
-          }
+        .editor-sidebar {
+          height: calc(100vh - 100px);
+          overflow-y: auto;
+          background: white;
+          border-right: 1px solid #e2e8f0;
+          padding-right: 10px;
         }
 
-        @media (max-width: 750px) {
-          .a4-document {
-            transform: scale(0.8);
-            padding: 12mm;
-          }
-        }
+        /* Otimização de escala baseada na largura da tela */
+        @media (min-width: 1400px) { .a4-document-wrapper { transform: scale(0.7); } }
+        @media (min-width: 1600px) { .a4-document-wrapper { transform: scale(0.85); } }
+        @media (min-width: 1900px) { .a4-document-wrapper { transform: scale(1.0); } }
 
-        @media (max-width: 650px) {
-          .a4-document {
-            transform: scale(0.7);
-            padding: 10mm;
-          }
-        }
-
-        @media (max-width: 550px) {
-          .a4-document {
-            transform: scale(0.6);
-            padding: 8mm;
-          }
-        }
-
-        /* Preview container responsive */
-        @media (max-width: 1024px) {
-          .preview-content {
-            padding: 16px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .preview-content {
-            padding: 12px;
-          }
+        @media (max-width: 1200px) {
+          .a4-document-wrapper { transform: scale(1); width: 100%; height: auto; }
+          .a4-preview-container { height: auto; padding: 10px; border-radius: 12px; }
+          .editor-sidebar { height: auto; border-right: none; }
+          .a4-document { width: 100%; padding: 10mm; }
         }
       `}</style>
 
-      {/* Toolbar interna (apenas ações) */}
-      <div className="dg-toolbar">
-        <div className="dg-toolbar__left">
-          {selectedTemplate && (
-            <button
-              onClick={handleBack}
-              className="dg-toolbar__button"
-              title="Voltar para seleção de templates"
-              aria-label="Voltar"
+      {/* Header / Toolbar */}
+      <Paper p="xs" radius={0} className="bg-white border-b border-slate-200 sticky top-0 z-10">
+        <Group justify="space-between" px="md">
+          <Group gap="xs">
+            {selectedTemplate && (
+              <Button 
+                variant="subtle" 
+                color="gray" 
+                size="xs"
+                leftSection={<ArrowLeft size={16} />}
+                onClick={handleBack}
+              >
+                Voltar
+              </Button>
+            )}
+            <Title order={5}>
+              {selectedTemplate ? templateConfig[selectedTemplate].title : 'Gerador de Documentos'}
+            </Title>
+          </Group>
+
+          <Group gap="xs">
+            <Button 
+              variant="light" 
+              size="xs" 
+              color="indigo"
+              leftSection={<History size={16} />}
+              onClick={() => setShowHistory(!showHistory)}
             >
-              <ChevronDown size={20} className="dg-chevron--back" />
-            </button>
-          )}
-          {selectedTemplate && (
-            <span className="dg-toolbar__title">
-              {templateConfig[selectedTemplate]?.title}
-            </span>
-          )}
-        </div>
-
-        <div className="dg-toolbar__right">
-          <button
-            onClick={() => setShowHistory(!showHistory)}
-            className={`dg-toolbar__icon-button ${showHistory ? 'dg-toolbar__icon-button--active' : ''}`}
-            title="Histórico de Documentos"
-          >
-            <History size={20} />
-            <span className="dg-hidden-mobile">Histórico</span>
-          </button>
-          {selectedTemplate && (
-            <button onClick={handleBack} className="dg-toolbar__icon-button">
-              <X size={20} />
-              <span className="dg-hidden-mobile">Fechar</span>
-            </button>
-          )}
-        </div>
-      </div>
-
-      {/* Conteúdo principal */}
-      <div className="dg-content">
-        {!selectedTemplate ? (
-          // Seletor de Templates
-          <div className="dg-selector">
-            <h3 className="dg-selector__title">
-              Selecione o tipo de documento
-            </h3>
-
-            <div className="dg-grid">
-              {DOCUMENT_TEMPLATES.map((template) => (
-                <button
-                  key={template.id}
-                  onClick={() => handleSelectTemplate(template.id)}
-                  className="dg-card"
+              Histórico
+            </Button>
+            
+            {selectedTemplate && (
+              <Group gap="xs">
+                <Button 
+                  variant="filled" 
+                  size="xs" 
+                  color="green" 
+                  leftSection={<Save size={16} />}
+                  onClick={handleSaveDocument}
+                  loading={isSaving}
                 >
-                  <span className="dg-card__icon">{template.icon}</span>
-                  <span className="dg-card__text">{template.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          // Editor - Layout Responsivo
-          <div className="dg-editor-layout">
-            {/* Formulário */}
-            <div className="dg-form-section">
-              <button
-                onClick={() => toggleSection('form')}
-                className="dg-section-header"
-                aria-expanded={!collapsedSections.form}
-              >
-                <div className="dg-section-header__left">
-                  <ChevronDown
-                    size={18}
-                    className={`dg-chevron ${collapsedSections.form ? 'dg-chevron--rotated' : ''}`}
-                  />
-                  <span>📝 Formulário</span>
-                </div>
-                <span className="dg-section-count">
-                  {collapsedSections.form ? 'Mostrar' : 'Ocultar'}
-                </span>
-              </button>
+                  Salvar
+                </Button>
+                <Button 
+                  variant="filled" 
+                  size="xs" 
+                  color="blue" 
+                  leftSection={<Printer size={16} />}
+                  onClick={() => handlePrint()}
+                >
+                  Imprimir
+                </Button>
+              </Group>
+            )}
+          </Group>
+        </Group>
+      </Paper>
 
-              {!collapsedSections.form && (
-                <div className="dg-form-content">
-                  {/* Seletor de Cliente */}
-                  <div className="dg-client-selector">
-                    <label className="dg-client-selector__label">
-                      🏢 Selecionar Cliente (Opcional)
-                    </label>
-                    <select
-                      value={selectedCliente?._id || selectedCliente?.id || ''}
-                      onChange={(e) => handleSelectCliente(e.target.value)}
-                      className="dg-select"
-                    >
-                      <option value="">Selecione um cliente...</option>
-                      {clientes.map(cliente => (
-                        <option
-                          key={cliente._id || cliente.id}
-                          value={cliente._id || cliente.id}
-                        >
-                          {cliente.razao_social || cliente.nome_fantasia || 'Sem nome'} - {cliente.cnpj || cliente.cpf || ''}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+      <Grid gutter={0} align="stretch" style={{ flex: 1 }}>
+        <Grid.Col span={{ base: 12, lg: selectedTemplate ? 4 : 12 }}>
+          {!selectedTemplate ? (
+            <Box p="xl">
+              <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="md">
+                {Object.entries(templateConfig).map(([id, config]) => (
+                  <Paper 
+                    key={id} 
+                    withBorder 
+                    p="xl" 
+                    radius="lg" 
+                    className="hover:shadow-md transition-all cursor-pointer bg-white group"
+                    onClick={() => handleSelectTemplate(id)}
+                  >
+                    <Stack align="center" gap="md">
+                      <Text size="3rem">{config.icon}</Text>
+                      <Title order={5} ta="center">{config.title}</Title>
+                      <Button variant="light" fullWidth className="group-hover:bg-blue-50">Selecionar</Button>
+                    </Stack>
+                  </Paper>
+                ))}
+              </SimpleGrid>
+            </Box>
+          ) : (
+            <Box className="editor-sidebar" p="md">
+              <Stack gap="md">
+                <Select
+                  label="🏢 Cliente Vinculado"
+                  placeholder="Selecione o cliente..."
+                  data={clientes.map(c => ({
+                    value: c.id || c._id,
+                    label: `${c.razao_social || c.nome_fantasia} - ${c.cnpj || c.cpf}`
+                  }))}
+                  value={selectedCliente?.id || selectedCliente?._id || ''}
+                  onChange={handleSelectCliente}
+                  searchable
+                  nothingFoundMessage="Nenhum cliente encontrado"
+                />
+                <Divider label="Campos do Documento" labelPosition="center" my="xs" />
+                {renderForm()}
+              </Stack>
+            </Box>
+          )}
+        </Grid.Col>
 
-                  {/* Ações */}
-                  <div className="dg-action-buttons">
-                    <button
-                      onClick={handleSaveDocument}
-                      disabled={isSaving}
-                      className={`dg-primary-button dg-primary-button--success ${isSaving ? 'dg-primary-button--disabled' : ''}`}
-                    >
-                      <Save size={16} />
-                      <span>{isSaving ? 'Salvando...' : 'Salvar'}</span>
-                    </button>
-                    <button
-                      onClick={() => handlePrint()}
-                      className="dg-primary-button"
-                    >
-                      <Printer size={16} />
-                      <span>Imprimir / PDF</span>
-                    </button>
-                  </div>
-
-                  {/* Formulário */}
-                  <div className="dg-form-scroll">
-                    {renderForm()}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Preview do Documento */}
-            <div className="dg-preview-section">
-              <button
-                onClick={() => toggleSection('preview')}
-                className="dg-section-header"
-                aria-expanded={!collapsedSections.preview}
-              >
-                <div className="dg-section-header__left">
-                  <ChevronDown
-                    size={18}
-                    className={`dg-chevron ${collapsedSections.preview ? 'dg-chevron--rotated' : ''}`}
-                  />
-                  <span>📄 Prévia do Documento</span>
-                </div>
-                <span className="dg-section-count">
-                  {collapsedSections.preview ? 'Mostrar' : 'Ocultar'}
-                </span>
-              </button>
-
-              {!collapsedSections.preview && (
-                <div className="dg-preview-content">
+        {/* Lado Direito: Preview (Apenas se template selecionado) */}
+        {selectedTemplate && (
+          <Grid.Col span={{ base: 12, lg: 8 }}>
+            <Box pos="relative">
+              <Box p="xs" bg="gray.1" style={{ borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Group gap="xs" px="sm">
+                  <Badge variant="dot" size="xs" color="blue">LIVE PREVIEW</Badge>
+                  <Text size="10px" fw={700} c="dimmed">FORMATO A4</Text>
+                </Group>
+                <Text size="10px" c="dimmed" px="sm">Escalado para caber na tela</Text>
+              </Box>
+              <Box className="a4-preview-container">
+                <Box className="a4-document-wrapper">
                   {renderDocument()}
-                </div>
-              )}
-            </div>
-          </div>
+                </Box>
+              </Box>
+            </Box>
+          </Grid.Col>
         )}
+      </Grid>
 
-        {/* Painel de Histórico (lateral) */}
-        {showHistory && (
-          <div className="dg-history-panel">
-            <div className="dg-history-header">
-              <h3 className="dg-history-title">📚 Histórico Recente</h3>
-              <button onClick={() => setShowHistory(false)} className="dg-toolbar__icon-button">
-                <X size={16} />
-              </button>
-            </div>
-
-            <div className="dg-history-list">
-              {history.length === 0 ? (
-                <p className="dg-history-empty">Nenhum documento gerado recentemente</p>
-              ) : (
-                history.map((doc) => (
-                  <div key={doc._id || doc.id} className="dg-history-item">
-                    <div className="dg-history-item__info">
-                      <p className="dg-history-item__type">
-                        {doc.tipo.replace(/_/g, ' ').toUpperCase()}
-                      </p>
-                      <p className="dg-history-item__date">
-                        {new Date(doc.createdAt).toLocaleDateString('pt-BR')}
-                      </p>
-                      {doc.cliente && (
-                        <p className="dg-history-item__client">
-                          {doc.cliente.razao_social || doc.cliente.nome_fantasia}
-                        </p>
-                      )}
-                    </div>
-                    <button
-                      onClick={() => {
-                        setSelectedTemplate(doc.tipo);
-                        setFormData(doc.dados || {});
-                      }}
-                      className="dg-history-view-button"
-                    >
-                      Ver
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      {/* Drawer/Modal de Histórico Lateral */}
+      <Collapse in={showHistory}>
+        <Paper withBorder p="md" radius="md" mt="md" bg="gray.0">
+          <Group justify="space-between" mb="md">
+            <Title order={5}>Histórico Recente</Title>
+            <ActionIcon variant="subtle" onClick={() => setShowHistory(false)}><X size={18} /></ActionIcon>
+          </Group>
+          <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }}>
+            {history.map((doc) => (
+              <Paper key={doc.id || doc._id} withBorder p="sm" radius="md" bg="white">
+                <Group justify="space-between" mb="xs">
+                  <Badge size="xs" variant="light">{doc.tipo.replace(/_/g, ' ')}</Badge>
+                  <Text size="xs" c="dimmed">{new Date(doc.createdAt).toLocaleDateString('pt-BR')}</Text>
+                </Group>
+                <Text size="sm" fw={700} truncate>{doc.cliente?.razao_social || 'Documento Avulso'}</Text>
+                <Button 
+                  variant="subtle" 
+                  size="compact-xs" 
+                  fullWidth 
+                  mt="sm"
+                  onClick={() => {
+                    setSelectedTemplate(doc.tipo);
+                    setFormData(doc.dados || {});
+                    setShowHistory(false);
+                  }}
+                >
+                  Carregar Dados
+                </Button>
+              </Paper>
+            ))}
+          </SimpleGrid>
+        </Paper>
+      </Collapse>
+    </Box>
   );
 };
 

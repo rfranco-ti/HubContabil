@@ -82,6 +82,7 @@ model Client {
   opcaoSimples            Boolean          @default(false) @map("opcao_simples")
   dataOpcaoSimples        String?          @map("data_opcao_simples")
   dataExclusaoSimples     String?          @map("data_exclusao_simples")
+  motivoExclusaoSimples   String?          @map("motivo_exclusao_simples")
   dataOpcaoMei            String?          @map("data_opcao_mei")
   dataExclusaoMei         String?          @map("data_exclusao_mei")
   observacoes             String?
@@ -124,7 +125,7 @@ model ClientQsa {
   nome         String
   cpfCnpj      String?  @map("cpf_cnpj")
   qualificacao String
-  participacao Decimal? @db.Decimal(5, 2)
+  participacao Decimal? @db.Decimal(20, 2)
   dataEntrada  String?  @map("data_entrada")
   pais         String?  @map("pais")
   representanteLegal String? @map("representante_legal")

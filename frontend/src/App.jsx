@@ -285,6 +285,18 @@ function App() {
                 }
               />
               <Route
+                path="/gerador-documentos/:templateId"
+                element={
+                  <LazyRoute>
+                    <ErrorBoundary
+                      fallback={<p>Erro ao carregar gerador de documentos</p>}
+                    >
+                      <GeradorDocumentos />
+                    </ErrorBoundary>
+                  </LazyRoute>
+                }
+              />
+              <Route
                 path="/editor-modelos"
                 element={
                   <LazyRoute>

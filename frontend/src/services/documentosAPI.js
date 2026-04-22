@@ -1,46 +1,13 @@
-import axios from 'axios';
+import api from './api';
 
-const API_URL = import.meta.env.VITE_API_URL || '/api';
-
-// Configuração do axios com token de autenticação
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-// Interceptor para adicionar token
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-/**
- * API para Clientes
- */
+// Adaptador para manter compatibilidade com o código antigo do Gerador
 export const clientesAPI = {
-  // Listar todos os clientes
   listar: async () => {
     const response = await api.get('/clientes');
     return response.data;
-  },
-
-  // Buscar cliente por ID
-  buscar: async (id) => {
-    const response = await api.get(`/clientes/${id}`);
-    return response.data;
-  },
-
-  // Buscar cliente por CNPJ
-  buscarPorCNPJ: async (cnpj) => {
-    const response = await api.get(`/clientes/cnpj/${cnpj}`);
-    return response.data;
-  },
+  }
 };
+
 
 /**
  * API para Documentos Gerados
@@ -87,6 +54,11 @@ export const documentosGeradosAPI = {
   // Estatísticas
   estatisticas: async () => {
     const response = await api.get('/documentos-gerados/estatisticas');
+    return response.data;
+  },
+  // Obter próximo número sequencial
+  obterProximoNumero: async (tipo) => {
+    const response = await api.get(`/documentos-gerados/proximo-numero/${tipo}`);
     return response.data;
   },
 };

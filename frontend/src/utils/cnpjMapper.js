@@ -2,10 +2,24 @@ import { formatCpf, formatPhoneDisplay } from './masks';
 
 export const formatDateToInput = (dateStr) => {
   if (!dateStr) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+  
   if (dateStr.includes('/')) {
-    const [d, m, y] = dateStr.split('/');
-    return `${y}-${m}-${d}`;
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+      const [d, m, y] = parts;
+      const year = y.length === 2 ? `20${y}` : y;
+      return `${year}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+    }
   }
+  
+  try {
+    const d = new Date(dateStr);
+    if (!isNaN(d.getTime())) {
+      return d.toISOString().split('T')[0];
+    }
+  } catch (e) {}
+
   return dateStr;
 };
 
@@ -35,10 +49,15 @@ export const mapCnpjDataToForm = (data, prevData) => {
       nome: m.nome || '',
       cpf_cnpj: formatCpf(m.cpfCnpj || ''),
       qualificacao: m.qualificacao || '',
-      data_entrada: m.dataEntrada || '',
+      data_entrada: formatDateToInput(m.dataEntrada) || '',
       pais: m.pais || '',
       representante_legal: m.representanteLegal || '',
       participacao: 0
+    })),
+    contatos: (data.telefones || []).map((tel, idx) => ({
+      nome: '',
+      email: idx === 0 ? (data.email || '') : '',
+      telefone: `${tel.ddd}${tel.numero}`
     })),
     endereco: {
       cep: data.endereco?.cep || prevData.endereco.cep,
@@ -57,15 +76,16 @@ export const mapCnpjDataToForm = (data, prevData) => {
         prevData.contato_principal.telefone
     },
     regime_tributario: (data.regimeTributario && data.regimeTributario !== 'Nao Informado') ? data.regimeTributario : 'Não Enquadrado',
-    capital_social: data.capitalSocial || prevData.capital_social,
+    capital_social: data.capitalSocial ? Number(data.capitalSocial) * 100 : prevData.capital_social,
     porte: data.porte?.descricao || data.porte || prevData.porte,
     situacao_data: data.situacao?.data || prevData.situacao_data,
     situacao_motivo: data.situacao?.motivo || prevData.situacao_motivo,
     opcao_simples: data.opcaoSimples || false,
-    data_opcao_simples: data.dataOpcaoSimples || prevData.data_opcao_simples,
-    data_exclusao_simples: data.dataExclusaoSimples || prevData.data_exclusao_simples,
-    data_opcao_mei: data.dataOpcaoMei || prevData.data_opcao_mei,
-    data_exclusao_mei: data.dataExclusaoMei || prevData.data_exclusao_mei,
+    data_opcao_simples: formatDateToInput(data.dataOpcaoSimples) || prevData.data_opcao_simples,
+    data_exclusao_simples: formatDateToInput(data.dataExclusaoSimples) || prevData.data_exclusao_simples,
+    motivo_exclusao_simples: data.motivoExclusaoSimples || prevData.motivo_exclusao_simples,
+    data_opcao_mei: formatDateToInput(data.dataOpcaoMei) || prevData.data_opcao_mei,
+    data_exclusao_mei: formatDateToInput(data.dataExclusaoMei) || prevData.data_exclusao_mei,
   };
 };
 

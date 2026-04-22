@@ -88,6 +88,7 @@ class ClientService {
       opcao_simples,
       data_opcao_simples,
       data_exclusao_simples,
+      motivo_exclusao_simples,
       data_opcao_mei,
       data_exclusao_mei,
     } = data;
@@ -138,6 +139,7 @@ class ClientService {
         opcaoSimples: opcao_simples || false,
         dataOpcaoSimples: data_opcao_simples || null,
         dataExclusaoSimples: data_exclusao_simples || null,
+        motivoExclusaoSimples: motivo_exclusao_simples || null,
         dataOpcaoMei: data_opcao_mei || null,
         dataExclusaoMei: data_exclusao_mei || null,
 
@@ -239,6 +241,7 @@ class ClientService {
       opcao_simples,
       data_opcao_simples,
       data_exclusao_simples,
+      motivo_exclusao_simples,
       data_opcao_mei,
       data_exclusao_mei,
     } = data;
@@ -279,6 +282,7 @@ class ClientService {
         opcaoSimples: opcao_simples,
         dataOpcaoSimples: data_opcao_simples,
         dataExclusaoSimples: data_exclusao_simples,
+        motivoExclusaoSimples: motivo_exclusao_simples,
         dataOpcaoMei: data_opcao_mei,
         dataExclusaoMei: data_exclusao_mei,
 
@@ -378,6 +382,7 @@ class ClientService {
       opcao_simples: client.opcaoSimples,
       data_opcao_simples: client.dataOpcaoSimples,
       data_exclusao_simples: client.dataExclusaoSimples,
+      motivo_exclusao_simples: client.motivoExclusaoSimples,
       data_opcao_mei: client.dataOpcaoMei,
       data_exclusao_mei: client.dataExclusaoMei,
       cnae_principal: {

@@ -105,6 +105,28 @@ async function startServer() {
       console.error("[Cron] Erro na verificação inicial de certificados:", err.message),
     );
 
+  // Limpeza de arquivos temporários a cada 24 horas (à meia-noite)
+  cron.schedule("0 0 * * *", async () => {
+    console.log("[Cron] Iniciando limpeza de arquivos temporários...");
+    const tempDir = path.join(__dirname, "../temp");
+    try {
+      if (require('fs').existsSync(tempDir)) {
+        const files = require('fs').readdirSync(tempDir);
+        for (const file of files) {
+          const filePath = path.join(tempDir, file);
+          const stats = require('fs').statSync(filePath);
+          // Remove arquivos com mais de 1 hora de vida
+          if (Date.now() - stats.mtimeMs > 3600000) {
+            require('fs').unlinkSync(filePath);
+          }
+        }
+        console.log("[Cron] Limpeza de arquivos temporários concluída.");
+      }
+    } catch (err) {
+      console.error("[Cron] Erro ao limpar arquivos temporários:", err.message);
+    }
+  });
+
   // Graceful shutdown - apenas sinais explícitos
   const gracefulShutdown = async (signal) => {
     console.log(`\n${signal} recebido. Iniciando shutdown...`);
