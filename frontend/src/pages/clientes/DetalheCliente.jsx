@@ -303,7 +303,7 @@ export default function DetalheCliente() {
                     {cliente.status}
                   </Badge>
                   <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                    {cliente.cnpj}
+                    {formatCnpj(cliente.cnpj)}
                   </span>
                 </div>
               </div>

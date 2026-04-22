@@ -2,6 +2,8 @@ const prisma = require('../config/prisma');
 const { storage } = require('../config/supabase');
 const path = require('path');
 const fs = require('fs');
+const forge = require('node-forge');
+const { encrypt } = require('../utils/cryptoUtils');
 
 const BUCKET_DOCUMENTOS = 'documentos';
 const BUCKET_THUMBNAILS = 'thumbnails';
@@ -20,6 +22,36 @@ function gerarStoragePath(cliente, pasta, nomeArquivo) {
 function gerarThumbnailPath(nomeArquivo) {
   const timestamp = Date.now();
   return `thumbs/${timestamp}_${path.basename(nomeArquivo)}.png`;
+}
+
+// Extrair metadados de certificado digital PFX/P12
+function processarCertificado(buffer, senha) {
+  try {
+    const p12Der = buffer.toString('binary');
+    const p12Asn1 = forge.asn1.fromDer(p12Der);
+    const p12 = forge.pkcs12.pkcs12FromAsn1(p12Asn1, senha);
+
+    // Encontrar o certificado principal
+    let cert;
+    for (const bagType in p12.getBags({ bagType: forge.pki.oids.certBag })) {
+      const bags = p12.getBags({ bagType: forge.pki.oids.certBag })[bagType];
+      if (bags && bags.length > 0) {
+        cert = bags[0].cert;
+        break;
+      }
+    }
+
+    if (!cert) throw new Error('Não foi possível encontrar o certificado no arquivo P12/PFX');
+
+    return {
+      emissao: new Date(cert.validity.notBefore),
+      vencimento: new Date(cert.validity.notAfter),
+      subject: cert.subject.attributes.map(a => `${a.shortName || a.name}=${a.value}`).join(', ')
+    };
+  } catch (err) {
+    console.error('[Certificado] Erro ao processar:', err.message);
+    throw new Error('Senha incorreta ou arquivo de certificado inválido');
+  }
 }
 
 // Upload de documento
@@ -100,6 +132,35 @@ const uploadDocumento = async (req, res) => {
 
     // Remover arquivo local temporário
     fs.unlinkSync(req.file.path);
+
+    // Processamento especial para Certificado Digital
+    if (tipo === 'certificado_digital' || path.extname(req.file.originalname).toLowerCase().match(/\.(pfx|p12)$/)) {
+      const { senha } = req.body;
+      if (!senha) {
+        // Se for certificado mas não enviou senha, apenas logamos (o front deveria ter enviado)
+        console.warn('[Upload] Certificado enviado sem senha para processamento de datas.');
+      } else {
+        try {
+          const certInfo = processarCertificado(fileBuffer, senha);
+          const encryptedSenha = encrypt(senha);
+
+          await prisma.client.update({
+            where: { id: clienteId },
+            data: {
+              certificadoPossui: true,
+              certificadoSenha: encryptedSenha,
+              certificadoEmissao: certInfo.emissao,
+              certificadoVencimento: certInfo.vencimento
+            }
+          });
+          console.log(`[Upload] Certificado processado para o cliente ${cliente.razaoSocial}. Vencimento: ${certInfo.vencimento}`);
+        } catch (certErr) {
+          console.error('[Upload] Falha ao processar metadados do certificado:', certErr.message);
+          // Não falhamos o upload total se o processamento do certificado falhar (talvez senha errada),
+          // mas o registro do documento já foi criado acima.
+        }
+      }
+    }
 
     res.status(201).json(documento);
   } catch (error) {

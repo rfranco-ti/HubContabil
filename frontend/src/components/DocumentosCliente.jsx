@@ -20,8 +20,8 @@ import {
   CheckCircle2,
   PauseCircle,
   PlayCircle,
-  ChevronUp,
   ChevronDown,
+  Lock
 } from "lucide-react";
 import { documentosAPI } from "../services/api";
 import { formatDate } from "../utils/masks";
@@ -50,7 +50,9 @@ import {
   Anchor,
   Loader,
   Progress,
-  Container
+  Container,
+  Select,
+  PasswordInput
 } from "@mantine/core";
 
 export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome }) {
@@ -60,8 +62,11 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedFolder, setSelectedFolder] = useState(null);
   const [tipoDocumento, setTipoDocumento] = useState("documento");
   const [descricao, setDescricao] = useState("");
+  const [certificadoSenha, setCertificadoSenha] = useState("");
+  const [isCertificado, setIsCertificado] = useState(false);
   const [pastaSelecionada, setPastaSelecionada] = useState(null);
   const [historicoNavegacao, setHistoricoNavegacao] = useState([]);
   const [showUploadForm, setShowUploadForm] = useState(false);
@@ -84,11 +89,13 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
 
   // Drag and drop
   const [isDragging, setIsDragging] = useState(false);
+  const [draggingFolderId, setDraggingFolderId] = useState(null);
   const dropZoneRef = useRef(null);
 
   // Preview de imagens
   const [imagePreviews, setImagePreviews] = useState([]);
   const [pdfPreviews, setPdfPreviews] = useState([]);
+  const fileInputRef = useRef(null);
 
   // Upload queue com prioridade
   const [uploadQueue, setUploadQueue] = useState([]); // [{file, priority, status, progress}]
@@ -108,6 +115,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
     "image/jpg",
     "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/x-pkcs12",
   ];
 
   useEffect(() => {
@@ -418,92 +426,111 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
     toast.success("Fila limpa");
   };
 
-  const handleUpload = async () => {
-    if (!selectedFiles || selectedFiles.length === 0) return;
+  const performUpload = async (files, targetFolderId = null, type = null, desc = null, senha = null) => {
+    if (!files || files.length === 0) return;
 
     setUploading(true);
-    toast.info("Iniciando uploads...");
+    const folderToUse = targetFolderId || selectedFolder || pastaSelecionada;
+    const typeToUse = type || tipoDocumento;
+    const descToUse = desc || descricao;
+    const passwordToUse = senha || certificadoSenha;
+    
+    toast.info(`Iniciando upload de ${files.length} arquivo(s)...`);
 
     // Inicializa progresso para cada arquivo
-    const initialProgress = selectedFiles.map((file) => ({
+    const initialProgress = files.map((file) => ({
       name: file.name,
       progress: 0,
       status: "uploading",
       error: null,
     }));
-    setUploadProgress(initialProgress);
+    
+    // Se já houver uploads, anexa, senão substitui
+    setUploadProgress(prev => [...prev, ...initialProgress]);
 
-    const newCancelTokens = {};
+    // Offset para o índice se já houver itens no progresso
+    const indexOffset = uploadProgress.length;
 
-    // Uploads em paralelo com Promise.all
-    const uploadPromises = selectedFiles.map((file, index) => {
+    const newCancelTokens = { ...cancelTokens };
+
+    const uploadPromises = files.map((file, index) => {
+      const globalIndex = indexOffset + index;
       const abortController = new AbortController();
-      newCancelTokens[index] = abortController;
+      newCancelTokens[globalIndex] = abortController;
 
       const formData = new FormData();
       formData.append("documento", file);
       formData.append("clienteId", clienteId);
-      formData.append("tipo", tipoDocumento);
-      formData.append("descricao", descricao);
-      if (pastaSelecionada) {
-        formData.append("pastaId", pastaSelecionada);
+      formData.append("tipo", typeToUse);
+      formData.append("descricao", descToUse);
+      if (passwordToUse) formData.append("senha", passwordToUse);
+      if (folderToUse) {
+        formData.append("pastaId", folderToUse);
       }
 
       return new Promise((resolve) => {
         documentosAPI
           .upload(formData, (progress) => {
             setUploadProgress((prev) =>
-              prev.map((p, idx) => (idx === index ? { ...p, progress } : p)),
+              prev.map((p, idx) => (idx === globalIndex ? { ...p, progress } : p)),
             );
           })
           .then(() => {
             setUploadProgress((prev) =>
               prev.map((p, idx) =>
-                idx === index ? { ...p, progress: 100, status: "success" } : p,
+                idx === globalIndex ? { ...p, progress: 100, status: "success" } : p,
               ),
             );
-            resolve({ index, success: true });
+            resolve({ index: globalIndex, success: true });
           })
           .catch((error) => {
             if (error.name === "AbortError") {
               setUploadProgress((prev) =>
                 prev.map((p, idx) =>
-                  idx === index ? { ...p, status: "cancelled" } : p,
+                  idx === globalIndex ? { ...p, status: "cancelled" } : p,
                 ),
               );
-              resolve({ index, success: false, cancelled: true });
+              resolve({ index: globalIndex, success: false, cancelled: true });
             } else {
               setUploadProgress((prev) =>
                 prev.map((p, idx) =>
-                  idx === index
+                  idx === globalIndex
                     ? { ...p, status: "error", error: error.message }
                     : p,
                 ),
               );
-              resolve({ index, success: false, error: error.message });
+              resolve({ index: globalIndex, success: false, error: error.message });
             }
           });
       });
     });
 
-    // Aguarda todos uploads completarem
+    setCancelTokens(newCancelTokens);
+
     await Promise.all(uploadPromises);
 
-    setCancelTokens({});
     setUploading(false);
-
-    // Recarrega documentos após uploads
     await fetchDocumentos();
     await fetchTodasPastas();
 
-    // Limpa formulário
+    toast.success("Uploads processados!");
+  };
+
+  const handleUpload = async () => {
+    if (!selectedFiles || selectedFiles.length === 0) return;
+
+    await performUpload(selectedFiles, pastaSelecionada, tipoDocumento, descricao, certificadoSenha);
+
+    // Limpa formulário após sucesso
     setSelectedFiles([]);
     setImagePreviews([]);
     setPdfPreviews([]);
-    setUploadProgress([]);
-    setShowUploadForm(false);
-
-    toast.success("Todos os uploads concluídos!");
+    // Opcional: manter progresso por uns segundos ou limpar imediatamente
+    setTimeout(() => setUploadProgress([]), 5000);
+    setDescricao("");
+    setCertificadoSenha("");
+    setIsCertificado(false);
+    setTipoDocumento("documento");
   };
 
   const _handleCancelUpload = (index) => {
@@ -532,17 +559,67 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
     e.preventDefault();
     setIsDragging(false);
 
-    const files = Array.from(e.dataTransfer.files).filter(
-      (file) =>
-        file.type.startsWith("image/") ||
-        file.type === "application/pdf" ||
-        file.type.startsWith("application/msword") ||
-        file.type.includes("wordprocessingml"),
-    );
-
-    if (files.length > 0) {
+    const files = Array.from(e.dataTransfer.files);
+    
+    // Identificar se há certificado no drop geral
+    const temCertificado = files.some(f => f.name.toLowerCase().match(/\.(pfx|p12)$/));
+    if (temCertificado) {
+      // Se tiver certificado, abre o form e pede a senha antes de subir
       setSelectedFiles((prev) => [...prev, ...files]);
       generatePreviews(files);
+      setIsCertificado(true);
+      setTipoDocumento("certificado_digital");
+      setShowUploadForm(true);
+      toast.info("Certificado detectado. Por favor, informe a senha para processamento.");
+      return;
+    }
+
+    const { validFiles, errors } = validateFiles(files);
+    if (errors.length > 0) errors.forEach(err => toast.error(err));
+    if (validFiles.length > 0) {
+      setSelectedFiles(prev => [...prev, ...validFiles]);
+      generatePreviews(validFiles);
+      setShowUploadForm(true);
+    }
+  };
+
+  const handleFolderDragOver = (e, folderId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDraggingFolderId(folderId);
+  };
+
+  const handleFolderDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDraggingFolderId(null);
+  };
+
+  const handleFolderDrop = (e, folderId) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDraggingFolderId(null);
+
+    const files = Array.from(e.dataTransfer.files);
+    const { validFiles, errors } = validateFiles(files);
+
+    if (errors.length > 0) {
+      errors.forEach((error) => toast.error(error));
+    }
+
+    if (validFiles.length > 0) {
+      const temCertificado = validFiles.some(f => f.name.toLowerCase().match(/\.(pfx|p12)$/));
+      if (temCertificado) {
+        setSelectedFiles(validFiles);
+        generatePreviews(validFiles);
+        setSelectedFolder(folderId);
+        setIsCertificado(true);
+        setTipoDocumento("certificado_digital");
+        setShowUploadForm(true);
+        toast.info("Certificado detectado. Informe a senha no formulário de upload.");
+      } else {
+        performUpload(validFiles, folderId);
+      }
     }
   };
 
@@ -569,11 +646,17 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
       }
 
       // Verifica tipo
-      if (!ALLOWED_TYPES.includes(file.type)) {
+      const isCert = file.name.toLowerCase().match(/\.(pfx|p12)$/);
+      if (!ALLOWED_TYPES.includes(file.type) && !isCert) {
         errors.push(
           `${file.name}: Tipo de arquivo não permitido (${file.type})`,
         );
         return;
+      }
+
+      if (isCert) {
+        setIsCertificado(true);
+        setTipoDocumento("certificado_digital");
       }
 
       validFiles.push(file);
@@ -868,7 +951,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
       <Group gap={4}><FolderOpen size={16} /> Todos Documentos</Group>
     </Anchor>,
     ...getBreadcrumbPath().map((p, i) => (
-      <Anchor key={p.id} size="sm" fw={500} onClick={() => handleNavegarBreadcrumb(p.id, i)}>
+      <Anchor key={`bc-${p.id || i}`} size="sm" fw={500} onClick={() => handleNavegarBreadcrumb(p.id, i)}>
         {p.nome}
       </Anchor>
     ))
@@ -901,11 +984,15 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
             <Button 
               variant="filled" 
               color="blue" 
-              leftSection={showUploadForm ? <X size={16} /> : <Plus size={16} />}
-              onClick={() => setShowUploadForm(!showUploadForm)}
+              leftSection={<Plus size={16} />}
+              onClick={() => {
+                const element = document.getElementById('upload-section');
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+                fileInputRef.current?.click();
+              }}
               radius="md"
             >
-              {showUploadForm ? "Cancelar" : "Novo Documento"}
+              Adicionar Documento
             </Button>
           </Group>
         </Group>
@@ -927,14 +1014,21 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
         <Box mb="xl">
           <MantineText size="xs" fw={900} c="dimmed" mb="md" className="uppercase tracking-widest">Pastas</MantineText>
           <SimpleGrid cols={{ base: 2, sm: 3, md: 4, lg: 6 }} spacing="md">
-            {pastasFiltradas.map((pasta) => (
+            {pastasFiltradas.map((pasta, index) => (
               <Card 
-                key={pasta._id} 
+                key={pasta._id || `pasta-${index}`} 
                 padding="md" 
                 radius="lg" 
                 withBorder 
-                className="hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer group bg-white dark:bg-slate-800"
+                className={`hover:shadow-lg hover:border-blue-300 transition-all cursor-pointer group bg-white dark:bg-slate-800 ${
+                  draggingFolderId === pasta._id 
+                    ? 'ring-2 ring-blue-500 bg-blue-50 dark:bg-blue-900/20 border-blue-400 scale-[1.02]' 
+                    : ''
+                }`}
                 onClick={() => handleNavegarPasta(pasta._id)}
+                onDragOver={(e) => handleFolderDragOver(e, pasta._id)}
+                onDragLeave={handleFolderDragLeave}
+                onDrop={(e) => handleFolderDrop(e, pasta._id)}
               >
                 <Stack align="center" gap="xs">
                   <div className="relative">
@@ -960,6 +1054,31 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
                       {pasta.descricao}
                     </MantineText>
                   )}
+
+                  <Group gap={4} mt="xs" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Tooltip label="Upload Direto">
+                      <ActionIcon 
+                        variant="light" 
+                        color="blue" 
+                        size="sm" 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const input = document.createElement('input');
+                          input.type = 'file';
+                          input.multiple = true;
+                          input.onchange = (event) => {
+                            const files = Array.from(event.target.files);
+                            const { validFiles, errors } = validateFiles(files);
+                            if (errors.length > 0) errors.forEach(err => toast.error(err));
+                            if (validFiles.length > 0) performUpload(validFiles, pasta._id);
+                          };
+                          input.click();
+                        }}
+                      >
+                        <Upload size={14} />
+                      </ActionIcon>
+                    </Tooltip>
+                  </Group>
                 </Stack>
 
                 {/* Menu de Ações da Pasta */}
@@ -988,14 +1107,20 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
                     </Menu.Dropdown>
                   </Menu>
                 </div>
+
+                {/* Overlay de Upload em Progresso para esta pasta específica */}
+                {uploading && uploadProgress.some(p => p.status === 'uploading') && (
+                  <div className="absolute inset-0 bg-white/60 dark:bg-slate-900/60 backdrop-blur-[1px] flex items-center justify-center rounded-lg z-10">
+                    <Loader size="sm" />
+                  </div>
+                )}
               </Card>
             ))}
           </SimpleGrid>
         </Box>
       )}
 
-      {showUploadForm && (
-        <Card withBorder padding="xl" radius="lg" mb="xl" className="bg-slate-50/50 dark:bg-slate-800/50">
+      <Card id="upload-section" withBorder padding="xl" radius="lg" mb="xl" className="bg-slate-50/50 dark:bg-slate-800/50">
           <Stack gap="md">
             <Group justify="space-between">
               <Title order={4} className="text-slate-800 dark:text-slate-200">Enviar Novo Documento</Title>
@@ -1019,23 +1144,24 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
             >
               <input
                 type="file"
+                ref={fileInputRef}
                 multiple
                 onChange={handleFileSelect}
                 disabled={selectedFiles.length >= MAX_FILES}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
+                accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.pfx,.p12"
               />
               <Upload size={48} className={`mx-auto mb-3 ${selectedFiles.length >= MAX_FILES ? "text-red-400" : "text-blue-400"}`} />
               <MantineText fw={700} size="lg" c={selectedFiles.length >= MAX_FILES ? "red.6" : "slate.7"}>
                 {selectedFiles.length >= MAX_FILES ? "Limite máximo de arquivos atingido" : "Arraste e solte arquivos aqui"}
               </MantineText>
-              <MantineText size="sm" c="dimmed" mt={4}>ou clique para selecionar (PDF, PNG, JPG, DOC - Máx 10MB)</MantineText>
+              <MantineText size="sm" c="dimmed" mt={4}>ou clique para selecionar (PDF, PNG, JPG, DOC, Certificados - Máx 10MB)</MantineText>
             </div>
 
             {/* Previews */}
             <Group gap="xs">
               {imagePreviews.map((preview, index) => (
-                <div key={index} className="relative group">
+                <div key={`img-${index}`} className="relative group">
                   <Paper radius="md" withBorder className="overflow-hidden w-20 h-20">
                     <img src={preview.url} alt="" className="w-full h-full object-cover" />
                   </Paper>
@@ -1052,7 +1178,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
                 </div>
               ))}
               {pdfPreviews.map((preview, index) => (
-                <div key={index} className="relative group">
+                <div key={`pdf-${index}`} className="relative group">
                   <Paper radius="md" withBorder className="overflow-hidden w-20 h-20 bg-red-50 flex items-center justify-center">
                     {preview.isThumbnail ? <img src={preview.url} alt="" className="w-full h-full object-cover" /> : <File size={32} className="text-red-500" />}
                   </Paper>
@@ -1080,6 +1206,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
                   { value: 'nota_fiscal', label: 'Nota Fiscal' },
                   { value: 'contrato', label: 'Contrato' },
                   { value: 'certidao', label: 'Certidão' },
+                  { value: 'certificado_digital', label: 'Certificado Digital (.pfx/.p12)' },
                   { value: 'outro', label: 'Outro' }
                 ]}
                 radius="md"
@@ -1094,7 +1221,6 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
             </SimpleGrid>
 
             <Group justify="flex-end" pt="md">
-              <Button variant="subtle" color="gray" onClick={() => setShowUploadForm(false)} radius="md">Cancelar</Button>
               <Button 
                 variant="filled" 
                 color="blue" 
@@ -1109,7 +1235,6 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
             </Group>
           </Stack>
         </Card>
-      )}
 
       {/* Progress */}
       {uploadProgress.length > 0 && (
@@ -1120,7 +1245,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
               {uploading && <Button variant="subtle" size="compact-xs" color="red" onClick={handleCancelAllUploads}>Cancelar Todos</Button>}
             </Group>
             {uploadProgress.map((item, idx) => (
-              <Box key={idx}>
+              <Box key={`up-${idx}`}>
                 <Group justify="space-between" mb={4}>
                   <MantineText size="xs" fw={500} className="truncate max-w-[200px]">{item.name}</MantineText>
                   <MantineText size="xs" fw={700} c={item.status === 'success' ? 'teal' : item.status === 'error' ? 'red' : 'blue'}>
@@ -1198,9 +1323,9 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
           </Paper>
         ) : (
           <Stack gap="sm">
-            {documentos.map((doc) => (
+            {documentos.map((doc, index) => (
               <Card 
-                key={doc._id} 
+                key={doc._id || `doc-${index}`} 
                 withBorder 
                 radius="lg" 
                 padding="md" 
@@ -1292,9 +1417,9 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
                         >
                           Sem pasta
                         </Button>
-                        {todasPastas.map((pasta) => (
+                        {todasPastas.map((pasta, index) => (
                           <Button 
-                            key={pasta._id}
+                            key={`move-${pasta._id || index}`}
                             variant="subtle" 
                             color="blue" 
                             size="xs" 
