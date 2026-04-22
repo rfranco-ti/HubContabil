@@ -709,6 +709,55 @@ export default function DetalheCliente() {
                />
             </div>
           </div>
+
+          {/* CERTIFICADO DIGITAL */}
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
+            <h2 className="text-lg font-black text-slate-800 dark:text-white flex items-center mb-4">
+              <BadgeCheck size={20} className="mr-2 text-blue-600" /> Certificado Digital
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+               <InfoCard 
+                  label="Possui Certificado?" 
+                  value={data.certificado_digital?.possui ? "Sim" : "Não"} 
+                  icon={Shield} 
+                  editable={editMode} 
+                  options={["Sim", "Não"]}
+                  onChange={v => updateNestedField("certificado_digital", "possui", v === "Sim")} 
+                  highlight={data.certificado_digital?.possui}
+               />
+               {data.certificado_digital?.possui ? (
+                 <>
+                   <InfoCard 
+                      label="Senha" 
+                      value={data.certificado_digital?.senha} 
+                      icon={Briefcase} 
+                      editable={editMode} 
+                      onChange={v => updateNestedField("certificado_digital", "senha", v)} 
+                   />
+                   <InfoCard 
+                      label="Data de Emissão" 
+                      value={data.certificado_digital?.emissao ? data.certificado_digital.emissao.split('T')[0] : null} 
+                      type="date"
+                      icon={Calendar} 
+                      editable={editMode} 
+                      onChange={v => updateNestedField("certificado_digital", "emissao", v ? new Date(v).toISOString() : null)} 
+                   />
+                   <InfoCard 
+                      label="Data de Vencimento" 
+                      value={data.certificado_digital?.vencimento ? data.certificado_digital.vencimento.split('T')[0] : null} 
+                      type="date"
+                      icon={Calendar} 
+                      editable={editMode} 
+                      onChange={v => updateNestedField("certificado_digital", "vencimento", v ? new Date(v).toISOString() : null)} 
+                   />
+                 </>
+               ) : (
+                 <div className="col-span-1 sm:col-span-1 lg:col-span-3 py-2">
+                   <MantineText size="sm" c="dimmed">Cliente não possui certificado digital cadastrado.</MantineText>
+                 </div>
+               )}
+            </div>
+          </div>
         </div>
       )}
     </div>

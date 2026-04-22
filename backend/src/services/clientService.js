@@ -76,6 +76,7 @@ class ClientService {
       observacoes,
       status,
       honorarios,
+      certificado_digital,
       servicos_prestados,
       tem_contabil,
       tem_fiscal,
@@ -139,6 +140,21 @@ class ClientService {
         dataExclusaoSimples: data_exclusao_simples || null,
         dataOpcaoMei: data_opcao_mei || null,
         dataExclusaoMei: data_exclusao_mei || null,
+
+        certificadoPossui: certificado_digital?.possui || false,
+        certificadoSenha: certificado_digital?.senha || null,
+        certificadoEmissao: certificado_digital?.emissao ? new Date(certificado_digital.emissao) : null,
+        certificadoVencimento: certificado_digital?.vencimento ? new Date(certificado_digital.vencimento) : null,
+
+        pastas: {
+          create: [
+            { nome: "Certificado Digital" },
+            { nome: "Junta Comercial" },
+            { nome: "Departamento Pessoal" },
+            { nome: "Departamento Fiscal" },
+            { nome: "Diversos" },
+          ]
+        },
 
         contatos: contatos?.length ? {
           create: contatos.map(c => ({
@@ -247,7 +263,8 @@ class ClientService {
         senhasPortais: senhas_portais,
         certificadoPossui: certificado_digital?.possui,
         certificadoSenha: certificado_digital?.senha,
-        certificadoVencimento: certificado_digital?.vencimento,
+        certificadoEmissao: certificado_digital?.emissao !== undefined ? (certificado_digital.emissao ? new Date(certificado_digital.emissao) : null) : undefined,
+        certificadoVencimento: certificado_digital?.vencimento !== undefined ? (certificado_digital.vencimento ? new Date(certificado_digital.vencimento) : null) : undefined,
         honorariosValor: honorarios?.valor,
         honorariosDiaVencimento: honorarios?.dia_vencimento,
         servicosPrestados: servicos_prestados,
@@ -392,6 +409,7 @@ class ClientService {
       certificado_digital: {
         possui: client.certificadoPossui,
         senha: client.certificadoSenha,
+        emissao: client.certificadoEmissao,
         vencimento: client.certificadoVencimento,
       },
       financeiro: {

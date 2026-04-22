@@ -993,15 +993,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
           </SimpleGrid>
         </Box>
       )}
-      </div>
 
-      {showUploadForm && (
-        <div className="bg-slate-50 rounded-xl border border-slate-200 p-6 mb-6">
-          <h3 className="font-bold text-slate-700 mb-4">
-            Enviar Novo Documento
-          </h3>
-
-      {/* Upload Form */}
       {showUploadForm && (
         <Card withBorder padding="xl" radius="lg" mb="xl" className="bg-slate-50/50 dark:bg-slate-800/50">
           <Stack gap="md">
@@ -1369,7 +1361,7 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
           </Button>
         </Group>
       </Modal>
-    </div>
+      </Box>
   );
 }
 

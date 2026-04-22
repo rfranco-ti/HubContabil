@@ -64,6 +64,7 @@ model Client {
   senhasPortais           Json?            @default("{}") @map("senhas_portais")
   certificadoPossui       Boolean          @default(false) @map("certificado_possui")
   certificadoSenha        String?          @map("certificado_senha")
+  certificadoEmissao      DateTime?        @map("certificado_emissao")
   certificadoVencimento   DateTime?        @map("certificado_vencimento")
   honorariosValor         Decimal          @default(0) @map("honorarios_valor") @db.Decimal(10, 2)
   honorariosDiaVencimento Int?             @map("honorarios_dia_vencimento")
@@ -602,7 +603,10 @@ enum AbrangenciaFeriado {
 }
 
 enum TipoAlerta {
+  TRES_DIAS_ANTES
+  DOIS_DIAS_ANTES
   UM_DIA_ANTE
+  DOZE_HORAS_ANTES
   NO_DIA
 }
 

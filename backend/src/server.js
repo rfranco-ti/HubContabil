@@ -5,6 +5,9 @@ const cron = require("node-cron");
 const {
   processarNotificacoesCalendario,
 } = require("./services/notificacaoService");
+const {
+  processarVencimentoCertificados,
+} = require("./services/cronCertificados");
 
 const PORT = process.env.PORT || 3000;
 
@@ -48,6 +51,25 @@ async function startServer() {
     },
   );
 
+  // Processar vencimentos de certificados a cada hora
+  cron.schedule(
+    "0 * * * *",
+    async () => {
+      console.log("[Cron] Verificando vencimentos de certificados...");
+      try {
+        const resultado = await processarVencimentoCertificados();
+        if (resultado && resultado.criadas > 0) {
+          console.log(`[Cron] ${resultado.criadas} notificações de certificados criadas.`);
+        }
+      } catch (error) {
+        console.error("[Cron] Erro ao processar certificados:", error);
+      }
+    },
+    {
+      timezone: "America/Sao_Paulo",
+    },
+  );
+
   // Executar uma vez ao iniciar para testar
   console.log("[Cron] Executando processamento inicial de notificações...");
   processarNotificacoesCalendario()
@@ -60,6 +82,17 @@ async function startServer() {
     })
     .catch((err) =>
       console.error("[Cron] Erro no processamento inicial:", err.message),
+    );
+
+  console.log("[Cron] Executando verificação inicial de certificados...");
+  processarVencimentoCertificados()
+    .then((resultado) => {
+      if (resultado && resultado.criadas > 0) {
+        console.log(`[Cron] Inicial: ${resultado.criadas} notificações de certificados criadas.`);
+      }
+    })
+    .catch((err) =>
+      console.error("[Cron] Erro na verificação inicial de certificados:", err.message),
     );
 
   // Graceful shutdown - apenas sinais explícitos

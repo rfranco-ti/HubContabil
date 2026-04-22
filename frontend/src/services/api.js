@@ -135,7 +135,15 @@ export const documentosAPI = {
     }),
   getAll: (params) => api.get('/documentos', { params }),
   getById: (id) => api.get(`/documentos/${id}`),
+  getByCliente: (clienteId, params) => api.get(`/documentos/cliente/${clienteId}`, { params }),
   delete: (id) => api.delete(`/documentos/${id}`),
+  pastas: {
+    criar: (data) => api.post('/documentos/pastas', data),
+    listar: (clienteId, params) => api.get(`/documentos/pastas/${clienteId}`, { params }),
+    getById: (id) => api.get(`/documentos/pastas/detalhe/${id}`),
+    atualizar: (id, data) => api.put(`/documentos/pastas/${id}`, data),
+    excluir: (id) => api.delete(`/documentos/pastas/${id}`),
+  }
 };
 
 export default api;
