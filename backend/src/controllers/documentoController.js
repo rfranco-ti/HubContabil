@@ -3,19 +3,28 @@ const { storage } = require('../config/supabase');
 const path = require('path');
 const fs = require('fs');
 const forge = require('node-forge');
+const crypto = require('crypto');
 const { encrypt } = require('../utils/cryptoUtils');
+const queueService = require('../services/queueService');
+
+const ALLOWED_MIME_TYPES = [
+  'application/pdf',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'image/jpeg', 'image/png', 'image/gif', 'image/webp',
+  'application/x-x509-ca-cert', 'application/x-pkcs12'
+];
 
 const BUCKET_DOCUMENTOS = 'documentos';
 const BUCKET_THUMBNAILS = 'thumbnails';
 
-// Gerar caminho de storage organizado por CNPJ
+// Gerar caminho de storage organizado por CNPJ com nome seguro (UUID)
 function gerarStoragePath(cliente, pasta, nomeArquivo) {
   const cnpj = cliente.cnpj.replace(/\D/g, ''); // Apenas números
   const pastaPath = pasta ? `${pasta.replace(/\//g, '_')}/` : '';
-  const timestamp = Date.now();
   const ext = path.extname(nomeArquivo);
-  const nome = path.basename(nomeArquivo, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
-  return `clientes/${cnpj}/${pastaPath}${timestamp}_${nome}${ext}`;
+  const nomeSeguro = crypto.randomUUID();
+  return `clientes/${cnpj}/${pastaPath}${nomeSeguro}${ext}`;
 }
 
 // Gerar caminho de thumbnail
@@ -83,12 +92,32 @@ const uploadDocumento = async (req, res) => {
       }
     }
 
-    // Upload para Supabase Storage
-    const storagePath = gerarStoragePath(cliente, pasta?.nome, req.file.originalname);
     const fileBuffer = fs.readFileSync(req.file.path);
 
+    // 1. Validação de Magic Bytes
+    const { fileTypeFromBuffer } = await import('file-type');
+    const fileType = await fileTypeFromBuffer(fileBuffer);
+    
+    if (!fileType) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ error: 'Tipo de arquivo desconhecido ou corrompido.' });
+    }
+
+    // 2. Validação contra Whitelist
+    if (!ALLOWED_MIME_TYPES.includes(fileType.mime)) {
+      fs.unlinkSync(req.file.path);
+      return res.status(400).json({ error: `Tipo de arquivo não permitido: ${fileType.mime}` });
+    }
+
+    // Gerar nome de arquivo UUID seguro
+    const ext = `.${fileType.ext}`;
+    const safeFilename = crypto.randomUUID() + ext;
+
+    // Upload para Supabase Storage
+    const storagePath = gerarStoragePath(cliente, pasta?.nome, safeFilename);
+
     await storage.upload(BUCKET_DOCUMENTOS, storagePath, fileBuffer, {
-      contentType: req.file.mimetype,
+      contentType: fileType.mime,
       upsert: false
     });
 
@@ -108,17 +137,21 @@ const uploadDocumento = async (req, res) => {
     }
 
     // Salvar registro no banco
+    const isCertificado = tipo === 'certificado_digital' || fileType.mime.includes('pkcs12') || req.file.originalname.toLowerCase().match(/\.(pfx|p12)$/);
+    const initialStatus = isCertificado ? 'CONCLUIDO' : 'PENDENTE';
+
     const documento = await prisma.documento.create({
       data: {
         clientId: clienteId,
         nomeOriginal: req.file.originalname,
-        nomeArquivo: req.file.filename,
+        nomeArquivo: safeFilename,
         storagePath,
         thumbnailPath,
-        mimetype: req.file.mimetype,
+        mimetype: fileType.mime,
         tamanhoBytes: req.file.size,
         tamanhoOriginalBytes: req.file.size,
-        tipo: tipo || 'documento',
+        tipo: isCertificado ? 'certificado_digital' : (tipo || 'documento'),
+        status: initialStatus,
         descricao,
         pastaId: pastaId || null,
         uploadedById: usuarioId || null
@@ -159,6 +192,13 @@ const uploadDocumento = async (req, res) => {
           // Não falhamos o upload total se o processamento do certificado falhar (talvez senha errada),
           // mas o registro do documento já foi criado acima.
         }
+      }
+    } else {
+      // Enviar para fila de processamento se não for certificado
+      try {
+        await queueService.enqueueDocumentOptimization(documento.id);
+      } catch (queueErr) {
+        console.error('[Upload] Falha ao adicionar à fila:', queueErr.message);
       }
     }
 

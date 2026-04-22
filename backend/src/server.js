@@ -18,6 +18,16 @@ async function startServer() {
   // Conectar ao banco de dados
   await connectDatabase();
 
+  // Iniciar Fila de background (pg-boss)
+  const { startQueue, boss } = require('./services/queueService');
+  const { startWorkers } = require('./workers/documentOptimizationWorker');
+  try {
+    await startQueue();
+    await startWorkers();
+  } catch(e) {
+    console.error("[Queue] Erro ao iniciar fila:", e.message);
+  }
+
   // Criar aplicação
   const app = createApp();
 
@@ -102,6 +112,11 @@ async function startServer() {
     // Fechar servidor HTTP
     server.close(async () => {
       console.log("✅ Servidor HTTP fechado");
+
+      // Desconectar fila
+      const { boss } = require('./services/queueService');
+      if (boss) await boss.stop().catch(() => {});
+      console.log("✅ Fila (pg-boss) parada");
 
       // Desconectar do banco
       await prisma.$disconnect();

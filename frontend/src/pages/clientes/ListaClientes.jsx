@@ -21,7 +21,7 @@ import {
   ActionIcon, 
   Menu, 
   Badge, 
-  TextInput, 
+  TextInput as MantineTextInput, 
   Group, 
   Stack, 
   Title, 

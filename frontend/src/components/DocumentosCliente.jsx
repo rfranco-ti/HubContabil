@@ -113,8 +113,12 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
     "image/png",
     "image/jpeg",
     "image/jpg",
+    "image/gif",
+    "image/webp",
     "application/msword",
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/x-x509-ca-cert",
     "application/x-pkcs12",
   ];
 
@@ -1357,17 +1361,26 @@ export default function DocumentosCliente({ clienteId, clienteNome: _clienteNome
                         <MantineText size="xs" c="dimmed" fw={600}>{formatDate(doc.createdAt)}</MantineText>
                         <MantineText size="xs" c="dimmed">•</MantineText>
                         <Badge size="xs" variant="outline" color="gray" className="capitalize">{doc.tipo.replace("_", " ")}</Badge>
+                        {(doc.status === 'PENDENTE' || doc.status === 'PROCESSANDO') && (
+                          <Badge size="xs" color="yellow" variant="light" leftSection={<Loader2 size={10} className="animate-spin" />}>
+                            {doc.status}
+                          </Badge>
+                        )}
+                        {doc.status === 'ERRO' && (
+                          <Badge size="xs" color="red" variant="light">Erro de Otimização</Badge>
+                        )}
                       </Group>
                     </Box>
                   </Group>
 
                   <Group gap={8}>
-                    <Tooltip label={doc.mimetype === "application/pdf" ? "Visualizar PDF" : "Baixar"}>
+                    <Tooltip label={doc.status !== 'CONCLUIDO' && doc.status !== 'ERRO' ? "Processando..." : (doc.mimetype === "application/pdf" ? "Visualizar PDF" : "Baixar")}>
                       <ActionIcon 
                         variant="light" 
                         color="blue" 
                         radius="md" 
                         size="lg"
+                        disabled={doc.status === 'PENDENTE' || doc.status === 'PROCESSANDO'}
                         onClick={() => doc.mimetype === "application/pdf" ? setShowPdfViewer(doc) : handleDownload(doc)}
                       >
                         {doc.mimetype === "application/pdf" ? <Eye size={18} /> : <Download size={18} />}

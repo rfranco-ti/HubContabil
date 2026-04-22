@@ -182,6 +182,7 @@ model Documento {
   tamanhoBytes         Int             @map("tamanho_bytes")
   tamanhoOriginalBytes Int?            @map("tamanho_original_bytes")
   tipo                 String          @default("documento")
+  status               DocumentoStatus @default(PENDENTE)
   descricao            String?
   pastaId              String?         @map("pasta_id") @db.Uuid
   ocrRealizado         Boolean         @default(false) @map("ocr_realizado")
@@ -622,4 +623,11 @@ enum RecorrenciaAgendamento {
   mensal
   x_vezes_dia
   x_vezes_semana
+}
+
+enum DocumentoStatus {
+  PENDENTE
+  PROCESSANDO
+  CONCLUIDO
+  ERRO
 }
