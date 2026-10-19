@@ -218,7 +218,7 @@ npm run test
 ## 📞 Suporte
 
 - **Issues:** GitHub Issues
-- **Email:** ricardofrancoti@gmail.com.com
+- **Email:** ricardofrancoti@gmail.com
 - **Documentação:** Pasta `docs/`
 
 ---
@@ -229,4 +229,4 @@ MIT License - Veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
 
-**Desenvolvido com ❤️ para contadores**
+**Desenvolvido para uso em escritórios de contabilidade**
